@@ -1,0 +1,272 @@
+body {
+  font-family: var(--bj-Open);
+  letter-spacing: 0.02rem;
+}
+
+:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--bj-Open);
+  font-weight: 700;
+  color: var(--bj-darks);
+}
+
+h5 {
+  line-height: 1.4;
+}
+
+.bold {
+  font-weight: 700;
+}
+.medium {
+  font-weight: 500;
+}
+.regular {
+  font-weight: 400;
+}
+
+p {
+  font-family: var(--bj-Open);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--bj-light);
+}
+
+img {
+  border-radius: 4px;
+}
+
+/** === Predefined Global Classes === **/
+button:focus {
+  outline: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    text-decoration: none;
+    color: $blue;
+  }
+}
+
+/** === Container === **/
+.container {
+  @media (min-width: 1300px) {
+    max-width: 1314px;
+    margin: 0 auto;
+  }
+}
+
+/**===== section padding scss =====**/
+.sec_padding {
+  padding: 120px 0px;
+}
+
+.sec_padding_two {
+  padding: 100px 0px;
+}
+
+.sec_padding_three {
+  padding: 140px 0px;
+}
+
+.title {
+  font-size: 48px;
+  letter-spacing: -0.48px;
+  margin-bottom: 14px;
+}
+
+.title_two {
+  color: #001f58;
+  font-family: $lb;
+}
+
+.section_title {
+  margin-bottom: 55px;
+
+  p {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+
+.section_title_two {
+  p {
+    font-size: 20px;
+  }
+}
+
+.toast:not(.showing):not(.show) {
+  display: none;
+}
+
+.toast-container {
+  bottom: 20px;
+  left: 0;
+  z-index: 2;
+
+  .toast {
+    background-color: #fff;
+
+    position: relative;
+
+    &.show,
+    &.showing {
+      display: block;
+    }
+  }
+}
+
+button.bj_theme_btn {
+  border: none;
+}
+
+.bj_theme_btn {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--bj-Open);
+  padding: 15px 36px 14px;
+  border-radius: 4px;
+  background: var(--bj-blue);
+  display: inline-block;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: color 0.3s;
+  text-align: center;
+
+  &:before {
+    top: 0px;
+    width: 0px;
+    left: auto;
+    right: 0px;
+    z-index: -1;
+    bottom: 0px;
+    content: "";
+    position: absolute;
+    background: #3972d2;
+    -webkit-transition: width 0.3s linear;
+    transition: width 0.3s linear;
+  }
+
+  i {
+    vertical-align: middle;
+  }
+
+  &:hover {
+    color: #fff;
+
+    &::before {
+      left: 0px;
+      width: 100%;
+      right: auto;
+    }
+  }
+
+  &.strock_btn {
+    border: 1px solid #d1d1d1;
+    color: #4d4e50;
+    background: transparent;
+
+    &:before {
+      background: rgba(#4285f4, 0.2);
+    }
+
+    &:hover {
+      border-color: var(--bj-blue);
+      color: var(--bj-blue);
+    }
+  }
+
+  &.icon_btn {
+    display: inline-flex;
+    gap: 9px;
+    align-items: center;
+  }
+}
+
+.add-to-cart-automated {
+  display: inline-flex;
+  gap: 7px;
+  align-items: baseline;
+  justify-content: center;
+  i {
+    font-size: 17px;
+  }
+}
+
+.pass-field-with-icon {
+  position: relative;
+  .icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7e8695;
+    cursor: pointer;
+  }
+  .form-control {
+    padding-right: 26px;
+  }
+}
+
+/* End Title Area css
+============================================================================================ */
+
+/*----------------------------------------*/
+/*   Back To Top Button CSS
+/*----------------------------------------*/
+#back-to-top {
+  display: inline-block;
+  background-color: rgba(220, 220, 220, 0.8);
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+
+#back-to-top::after {
+  content: "\32";
+  font-family: eleganticons;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #000;
+}
+
+#back-to-top:hover {
+  cursor: pointer;
+  background-color: $blue;
+}
+
+#back-to-top:hover::after {
+  color: #fff;
+}
+
+#back-to-top:active {
+  background-color: #555;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}

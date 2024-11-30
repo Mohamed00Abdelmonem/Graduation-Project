@@ -1,0 +1,84 @@
+/*========= bj_breadcrumb_area ===========*/
+
+.bj_breadcrumb_area{
+    position: relative;
+    padding: 126px 0px;
+    overflow: hidden;
+    z-index: 1;
+    .bg_one{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        top: 0;
+        left: 0;
+    }
+}
+
+.bd_shape{
+    position: absolute !important;
+    z-index: -1;
+    &.one{
+        bottom: 0;
+        left: 100px;
+        top: auto !important;
+    }
+    &.two{
+        top: 50px !important;
+        left: 320px !important;
+    }
+    &.three{
+        top: 20px !important;
+        left: 50px !important;
+    }
+    &.four{
+        bottom: 0px !important;
+        top: auto !important;
+        left: 300px !important;
+    }
+    &.five{
+        right: 0;
+        top: 20px !important;
+        left: auto !important;
+    }
+    &.six{
+        right: 60px;
+        top: 80px !important;
+        left: auto !important;
+    }
+    &.seven{
+        right: 290px;
+        top: auto !important;
+        left: auto !important;
+        bottom: 0;
+    }
+}
+
+.breadcrumb{
+    margin-bottom: 0;
+    li{
+        font-size: 14px;
+        font-weight: 400;
+        color: $text_color;
+        position: relative;
+        a{
+            color: $text_color;
+        }
+        & + li{
+            margin-left: 30px;
+            &:before{
+                content: "\e649";
+                font-family: themify;
+                speak: none;
+                position: absolute;
+                left: -22px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 24px;
+                top: 0;
+                height: 100%;
+                font-size: 12px;
+            }
+        }
+    }
+}

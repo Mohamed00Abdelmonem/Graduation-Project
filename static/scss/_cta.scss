@@ -1,0 +1,257 @@
+/*======= bj_subscribe_area css ========*/
+.bj_subscribe_inner {
+  padding: 95px 160px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.bj_subscribe_bg {
+  li {
+    position: absolute;
+    &:nth-child(1) {
+      left: 95px;
+      top: -172px;
+    }
+    &:nth-child(2) {
+      left: -174px;
+      top: 104px;
+    }
+    &:nth-child(3) {
+      left: 102px;
+      bottom: -172px;
+    }
+  }
+}
+.bj_subscribe_content {
+  position: relative;
+  z-index: 2;
+  .title {
+    font-size: 40px;
+  }
+  p {
+    color: $gray_light;
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 40px;
+  }
+}
+.bj_subscribe_form {
+  .input-group {
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 5px;
+    .form-control {
+      font-size: 16px;
+      font-weight: 400;
+      color: $dark;
+      border: 0px;
+      border-radius: 0;
+      box-shadow: none;
+      padding-left: 20px;
+      @include placeholder {
+        color: #909192;
+      }
+    }
+    .bj_theme_btn {
+      border: 0px;
+      border-radius: 6px !important;
+      padding: 17px 38px;
+    }
+  }
+  .condition_text {
+    margin-top: 12px;
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+      &:checked {
+        & + .checkbox_input {
+          &::before {
+            background: $blue;
+            border-color: $blue;
+          }
+          &:after {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .checkbox_input {
+      font-size: 16px;
+      color: #636466;
+      position: relative;
+      padding-left: 20px;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 12px;
+        width: 12px;
+        border: 1px solid#636466;
+        border-radius: 1px;
+        top: 6px;
+      }
+      &:after {
+        content: "";
+        left: 4px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        position: absolute;
+        transform: rotate(45deg);
+        opacity: 0;
+      }
+    }
+  }
+}
+/*======= bj_subscribe_area css ========*/
+
+// bj_subscribe_inner_two css
+.bj_subscribe_area_two {
+  z-index: 2;
+  background: #f5f5f5;
+}
+.bj_subscribe_inner_two {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  padding: 100px;
+  position: relative;
+  margin-bottom: -200px;
+  z-index: 2;
+  .bg_shap {
+    .shap_one {
+      position: absolute;
+      z-index: -1;
+      .layer {
+        position: relative !important;
+      }
+      &:nth-child(1) {
+        left: 45px;
+        top: 40px;
+      }
+      &:nth-child(2) {
+        right: 40px;
+        top: 40px;
+      }
+      &:nth-child(3) {
+        bottom: 50px;
+        right: 50px;
+      }
+      &:nth-child(4) {
+        left: 250px;
+        bottom: 50px;
+      }
+    }
+  }
+  h2 {
+    font-size: 64px;
+    color: #001f58;
+    font-weight: 700;
+    font-family: $lb;
+    margin-bottom: 18px;
+  }
+  p {
+    font-size: 18px;
+    line-height: 32px;
+    color: #3c4146;
+    max-width: 880px;
+    margin: 0 auto 40px;
+  }
+}
+
+.cta-area-7 {
+  background-color: #202124;
+  padding-top: 127px;
+  position: relative;
+  padding-bottom: 150px;
+
+  .section-title {
+    .title {
+      color: #fff;
+    }
+
+    p {
+      color: #d2d2d3;
+      max-width: 500px;
+      font-size: 20px;
+      line-height: 26px;
+      margin-top: 21px;
+      margin-bottom: 53px;
+    }
+  }
+
+  .img-shapes {
+    .shape {
+      position: absolute;
+
+      @keyframes WingsOne {
+        0% {
+          transform: rotate(-10deg);
+        }
+
+        100% {
+          transform: rotate(10deg);
+        }
+      }
+
+      .fly-msg {
+        transform: rotate(-30deg);
+
+        img {
+          &:nth-child(2) {
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation-fill-mode: both;
+            animation: WingsOne 0.2s ease-in infinite alternate-reverse;
+            animation-delay: 0.2s;
+          }
+
+          &:nth-child(3) {
+            position: absolute;
+            right: 0;
+            top: 0;
+            animation-fill-mode: both;
+            animation: WingsOne 0.2s ease-in infinite alternate-reverse;
+          }
+        }
+      }
+
+      &:nth-child(1) {
+        right: 3%;
+        transform-origin: left bottom;
+        top: 70%;
+      }
+
+      &:nth-child(2) {
+        left: -18%;
+        top: -20%;
+      }
+
+      &:nth-child(3) {
+        right: 28%;
+        bottom: 0%;
+        transform-origin: right bottom;
+      }
+
+      &:nth-child(4) {
+        right: 7%;
+        top: -25%;
+      }
+    }
+  }
+
+  .search_form {
+    .form-control {
+      border-radius: 5px;
+    }
+    .bj_theme_btn {
+      border: 0px;
+    }
+  }
+}
