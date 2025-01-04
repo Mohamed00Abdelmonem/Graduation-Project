@@ -115,7 +115,10 @@
                                                 <div class="item">
                                                     <div class="bj_new_pr_item">
                                                         <a href="product-single.html" class="img">
-                                                            <img src="{{project.images.url}}" alt="{{ project.title }}" style="width: 200px; height: 200px;" />
+                                                            <a href="{% url 'project:project_detail' project.id %}">
+                                                                <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 200px; height: 200px;" />
+                                                            </a>
+                                                                                                                    
                                                         </a>
                                                         
                                                         <div class="bj_new_pr_content_two">

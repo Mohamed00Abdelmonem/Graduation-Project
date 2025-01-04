@@ -35,6 +35,7 @@ class GraduationProject(models.Model):
     book_pdf = models.FileField(upload_to="projects/books/", blank=True, null=True)
     images = models.ImageField(upload_to="projects/images/", blank=True, null=True)
     video = models.URLField(blank=True, null=True)
+    likes = models.ManyToManyField(User, blank=True, related_name="likes_project")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
