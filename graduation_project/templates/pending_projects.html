@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Pending Projects</h1>
+        {% for project in projects %}
+        
+            <div class="card mb-5 mt-5">
+                
+                <div class="card-body">
+                    
+                    <h5 class="card-title">{{ project.title }}</h5>
+                    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+                    <p class="card-text">{{ project.description }}</p>
+                    <a href="{% url 'project:approve_project' project.id %}" class="btn btn-success">Accept</a>
+                    <a href="{% url 'project:reject_project' project.id %}" class="btn btn-danger">Reject</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No pending projects.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

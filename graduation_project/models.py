@@ -4,13 +4,19 @@ from django.db import models
 
 
 
-
+STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+    ]
 
 class GraduationProject(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     sub_description = models.TextField(blank=True, null=True)
     graduation_year = models.IntegerField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
     # Filter out users who are doctors or teaching assistants (students can only be regular users)
     students = models.ManyToManyField(
         User,

@@ -10,6 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env.
+
+
+
 from pathlib import Path
 import os 
 
@@ -153,3 +158,18 @@ LOGIN_URL = '/accounts/login/'
 # settings.py
 LOGIN_REDIRECT_URL = '/'  # أو صفحة معينة
 LOGOUT_REDIRECT_URL = '/'  # أو صفحة معينة
+
+
+
+
+
+# Email Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Replace with your Gmail email address
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+
