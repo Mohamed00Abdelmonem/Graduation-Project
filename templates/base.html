@@ -414,6 +414,11 @@
                         </ul>
 
                         <div class="alter_nav">
+                            {% if user.is_authenticated and user.profile.is_leader %}
+                            <a href="{% url 'project:add_project' %}" class="bj_theme_btn wow fadeInLeft" data-wow-delay="0.2s">
+                                Add Project
+                            </a>
+                            {% endif %}
                             <ul class="navbar-nav search_cart menu">
                                 <li class="nav-item search">
                                     <a class="nav-link search-btn" href="javascript:void(0);"><i class="icon-search"></i></a>
@@ -427,6 +432,7 @@
                                     </form>
                                 </li>
                                 <li class="nav-item shpping-cart dropdown submenu">
+                                    
                                     <a class="cart-btn nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="icon-shopping-basket"></i><span class="num">2</span></a>
                                     <ul class="dropdown-menu">
