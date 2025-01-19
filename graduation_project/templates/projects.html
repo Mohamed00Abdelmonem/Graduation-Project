@@ -1,0 +1,261 @@
+
+{% extends "base.html" %}
+{% load static %} 
+
+{% block body %}
+
+        <!-- breadcrumb area  -->
+        <section class="bj_breadcrumb_area text-center banner_animation_03" data-bg-color="#f5f5f5">
+            <div class="bg_one" data-bg-image="assets/img/breadcrumb/breadcrumb_banner_bg.png"></div>
+            <div class="bd_shape one wow fadeInDown layer" data-wow-delay="0.3s" data-depth="0.5"><img data-parallax='{"y": -50}' src="{% static 'img/breadcrumb/book_left1.png' %}" alt="">
+            </div>
+            <div class="bd_shape two wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s"><img data-parallax='{"y": 30}' src="{% static 'img/breadcrumb/book-left2.png' %}" alt="">
+            </div>
+            <div class="bd_shape three wow fadeInDown layer" data-wow-delay="0.3s" data-depth="0.5"><img data-parallax='{"y": -50}' src="{% static 'img/breadcrumb/plane-1.png' %}" alt="">
+            </div>
+            <div class="bd_shape four wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s"><img data-parallax='{"y": 30}' src="{% static 'img/breadcrumb/plan-3.png' %}" alt="">
+            </div>
+            <div class="bd_shape five wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s"><img data-parallax='{"y": 80}' src="{% static 'img/breadcrumb/plan-2.png' %}" alt="">
+            </div>
+            <div class="bd_shape six wow fadeInDown layer" data-wow-delay="0.3s" data-depth="0.5"><img data-parallax='{"y": -60}' src="{% static 'img/breadcrumb/book-right.png' %}" alt="">
+            </div>
+            <div class="bd_shape seven wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s"><img data-parallax='{"x": 50}' src="{% static 'img/breadcrumb/book-right2.png' %}" alt="">
+            </div>
+            <div class="container">
+                <h2 class="title wow fadeInUp" data-wow-delay="0.2s">Book Shope</h2>
+                <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.3s">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Shop Sidebar</li>
+                </ol>
+            </div>
+        </section>
+        <!-- breadcrumb area  -->
+
+
+        <!-- shop area  -->
+        <section class="bj_shop_area sec_padding" data-bg-color="#f5f5f5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="shop_sidebar">
+                            <div class="widget filter_widget">
+                                <h3 class="shop_sidebar_title"><a href="#"><img src="{% static 'assets/img/shop/filter.svg' %}" alt=""></a>Filter</h3>
+                            </div>
+                            <div class="widget shop_category_widget">
+                                <h4 class="shop_sidebar_title_small"><i class="icon-category-icon"></i>Category</h4>
+                                <ul class="list-unstyled shop_category_list">
+                                    <li><a href="#">All categories</a></li>
+                                    <li><a href="#">Drama</a></li>
+                                    <li><a href="#">Mystery</a></li>
+                                    <li><a href="#">Novels</a></li>
+                                    <li><a href="#">Recipe Books</a></li>
+                                </ul>
+                                <div class="collapse" id="collapseExample">
+                                    <ul class="list-unstyled shop_category_list">
+                                        <li><a href="#">All categories</a></li>
+                                        <li><a href="#">Drama</a></li>
+                                        <li><a href="#">Mystery</a></li>
+                                        <li><a href="#">Novels</a></li>
+                                        <li><a href="#">Recipe Books</a></li>
+                                    </ul>
+                                </div>
+                                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Show more <i class="ti-angle-down"></i>
+                                </a>
+                            </div>
+                            <div class="widget author_widget">
+                                <h4 class="shop_sidebar_title_small"><i class="icon-pen"></i>Author</h4>
+                                <div class="author_choose_list">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="burt" id="burt" value="burt">
+                                        <label class="form-check-label" for="burt">Burt Geller</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="candy" id="candy" value="candy">
+                                        <label class="form-check-label" for="candy">Candy Carson</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="drew" id="drew" value="drew">
+                                        <label class="form-check-label" for="drew">Drew Berrymore</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="karen" id="karen" value="karen">
+                                        <label class="form-check-label" for="karen">Karen Perry</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="richard" id="richard" value="richard">
+                                        <label class="form-check-label" for="richard">Richard Mann</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget author_widget">
+                                <h4 class="shop_sidebar_title_small"><i class="fa-regular fa-star"></i>Rating</h4>
+                                <div class="author_choose_list">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="rating_filter" id="5_star_filter" value="5 star">
+                                        <label class="form-check-label" for="5_star_filter">
+                                            <span class="rating">
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="rating_filter" id="4_star_filter" value="5 star">
+                                        <label class="form-check-label" for="4_star_filter">
+                                            <span class="rating">
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star "></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="rating_filter" id="3_star_filter" value="5 star">
+                                        <label class="form-check-label" for="3_star_filter">
+                                            <span class="rating">
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star "></i>
+                                                <i class="fa-solid fa-star "></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="rating_filter" id="2_star_filter" value="5 star">
+                                        <label class="form-check-label" for="2_star_filter">
+                                            <span class="rating">
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star "></i>
+                                                <i class="fa-solid fa-star "></i>
+                                                <i class="fa-solid fa-star "></i>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="rating_filter" id="1_star_filter" value="1 star">
+                                        <label class="form-check-label" for="1_star_filter">
+                                            <span class="rating">
+                                                <i class="fa-solid fa-star filled"></i>
+                                                <i class="fa-solid fa-star "></i>
+                                                <i class="fa-solid fa-star "></i>
+                                                <i class="fa-solid fa-star "></i>
+                                                <i class="fa-solid fa-star "></i>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="widget price_widget">
+                                <h4 class="shop_sidebar_title_small"><i class="icon-price"></i>Price</h4>
+                                <div id="slider-range" data-price-min="230" data-price-max="1233"></div>
+                                <div class="price-filters d-flex justify-content-between">
+                                    <div class="left">
+                                        <label for="price-filter-min">$</label>
+                                        <input type="number" id="price-filter-min" placeholder=230 aria-label="Minimum price for filtering products">
+                                    </div>
+                                    <div class="right">
+                                        <label for="price-filter-max" aria-label="Maximum price for filtering products">$</label>
+                                        <input type="number" id="price-filter-max" placeholder=1233>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <form role="search" method="get" class="pr_search_form input-group" action="#">
+                            <input type="text" name="s" value="" class="form-control search-field" id="search" placeholder="Serach  off book store..">
+                            <button type="submit"><i class="ti-search"></i></button>
+                        </form>
+                        <div class="shop_top d-flex align-items-center justify-content-between">
+                            <div class="shop_menu_left">{{count_books}} Books</div>
+                            <div class="shop_menu_right d-flex align-items-center justify-content-end">
+                                Sort by
+                                <form class="woocommerce-ordering" method="get">
+                                    <select name="orderby" class="orderby selectpickers">
+                                        <option value="menu_order" selected='selected'>Default sorting</option>
+                                        <option value="popularity">Sort by popularity</option>
+                                        <option value="rating">Sort by average rating</option>
+                                        <option value="date">Sort by latest</option>
+                                        <option value="price">Sort by price: low to high</option>
+                                        <option value="price-desc">Sort by price: high to low</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+
+
+                            {% for book in projects_main %}
+                                <div class="col-xl-3 col-lg-4 col-sm-6 projects_item">
+                                    <div class="best_product_item best_product_item_two shop_product">
+                                        <div class="img">
+                                            {% if book.images %}
+                                            <a href="{% url 'project:project_detail' book.id %}"><img src="{{book.images.url}}" alt="book"></a>
+
+                                            {% else %}
+                                            <a href="#"><img src="" alt="book"></a>
+
+                                            {% endif %}
+                                            <div class="pr_ribbon">
+                                                <span class="product-badge">{{book.graduation_year}}</span>
+                                                <div class="ratting">
+                                                    <img src="{% static 'img/star-1.png' %}" alt="">4.9
+                                                </div>
+                                            </div>
+                                            <div class="hover_item">
+                                                <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Wishlist"><i class="icon_heart_alt"></i></a>
+                                                <span data-bs-toggle="tooltip" data-bs-placement="right" title="Quickview"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
+                                                <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Compare"><i class="ti-control-shuffle"></i></a>
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="bj_new_pr_content">
+                                            <a href="{% url 'project:project_detail' book.id %}">
+                                                <h4 class="bj_new_pr_title">{{book}}</h4>
+                                            </a>
+                                            <div class="bj_pr_meta d-flex">
+                                                <div class="book_price">👍{{book.likes.count}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+                          
+                            
+
+                        </div>
+                        <div class="text-center">
+                            <nav aria-label="...">
+                                <ul class="pagination pagi-content">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#"><i class="ti-angle-left"></i>Prev</a>
+                                    </li>
+                                    <li class="page-item active" aria-current="page"><span class="page-link">1</span>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next<i class="ti-angle-right"></i></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- shop area  -->
+
+{% endblock body %}

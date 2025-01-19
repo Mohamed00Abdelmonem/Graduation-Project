@@ -44,6 +44,16 @@ class GraduationProject(models.Model):
     likes = models.ManyToManyField(User, blank=True, related_name="likes_project")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    view_count = models.PositiveIntegerField(default=0)  # Added field
+
+    
+    def get_lat_lng(self):
+        """Extract latitude and longitude from the location field."""
+        if self.location:
+            lat_lng = self.location.split(',')
+            if len(lat_lng) == 2:
+                return lat_lng[0], lat_lng[1]
+        return '0', '0'  # default values
 
     def __str__(self):
         return self.title

@@ -176,7 +176,11 @@
                 
                         <div class="col-xl-4 col-md-6">
                             <div class="bj_new_pr_item_two d-flex wow fadeInUp" data-wow-delay="0.2s">
-                                {% comment %} <a href="product-single.html" class="img"><img src="{{project.images.url}}" alt="book" /></a> {% endcomment %}
+                                {% if project.images %}
+                                <a href="product-single.html" class="img"><img src="{{project.images.url}}" alt="book" /></a>
+                                {% else %}
+                                    <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 200px; height: 200px;" />
+                                {% endif %}
                                 <div class="bj_new_pr_content_two">
                                     <a href="shop-sidebar.html" class="category">{{project.category}}</a>
                                     <a href="product-single.html">
@@ -191,7 +195,7 @@
                     {% endfor %}
                 </div>
                 <div class="text-center mt-4">
-                    <a href="shop.html" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">View All</a>
+                    <a href="{% url 'project:ProjectList'%}" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">View All</a>
                 </div>
             </div>
         </section>

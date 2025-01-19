@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-
+{% load humanize %}
         <!-- breadcrumb area  -->
         <section class="bj_breadcrumb_area text-center banner_animation_03" data-bg-color="#f5f5f5">
             <div class="bg_one" data-bg-image="assets/img/breadcrumb/breadcrumb_banner_bg.png"></div>
@@ -37,7 +37,7 @@
                                 </div>
                                 {% comment %} <div class="back"><img class="img-fluid" src="{{object.images.url}}" alt=""></div> {% endcomment %}
                                 <div class="pr_ribbon">
-                                    <span class="product-badge">New</span>
+                                    <span class="product-badge">👁️ views: {{object.view_count|intcomma  }}</span>
                                 </div>
                             </div>
                             <div class="bj_book_details">

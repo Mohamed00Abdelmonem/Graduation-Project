@@ -421,6 +421,12 @@
                             </a>
                             {% endif %}
 
+
+                            {% if user.is_staff %}
+                            <a href="{% url 'upload_excel' %}" class="bj_theme_btn wow fadeInLeft" data-wow-delay="0.2s">
+                                Upload an Excel sheet for user signups                            </a>
+                            {% endif %}
+
                             <ul class="navbar-nav search_cart menu">
                                 <li class="nav-item search">
                                     <a class="nav-link search-btn" href="javascript:void(0);"><i class="icon-search"></i></a>

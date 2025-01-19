@@ -12,12 +12,24 @@ from django.conf import settings
 
 
 
+def ProjectList(request):
+    # Fetch the latest 10 accepted projects
+    projects_main = GraduationProject.objects.filter(status='accepted').order_by('-id')
+    count_books = projects_main.count()
+
+    # Render the template with the projects and count
+    return render(request, "projects.html", {'projects_main': projects_main, "count_books": count_books})
+
+
 class ProjectDetail(generic.DetailView):
     model = GraduationProject
     template_name = "project_detail.html"
 
-
-
+    def get_object(self):
+        obj = super().get_object()
+        obj.view_count += 1
+        obj.save()
+        return obj
 
 
 

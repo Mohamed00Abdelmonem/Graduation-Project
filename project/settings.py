@@ -49,7 +49,11 @@ INSTALLED_APPS = [
 
 
     'bootstrap5',
-    
+    'hitcount',
+    'django.contrib.humanize',
+
+
+
     'settings',
     'accounts',
     'graduation_project',
