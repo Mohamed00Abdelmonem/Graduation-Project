@@ -5,10 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
 
-
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.contrib import messages
-from .models import GraduationProject
 
 from django.conf import settings 
 
@@ -73,8 +71,10 @@ def approve_project(request, project_id):
     )
 
     messages.success(request, f'تم قبول مشروعك "{project.title}".')
-
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+
 
 
 
@@ -92,10 +92,9 @@ def reject_project(request, project_id):
         [user.email],
         fail_silently=False,
     )
-
-
     messages.success(request, f'تم رفض مشروعك "{project.title}".')
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
 
 
 
@@ -103,6 +102,8 @@ def reject_project(request, project_id):
 def pending_projects(request):
     pending_projects = GraduationProject.objects.filter(status='pending')
     return render(request, 'pending_projects.html', {'projects': pending_projects})
+
+
 
 
 

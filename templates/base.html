@@ -42,7 +42,7 @@
         <header class="header_area header_relative header_blue">
             <nav class="navbar navbar-expand-lg menu_one menu_white" id="header">
                 <div class="container">
-                    <a class="navbar-brand sticky_logo" href="index.html">
+                    <a class="navbar-brand sticky_logo" href="/">
                         <img class="wow fadeInRight" data-wow-delay="0.5s" src="{% static 'img/home/favicon.ico' %}" alt="logo" />
                         <img src="{% static 'img/home-two/logo-dark.svg' %}" alt="logo" />
                     </a>
@@ -62,7 +62,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                         <ul class="navbar-nav menu w_menu ms-auto me-auto">
                             <li class="nav-item dropdown submenu active">
-                                <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     HOME
                                 </a>
                                 <ul class="dropdown-menu">
@@ -440,49 +440,10 @@
                                 <li class="nav-item shpping-cart dropdown submenu">
                                     
                                     <a class="cart-btn nav-link dropdown-toggle" href="{% url "project:pending_projects" %}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="icon-shopping-basket"></i><span class="num">2</span></a>
-                                    <ul class="dropdown-menu">
-                                        <li class="cart-single-item clearfix">
-                                            <div class="cart-img">
-                                                <img src="{% static '.img/cart1.jpg' %}" alt="styler" />
-                                            </div>
-                                            <div class="cart-content text-left">
-                                                <p class="cart-title">
-                                                    <a href="product-single.html">Pale pink and black buttoned dress</a>
-                                                </p>
-                                                <p><del>$400.00</del> - $350.00</p>
-                                            </div>
-                                            <div class="cart-remove">
-                                                <a href="#" class="action"><span class="ti-close"></span></a>
-                                            </div>
-                                        </li>
-                                        <li class="cart-single-item clearfix">
-                                            <div class="cart-img">
-                                                <img src="{% static '.img/cart1.jpg' %}" alt="styler" />
-                                            </div>
-                                            <div class="cart-content text-left">
-                                                <p class="cart-title">
-                                                    <a href="product-single.html">Vera bradley lug- gage large
-                                                        duffel</a>
-                                                </p>
-                                                <p>$350.00</p>
-                                            </div>
-                                            <div class="cart-remove">
-                                                <a href="#" class="action"><span class="ti-close"></span></a>
-                                            </div>
-                                        </li>
-                                        <li class="cart_f">
-                                            <div class="cart-pricing">
-                                                <p class="total">
-                                                    Subtotal :<span class="p-total text-end">$358.00</span>
-                                                </p>
-                                            </div>
-                                            <div class="cart-button text-center">
-                                                <a href="cart.html" class="btn btn-cart get_btn pink">View Cart</a>
-                                                <a href="checkout.html" class="btn btn-cart get_btn dark">Checkout</a>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                        <i class="icon-shopping-basket"></i>
+                                        <span class="num">{{ pending_projects_count }}</span>
+                                    </a>
+                                   
                                 </li>
                                 {% endif %}
 
