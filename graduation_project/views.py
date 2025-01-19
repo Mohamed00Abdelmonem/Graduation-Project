@@ -1,24 +1,66 @@
 from django.shortcuts import render, redirect
-from .models import GraduationProject
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
-
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
-
 from django.conf import settings 
+from django.db.models import Q, Count
+from .models import GraduationProject, Category
+from accounts.models import UserProfile
+
 
 
 
 def ProjectList(request):
-    # Fetch the latest 10 accepted projects
-    projects_main = GraduationProject.objects.filter(status='accepted').order_by('-id')
+    # Get filter parameters from the request
+    category_id = request.GET.get('category')
+    doctor_id = request.GET.get('doctor')
+    graduation_year = request.GET.get('graduation_year')
+
+    # Start with all accepted projects
+    projects = GraduationProject.objects.filter(status='accepted')
+
+    # Apply filters
+    if category_id and category_id != 'all':
+        projects = projects.filter(category_id=category_id)
+    if doctor_id:
+        projects = projects.filter(doctor_id=doctor_id)
+    if graduation_year:
+        projects = projects.filter(graduation_year=graduation_year)
+
+    # Fetch all categories for the sidebar
+    categories = Category.objects.all()
+
+    # Fetch the top 10 doctors with the most projects (only accepted projects)
+    doctors = UserProfile.objects.filter(is_doctor=True).annotate(
+        book_count=Count('user__doctor_projects', filter=Q(user__doctor_projects__status='accepted'))
+    ).order_by('-book_count')[:10]
+
+    # Fetch the latest 10 accepted projects for the main section
+    projects_main = GraduationProject.objects.filter(status='accepted').order_by('-id')[:10]
     count_books = projects_main.count()
 
-    # Render the template with the projects and count
-    return render(request, "projects.html", {'projects_main': projects_main, "count_books": count_books})
+    # Check if the request is from HTMX
+    if request.headers.get('HX-Request'):
+        # Render only the project list for HTMX requests
+        return render(request, "partials/project_list.html", {
+            "projects": projects,
+        })
+    else:
+        # Render the full page for regular requests
+        return render(request, "projects.html", {
+            "projects_main": projects_main,
+            "count_books": count_books,
+            "projects": projects,
+            "categories": categories,
+            "doctors": doctors,
+        })
+    
+
+
+
 
 
 class ProjectDetail(generic.DetailView):
