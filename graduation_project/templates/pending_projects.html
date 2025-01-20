@@ -3,27 +3,31 @@
 {% block body %}
     <div class="container mt-5">
         <h1>Pending Projects</h1>
+
+        <!-- Display Django Messages at the Top of the Page -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Iterate Over Projects -->
         {% for project in projects %}
-        
             <div class="card mb-5 mt-5">
-                
                 <div class="card-body">
-                    
-                    <h5 class="card-title">{{ project.title }}</h5>
+                    <h5 class="card-title">
+                        <a href="{% url 'project:project_detail' project.slug %}">{{ project.title }}</a>
+                    </h5>                    
+                    <p>Date: {{ project.updated_at }}</p>
+                    <p>Gradution Year: {{ project.graduation_year }}</p>
+                    <p>By Doctor:{{ project.doctor }}</p>
 
-
-                    {% if messages %}
-                        <div class="messages">
-                            {% for message in messages %}
-                                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-
-
-                    <p class="card-text">{{ project.description }}</p>
+                    <!-- Action Buttons -->
                     <a href="{% url 'project:approve_project' project.id %}" class="btn btn-success">Accept</a>
                     <a href="{% url 'project:reject_project' project.id %}" class="btn btn-danger">Reject</a>
                 </div>

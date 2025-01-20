@@ -46,7 +46,7 @@ class GraduationProject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     view_count = models.PositiveIntegerField(default=0)  # Added field
-    slug = models.SlugField(null=True, blank=True)
+    slug = models.SlugField(unique=True, null=True, blank=True)
 
     
     def get_lat_lng(self):
