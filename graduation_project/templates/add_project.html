@@ -2,24 +2,49 @@
 {% load bootstrap5 %}
 
 {% block body %}
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6" style="margin-top: 6rem;">
-                <div class="card shadow">
-                    <div > 
-                        <h3 class="card-title text-center">Create Project Gradution 🎓</h3>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% bootstrap_form form %}
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6" style="margin-top: 6rem;">
+            <div class="card shadow">
+                <div>
+                    <h3 class="card-title text-center">Create Project Gradution 🎓</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Display Django Messages -->
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- JavaScript for Delay and Redirection -->
+<script>
+    // Check if there are any messages
+    const messages = document.querySelectorAll('.alert');
+    if (messages.length > 0) {
+        // Wait for 5 seconds
+        setTimeout(() => {
+            // Redirect to the success page
+            window.location.href = "{% url 'project:success_create_project' %}";
+        }, 5000); // 5000 milliseconds = 5 seconds
+    }
+</script>
 {% endblock body %}

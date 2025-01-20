@@ -9,6 +9,7 @@ from django.conf import settings
 from django.db.models import Q, Count
 from .models import GraduationProject, Category
 from accounts.models import UserProfile
+from django.urls import reverse
 
 
 
@@ -76,6 +77,7 @@ class ProjectDetail(generic.DetailView):
 
 
 
+
 class AddProject(UserPassesTestMixin, generic.CreateView):
     model = GraduationProject
     fields = "__all__"  # Use this or form_class, but not both
@@ -90,19 +92,25 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
 
         # Send email notification to the leader
         send_mail(
-            'Project Submitted',
-            'Your project has been submitted and is awaiting admin approval.',
-            'mmohamedabdelm@gmail.com',
-            [self.request.user.email],
+            'مشروع جديد للمراجعه',
+            'تم ارسال مشروعك للمشرف للمراجعه انتظر حين قبوله',
+            settings.EMAIL_HOST_USER,
+            [self.request.user.email],  # Use self.request.user.email
             fail_silently=False,
         )
 
+        # Add a success message to be displayed on the same page
+        messages.success(self.request, 'تم إرسال المشروع بنجاح! سيتم مراجعته من قبل المشرف.')
+
         return response  # Return the response after sending the email
 
+    def get_success_url(self):
+        # Redirect to the success_create_project page
+        return reverse('project:success_create_project')
+    
     def test_func(self):
         # Only allow access if the user is a leader
         return self.request.user.profile.is_leader
-
 
 
 
