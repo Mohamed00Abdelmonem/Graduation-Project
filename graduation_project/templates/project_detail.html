@@ -43,7 +43,7 @@
                             <div class="bj_book_details">
                                 <h2>{{object.title}}</h2>
                                 <ul class="list-unstyled book_meta">
-                                    <li>By:<a href="author-single.html">Phillip Siphron</a></li>
+                                    {% comment %} <li>By:<a href="author-single.html">Phillip Siphron</a></li> {% endcomment %}
                                     <li>Category:<a href="shop-sidebar.html">Drama</a></li>
                                     <li>Tag:<a href="shop-sidebar.html">Best Sellers</a></li>
                                 </ul>
@@ -127,7 +127,7 @@
                                         Details</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="product_aurhor_desc-tab" data-bs-toggle="tab" data-bs-target="#product_aurhor_desc" type="button" role="tab" aria-controls="product_aurhor_desc" aria-selected="false">About Author</button>
+                                    <button class="nav-link" id="product_aurhor_desc-tab" data-bs-toggle="tab" data-bs-target="#product_aurhor_desc" type="button" role="tab" aria-controls="product_aurhor_desc" aria-selected="false"> Team </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="product_review-tab" data-bs-toggle="tab" data-bs-target="#product_review" type="button" role="tab" aria-controls="product_review" aria-selected="false">Review</button>
@@ -226,21 +226,64 @@
                                         <div class="bj_author_single d-flex align-items-center">
                                             <img src="assets/img/home/author.jpg" alt="">
                                             <div class="bj_author_single_content">
-                                                <h2>Phillip Siphron</h2>
-                                                <p>Diam, urna, ornare leo facilisis suspendisse eu rutrum id
-                                                    augue
-                                                    cursus tincidunt nisl eget ornare pharetra ac pharetra,
-                                                    pulvinar
-                                                    ipsum.
+                                                <h2>Info for Team</h2>
+                                                <p> 
+                                                      بسم الله الرحمن الرحيم : {وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَى وَلا تَعَاوَنُوا عَلَى الإثْمِ وَالْعُدْوَانِ..}
                                                 </p>
-                                                <ul class="book_info">
-                                                    <li><span>Position:</span> Book Writer</li>
-                                                    <li><span>Book Count:</span>23</li>
-                                                    <li><span>Born:</span>1973</li>
-                                                    <li><span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a></li>
-                                                    <li><span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                    </li>
-                                                </ul>
+                                                <div class="container mt-3">
+                                                    <!-- Doctor Information -->
+                                                    <div class="info-section">
+                                                        <h2>Doctor</h2>
+                                                        <ul>
+                                                            <li><strong>Name:</strong> {{ object.doctor }}</li>
+                                                        </ul>
+                                                    </div>
+                                            
+                                                    <!-- Supervisors Information -->
+                                                    <div class="info-section">
+                                                        <h2>Supervisors</h2>
+                                                        <ul>
+                                                            {% if object.supervisors.all %}
+                                                                {% for supervisor in object.supervisors.all %}
+                                                                    <li><strong>Name:</strong> {{ supervisor }}</li>
+                                                                {% endfor %}
+                                                            {% else %}
+                                                                <li class="no-data">No supervisors available.</li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </div>
+                                            
+                                                    <!-- Students Information -->
+                                                    <div class="info-section">
+                                                        <h2>Students</h2>
+                                                        <ul>
+                                                            {% if object.students.all %}
+                                                                {% for student in object.students.all %}
+                                                                    <li><strong>Name:</strong> {{ student }}</li>
+                                                                    <li><strong>Phone Number:</strong> {{ student.phone_number|default:"Not provided" }}</li>
+                                                                    <li>
+                                                                        <strong>Image:</strong>
+                                                                        {% if student.image %}
+                                                                            <img src="{{ student.image.url }}" alt="{{ student.user.username }}'s profile picture" width="100">
+                                                                        {% else %}
+                                                                            <span class="no-data">No image available</span>
+                                                                        {% endif %}
+                                                                    </li>
+                                                                {% endfor %}
+                                                            {% else %}
+                                                                <li class="no-data">No students available.</li>
+                                                            {% endif %}
+                                                        </ul>
+                                                    </div>
+                                            
+                                                    <!-- Created At Information -->
+                                                    <div class="info-section">
+                                                        <h2>Created At</h2>
+                                                        <ul>
+                                                            <li><strong>Date:</strong> {{ object.created_at }}</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                                 <ul class="list-unstyled f_social_round">
                                                     <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
                                                     <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
