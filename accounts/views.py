@@ -14,13 +14,14 @@ from django.contrib.auth.decorators import login_required
 from .forms import NationalIDLoginForm
 
 
-@login_required
-def home(request):
-    return render(request, 'home.html', {'user': request.user})
-
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
+
+
+@login_required
+def home(request):
+    return render(request, 'logout.html', {'user': request.user})
 
 
 
@@ -34,13 +35,12 @@ def national_id_login(request):
             user = authenticate(request, national_id=national_id, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('/')
             else:
                 return render(request, 'login.html', {'form': form, 'error': 'Invalid National ID or password'})
     else:
         form = NationalIDLoginForm()
     return render(request, 'login.html', {'form': form})
-
 
 
 

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+<div class="container"style="margin-top: 200px; margin-bottom: 100px;">
+    <h2>Welcome, {{ user.first_name }}!</h2>
+    <p>Your National ID: {{ user.username }}</p>
+    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+</div>
+
+{% endblock %}

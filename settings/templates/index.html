@@ -10,7 +10,10 @@
                     <div class="col-lg-6">
                         <div class="bj_banner_content">
                             <div class="offer_text wow fadeInUp">
-                                SALE UPTO <span>20% OFF</span>
+                                {% if user.is_authenticated %}
+
+                                    Welcome <span>{{user.first_name}}</span>
+                                    {% endif %}
                             </div>
                             <h2 class="wow fadeInUp" data-wow-delay="0.2s">
                                 Meet your next favorite book
@@ -21,10 +24,10 @@
                                 with heroes.
                             </p>
                             <div class="d-flex">
-                                <a href="shop.html" class="bj_theme_btn wow fadeInLeft" data-wow-delay="0.2s">SHOP
-                                    NOW</a>
-                                <a href="#product_tab_showcase_id" class="bj_theme_btn strock_btn wow fadeInLeft" data-wow-delay="0.3s">TAKE A
-                                    TOUR</a>
+                                <a href="/accounts/login" class="bj_theme_btn wow fadeInLeft" data-wow-delay="0.2s">
+                                    Login</a>
+                                <a href="#product_tab_showcase_id" class="bj_theme_btn strock_btn wow fadeInLeft" data-wow-delay="0.3s">
+                                    Signup</a>
                             </div>
                             <div class="d-flex community_info_wrapper wow fadeInUp" data-wow-delay="0.4s">
                                 <div class="community_info">

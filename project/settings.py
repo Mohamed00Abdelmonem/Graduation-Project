@@ -34,7 +34,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
-    'https://rnbqp-156-197-29-230.a.free.pinggy.link/',
+    'https://rngna-197-35-92-181.a.free.pinggy.link',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://rngna-197-35-92-181.a.free.pinggy.link',
+    # أضف أي domains تانية هنا
 ]
 
 # Application definition
