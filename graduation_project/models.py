@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
 
 
 
@@ -45,6 +46,7 @@ class GraduationProject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     view_count = models.PositiveIntegerField(default=0)  # Added field
+    slug = models.SlugField(null=True, blank=True)
 
     
     def get_lat_lng(self):
@@ -58,8 +60,12 @@ class GraduationProject(models.Model):
     def __str__(self):
         return self.title
 
+    # Add slug
+    def save(self, *args, **kwargs):
+            self.slug = slugify(self.title)
+            super(GraduationProject, self).save(*args, **kwargs) 
 
-
+            
 # Category
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)

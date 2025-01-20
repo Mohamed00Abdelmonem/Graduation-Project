@@ -5,7 +5,7 @@ app_name  = "project"
 
 urlpatterns = [
     path('books/', views.ProjectList, name="ProjectList"),
-    path('book/<int:pk>', views.ProjectDetail.as_view(), name="project_detail"),
+    path('book/<slug:slug>', views.ProjectDetail.as_view(), name="project_detail"),
     path('add-project', views.AddProject.as_view(), name="add_project"),
     path('like/<int:id>', views.like_post, name='like_post'),
     path('approve-project/<int:project_id>/', views.approve_project, name='approve_project'),
