@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body %}
+{% load humanize %}
 
 
         <!-- banner area  -->
@@ -16,7 +17,7 @@
                                     {% endif %}
                             </div>
                             <h2 class="wow fadeInUp" data-wow-delay="0.2s">
-                                Meet your next favorite book
+                                You can see All Gradution Projects MET Acadmy
                             </h2>
                             <p class="wow fadeInUp" data-wow-delay="0.4s">
                                 Unleash your imagination with epic fantasy sagas, mystical
@@ -51,8 +52,8 @@
                                     </div>
                                 </div>
                                 <div class="community_info_number">
-                                    <div class="number"><span class="counter">100</span>k+</div>
-                                    <p>Book Readers worldwide</p>
+                                    <div class="number"><span class="counter">{{all_users.count}}</span>+</div>
+                                    <p>Book Readers </p>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +84,7 @@
         <section class="product_tab_showcase_area sec_padding" id="product_tab_showcase_id">
             <div class="container">
                 <div class="section_title wow fadeInUp">
-                    <h2 class="title title_two">Browse By Genres</h2>
+                    <h2 class="title title_two">Filter By Doctors</h2>
                 </div>
                 <div class="row wow fadeInUp" data-wow-delay="0.2s">
                     {% comment %} <div class="row"> {% endcomment %}
@@ -171,7 +172,7 @@
         <section class="best_selling_pr_area sec_padding" data-bg-color="#f5f5f5">
             <div class="container">
                 <div class="section_title section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 class="title title_two">New Arrivals</h2>
+                    <h2 class="title title_two">Latest 10 Projects</h2>
                     <p>Reading books helps you to develop your communication skill</p>
                 </div>
                 <div class="row">
@@ -203,8 +204,12 @@
             </div>
         </section>
 
+
+
+
+{% comment %}
         <section class="best_selling_pr_area sec_padding">
-            <div class="container">
+             <div class="container">
                 <div class="section_title section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
                     <h2 class="title title_two">Peoples Choice</h2>
                     <p>Reading books helps you to develop your communication skill</p>
@@ -883,93 +888,49 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </div> 
+        </section> {% endcomment %}
         <!-- best selling product area  -->
 
         <!-- new product area  -->
         <section class="bj_new_product_area sec_padding" data-bg-color="#f5f5f5">
             <div class="container">
                 <div class="section_title section_title_two text-center">
-                    <h2 class="title title_two">Limited Offer</h2>
-                    <p>Get Special Promo All Books Are 50% Off Now!</p>
+                    <h2 class="title title_two">Most Poupler Projects have likes </h2>
+                    <p>Reading books helps you to develop your communication skill</p>
                 </div>
                 <div id="clockdiv" class="clock" data-date="2024-12-02"></div>
                 <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="bj_new_pr_item wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="ribon">30% off</div>
-                            <a href="product-single.html" class="img"><img src="{% static 'img/home/book5.jpg' %}" alt="book" /></a>
-                            <div class="bj_new_pr_content">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">The Sun And The Star</h4>
-                                </a>
-                                <div class="bj_pr_meta">
-                                    <div class="writer_name">by <a href="author-single.html">Ann Napolitano </a></div>
-                                    <div class="book_price mt-2">
-                                        <del class="me-2">350</del> $125
-                                    </div>
-                                </div>
-                                <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="bj_new_pr_item wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="ribon">30% off</div>
-                            <a href="product-single.html" class="img"><img src="{% static 'img/home/book6.jpg' %}" alt="book" /></a>
-                            <div class="bj_new_pr_content">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">The Sun And The Star</h4>
-                                </a>
-                                <div class="bj_pr_meta">
-                                    <div class="writer_name">by <a href="author-single.html">Rick Riordan </a></div>
-                                    <div class="book_price mt-2">
-                                        <del class="me-2">250</del> $125
-                                    </div>
-                                </div>
-                                <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% for project in  projects_main %}
 
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="bj_new_pr_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="ribon">30% off</div>
-                            <a href="product-single.html" class="img"><img src="{% static 'img/home/book7.jpg' %}" alt="book" /></a>
-                            <div class="bj_new_pr_content">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">The Sun And The Star</h4>
-                                </a>
-                                <div class="bj_pr_meta">
-                                    <div class="writer_name">by <a href="author-single.html">Ann Napolitano </a></div>
-                                    <div class="book_price mt-2">
-                                        <del class="me-2">250</del> $125
+
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="bj_new_pr_item wow fadeInUp" data-wow-delay="0.2s">
+                                <div class="ribon">👍🏻 {{project.likes.count}}</div>
+                                {% if project.images %}
+
+                                <a href="{% url 'project:project_detail' project.slug %}" class="img"><img src="{{project.images.url}}" alt="book" /></a>
+                                {% else %}
+                                    <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 200px; height: 200px;" />
+                                {% endif %}
+                                <div class="bj_new_pr_content">
+                                    <a href="{% url 'project:project_detail' project.slug %}">
+                                        <h4 class="bj_new_pr_title">{{project}}</h4>
+                                    </a>
+                                    <div class="bj_pr_meta">
+                                        <div class="writer_name">by <a href="author-single.html">Dr: {{project.doctor}} </a></div>
+                                        <div class="book_price mt-2">
+                                            👁️ {{project.view_count|intcomma}}
+                                            {% comment %} <del class="me-2">350</del> $125 {% endcomment %}
+                                        </div>
                                     </div>
                                 </div>
-                                <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="bj_new_pr_item wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="ribon">30% off</div>
-                            <a href="product-single.html" class="img"><img src="{% static 'img/home/book8.jpg' %}" alt="book" /></a>
-                            <div class="bj_new_pr_content">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">The Sun And The Star</h4>
-                                </a>
-                                <div class="bj_pr_meta">
-                                    <div class="writer_name">by <a href="">Rick Riordan</a></div>
-                                    <div class="book_price mt-2">
-                                        <del class="me-2">150</del> $125
-                                    </div>
-                                </div>
-                                <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                            </div>
-                        </div>
-                    </div>
+
+                    {% endfor %}
+
                 </div>
                 <div class="text-center mt-4">
                     <a href="shop.html" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">View All</a>
@@ -979,7 +940,11 @@
         <!-- new product area  -->
 
         <!-- product featured author area  -->
-        <section class="pr_featured_author_area sec_padding">
+
+
+
+
+        {% comment %} <section class="pr_featured_author_area sec_padding">
             <div class="container">
                 <div class="section_title">
                     <h2 class="title title_two">Featured Author Of Month</h2>
@@ -1395,11 +1360,15 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> {% endcomment %}
+
+
+
+        
         <!-- product featured author area   -->
 
         <!-- bj testimonial area -->
-        <section class="bj_testimonial_area sec_padding" data-bg-color="#f5f5f5">
+        {% comment %} <section class="bj_testimonial_area sec_padding" data-bg-color="#f5f5f5">
             <div class="container">
                 <div class="section_title section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
                     <h2 class="title title_two">Testimonial</h2>
@@ -1536,7 +1505,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> {% endcomment %}
         <!-- bj testimonial area -->
 
 
@@ -1558,13 +1527,13 @@
                             <img class="layer" data-depth="-0.25" src="{% static 'img/home/cube.png' %}" alt="" />
                         </div>
                     </div>
-                    <h2>Online Book Fairs 2024</h2>
+                    <h2>You can see All Gradution Projects MET Acadmy</h2>
                     <p>
                         Our authors are devoted to their writing and are eager to share
                         more information about their books with you. After that, you can
                         Explore anywhere.
                     </p>
-                    <a href="#" class="bj_theme_btn">REGISTRATION NOW</a>
+                    <a href="#" class="bj_theme_btn">Login NOW</a>
                 </div>
             </div>
         </section>

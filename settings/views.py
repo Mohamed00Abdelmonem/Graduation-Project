@@ -12,7 +12,7 @@ def home(request):
     category = Category.objects.all()
 
     # Fetch the latest 7 reviews
-    reviews = Review.objects.all().order_by('-id')[:7]
+    # reviews = Review.objects.all().order_by('-id')[:7]
 
     # Fetch the top 10 doctors with the most projects (only accepted projects)
     doctors = UserProfile.objects.filter(is_doctor=True).annotate(
@@ -25,9 +25,14 @@ def home(request):
         )
     ).order_by('-book_count')[:10]
 
+    # projects_have_more_likes = GraduationProject.objects.filter().order_by('-book_count')[:10]
+
+    all_users = UserProfile.objects.all()
+
     return render(request, "index.html", {
         "projects_main": projects_main,
         "category": category,
-        "reviews": reviews,
+        # "reviews": reviews,
         "doctors": doctors,
+        "all_users": all_users,
     })

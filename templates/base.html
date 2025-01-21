@@ -27,7 +27,7 @@
 <body data-scroll-animation="true">
     {% comment %} for landing page anamation {% endcomment %}
 
-    {% comment %} <div id="preloader">
+    <div id="preloader">
         <div id="ctn-preloader" class="ctn-preloader">
             <div class="round_spinner">
                 <div class="spinner"></div>
@@ -39,8 +39,9 @@
             <h2 class="head">Did You Know?</h2>
             <p></p>
         </div>
-    </div>  {% endcomment %}
+    </div> 
 
+    
     <div class="body_wrapper">
         <div class="click_capture"></div>
         <header class="header_area header_relative header_blue">
@@ -48,7 +49,7 @@
                 <div class="container">
                     <a class="navbar-brand sticky_logo" href="/">
                         <img class="wow fadeInRight" data-wow-delay="0.5s" src="{% static 'img/home/favicon.ico' %}" alt="logo" />
-                        <img src="{% static 'img/home-two/logo-dark.svg' %}" alt="logo" />
+                        <img src="{% static 'img/home/favicon.ico' %}" alt="logo" />
                     </a>
                     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="menu_toggle">
@@ -86,55 +87,17 @@
                             </li>
                             <li class="nav-item dropdown submenu">
                                 <a class="nav-link dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Shop
+                                    Projects
                                 </a>
 
                                 <ul class="dropdown-menu">
                                     <li class="nav-item dropdown submenu">
-                                        <a class="nav-link dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Shop
+                                        <a class="nav-link dropdown-toggle" href="{% url 'project:ProjectList'%}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            books
                                         </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="shop.html" class="nav-link">Shop</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="shop-no-sidebar.html" class="nav-link">Shop No Sidebar</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="product-single.html" class="nav-link">Product Details</a>
-                                            </li>
-                                        </ul>
+                                        
                                     </li>
-                                    <li class="nav-item dropdown submenu">
-                                        <a class="nav-link dropdown-toggle" href="cart.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Cart
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="cart.html" class="nav-link">Cart</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="cart-guest.html" class="nav-link">Cart Guest</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item dropdown submenu">
-                                        <a class="nav-link dropdown-toggle" href="checkout.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Checkout
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="checkout.html" class="nav-link">Checkout</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="checkout-login.html" class="nav-link">Checkout Login</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="checkout-gift.html" class="nav-link">Checkout Gift</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                    
                                 </ul>
                             </li>
                             <li class="nav-item dropdown submenu">
@@ -573,7 +536,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-12 text-center text-lg-start">
                                 <a href="#" class="f_logo">
-                                    <img src="{% static 'img/home/logo-white.svg' %}" alt="f_logo" />
+                                    <img src="{% static 'img/home/favicon.ico' %}" alt="f_logo" />
                                 </a>
                             </div>
                             <div class="col-lg-4 col-md-6">
@@ -606,7 +569,7 @@
                 </div>
     
                 <div class="footer_bottom text-center wow fadeInUp" data-wow-delay="0.6s">
-                    <p>© 2024 met. All Rights Reserved</p>
+                    <p>© 2025 MET. All Rights Reserved</p>
                 </div>
             </footer>
             <!-- footer area css  -->
