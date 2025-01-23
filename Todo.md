@@ -15,3 +15,4 @@
 - make custom in admin panel 
 - add debug toolbar
 - use tools for tesing in my course for cheack performance system
+- paginations

@@ -13,9 +13,11 @@ from django.urls import reverse
 
 
 
+from django.db.models import Q
 
 def ProjectList(request):
-    # Get filter parameters from the request
+    # Get search query and filter parameters
+    search_query = request.GET.get('q', '')
     category_id = request.GET.get('category')
     doctor_id = request.GET.get('doctor')
     graduation_year = request.GET.get('graduation_year')
@@ -23,7 +25,14 @@ def ProjectList(request):
     # Start with all accepted projects
     projects = GraduationProject.objects.filter(status='accepted')
 
-    # Apply filters
+    # Apply search query (if provided)
+    if search_query:
+        projects = projects.filter(
+            Q(title__icontains=search_query) |  # Search by title
+            Q(description__icontains=search_query)  # Search by description
+        )
+
+    # Apply filters (if provided)
     if category_id and category_id != 'all':
         projects = projects.filter(category_id=category_id)
     if doctor_id:
@@ -39,10 +48,6 @@ def ProjectList(request):
         book_count=Count('user__doctor_projects', filter=Q(user__doctor_projects__status='accepted'))
     ).order_by('-book_count')[:10]
 
-    # Fetch the latest 10 accepted projects for the main section
-    projects_main = GraduationProject.objects.filter(status='accepted').order_by('-id')[:10]
-    count_books = projects_main.count()
-
     # Check if the request is from HTMX
     if request.headers.get('HX-Request'):
         # Render only the project list for HTMX requests
@@ -52,14 +57,28 @@ def ProjectList(request):
     else:
         # Render the full page for regular requests
         return render(request, "projects.html", {
-            "projects_main": projects_main,
-            "count_books": count_books,
             "projects": projects,
             "categories": categories,
             "doctors": doctors,
         })
     
 
+
+
+# from django.shortcuts import render
+# from django.http import JsonResponse
+# from .models import GraduationProject
+
+# def search_projects(request):
+#     query = request.GET.get('q', '')
+#     if query:
+#         projects = GraduationProject.objects.filter(title__icontains=query, status='accepted')
+#     else:
+#         projects = GraduationProject.objects.none()
+
+#     return render(request, 'partials/project_list.html', {
+#         "projects": projects,
+#     })
 
 
 

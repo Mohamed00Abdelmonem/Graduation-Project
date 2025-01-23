@@ -39,29 +39,49 @@
 
 
 
-
-
-
-                    <div class="col-lg-9">
+                        <!-- Search Input -->
                         <form role="search" method="get" class="pr_search_form input-group" action="#">
-                            <input type="text" name="s" value="" class="form-control search-field" id="search" placeholder="Serach  off book store..">
+                            <input type="text" 
+                                   name="q" 
+                                   class="form-control search-field" 
+                                   id="searchInput" 
+                                   placeholder="Search off book store.."
+                                   hx-get="{% url 'project:ProjectList' %}"
+                                   hx-target="#project-list"
+                                   hx-trigger="keyup changed delay:500ms"
+                                   value="{{ request.GET.q|default:'' }}">
                             <button type="submit"><i class="ti-search"></i></button>
                         </form>
+                        <!-- Container to display search results -->
+
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        
+                       
+
+
+                            
+
                         <div class="shop_top d-flex align-items-center justify-content-between">
                             <div class="shop_menu_left">{{count_books}} Books</div>
+                          
+                            <div class="row">
+
+
                             <div class="shop_menu_right d-flex align-items-center justify-content-end">
                                 Sort by
                                 <form class="woocommerce-ordering" method="get">
-                                    <select name="orderby" class="orderby selectpickers">
+                                    <select name="orderby" class="orderby selectpickers" id="sortBy" onchange="sortProjects()">
                                         <option value="menu_order" selected='selected'>Default sorting</option>
                                         <option value="popularity">Sort by popularity</option>
                                         <option value="rating">Sort by average rating</option>
                                         <option value="date">Sort by latest</option>
-                                        <option value="price">Sort by price: low to high</option>
-                                        <option value="price-desc">Sort by price: high to low</option>
+                                        <option value="price">Sort by price: low to high based likes</option>
+                                        <option value="price-desc">Sort by price: high to low based linebreaksbr</option>
                                     </select>
                                 </form>
                             </div>
+                            </div>
+
                         </div>
                         <div class="row">
 
@@ -71,83 +91,101 @@
 
                <!-- Include HTMX in your base template -->
 
-                        <div class="row">
-                            <!-- Sidebar for Filters -->
-                            <div class="col-lg-3">
-                                <div class="shop_sidebar">
-                                    <!-- Category Filter -->
-                                    <div class="widget shop_category_widget">
-                                        <h4 class="shop_sidebar_title_small"><i class="icon-category-icon"></i>Category</h4>
-                                        <ul class="list-unstyled shop_category_list">
-                                            <li>
-                                                <a href="#" 
-                                                hx-get="{% url 'project:ProjectList' %}?category=all" 
-                                                hx-target="#project-list">
-                                                    All categories
-                                                </a>
-                                            </li>
-                                            {% for category in categories %}
-                                                <li>
-                                                    <a href="#" 
-                                                    hx-get="{% url 'project:ProjectList' %}?category={{ category.id }}" 
-                                                    hx-target="#project-list">
-                                                        {{ category.name }}
-                                                    </a>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
+               <div class="row">
+                <!-- Sidebar for Filters -->
+                <div class="col-lg-3">
+                    <div class="shop_sidebar">
+                        <!-- Category Filter -->
+                        <div class="widget shop_category_widget">
+                            <h4 class="shop_sidebar_title_small"><i class="icon-category-icon"></i>Category</h4>
+                            <ul class="list-unstyled shop_category_list">
+                                <li>
+                                    <a href="#" 
+                                       hx-get="{% url 'project:ProjectList' %}?q={{ request.GET.q|default:'' }}&category=all" 
+                                       hx-target="#project-list">
+                                        All categories
+                                    </a>
+                                </li>
+                                {% for category in categories %}
+                                    <li>
+                                        <a href="#" 
+                                           hx-get="{% url 'project:ProjectList' %}?q={{ request.GET.q|default:'' }}&category={{ category.id }}" 
+                                           hx-target="#project-list">
+                                            {{ category.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+            
+                        <!-- Doctor Filter -->
+                        <div class="widget author_widget">
+                            <h4 class="shop_sidebar_title_small"><i class="icon-pen"></i>Doctor</h4>
+                            <div class="author_choose_list">
+                                {% for doctor in doctors %}
+                                    <div class="form-check">
+                                        <input class="form-check-input" 
+                                               type="checkbox" 
+                                               name="doctor" 
+                                               id="doctor_{{ doctor.user.id }}" 
+                                               value="{{ doctor.user.id }}" 
+                                               hx-get="{% url 'project:ProjectList' %}?q={{ request.GET.q|default:'' }}&doctor={{ doctor.user.id }}" 
+                                               hx-target="#project-list">
+                                        <label class="form-check-label" for="doctor_{{ doctor.user.id }}">
+                                            {{ doctor.user.get_full_name }}
+                                        </label>
                                     </div>
-
-                                    <!-- Doctor Filter -->
-                                    <div class="widget author_widget">
-                                        <h4 class="shop_sidebar_title_small"><i class="icon-pen"></i>Doctor</h4>
-                                        <div class="author_choose_list">
-                                            {% for doctor in doctors %}
-                                                <div class="form-check">
-                                                    <input class="form-check-input" 
-                                                        type="checkbox" 
-                                                        name="doctor" 
-                                                        id="doctor_{{ doctor.user.id }}" 
-                                                        value="{{ doctor.user.id }}" 
-                                                        hx-get="{% url 'project:ProjectList' %}?doctor={{ doctor.user.id }}" 
-                                                        hx-target="#project-list">
-                                                    <label class="form-check-label" for="doctor_{{ doctor.user.id }}">
-                                                        {{ doctor.user.get_full_name }}
-                                                    </label>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-
-                                    <!-- Graduation Year Filter -->
-                                    <div class="widget price_widget">
-                                        <h4 class="shop_sidebar_title_small"><i class="icon-price"></i>Graduation Year</h4>
-                                        <div class="price-filters d-flex justify-content-between">
-                                            <input type="number" 
-                                                id="graduation-year-filter" 
-                                                placeholder="Enter year" 
-                                                hx-get="{% url 'project:ProjectList' %}" 
-                                                hx-target="#project-list" 
-                                                hx-trigger="keyup changed delay:500ms" 
-                                                name="graduation_year">
-                                        </div>
-                                    </div>
-
-                                    <!-- Submit Button -->
-                                  
-                                </div>
-                            </div>
-
-                            <!-- Project List -->
-                            <div class="col-lg-9">
-                                <div class="row">
-
-                                <div id="project-list">
-                                    {% include "partials/project_list.html" %}
-                                </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
+            
+                        <!-- Graduation Year Filter -->
+                        <div class="widget price_widget">
+                            <h4 class="shop_sidebar_title_small"><i class="icon-price"></i>Graduation Year</h4>
+                            <div class="price-filters d-flex justify-content-between">
+                                <input type="number" 
+                                       id="graduation-year-filter" 
+                                       placeholder="Enter year" 
+                                       hx-get="{% url 'project:ProjectList' %}?q={{ request.GET.q|default:'' }}" 
+                                       hx-target="#project-list" 
+                                       hx-trigger="keyup changed delay:500ms" 
+                                       name="graduation_year">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Project List -->
+                <div class="col-lg-9">
+                    <div class="row">
+
+
+                        {% comment %} <!-- Search Input -->
+                        <form role="search" method="get" class="pr_search_form input-group" action="#">
+                            <input type="text" 
+                                   name="q" 
+                                   class="form-control search-field" 
+                                   id="searchInput" 
+                                   placeholder="Search off book store.."
+                                   hx-get="{% url 'project:ProjectList' %}"
+                                   hx-target="#project-list"
+                                   hx-trigger="keyup changed delay:500ms"
+                                   value="{{ request.GET.q|default:'' }}">
+                            <button type="submit"><i class="ti-search"></i></button>
+                        </form> {% endcomment %}
+            
+
+                        
+                        <!-- Search Results -->
+                        <div id="project-list">
+                            {% include "partials/project_list.html" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
 
 
 
@@ -185,5 +223,87 @@
             </div>
         </section>
         <!-- shop area  -->
+
+
+
+
+
+
+        
+        <script>
+            function sortProjects() {
+                const sortBy = document.getElementById('sortBy').value; // Get the selected sorting option
+                const projectList = document.getElementById('project-list'); // Get the container for projects
+                const projects = Array.from(projectList.getElementsByClassName('projects_item')); // Get all project items
+            
+                // Sort the projects based on the selected option
+                projects.sort((a, b) => {
+                    switch (sortBy) {
+                        case 'popularity':
+                            const likesA = parseInt(a.querySelector('.book_price').textContent.match(/\d+/)[0]);
+                            const likesB = parseInt(b.querySelector('.book_price').textContent.match(/\d+/)[0]);
+                            return likesB - likesA; // Sort by likes (descending)
+                        case 'rating':
+                            const ratingA = parseFloat(a.querySelector('.ratting').textContent);
+                            const ratingB = parseFloat(b.querySelector('.ratting').textContent);
+                            return ratingB - ratingA; // Sort by rating (descending)
+                        case 'date':
+                            const dateA = new Date(a.querySelector('.pr_ribbon .product-badge').textContent);
+                            const dateB = new Date(b.querySelector('.pr_ribbon .product-badge').textContent);
+                            return dateB - dateA; // Sort by date (newest first)
+                        case 'price':
+                            const priceA = parseFloat(a.querySelector('.book_price').textContent.replace(/[^0-9.]/g, ''));
+                            const priceB = parseFloat(b.querySelector('.book_price').textContent.replace(/[^0-9.]/g, ''));
+                            return priceA - priceB; // Sort by price (low to high)
+                        case 'price-desc':
+                            const priceDescA = parseFloat(a.querySelector('.book_price').textContent.replace(/[^0-9.]/g, ''));
+                            const priceDescB = parseFloat(b.querySelector('.book_price').textContent.replace(/[^0-9.]/g, ''));
+                            return priceDescB - priceDescA; // Sort by price (high to low)
+                        default:
+                            return 0; // Default sorting (no change)
+                    }
+                });
+            
+                // Clear the current project list
+                projectList.innerHTML = '';
+            
+                // Append the sorted projects back to the container
+                projects.forEach(project => {
+                    projectList.appendChild(project);
+                });
+            }
+            </script>
+
+
+
+
+            
+
+             <!--   search  -->
+                        
+             <script>
+                $(document).ready(function() {
+                    $('#searchInput').on('input', function() {
+                        const query = $(this).val(); // Get the search query
+                        if (query.length >= 2) { // Only search if 2 or more characters are typed
+                            $.ajax({
+                                url: '{% url "project:ProjectList" %}', // URL to your search view
+                                data: {
+                                    'q': query
+                                },
+                                success: function(data) {
+                                    $('#searchResults').html(data); // Update the results container
+                                }
+                            });
+                        } else {
+                            $('#searchResults').html(''); // Clear results if query is too short
+                        }
+                    });
+                });
+                </script>
+
+
+
+
 
 {% endblock body %}

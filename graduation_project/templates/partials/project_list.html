@@ -1,37 +1,33 @@
-                        <div class="row">
-
-{% for book in projects %}
-<div class="col-xl-3 col-lg-4 col-sm-6 projects_item">
-    <div class="best_product_item best_product_item_two shop_product">
-        <div class="img">
-            {% if book.images %}
-            <a href="{% url 'project:project_detail' book.id %}"><img src="{{book.images.url}}" alt="book"></a>
-
-            {% else %}
-            <a href="#"><img src="" alt="book"></a>
-
-            {% endif %}
-            <div class="pr_ribbon">
-                <span class="product-badge">{{book.graduation_year}}</span>
-                <div class="ratting">
+<div class="row">
+    {% for book in projects %}
+    <div class="col-xl-3 col-lg-4 col-sm-6 projects_item">
+        <div class="best_product_item best_product_item_two shop_product">
+            <div class="img">
+                {% if book.images %}
+                <a href="{% url 'project:project_detail' book.id %}"><img src="{{book.images.url}}" alt="book"></a>
+                {% else %}
+                <a href="#"><img src="" alt="book"></a>
+                {% endif %}
+                <div class="pr_ribbon">
+                    <span class="product-badge">{{book.graduation_year}}</span>
+                    <div class="ratting">
+                    </div>
+                </div>
+                <div class="hover_item">
+                    <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Wishlist"><i class="icon_heart_alt"></i></a>
+                    <span data-bs-toggle="tooltip" data-bs-placement="right" title="Quickview"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
+                    <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Compare"><i class="ti-control-shuffle"></i></a>
                 </div>
             </div>
-            <div class="hover_item">
-                <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Wishlist"><i class="icon_heart_alt"></i></a>
-                <span data-bs-toggle="tooltip" data-bs-placement="right" title="Quickview"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
-                <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Compare"><i class="ti-control-shuffle"></i></a>
-            </div>
-           
-        </div>
-        <div class="bj_new_pr_content">
-            <a href="{% url 'project:project_detail' book.slug %}">
-                <h4 class="bj_new_pr_title">{{book}}</h4>
-            </a>
-            <div class="bj_pr_meta d-flex">
-                <div class="book_price"><del> </del>👍🏽{{book.likes.count}}</div>
+            <div class="bj_new_pr_content">
+                <a href="{% url 'project:project_detail' book.slug %}">
+                    <h4 class="bj_new_pr_title">{{book}}</h4>
+                </a>
+                <div class="bj_pr_meta d-flex">
+                    <div class="book_price"><del> </del>👍🏽{{book.likes.count}}</div>
+                </div>
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
-
-{% endfor %}
