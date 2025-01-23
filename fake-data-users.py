@@ -12,7 +12,7 @@ year_grades = ['1', '2', '3', '4', 'not_student']
 user_data = []
 
 # Generate 100 users
-for _ in range(100):
+for _ in range(99):
     # Generate fake data for each user
     username = f"{random.randint(100000000, 999999999)}"  # Simulating National ID as username
     first_name = fake.first_name()
