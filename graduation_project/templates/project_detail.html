@@ -69,8 +69,14 @@
                                 </ul>
                                 <div class="d-flex">
                                     {% comment %} <a href="#" class="bj_theme_btn strock_btn flip_btn">Flip to Back</a> {% endcomment %}
+                                    {% if boject.book_pdf %}
                                     <a href="{{object.book_pdf.url}}" class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i>
                                         Look inside</a>
+                                    {% else %}
+                                    <a href="#" class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i>
+                                        Look inside</a>
+                                    {% endif %}
+                                   
                                 </div>
 
 
@@ -508,7 +514,7 @@
                                         <span class="product_details_section_value">English</span>
                                     </div>
                                     <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">ID- :</span>
+                                        <span class="product_details_section_key">ID :</span>
                                         <span class="product_details_section_value">{{object.id}}</span>
                                     </div>
                                     <div class="product_details_section_content mb-3">

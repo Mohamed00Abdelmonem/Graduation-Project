@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'hitcount',
     'django.contrib.humanize',
+    "debug_toolbar",
 
 
 
@@ -69,9 +70,13 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default fallback
 ]
 
-
+# for debug_toolbar
+INTERNAL_IPS = [
+    '127.0.0.1',  # Add your local IP address here
+]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
