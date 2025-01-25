@@ -20,9 +20,9 @@
 
 
 ToDay: 25/1/2025
-- dummy_data 25/1
-- db postgresql today 25/1
-- add debug toolbar today 25/1
+- dummy_data 25/1    done
+- db postgresql today 25/1   done 
+- add debug toolbar today 25/1   done 
 - use tools for tesing in my course for cheack performance system 25/1
 - paginations 25/1
 

@@ -82,6 +82,8 @@ def seed_reviews(n):
         )
     print(f"Seeded {n} reviews successfully.")
 
+
+
 def seed_all():
     """Seed all data."""
     # seed_users(10)  # Create 10 dummy users
