@@ -201,20 +201,72 @@
 
                         </div>
                         <div class="text-center">
-                            <nav aria-label="...">
+                            <nav aria-label="Page navigation">
                                 <ul class="pagination pagi-content">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"><i class="ti-angle-left"></i>Prev</a>
-                                    </li>
-                                    <li class="page-item active" aria-current="page"><span class="page-link">1</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">Next<i class="ti-angle-right"></i></a>
-                                    </li>
+                                    <!-- Previous Page Link -->
+                                    {% if projects.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ projects.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                                                <i class="ti-angle-left"></i> Prev
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <span class="page-link"><i class="ti-angle-left"></i> Prev</span>
+                                        </li>
+                                    {% endif %}
+                            
+                                    <!-- Show first page and ellipsis if needed -->
+                                    {% if projects.number > 4 %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">1</a>
+                                        </li>
+                                        <li class="page-item disabled">
+                                            <span class="page-link">...</span>
+                                        </li>
+                                    {% endif %}
+                            
+                                    <!-- Show 3 pages to the left and 3 pages to the right of the current page -->
+                                    {% for num in projects.paginator.page_range %}
+                                        {% if num >= projects.number|add:-3 and num <= projects.number|add:3 %}
+                                            {% if projects.number == num %}
+                                                <li class="page-item active" aria-current="page">
+                                                    <span class="page-link">{{ num }}</span>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                                                        {{ num }}
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                            
+                                    <!-- Show last page and ellipsis if needed -->
+                                    {% if projects.number < projects.paginator.num_pages|add:-3 %}
+                                        <li class="page-item disabled">
+                                            <span class="page-link">...</span>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ projects.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                                                {{ projects.paginator.num_pages }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                            
+                                    <!-- Next Page Link -->
+                                    {% if projects.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ projects.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                                                Next <i class="ti-angle-right"></i>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Next <i class="ti-angle-right"></i></span>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </nav>
                         </div>

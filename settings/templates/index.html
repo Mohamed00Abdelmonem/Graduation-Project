@@ -149,7 +149,7 @@
                                                                 </div>
                                                                 <span>(252)</span>
                                                             </div>
-                                                            <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
+                                                            <a href="{% url 'project:project_detail' project.slug %}" class="bj_theme_btn">show</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -933,7 +933,7 @@
 
                 </div>
                 <div class="text-center mt-4">
-                    <a href="shop.html" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">View All</a>
+                    <a href="{% url 'project:ProjectList'%}" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">View All</a>
                 </div>
             </div>
         </section>

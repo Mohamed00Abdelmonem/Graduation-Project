@@ -10,6 +10,7 @@ from django.db.models import Q, Count
 from .models import GraduationProject, Category
 from accounts.models import UserProfile
 from django.urls import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 
@@ -40,6 +41,21 @@ def ProjectList(request):
     if graduation_year:
         projects = projects.filter(graduation_year=graduation_year)
 
+
+
+   # Pagination
+    page = request.GET.get('page', 1)  # Get the current page number from the request
+    paginator = Paginator(projects, 15)  # Show 10 projects per page
+    try:
+        paginated_projects = paginator.page(page)
+    except PageNotAnInteger:
+        paginated_projects = paginator.page(1)  # If page is not an integer, deliver first page
+    except EmptyPage:
+        paginated_projects = paginator.page(paginator.num_pages)  # If page is out of range, deliver last page
+
+
+
+
     # Fetch all categories for the sidebar
     categories = Category.objects.all()
 
@@ -58,6 +74,7 @@ def ProjectList(request):
         # Render the full page for regular requests
         return render(request, "projects.html", {
             "projects": projects,
+            "projects": paginated_projects,
             "categories": categories,
             "doctors": doctors,
         })
