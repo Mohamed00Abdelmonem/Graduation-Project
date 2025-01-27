@@ -191,6 +191,16 @@ LOGOUT_REDIRECT_URL = '/'  # أو صفحة معينة
 
 
 
+# chaching
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+
+
+
 
 
 # Email Configuration

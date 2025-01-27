@@ -3,7 +3,10 @@ from django.db.models import Count, Prefetch, Q  # Import Q here
 from .models import Settings
 from graduation_project.models import GraduationProject, Category, Review
 from accounts.models import UserProfile
+from django.views.decorators.cache import cache_page
 
+
+@cache_page(60 * 1)
 def home(request):
     # Fetch only accepted projects for the main projects section
     projects_main = GraduationProject.objects.filter(status='accepted').order_by('-id')[:10]

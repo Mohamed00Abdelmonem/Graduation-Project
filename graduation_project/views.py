@@ -11,11 +11,12 @@ from .models import GraduationProject, Category
 from accounts.models import UserProfile
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-
-
+from django.views.decorators.cache import cache_page
 from django.db.models import Q
 
+
+
+@cache_page(60 * 5)
 def ProjectList(request):
     # Get search query and filter parameters
     search_query = request.GET.get('q', '')
@@ -55,7 +56,6 @@ def ProjectList(request):
 
 
 
-
     # Fetch all categories for the sidebar
     categories = Category.objects.all()
 
@@ -81,21 +81,6 @@ def ProjectList(request):
     
 
 
-
-# from django.shortcuts import render
-# from django.http import JsonResponse
-# from .models import GraduationProject
-
-# def search_projects(request):
-#     query = request.GET.get('q', '')
-#     if query:
-#         projects = GraduationProject.objects.filter(title__icontains=query, status='accepted')
-#     else:
-#         projects = GraduationProject.objects.none()
-
-#     return render(request, 'partials/project_list.html', {
-#         "projects": projects,
-#     })
 
 
 
