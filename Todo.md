@@ -24,7 +24,7 @@ ToDay: 25/1/2025
 - db postgresql today 25/1   done 
 - add debug toolbar today 25/1   done 
 - use tools for tesing in my course for cheack performance system 25/1
-- paginations 25/1
+- paginations 25/1   done
 
 
 
@@ -34,10 +34,9 @@ After time:
 
 - search in form M to M relations in add project  search for student  and doctor
 - fix login required for like and show pdf file 
-- app settings
-- caching
+- app settings    InProgress 
+- caching    done
 - review and rating
 - page not found 
 - show all links for project_deatil like (github and another links)
-
 
