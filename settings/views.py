@@ -6,7 +6,7 @@ from accounts.models import UserProfile
 from django.views.decorators.cache import cache_page
 
 
-@cache_page(60 * 1)
+# @cache_page(60 * 1) #    for caching 1 minute
 def home(request):
     # Fetch only accepted projects for the main projects section
     projects_main = GraduationProject.objects.filter(status='accepted').order_by('-id')[:10]

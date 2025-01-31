@@ -16,7 +16,7 @@ from django.db.models import Q
 
 
 
-@cache_page(60 * 5)
+# @cache_page(60 * 5)
 def ProjectList(request):
     # Get search query and filter parameters
     search_query = request.GET.get('q', '')
@@ -26,6 +26,9 @@ def ProjectList(request):
 
     # Start with all accepted projects
     projects = GraduationProject.objects.filter(status='accepted')
+    projects_count = GraduationProject.objects.filter(status='accepted').count()
+    projects_count = GraduationProject.objects.filter(status='accepted').count()
+    
 
     # Apply search query (if provided)
     if search_query:
@@ -74,6 +77,7 @@ def ProjectList(request):
         # Render the full page for regular requests
         return render(request, "projects.html", {
             "projects": projects,
+            "projects_count": projects_count,
             "projects": paginated_projects,
             "categories": categories,
             "doctors": doctors,

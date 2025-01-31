@@ -22,7 +22,7 @@
             <div class="bd_shape seven wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s"><img data-parallax='{"x": 50}' src="{% static 'img/breadcrumb/book-right2.png' %}" alt="">
             </div>
             <div class="container">
-                <h2 class="title wow fadeInUp" data-wow-delay="0.2s">Book Shope</h2>
+                <h2 class="title wow fadeInUp" data-wow-delay="0.2s">Project Graduation</h2>
                 <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.3s">
                     <li><a href="index.html">Home</a></li>
                     <li class="active">Shop Sidebar</li>
@@ -57,12 +57,14 @@
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                         
                        
-
-
-                            
+            
 
                         <div class="shop_top d-flex align-items-center justify-content-between">
-                            <div class="shop_menu_left">{{count_books}} Books</div>
+                            <div class="shop_menu_left">
+                                Available Books  : {{projects_count }}  
+                                <br>  
+                                count Pagination : {{projects|length}}
+                            </div>
                           
                             <div class="row">
 
