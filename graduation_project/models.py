@@ -16,7 +16,12 @@ class GraduationProject(models.Model):
     description = models.TextField()
     sub_description = models.TextField(blank=True, null=True)
     graduation_year = models.IntegerField()
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='pending',
+        db_index=True  # Add this line to create an index
+    )
 
     # Filter out users who are doctors or teaching assistants (students can only be regular users)
     students = models.ManyToManyField(

@@ -1,41 +1,69 @@
 from django.shortcuts import render
-from django.db.models import Count, Prefetch, Q  # Import Q here
+from django.db.models import Count, Prefetch, Q
 from .models import Settings
 from graduation_project.models import GraduationProject, Category, Review
 from accounts.models import UserProfile
 from django.views.decorators.cache import cache_page
+from django.db.models import Count
 
 
-# @cache_page(60 * 1) #    for caching 1 minute
+
+
+
+
+def get_top_liked_projects():
+    # Fetch the top 10 projects with the most likes
+    top_liked_projects = (
+        GraduationProject.objects
+        .annotate(like_count=Count('likes'))  # Count the number of likes for each project
+        .filter(status='accepted')  # Optionally filter only accepted projects
+        .prefetch_related('likes')  # Optimize by prefetching related likes
+        .order_by('-like_count')[:10]  # Order by like count in descending order and limit to 10
+    )
+    return top_liked_projects
+
+
+
+
+
+# Cache the page for 1 minute to reduce database load
+# @cache_page(60 * 1)  
 def home(request):
     # Fetch only accepted projects for the main projects section
-    projects_main = GraduationProject.objects.filter(status='accepted').order_by('-id')[:10]
+    projects_main = (
+        GraduationProject.objects
+        .filter(status='accepted')
+        .select_related('category')  # Optimize by fetching related category data in one query
+        .order_by('-id')[:10]
+    )
 
-    # Fetch all categories
-    category = Category.objects.all()
-
-    # Fetch the latest 7 reviews
-    # reviews = Review.objects.all().order_by('-id')[:7]
-
-    # Fetch the top 10 doctors with the most projects (only accepted projects)
-    doctors = UserProfile.objects.filter(is_doctor=True).annotate(
-        book_count=Count('user__doctor_projects', filter=Q(user__doctor_projects__status='accepted'))  # Use Q here
-    ).prefetch_related(
-        Prefetch(
-            'user__doctor_projects',
-            queryset=GraduationProject.objects.filter(status='accepted'),  # Only fetch accepted projects
-            to_attr='doctor_projects_list'
+   
+    # Fetch the top 10 doctors with the most accepted projects
+    doctors = (
+        UserProfile.objects
+        .filter(is_doctor=True)
+        .annotate(
+            book_count=Count('user__doctor_projects', filter=Q(user__doctor_projects__status='accepted'))
         )
-    ).order_by('-book_count')[:10]
+        .prefetch_related(
+            Prefetch(
+                'user__doctor_projects',
+                queryset=GraduationProject.objects.filter(status='accepted').select_related('category'),
+                to_attr='doctor_projects_list'
+            )
+        )
+        .order_by('-book_count')[:10]
+    )
 
-    # projects_have_more_likes = GraduationProject.objects.filter().order_by('-book_count')[:10]
+    # Fetch the top 10 projects with the most likes
+    top_liked_projects = get_top_liked_projects()
 
-    all_users = UserProfile.objects.all()
+    # Fetch all users (if necessary; consider limiting or filtering if the dataset is large)
+    all_users = UserProfile.objects.all().select_related('user')  # Optimize by fetching related user data
 
     return render(request, "index.html", {
         "projects_main": projects_main,
-        "category": category,
-        # "reviews": reviews,
+        "top_liked_projects": top_liked_projects,  
         "doctors": doctors,
         "all_users": all_users,
     })

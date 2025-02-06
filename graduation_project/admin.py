@@ -1,8 +1,16 @@
 from django.contrib import admin
 from .models import GraduationProject, Category, Review
-# Register your models here.
 
+# Define a custom ModelAdmin for GraduationProject
+class GraduationProjectAdmin(admin.ModelAdmin):
+    search_fields = ('title', 'graduation_year', 'category__name')  # Use 'category__name' for ForeignKey fields
+    list_display = ('title', 'graduation_year', 'category', 'status')  # Optional: Add fields to display in the admin list
+    list_filter = ('status', 'graduation_year', 'category')  # Optional: Add filters for easier navigation
+    ordering = ('-graduation_year',)  # Optional: Order by graduation year (newest first)
+    list_per_page = 50  # Display 50 rows per page
 
-admin.site.register(GraduationProject)
+    
+# Register the models with their respective admin configurations
+admin.site.register(GraduationProject, GraduationProjectAdmin)
 admin.site.register(Category)
 admin.site.register(Review)
