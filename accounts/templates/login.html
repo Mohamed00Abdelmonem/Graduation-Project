@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block body %}
 
-<div class="container"style="margin-top: 200px; margin-bottom: 100px;">
-    <h2>Login</h2>
+<div class="container">
+    <h2 style="margin-top: 0px; margin-bottom: 100px;">Login</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

@@ -1,18 +1,240 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
-
 {% block body %}
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6" style="margin-top: 6rem;">
             <div class="card shadow">
                 <div>
-                    <h3 class="card-title text-center">Create Project Gradution 🎓</h3>
+                    <h3 class="card-title text-center">Create Project Graduation 🎓</h3>
                 </div>
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% bootstrap_form form %}
+
+                       <!-- Render all fields except students and supervisors -->
+                       {% for field in form %}
+                        {% if field.name != "students" and field.name != "supervisors" and field.name != "doctor" and field.name != "category" %}
+                            {% bootstrap_field field %}
+                        {% endif %}
+                        {% endfor %}
+
+
+
+
+                        
+                        <!-- Custom rendering for students (checkboxes with search) -->
+                        <div class="mb-3">
+                            <!-- Search Input for Students -->
+                            <label for="id_search_students" class="form-label">Search Students:</label>
+                            <input 
+                                type="text" 
+                                id="id_search_students" 
+                                class="form-control" 
+                                placeholder="Type to search students..."
+                            >
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_students" class="form-label">Select Students:</label><br>
+                            {% for student in form.fields.students.queryset %}
+                                <div class="form-check student-checkbox">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="checkbox" 
+                                        name="students" 
+                                        value="{{ student.id }}" 
+                                        id="student_{{ student.id }}"
+                                    >
+                                    <label class="form-check-label" for="student_{{ student.id }}">
+                                        {{ student }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- JavaScript for Filtering Students -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const searchInputStudents = document.getElementById('id_search_students');
+                                const studentCheckboxes = document.querySelectorAll('.student-checkbox');
+
+                                searchInputStudents.addEventListener('input', function () {
+                                    const query = searchInputStudents.value.toLowerCase();
+                                    studentCheckboxes.forEach(function (checkbox) {
+                                        const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
+                                        if (label.includes(query)) {
+                                            checkbox.style.display = 'block';
+                                        } else {
+                                            checkbox.style.display = 'none';
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
+
+
+
+
+                        <!-- Custom rendering for supervisors (checkboxes with search) -->
+                        <div class="mb-3">
+                            <!-- Search Input for Supervisors -->
+                            <label for="id_search_supervisors" class="form-label">Search Supervisors:</label>
+                            <input 
+                                type="text" 
+                                id="id_search_supervisors" 
+                                class="form-control" 
+                                placeholder="Type to search supervisors..."
+                            >
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_supervisors" class="form-label">Select Supervisors:</label><br>
+                            {% for supervisor in form.fields.supervisors.queryset %}
+                                <div class="form-check supervisor-checkbox">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="checkbox" 
+                                        name="supervisors" 
+                                        value="{{ supervisor.id }}" 
+                                        id="supervisor_{{ supervisor.id }}"
+                                    >
+                                    <label class="form-check-label" for="supervisor_{{ supervisor.id }}">
+                                        {{ supervisor }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- JavaScript for Filtering Supervisors -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const searchInputSupervisors = document.getElementById('id_search_supervisors');
+                                const supervisorCheckboxes = document.querySelectorAll('.supervisor-checkbox');
+
+                                searchInputSupervisors.addEventListener('input', function () {
+                                    const query = searchInputSupervisors.value.toLowerCase();
+                                    supervisorCheckboxes.forEach(function (checkbox) {
+                                        const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
+                                        if (label.includes(query)) {
+                                            checkbox.style.display = 'block';
+                                        } else {
+                                            checkbox.style.display = 'none';
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
+
+
+
+
+
+                        <!-- Custom rendering for doctor (dropdown with search) -->
+                        <div class="mb-3">
+                            <!-- Search Input for Doctor -->
+                            <label for="id_search_doctor" class="form-label">Search Doctor:</label>
+                            <input 
+                                type="text" 
+                                id="id_search_doctor" 
+                                class="form-control" 
+                                placeholder="Type to search doctors..."
+                            >
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_doctor" class="form-label">Select Doctor:</label><br>
+                            {% for doctor in form.fields.doctor.queryset %}
+                                <div class="form-check doctor-checkbox">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="radio" 
+                                        name="doctor" 
+                                        value="{{ doctor.id }}" 
+                                        id="doctor_{{ doctor.id }}"
+                                    >
+                                    <label class="form-check-label" for="doctor_{{ doctor.id }}">
+                                        {{ doctor }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- JavaScript for Filtering Doctor -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const searchInputDoctor = document.getElementById('id_search_doctor');
+                                const doctorCheckboxes = document.querySelectorAll('.doctor-checkbox');
+
+                                searchInputDoctor.addEventListener('input', function () {
+                                    const query = searchInputDoctor.value.toLowerCase();
+                                    doctorCheckboxes.forEach(function (checkbox) {
+                                        const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
+                                        if (label.includes(query)) {
+                                            checkbox.style.display = 'block';
+                                        } else {
+                                            checkbox.style.display = 'none';
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
+
+
+
+
+
+                        <!-- Custom rendering for category (dropdown with search) -->
+                        <div class="mb-3">
+                            <!-- Search Input for Category -->
+                            <label for="id_search_category" class="form-label">Search Category:</label>
+                            <input 
+                                type="text" 
+                                id="id_search_category" 
+                                class="form-control" 
+                                placeholder="Type to search categories..."
+                            >
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_category" class="form-label">Select Category:</label><br>
+                            {% for category in form.fields.category.queryset %}
+                                <div class="form-check category-checkbox">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="radio" 
+                                        name="category" 
+                                        value="{{ category.id }}" 
+                                        id="category_{{ category.id }}"
+                                    >
+                                    <label class="form-check-label" for="category_{{ category.id }}">
+                                        {{ category }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- JavaScript for Filtering Category -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const searchInputCategory = document.getElementById('id_search_category');
+                                const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+
+                                searchInputCategory.addEventListener('input', function () {
+                                    const query = searchInputCategory.value.toLowerCase();
+                                    categoryCheckboxes.forEach(function (checkbox) {
+                                        const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
+                                        if (label.includes(query)) {
+                                            checkbox.style.display = 'block';
+                                        } else {
+                                            checkbox.style.display = 'none';
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
+
+
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                         </div>
