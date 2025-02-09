@@ -96,6 +96,7 @@
 - **Frontend:** HTML, CSS, JavaScript  
 - **Database:** PostgreSQL  
 
+
 ---
 
 ## **🎬 عرض توضيحي للمشروع**
@@ -107,5 +108,127 @@
 ## **📬 للتواصل**
 
 📧 البريد الإلكتروني: mmohamedabdelm@gmail.com
+
+
+---
+# English Version  
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/317ef4fb-b626-4732-8767-d3f01980f838" alt="American Flag Waving" width="200px">
+</div>---
+
+# Graduation Projects Management Website
+
+
+---
+
+## **Introduction**
+
+This website aims to simplify the management of graduation projects at Al-Azhar University's College of Commerce and Computers, facilitating collaboration between students, staff, and academic supervisors.
+
+**Developer:**  
+🖊️ Muhammad Muhammad Abdel Moneim  
+
+---
+
+## **Problem Statement and Importance**
+
+### **🔴 Problem**
+Traditionally, managing graduation projects faced several challenges, such as:
+- Late submission of projects.
+- Poor communication between parties.
+- Complexities in the review process.
+
+### **✅ Importance**
+The website addresses these issues, leading to:
+- Improved project quality.
+- Increased management efficiency.
+- Time and effort savings for all stakeholders.
+
+---
+
+## **🔥 Key Features of the Website**
+
+✔️ A centralized platform for managing all graduation projects.  
+✔️ Submission of projects by students via PDF uploads and detailed information.  
+✔️ Review of projects by staff with evaluation feedback.  
+✔️ Tracking of project progress by supervisors.  
+✔️ User management by administrators to define roles and permissions.
+
+---
+
+## **📝 How the Website Works**
+
+### **1️⃣ Project Submission by Students**
+1. Log in to the website.
+2. Create a new project.
+3. Upload the project file in PDF format.
+4. Enter project details.
+
+### **2️⃣ Project Review by Staff**
+1. Receive notifications when a new project is submitted.
+2. Review the project and provide evaluations.
+3. Accept or reject the project.
+
+### **3️⃣ Project Monitoring by Supervisors**
+1. Receive notifications when a new project is submitted.
+2. Track the project's progress.
+3. Communicate with students and staff.
+
+### **4️⃣ Staff Management and System Oversight**
+1. Create and delete staff accounts.
+2. Define user roles and permissions.
+3. Monitor system performance.
+4. Resolve technical issues.
+
+---
+
+## **🎯 Benefits of the Website**
+
+- ✅ Simplifies project management for all stakeholders.
+- ✅ Enables instant communication via email.
+- ✅ Saves time and effort.
+- ✅ Helps organize submission deadlines.
+
+---
+
+## **⚠️ Expected Challenges**
+
+- 🔐 Security: Protecting data from unauthorized access.
+- 📱 Compatibility: Ensuring the website works seamlessly on all devices.
+- 🚀 Updates: Adding new features and responding to user requests.
+
+---
+
+## **🔮 Future Development Plans**
+
+- 🚀 Performance Improvement: Increase loading speed and enhance user experience.
+- ⬛ New Features: Add functionalities like report generation and advanced evaluations.
+- 📢 Promotion: Spread awareness among students and staff.
+
+---
+
+## **🛠️ Technologies Used**
+
+- **Backend:** Django (Python)  
+- **Frontend:** HTML, CSS, JavaScript  
+- **Database:** PostgreSQL / MySQL  
+- **Deployment:** Docker, AWS  
+
+---
+
+## **🎬 Project Demonstration**
+
+[Click here for the demo video](#)
+
+---
+
+## **📬 Contact Us**
+
+📧 Email: mmohamedabdelm@gmail.com 
+
+📌 If you're interested in the project, don't forget to **⭐** it on GitHub! 🚀
+
+
 
 📌 إذا كنت مهتمًا بالمشروع، لا تنسَ **⭐** على GitHub! 🚀
