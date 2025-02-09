@@ -1,8 +1,8 @@
 # موقع إدارة مشاريع التخرج
 
-![Project Animation](https://i.pinimg.com/originals/e1/47/e8/e147e8c60c8c8ab2c74ca3c43fff6f5c.gif)
-
----
+<div align="center">
+  <img src="https://i.pinimg.com/originals/e1/47/e8/e147e8c60c8c8ab2c74ca3c43fff6f5c.gif" alt="American Flag Waving" width="700px">
+</div>
 
 ## **مقدمة**
 
@@ -115,7 +115,8 @@
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/317ef4fb-b626-4732-8767-d3f01980f838" alt="American Flag Waving" width="200px">
-</div>---
+</div>
+---
 
 # Graduation Projects Management Website
 
