@@ -32,11 +32,13 @@ ToDay: 25/1/2025
 
 After time: 
 
-- search in form M to M relations in add project  search for student  and doctor
+- search in form M to M relations in add project  search for student  and doctor (done)
 - fix login required for like and show pdf file 
-- app settings    InProgress 
-- caching    done
-- review and rating
+- app settings for data site   InProgress 
+- caching    (done)
+- review and rate by doctors and supervisors and employee only not (normal user)
 - page not found 
-- show all links for project_deatil like (github and another links)
-
+- show all details or links for project_deatil like (github and another links)
+- add to favorite (wishlist)
+- profile user 
+- simple Dashboard
