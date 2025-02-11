@@ -112,6 +112,7 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
     def form_valid(self, form):
         # Set the leader and status before saving the form
         form.instance.leader = self.request.user.profile
+        form.instance.author = self.request.user
         form.instance.status = 'pending'  # Set status to pending
         response = super().form_valid(form)
 

@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Experience
 from .forms import ExperienceForm  # Ensure this form exists
-
+from graduation_project.models import GraduationProject
 
 
 @login_required
@@ -95,9 +95,13 @@ def upload_excel(request):
 @login_required
 def Profile(request):
     user = request.user
-    return render(request, 'profile.html', {user:'user'})
+        # Combine student projects and authored projects
+    projects = (
+        user.student_projects.all()
+        | user.author_project.all()  # Union of the two querysets
+    ).distinct()  # Use distinct to avoid duplicates
 
-
+    return render(request, 'profile.html', {"user":user, "projects":projects})
 
 
 @login_required

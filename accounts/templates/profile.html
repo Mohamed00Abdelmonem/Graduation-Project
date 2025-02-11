@@ -2,7 +2,87 @@
 {% extends "base.html" %}
 {% block body %}
 
+<style>
+    /* General Styling */
+    .award_list {
+        max-width: 800px;
+        margin: 0 auto;
+    }
 
+    .award_list_item {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 15px;
+    }
+
+    .award_list_item h5 {
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .award_list_item ul {
+        margin-bottom: 10px;
+    }
+
+    .award_list_item li {
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    .award_list_item strong {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .award_list_item a {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .award_list_item a:hover {
+        text-decoration: underline;
+    }
+
+    .award_list_item .btn {
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background-color:rgb(194, 199, 204);
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color:rgb(158, 173, 189);
+        border-color: #0056b3;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .text-muted {
+        color: #aaa;
+        font-style: italic;
+    }
+</style>
 
 
         <!-- breadcrumb area  -->
@@ -38,12 +118,16 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-10">
                         <div class="bj_author_single d-flex align-items-center">
-                            <img 
+                            {% if user.profile.image %}
+                                <img 
                                 src="{{ user.profile.image.url }}" 
                                 alt="Profile Picture" 
-                                onerror="this.src='/default_image_path.jpg';" 
                                 style="width: 460px; height: 600px; object-fit: cover; display: block;"
-                            >
+                                >
+                            {% else %}
+                            
+                            {% endif %}
+                           
                             <div class="bj_author_single_content">
                                 <h2>{{ user.get_full_name|default_if_none:user.username }}</h2>
                             
@@ -128,7 +212,10 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                        
+
+
+
                             <div class="col-lg-5 col-md-5">
                                 <div class="award_list">
                                     <h4 class="mb-3">Experiences</h4>
@@ -153,7 +240,11 @@
                                             <!-- Buttons -->
                                             <div class="d-flex justify-content-end">
                                                 <a href="{% url 'update_experience' experience.id %}" class="btn btn-primary btn-sm me-2">Update</a>
-                                                <a href="{% url 'delete_experience' experience.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this experience?')">Delete</a>
+                                               <!-- Add Delete Button -->
+                                                <form action="{% url 'delete_experience' experience.id %}" method="POST" style="display:inline;">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this experience?')">Delete</button>
+                                                </form>
                                             </div>
                                         </div>
                                     {% empty %}
@@ -163,87 +254,7 @@
                                     <a href="{% url 'add_experience' %}" class="btn btn-success mt-4">Add Experience</a>
                                 </div>
                                 
-                                <style>
-                                    /* General Styling */
-                                    .award_list {
-                                        max-width: 800px;
-                                        margin: 0 auto;
-                                    }
                                 
-                                    .award_list_item {
-                                        background-color: #f9f9f9;
-                                        border: 1px solid #ddd;
-                                        padding: 15px;
-                                    }
-                                
-                                    .award_list_item h5 {
-                                        font-size: 1.2rem;
-                                        color: #333;
-                                    }
-                                
-                                    .award_list_item ul {
-                                        margin-bottom: 10px;
-                                    }
-                                
-                                    .award_list_item li {
-                                        font-size: 0.9rem;
-                                        color: #555;
-                                        line-height: 1.6;
-                                    }
-                                
-                                    .award_list_item strong {
-                                        font-weight: bold;
-                                        color: #007bff;
-                                    }
-                                
-                                    .award_list_item a {
-                                        text-decoration: none;
-                                        color: #007bff;
-                                    }
-                                
-                                    .award_list_item a:hover {
-                                        text-decoration: underline;
-                                    }
-                                
-                                    .award_list_item .btn {
-                                        margin-top: 10px;
-                                    }
-                                
-                                    .btn-primary {
-                                        background-color:rgb(194, 199, 204);
-                                        border-color: #007bff;
-                                    }
-                                
-                                    .btn-primary:hover {
-                                        background-color:rgb(158, 173, 189);
-                                        border-color: #0056b3;
-                                    }
-                                
-                                    .btn-danger {
-                                        background-color: #dc3545;
-                                        border-color: #dc3545;
-                                    }
-                                
-                                    .btn-danger:hover {
-                                        background-color: #c82333;
-                                        border-color: #bd2130;
-                                    }
-                                
-                                    .btn-success {
-                                        background-color: #28a745;
-                                        border-color: #28a745;
-                                    }
-                                
-                                    .btn-success:hover {
-                                        background-color: #218838;
-                                        border-color: #1e7e34;
-                                    }
-                                
-                                    .text-muted {
-                                        color: #aaa;
-                                        font-style: italic;
-                                    }
-                                </style>
                             </div>
                             
                             <marquee width="60%" direction="left" height="100px" style="background-color: #f9f9f9; border: 1px solid #ddd; padding: 10px; border-radius: 8px;">
@@ -260,129 +271,37 @@
         <section class="bj_new_product_area_four sec_padding">
             <div class="container">
                 <div class="section_title text-center">
-                    <h2 class="title">Author books</h2>
+                    <h2 class="title"> Graduation Project</h2>
                 </div>
-                <div id="portfolio_filter" class="portfolio_filter d-flex justify-content-center">
-                    <div data-filter="*" class="work_portfolio_item active">All</div>
-                    <div data-filter=".bio" class="work_portfolio_item">BIOGRAPHY</div>
-                    <div data-filter=".cook" class="work_portfolio_item">COOKBOOKS</div>
-                    <div data-filter=".drama" class="work_portfolio_item">DRAMA</div>
-                    <div data-filter=".kid" class="work_portfolio_item">FOR KID</div>
-                    <div data-filter=".romance" class="work_portfolio_item">ROMANCE</div>
-                </div>
+               
                 <div class="projects_gallery_one">
                     <div class="row" id="project_portfolio">
                         <div class="col-lg-3 col-md-4 col-sm-6 projects_item bio kid">
-                            <div class="best_product_item best_product_item_two">
-                                <div class="img">
-                                    <a href="product-single.html"><img src="assets/img/author_book1.jpg" alt="book"></a>
-                                    <div class="hover_item">
-                                        <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Wishlist"><i class="icon_heart_alt"></i></a>
-                                        <span data-bs-toggle="tooltip" data-bs-placement="right" title="Quickview"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
-                                        <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Compare"><i class="ti-control-shuffle"></i></a>
-                                    </div>
-                                    <button type="button" class="bj_theme_btn add-to-cart-automated" data-name="A Storytelling Workbook" data-img="assets/img/author_book1.jpg" data-price="25"><i class="icon_cart_alt"></i> Add to Cart
-                                    </button>
-                                </div>
-                                <div class="bj_new_pr_content">
-                                    <a href="product-single.html">
-                                        <h4 class="bj_new_pr_title">A Storytelling Workbook</h4>
-                                    </a>
-                                    <div class="writer_name">By - <a href="author-single.html"> MUAZ BK </a></div>
-                                    <div class="bj_pr_meta d-flex">
-                                        <div class="book_price">$25</div>
-                                        <div class="ratting">
-                                            <img src="assets/img/home/raiting.png" alt="">
-                                            1221
-                                        </div>
-                                    </div>
-                                </div>
+
+                           
+
+
+
+                            {% for project in projects %}
+                            <div>
+                                
+                                {% if project.images %}
+                                <a href="{% url 'project:project_detail' project.slug %}">
+                                    <img src="{{ project.images.url }}" alt="{{ project.title }} image" style="max-width: 200px;">
+                                </a>                       
+                                {% else %}
+                                    <p>No image available for this project.</p>
+                                {% endif %}
+                                <h5>{{ project.title }}</h5>
+                                <p>description: {{ project.description }}</p>
+                                <p>Created at: {{ project.graduation_year }}</p>
                             </div>
+                            <hr>
+                        {% empty %}
+                            <p>No projects found for this student.</p>
+                        {% endfor %}
                         </div>
 
-                        <div class="col-lg-3 col-md-4 col-sm-6 projects_item bio drama">
-                            <div class="best_product_item best_product_item_two">
-                                <div class="img">
-                                    <a href="product-single.html"><img src="assets/img/author_book2.jpg" alt="book"></a>
-                                    <div class="hover_item">
-                                        <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Wishlist"><i class="icon_heart_alt"></i></a>
-                                        <span data-bs-toggle="tooltip" data-bs-placement="right" title="Quickview"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
-                                        <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Compare"><i class="ti-control-shuffle"></i></a>
-                                    </div>
-                                    <button type="button" class="bj_theme_btn add-to-cart-automated" data-name="The Psychology of.." data-img="assets/img/author_book2.jpg" data-price="25"><i class="icon_cart_alt"></i> Add to Cart
-                                    </button>
-                                </div>
-                                <div class="bj_new_pr_content">
-                                    <a href="product-single.html">
-                                        <h4 class="bj_new_pr_title">The Psychology of..</h4>
-                                    </a>
-                                    <div class="writer_name">By - <a href="author-single.html"> Morgan Housel </a></div>
-                                    <div class="bj_pr_meta d-flex">
-                                        <div class="book_price">$25</div>
-                                        <div class="ratting">
-                                            <img src="assets/img/home/raiting.png" alt="">
-                                            1221
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-sm-6 projects_item cook romance">
-                            <div class="best_product_item best_product_item_two">
-                                <div class="img">
-                                    <a href="product-single.html"><img src="assets/img/author_book3.jpg" alt="book"></a>
-                                    <div class="hover_item">
-                                        <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Wishlist"><i class="icon_heart_alt"></i></a>
-                                        <span data-bs-toggle="tooltip" data-bs-placement="right" title="Quickview"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
-                                        <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Compare"><i class="ti-control-shuffle"></i></a>
-                                    </div>
-                                    <button type="button" class="bj_theme_btn add-to-cart-automated" data-name="Your Next Five Moves" data-img="assets/img/author_book3.jpg" data-price="25"><i class="icon_cart_alt"></i> Add to Cart
-                                    </button>
-                                </div>
-                                <div class="bj_new_pr_content">
-                                    <a href="product-single.html">
-                                        <h4 class="bj_new_pr_title">Your Next Five Moves</h4>
-                                    </a>
-                                    <div class="writer_name">By - <a href="author-single.html"> Patrick Bet-David </a></div>
-                                    <div class="bj_pr_meta d-flex">
-                                        <div class="book_price">$25</div>
-                                        <div class="ratting">
-                                            <img src="assets/img/home/raiting.png" alt="">
-                                            1221
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-sm-6 projects_item cook romance drama">
-                            <div class="best_product_item best_product_item_two">
-                                <div class="img">
-                                    <a href="product-single.html"><img src="assets/img/author_book4.jpg" alt="book"></a>
-                                    <div class="hover_item">
-                                        <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="right" title="Wishlist"><i class="icon_heart_alt"></i></a>
-                                        <span data-bs-toggle="tooltip" data-bs-placement="right" title="Quickview"><button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="arrow_move"></i></button></span>
-                                        <a class="quick_button" href="#" data-bs-toggle="tooltip" data-bs-placement="right" title="Compare"><i class="ti-control-shuffle"></i></a>
-                                    </div>
-                                    <button type="button" class="bj_theme_btn add-to-cart-automated" data-name="The Ruthless" data-img="assets/img/author_book4.jpg" data-price="55"><i class="icon_cart_alt"></i> Add to Cart
-                                    </button>
-                                </div>
-                                <div class="bj_new_pr_content">
-                                    <a href="product-single.html">
-                                        <h4 class="bj_new_pr_title">The Ruthless ..</h4>
-                                    </a>
-                                    <div class="writer_name">By - <a href="author-single.html"> John Mark Comer </a></div>
-                                    <div class="bj_pr_meta d-flex">
-                                        <div class="book_price">$55</div>
-                                        <div class="ratting">
-                                            <img src="assets/img/home/raiting.png" alt="">
-                                            1221
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
