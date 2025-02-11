@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="edit-profile-container">
+    <h2 class="page-title">Edit Profile</h2>
+    <form method="post" enctype="multipart/form-data" class="edit-profile-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary save-button">Save Changes</button>
+    </form>
+</div>
+
+<style>
+    /* Container Styling */
+    .edit-profile-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Page Title Styling */
+    .page-title {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    /* Form Styling */
+    .edit-profile-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Form Field Styling */
+    .edit-profile-form p {
+        margin-bottom: 15px;
+    }
+
+    .edit-profile-form label {
+        font-weight: bold;
+        color: #555;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .edit-profile-form input[type="text"],
+    .edit-profile-form input[type="email"],
+    .edit-profile-form input[type="number"],
+    .edit-profile-form input[type="date"],
+    .edit-profile-form select,
+    .edit-profile-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+    }
+
+    .edit-profile-form input[type="file"] {
+        padding: 8px;
+        font-size: 16px;
+    }
+
+    .edit-profile-form input:focus,
+    .edit-profile-form select:focus,
+    .edit-profile-form textarea:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Save Button Styling */
+    .save-button {
+        align-self: center;
+        padding: 10px 20px;
+        font-size: 18px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .save-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}

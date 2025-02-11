@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h2 style="margin-top: 50px; margin-bottom: 100px;">Add New Experience</h2>
+<form method="post" class="add-experience-form">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-success">Add Experience</button>
+</form>
+{% endblock %}

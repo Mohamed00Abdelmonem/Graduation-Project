@@ -70,24 +70,11 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                         <ul class="navbar-nav menu w_menu ms-auto me-auto">
-                            <li class="nav-item dropdown submenu active">
+                            <li class="nav-item dropdown submenu">
                                 <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     HOME
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item active">
-                                        <a href="index.html" class="nav-link">Home One</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-2.html" class="nav-link">Home Two</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-3.html" class="nav-link">Home Three</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="index-4.html" class="nav-link">Home Four</a>
-                                    </li>
-                                </ul>
+                                
                             </li>
                             <li class="nav-item dropdown submenu">
                                 <a class="nav-link dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -111,66 +98,47 @@
 
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                        <a href="my-account.html" class="nav-link">User Profile</a>
+                                        <a href="my-account.html" class="nav-link">Users Profile</a>
                                     </li>
 
-                                    <li class="nav-item dropdown submenu">
-                                        <a class="nav-link dropdown-toggle" href="my-orders.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Orders
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="my-orders.html" class="nav-link">Orders</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="order-track.html" class="nav-link">Order Tracking</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="order-confrmation.html" class="nav-link">Thank You Page</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="my-ebook-library.html" class="nav-link">Ebook Library</a>
-                                    </li>
+                                    
+                                    
 
                                     <li class="nav-item dropdown submenu">
                                         <a class="nav-link dropdown-toggle" href="my-list.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Book List
+                                            Create
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="my-list.html" class="nav-link">Book List</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="my-list-details.html" class="nav-link">Book List Details</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="my-list-create.html" class="nav-link">Create Book List</a>
-                                            </li>
+                                            {% if user.is_staff %}
+                                                <li class="nav-item">
+                                                    <a href="{% url 'upload_excel' %}" class="nav-link">Add Users by excle sheet</a>
+                                                </li>
+                                            {% endif %}
+
+                                            {% if user.is_authenticated and user.profile.is_leader %}
+                                                <li class="nav-item">
+                                                    <a href="{% url 'project:add_project' %}" class="nav-link">Add Project</a>
+                                                </li>
+                                            {% endif %}
                                         </ul>
                                     </li>
                                     <li class="nav-item dropdown submenu">
                                         <a class="nav-link dropdown-toggle" href="my-address.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Address Book
+                                            Projects
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li class="nav-item">
-                                                <a href="my-address.html" class="nav-link">Address Book</a>
+                                                <a href="{% url 'project:ProjectList'%}" class="nav-link">List Projects</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="add-new-address.html" class="nav-link">Add New Address</a>
-                                            </li>
+                                            {% if user.is_staff %}
+                                                <li class="nav-item">
+                                                    <a href="{% url 'project:pending_projects' %}" class="nav-link">Pinding Projects</a>
+                                                </li>
+                                            {% endif %}
                                         </ul>
                                     </li>
 
-                                    <li class="nav-item">
-                                        <a href="my-following-authors.html" class="nav-link">Following Authors</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="my-rating-reviews.html" class="nav-link">Rating & Reviews</a>
-                                    </li>
+                                   
                                     <li class="nav-item">
                                         <a href="my-wishlist.html" class="nav-link">Wishlist</a>
                                     </li>

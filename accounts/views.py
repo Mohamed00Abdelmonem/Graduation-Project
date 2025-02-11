@@ -1,21 +1,18 @@
-# accounts/views.py
 import pandas as pd
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from .forms import ExcelUploadForm
-from .models import UserProfile
-
-
-
-
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import NationalIDLoginForm
-
-
-from django.contrib.auth import authenticate, login
+from .models import UserProfile
+from .forms import NationalIDLoginForm, UserProfileForm, ExcelUploadForm
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Experience
+from .forms import ExperienceForm  # You'll need to create this form
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Experience
+from .forms import ExperienceForm  # Ensure this form exists
 
 
 
@@ -93,3 +90,75 @@ def upload_excel(request):
         return render(request, 'upload_success.html')
 
     return render(request, 'upload_form.html', {'form': ExcelUploadForm()})
+
+
+@login_required
+def Profile(request):
+    user = request.user
+    return render(request, 'profile.html', {user:'user'})
+
+
+
+
+@login_required
+def edit_profile(request):
+    user_profile = request.user.profile  # Get the current user's profile
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Redirect to the profile page after saving
+    else:
+        form = UserProfileForm(instance=user_profile)
+
+    return render(request, 'edit_profile.html', {'form': form})
+
+
+
+
+
+
+@login_required
+def add_experience(request):
+    if request.method == 'POST':
+        # Process the form submission
+        form = ExperienceForm(request.POST)
+        if form.is_valid():
+            experience = form.save(commit=False)
+            experience.profile = request.user.profile  # Associate with the current user's profile
+            experience.save()
+            return redirect('profile')  # Redirect to the profile page after saving
+    else:
+        # Initialize an empty form
+        form = ExperienceForm()
+
+    return render(request, 'add_experience.html', {'form': form})
+
+
+
+
+@login_required
+def update_experience(request, experience_id):
+    # Get the specific experience or return a 404 error if not found
+    experience = get_object_or_404(Experience, id=experience_id, profile=request.user.profile)
+
+    if request.method == 'POST':
+        # Process the form submission
+        form = ExperienceForm(request.POST, instance=experience)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')  # Redirect to the profile page after saving
+    else:
+        # Initialize the form with the current experience data
+        form = ExperienceForm(instance=experience)
+
+    return render(request, 'update_experience.html', {'form': form, 'experience': experience})
+
+
+
+@login_required
+def delete_experience(request, experience_id):
+    experience = get_object_or_404(Experience, id=experience_id, profile=request.user.profile)
+    experience.delete()
+    return redirect('profile')
