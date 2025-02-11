@@ -57,16 +57,25 @@
     <p>{{ post.likes.count }}👁️ likes</p>
 
     <!-- Like button -->
-    <button hx-post="{% url 'project:like_post' object.id %}" id="like-button" 
+
+    {% if request.user.is_authenticated %}
+        <button hx-post="{% url 'project:like_post' object.id %}" id="like-button" 
             hx-target="#likesarea" hx-swap="outerHTML" class="btn btn-light" onclick="toggleLike(this)">
-        {% if request.user in post.likes.all %}
-            <!-- "Liked" icon: Heart (love like) -->
-            <i class="fas fa-heart"></i>
-        {% else %}
-            <!-- "Unliked" icon: Thumbs-up -->
-            <i class="far fa-thumbs-up"></i>
-        {% endif %}
-    </button>
+            {% if request.user in post.likes.all %}
+                <!-- "Liked" icon: Heart (love like) -->
+                <i class="fas fa-heart"></i>
+            {% else %}
+                <!-- "Unliked" icon: Thumbs-up -->
+                <i class="far fa-thumbs-up"></i>
+            {% endif %}
+        </button>
+    {% else %}
+        <!-- If the user is not authenticated, show a message or link to login -->
+        <a href="{% url 'login' %}" class="btn btn-light">
+            <i class="far fa-thumbs-up"></i> Log in to like
+        </a>
+    {% endif %}
+    
 
     <!-- Display list of users who liked the post -->
     <div id="like-users-list" style="display:none;">

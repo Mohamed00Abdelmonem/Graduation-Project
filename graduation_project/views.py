@@ -88,18 +88,24 @@ def ProjectList(request):
 
 
 
+def project_detail(request, slug):
+    # Get the current project
+    current_project = get_object_or_404(GraduationProject, slug=slug)
+    
+    # Increment the view count for the current project
+    current_project.view_count += 1
+    current_project.save()
 
-class ProjectDetail(generic.DetailView):
-    model = GraduationProject
-    template_name = "project_detail.html"
+    # Get related projects in the same category, excluding the current project
+    related_projects = GraduationProject.objects.filter(
+        category=current_project.category
+    ).exclude(id=current_project.id)[:5]  # Limit to 5 related projects (optional)
 
-    def get_object(self):
-        obj = super().get_object()
-        obj.view_count += 1
-        obj.save()
-        return obj
-
-
+    # Render the template with context
+    return render(request, 'project_detail.html', {
+        'object': current_project,
+        'related_projects': related_projects,
+    })
 
 
 

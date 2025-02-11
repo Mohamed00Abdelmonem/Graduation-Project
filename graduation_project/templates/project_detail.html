@@ -21,7 +21,7 @@
             <div class="container">
                 <h2 class="title wow fadeInUp" data-wow-delay="0.2s">Project Detail: {{object.title}}</h2>
                 <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.3s">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li class="active">book Single</li>
                 </ol>
             </div>
@@ -44,7 +44,7 @@
                                 <h2>{{object.title}}</h2>
                                 <ul class="list-unstyled book_meta">
                                     {% comment %} <li>By:<a href="author-single.html">Phillip Siphron</a></li> {% endcomment %}
-                                    <li>Category:<a href="shop-sidebar.html">{{object.category}}</a></li>
+                                    <li>Category:<a href="">{{object.category}}</a></li>
                                     {% comment %} <li>Tag:<a href="shop-sidebar.html">Best Sellers</a></li> {% endcomment %}
                                 </ul>
                                 {% comment %} <div class="ratting review">
@@ -248,7 +248,7 @@
                                                     <li><a href="#"><i class="fa-brands fa-quora"></i></a>
                                                     </li>
                                                 </ul>
-                                                <a href="author-single.html" class="bj_theme_btn text_btn">More
+                                                <a href="" class="bj_theme_btn text_btn">More
                                                     Details<i class="arrow_right"></i></a>
                                             </div>
                                         </div>
@@ -577,127 +577,28 @@
                     {% comment %} <p>Get Special Promo All Books Are 50% Off Now!</p> {% endcomment %}
                 </div>
                 <div class="row gy-xl-0 gy-4">
+                {% for project in related_projects %}
                 
                     <div class="col-xl-3 col-lg-4 col-sm-6">
                         <div class="bj_new_pr_item mb-0 wow fadeInUp" data-wow-delay="0.2s">
-                            <label class="select-box" for="fbt-box-1">
+                           
 
-                                <input type="checkbox" class="form-check-input" id="fbt-box-1" checked>
-                            </label>
-
-                            <a href="#" class="img"><img src="assets/img/home/book5.jpg" alt="book"></a>
+                            <a href="#" class="img"><img src="{{project.images.url}}" alt="book"></a>
                             <div class="bj_new_pr_content">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">The Sun And The Star</h4>
+                                <a href="{% url 'project:project_detail' project.slug%}">
+                                    <h4 class="bj_new_pr_title">{{project}}</h4>
                                 </a>
                                 <div class="bj_pr_meta d-flex">
-                                    <div class="norm_text">Dec 2019</div>
-                                    <div class="norm_text">77 pages</div>
+                                    <div class="norm_text">{{project.created_at.date}}</div>
                                     <div class="ratting">
-                                        <i class="fas fa-star"></i> <span>4.7</span>
+                                        <i class="fas fa-like"></i> <span>👍 {{project.likes.count}}</span>
                                     </div>
                                 </div>
-                                <div class="product_varaiation">
-                                    <select class="selectpickers">
-                                        <option value="" data-img="./assets/img/shop/ereader.png">eBook</option>
-                                        <option value="" data-img="./assets/img/shop/book.png">paperback</option>
-                                    </select>
-                                    <div class="book_price mt-2"><del class="me-2">410</del> $100</div>
-                                </div>
-                                <button type="button" class="bj_theme_btn strock_btn add-to-cart-automated" data-name="The Sun And The Star" data-price="125" data-mrp="350" data-img="assets/img/home/book5.jpg">Add To Cart</button>
+                                
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="bj_new_pr_item mb-0 wow fadeInUp" data-wow-delay="0.2s">
-                            <label class="select-box" for="fbt-box-1">
-
-                                <input type="checkbox" class="form-check-input" id="fbt-box-1" checked>
-                            </label>
-
-                            <a href="#" class="img"><img src="assets/img/home/book5.jpg" alt="book"></a>
-                            <div class="bj_new_pr_content">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">The Sun And The Star</h4>
-                                </a>
-                                <div class="bj_pr_meta d-flex">
-                                    <div class="norm_text">Dec 2019</div>
-                                    <div class="norm_text">77 pages</div>
-                                    <div class="ratting">
-                                        <i class="fas fa-star"></i> <span>4.7</span>
-                                    </div>
-                                </div>
-                                <div class="product_varaiation">
-                                    <select class="selectpickers">
-                                        <option value="" data-img="./assets/img/shop/ereader.png">eBook</option>
-                                        <option value="" data-img="./assets/img/shop/book.png">paperback</option>
-                                    </select>
-                                    <div class="book_price mt-2"><del class="me-2">410</del> $100</div>
-                                </div>
-                                <button type="button" class="bj_theme_btn strock_btn add-to-cart-automated" data-name="The Sun And The Star" data-price="125" data-mrp="350" data-img="assets/img/home/book5.jpg">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="bj_new_pr_item mb-0 wow fadeInUp" data-wow-delay="0.2s">
-                            <label class="select-box" for="fbt-box-1">
-
-                                <input type="checkbox" class="form-check-input" id="fbt-box-1" checked>
-                            </label>
-
-                            <a href="#" class="img"><img src="assets/img/home/book5.jpg" alt="book"></a>
-                            <div class="bj_new_pr_content">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">The Sun And The Star</h4>
-                                </a>
-                                <div class="bj_pr_meta d-flex">
-                                    <div class="norm_text">Dec 2019</div>
-                                    <div class="norm_text">77 pages</div>
-                                    <div class="ratting">
-                                        <i class="fas fa-star"></i> <span>4.7</span>
-                                    </div>
-                                </div>
-                                <div class="product_varaiation">
-                                    <select class="selectpickers">
-                                        <option value="" data-img="./assets/img/shop/ereader.png">eBook</option>
-                                        <option value="" data-img="./assets/img/shop/book.png">paperback</option>
-                                    </select>
-                                    <div class="book_price mt-2"><del class="me-2">410</del> $100</div>
-                                </div>
-                                <button type="button" class="bj_theme_btn strock_btn add-to-cart-automated" data-name="The Sun And The Star" data-price="125" data-mrp="350" data-img="assets/img/home/book5.jpg">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <div class="bj_new_pr_item mb-0 wow fadeInUp" data-wow-delay="0.2s">
-                            <label class="select-box" for="fbt-box-1">
-
-                                <input type="checkbox" class="form-check-input" id="fbt-box-1" checked>
-                            </label>
-
-                            <a href="#" class="img"><img src="assets/img/home/book5.jpg" alt="book"></a>
-                            <div class="bj_new_pr_content">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">The Sun And The Star</h4>
-                                </a>
-                                <div class="bj_pr_meta d-flex">
-                                    <div class="norm_text">Dec 2019</div>
-                                    <div class="norm_text">77 pages</div>
-                                    <div class="ratting">
-                                        <i class="fas fa-star"></i> <span>4.7</span>
-                                    </div>
-                                </div>
-                                <div class="product_varaiation">
-                                    <select class="selectpickers">
-                                        <option value="" data-img="./assets/img/shop/ereader.png">eBook</option>
-                                        <option value="" data-img="./assets/img/shop/book.png">paperback</option>
-                                    </select>
-                                    <div class="book_price mt-2"><del class="me-2">410</del> $100</div>
-                                </div>
-                                <button type="button" class="bj_theme_btn strock_btn add-to-cart-automated" data-name="The Sun And The Star" data-price="125" data-mrp="350" data-img="assets/img/home/book5.jpg">Add To Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                {% endfor %}
 
                 </div>
             </div>
