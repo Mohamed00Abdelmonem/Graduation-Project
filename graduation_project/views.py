@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.conf import settings 
 from django.db.models import Q, Count
-from .models import GraduationProject, Category
+from .models import GraduationProject, Category, Review
 from accounts.models import UserProfile
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -108,7 +108,40 @@ def project_detail(request, slug):
     })
 
 
+# __________________________________________________________________________________
 
+@login_required
+
+def add_review(request, slug):
+        project = GraduationProject.objects.get(slug=slug)
+        comments = request.POST['comments']
+        
+        Review.objects.create(
+            project=project,
+            comments=comments,
+            reviewer=request.user
+        )
+
+        return redirect(f'/project/book/{project.slug}')
+
+
+
+
+@login_required
+def delete_review(request, slug, review_id):
+    project = get_object_or_404(GraduationProject, slug=slug)
+    review = get_object_or_404(Review, id=review_id, reviewer=request.user)
+
+    if request.method == 'POST':
+        review.delete()
+        return redirect(f'/project/book/{project.slug}')
+
+    # If accessed via GET, redirect back to the project detail page
+    return redirect('project:detail', slug=project.slug)
+
+
+
+# __________________________________________________________________________________
 class AddProject(UserPassesTestMixin, generic.CreateView):
     model = GraduationProject
     fields = ['title', 'description', 'sub_description', 'graduation_year', 'category', 'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video']  # Include 'doctors'

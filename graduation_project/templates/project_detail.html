@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
+{% load static %}
 {% load humanize %}
         <!-- breadcrumb area  -->
         <section class="bj_breadcrumb_area text-center banner_animation_03" data-bg-color="#f5f5f5">
@@ -255,194 +256,72 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="product_review" role="tabpanel" aria-labelledby="product_review-tab">
-                                    <div class="reviews-item " id="scrollspyReviews">
+                                    <div class="reviews-item" id="scrollspyReviews">
                                         <div class="d-flex flex-wrap justify-content-between mb-40 gap-3">
-                                            <h4 class="review-title d-flex flex-wrap">50 Reviews <span><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 4.9</span></h4>
-                                            <div>
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    <i class="fas fa-edit"></i>Write a Review
-                                                </button>
-
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog  modal-dialog-centered">
-                                                        <div class="modal-content modal-item">
-                                                            <div class="modal-header border-0 p-0">
-                                                                <h4 class="modal-title mb-50" id="exampleModalLabel">
-                                                                    Hello
-                                                                    Jason</h4>
-                                                                <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="icon_close"></i></button>
-                                                            </div>
-                                                            <div class="d-flex admin-content">
-                                                                <div class="user-img">
-                                                                    <img src="assets/img/profile-img.png" alt="Admin">
-                                                                </div>
-                                                                <div>
-                                                                    <p class="admin-title">Corey Baptista</p>
-                                                                    <p class="admin-sub-title">Posting publicly
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="star-icon">
-                                                                <div class="dynamic-star-rating">
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-                                                                    <i class="fas fa-star"></i>
-
-                                                                </div>
-                                                                <input type="hidden" name="rating" class="dynamic-star-rating-input" value="0">
-                                                                <textarea class="admin-text form-control dynamic-rating-text" placeholder="Share details of your own experience at this place" cols="30" rows="5"></textarea>
-                                                            </div>
-                                                            <div class="admin-galley">
-                                                                <label for="formAdminImgFile">
-                                                                    <i class="fas fa-image"></i>
-                                                                </label>
-                                                                <input class="d-none" id="formAdminImgFile" type="file">
-                                                            </div>
-                                                            <div class="modal-footer border-0">
-                                                                <button type="button" class="cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                                                                <button type="button" class="post-btn">Post</button>
-                                                            </div>
+                                            <!-- Review Form -->
+                                            <form id="review-form" class="review-form" method="post" action="{% url 'project:add_review' object.slug %}">
+                                                {% csrf_token %}
+                                                <h3 class="postbox__comment-form-title">Review ({{ object.reviews.count }})</h3>
+                                                <div class="row">
+                                                    <div class="col-xxl-12">
+                                                        <div class="postbox__comment-input">
+                                                            <textarea name="comments" id="comment" placeholder="Enter your comment..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xxl-12">
+                                                        <div class="postbox__comment-btn">
+                                                            <button type="submit" class="tp-btn">Post Comment</button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
-                                        <div class="row gy-lg-0 gy-3">
-                                            <div class="col-lg-5">
-                                                <div class="your-rating-review">
-                                                    <h5>Your rating & review</h5>
-                                                    <div class="rating">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
+                                    
+                                        <!-- Display Reviews -->
+                                        <div class="review-list">
+                                            {% for review in object.reviews.all %}
+                                            <div class="d-md-flex align-items-start mb-4">
+                                                <!-- User Profile Image -->
+                                                <div class="me-3">
+                                                    {% if review.reviewer.profile.image %}
+                                                    <img src="{{ review.reviewer.profile.image.url }}" alt="User Profile Image" class="rounded-circle" width="50" height="50">
+                                                    {% else %}
+                                                    <img src="{% static 'img/default-avatar.png'%}" alt="User Profile Image" class="rounded-circle" width="50" height="50">
 
-                                                    </div>
-                                                    <p class="review">Good book, I understood many important theories
-                                                        from the book.</p>
-                                                    <button type="button" class="bj_theme_btn strock_btn btn_small_two" data-bs-toggle="modal" data-bs-target="#editReviewModal">Update
-                                                        Your
-                                                        Review</button>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="editReviewModal" tabindex="-1" aria-labelledby="editReviewModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog  modal-dialog-centered">
-                                                            <div class="modal-content modal-item">
-                                                                <div class="modal-header border-0 p-0">
-                                                                    <h4 class="modal-title mb-50" id="editReviewModalLabel">
-                                                                        Hello
-                                                                        Jason</h4>
-                                                                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="icon_close"></i></button>
-                                                                </div>
-                                                                <div class="d-flex admin-content">
-                                                                    <div class="user-img">
-                                                                        <img src="assets/img/profile-img.png" alt="Admin">
-                                                                    </div>
-                                                                    <div>
-                                                                        <p class="admin-title">Corey Baptista</p>
-                                                                        <p class="admin-sub-title">Posting publicly
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="star-icon">
-                                                                    <div class="dynamic-star-rating">
-                                                                        <i class="fas fa-star active"></i>
-                                                                        <i class="fas fa-star active"></i>
-                                                                        <i class="fas fa-star active"></i>
-                                                                        <i class="fas fa-star active"></i>
-                                                                        <i class="fas fa-star active"></i>
-
-                                                                    </div>
-                                                                    <input type="hidden" name="rating" class="dynamic-star-rating-input" value="0">
-                                                                    <textarea class="admin-text form-control dynamic-rating-text" placeholder="Share details of your own experience at this place" cols="30" rows="5">Good book, I understood many important theories from the book.</textarea>
-                                                                </div>
-                                                                <div class="admin-galley">
-                                                                    <div class="gallery-item">
-                                                                        <button class="delete-btn"><i class="fa-regular fa-trash-can"></i></button>
-                                                                        <img src="./assets/img/shop/best_book1.jpg" alt="">
-                                                                    </div>
-
-                                                                    <label for="formAdminImgFile2">
-                                                                        <i class="fas fa-image"></i>
-                                                                    </label>
-                                                                    <input class="d-none" id="formAdminImgFile2" type="file">
-                                                                </div>
-                                                                <div class="modal-footer border-0">
-                                                                    <button type="button" class="cancel-btn" data-bs-dismiss="modal">Cancel</button>
-                                                                    <button type="button" class="post-btn">Update</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    {% endif %}
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <ul class="reviews-box list-unstyled">
-                                                    <li class="d-flex">5 Stars <span><span></span></span> (35)</li>
-                                                    <li>4 Stars <span><span></span></span> (10)</li>
-                                                    <li>3 Stars <span><span></span></span> (3)</li>
-                                                    <li>2 Stars <span><span></span></span> (2)</li>
-                                                    <li>1 Stars <span><span></span></span> (0)</li>
-                                                </ul>
-                                            </div>
-
-                                        </div>
-                                        <div class="review-content">
-                                            <div class="d-flex flex-sm-row flex-column justify-content-between gap-3 mb-40">
-                                                <h4>Reviews</h4>
-                                                <div class="review-right">
-                                                    <div class="sorting-select review-sort selectpickers">
-                                                        <select id="sort-select">
-                                                            <option value="SortBy Newest" selected>Relevent</option>
-                                                            <option value="SortBy Oldest">Newest </option>
-                                                            <option value="SortBy Popular">Oldest</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-md-flex">
-                                                <div>
-                                                    <img class="admin-img" src="assets/img/profile-img.png" alt="Admin">
-                                                </div>
+                                    
+                                                <!-- Review Content -->
                                                 <div class="review-text">
-                                                    <p class="r-title sub-regular-2">Muaz Bin</p>
-                                                    <div class="r-icon">
-                                                        <div>
-                                                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5
-                                                        </div>
-                                                        <span>⋅ Nov 5, 2021</span>
+                                                    <p class="r-title sub-regular-2">{{ review.reviewer.get_full_name|default_if_none:user.username }}</p>
+                                                    <div class="r-icon d-flex align-items-center">
+                                                
+                                                        <span class="ms-2 text-muted">At {{ review.created_at|date:"F d, Y" }}</span>
                                                     </div>
-                                                    <p class="small-2">A Storytelling Workbook is a gem for anyone looking to enhance their narrative skills! The exercises are engaging and practical, making it easy to dive into storytelling with confidence. A must-have for aspiring writers!</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-md-flex">
-                                            <div>
-                                                <img class="admin-img" src="assets/img/profile-img.png" alt="Admin">
-                                            </div>
-                                            <div class="review-text">
-                                                <p class="r-title sub-regular-2">Ryan Aminoff</p>
-                                                <div class="r-icon">
-                                                    <div>
-                                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5
-                                                    </div>
-                                                    <span>⋅ Nov 5, 2021</span>
-                                                </div>
-                                                <p class="small-2 mb-30">A Storytelling Workbook is a fantastic resource for honing storytelling skills! It's packed with creative exercises that spark inspiration and help build strong narrative techniques. Highly recommended for writers at any level!</p>
-                                                <div class="d-flex flex-wrap review-img">
-                                                    <a data-fancybox="gallery" href="./assets/img/shop/best_book1.jpg"><img src="./assets/img/shop/best_book1.jpg" alt="Image"></a>
-                                                    <a data-fancybox="gallery" href="./assets/img/shop/best_book2.jpg"><img src="./assets/img/shop/best_book2.jpg" alt="Image"></a>
-                                                    <a data-fancybox="gallery" href="./assets/img/shop/best_book3.jpg"><img src="./assets/img/shop/best_book3.jpg" alt="Image"></a>
+                                                    <p class="small-2 mb-3">{{ review.comments }}</p>
+                                                    <!-- Delete Button (Only for the Owner) -->
+                                                    {% if request.user == review.reviewer %}
+                                                    <form method="post" action="{% url 'project:delete_review' object.slug review.id %}" style="display: inline;">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger btn-sm delete-btn" title="Delete Review">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                    {% endif %}
 
                                                 </div>
                                             </div>
+                                            {% empty %}
+                                            <div class="text-center">
+                                                <p class="text-muted">No reviews yet. Be the first to leave a review!</p>
+                                            </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
+
+
+
+
                                 </div>
                             </div>
                         </div>

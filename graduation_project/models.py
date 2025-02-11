@@ -89,7 +89,6 @@ class Review(models.Model):
     project = models.ForeignKey(GraduationProject, on_delete=models.CASCADE, related_name="reviews")
     reviewer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="submitted_reviews")
     comments = models.TextField()
-    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)], default=3)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
