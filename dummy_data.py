@@ -8,8 +8,7 @@ from faker import Faker
 from django.contrib.auth.models import User
 from graduation_project.models import GraduationProject, Category, Review
 from accounts.models import UserProfile
-
-
+import string
 
 
 
@@ -18,19 +17,69 @@ fake = Faker()
 
 
 
+
+
 def seed_users(n):
-    """Create dummy users."""
+    """Create dummy users with profiles."""
     for _ in range(n):
-        username = fake.user_name()
+        # Generate fake data for the user
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        username = f"{first_name.lower()}_{last_name.lower()}"  # Combine first and last name as username
         email = fake.email()
-        password = 'password123'  # Default password for dummy users
-        user = User.objects.create_user(username=username, email=email, password=password)
-        profile = UserProfile.objects.create(
-            user=user,
-            national_id=fake.ssn(),  # Generate a random national ID
+        national_id = ''.join(random.choices(string.digits, k=14))  # Random 14-digit national ID
+        phone_number = fake.phone_number()[:15]  # Truncate phone number to 15 characters
+        year_grade = random.choice(['1', '2', '3', '4', 'not_student'])
+        is_leader = random.choice([True, False])
+        is_doctor = random.choice([True, False])
+        is_teaching_assistant = random.choice([True, False])
+        address = fake.address()
+
+        # Create or update the user
+        user, created = User.objects.update_or_create(
+            username=username,
+            defaults={
+                'first_name': first_name,
+                'last_name': last_name,
+                'email': email,
+            }
         )
-        print(f"Created user: {username} with national_id: {profile.national_id}")
-    print(f"Seeded {n} users successfully.")
+
+        if created:
+            # Set the password as the national ID
+            user.set_password(str(national_id))
+            user.save()
+
+        # Create or update the profile with national_id
+        UserProfile.objects.update_or_create(
+            user=user,
+            defaults={
+                'national_id': national_id,
+                'phone_number': phone_number,
+                'grade': year_grade,
+                'is_leader': is_leader,
+                'is_doctor': is_doctor,
+                'is_teaching_assistant': is_teaching_assistant,
+                'address': address,
+            }
+        )
+
+        print(f"Created user: {username} with national_id: {national_id}")
+
+
+
+
+
+# def seed_users(n):
+#     """Create dummy users."""
+#     for _ in range(n):
+#         username = fake.user_name()
+#         email = fake.email()
+#         password = 'password123'  # Default password for dummy users
+#         User.objects.create_user(username=username, email=email, password=password)
+#     print(f"Seeded {n} users successfully.")
+
+
 
 
 def seed_categories(n):
