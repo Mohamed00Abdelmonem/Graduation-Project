@@ -7,9 +7,16 @@ import random
 from faker import Faker
 from django.contrib.auth.models import User
 from graduation_project.models import GraduationProject, Category, Review
+from accounts.models import UserProfile
+
+
+
+
 
 # Initialize Faker
 fake = Faker()
+
+
 
 def seed_users(n):
     """Create dummy users."""
@@ -17,10 +24,13 @@ def seed_users(n):
         username = fake.user_name()
         email = fake.email()
         password = 'password123'  # Default password for dummy users
-        User.objects.create_user(username=username, email=email, password=password)
+        user = User.objects.create_user(username=username, email=email, password=password)
+        profile = UserProfile.objects.create(
+            user=user,
+            national_id=fake.ssn(),  # Generate a random national ID
+        )
+        print(f"Created user: {username} with national_id: {profile.national_id}")
     print(f"Seeded {n} users successfully.")
-
-
 
 
 def seed_categories(n):
@@ -78,7 +88,6 @@ def seed_reviews(n):
             project=random.choice(projects),
             reviewer=random.choice(users),
             comments=fake.text(max_nb_chars=500),
-            rating=random.randint(1, 5)
         )
     print(f"Seeded {n} reviews successfully.")
 
@@ -86,10 +95,10 @@ def seed_reviews(n):
 
 def seed_all():
     """Seed all data."""
-    # seed_users(10)  # Create 10 dummy users
+    seed_users(10)  # Create 10 dummy users
     # seed_categories(5)  # Create 5 dummy categories
-    seed_projects(1500)  # Create 20 dummy projects
-    seed_reviews(2000)  # Create 50 dummy reviews
+    # seed_projects(1500)  # Create 20 dummy projects
+    # seed_reviews(2000)  # Create 50 dummy reviews
     print("All data seeded successfully.")
 
 # Run the seeding process

@@ -1,7 +1,7 @@
 
 {% extends "base.html" %}
 {% block body %}
-
+{% load static %}
 <style>
     /* General Styling */
     .award_list {
@@ -125,11 +125,19 @@
                                 style="width: 460px; height: 600px; object-fit: cover; display: block;"
                                 >
                             {% else %}
-                            
+                                <img 
+                                    src="{% static 'img/default-avatar.png' %}" 
+                                    alt="Profile Picture" 
+                                    style="width: 460px; height: 600px; object-fit: cover; display: block;"
+                                >
                             {% endif %}
                            
                             <div class="bj_author_single_content">
-                                <h2>{{ user.get_full_name|default_if_none:user.username }}</h2>
+                                {% if user.get_full_name %}
+                                    <h2>{{ user.get_full_name|default_if_none:user.username }}</h2>
+                                {% else %}
+                                    <h2>{{ user.profile.full_name}}</h2>
+                                {% endif %}
                             
                                 <!-- Add the Edit Profile Button -->
                                 <a href="{% url 'edit_profile' %}" class="btn btn-primary"><i class="fa fa-edit"></i> Edit Profile</a>

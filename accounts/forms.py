@@ -28,7 +28,7 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = [
-            'phone_number', 'grade', 'image',
+            'full_name', 'phone_number', 'grade', 'image',
             'job_title', 'whatsapp_number', 'linkedin_link', 'instgram_link', 'porfolio_link', 'short_bio', 'department', 'date_of_birth',
             'address'
         ]

@@ -70,6 +70,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default fallback
 ]
 
+
 # for debug_toolbar
 INTERNAL_IPS = [
     '127.0.0.1',  # Add your local IP address here
@@ -148,9 +149,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
