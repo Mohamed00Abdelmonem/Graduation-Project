@@ -9,7 +9,6 @@ urlpatterns = [
     path('book/<slug:slug>', views.project_detail, name="project_detail"),
     path('book/<slug:slug>/add-review/', views.add_review, name='add_review'),
     path('projects/<slug:slug>/delete-review/<int:review_id>/', views.delete_review, name='delete_review'),
-
     path('add-project', views.AddProject.as_view(), name="add_project"),
     path('project/success/', TemplateView.as_view(template_name='success_create_project.html'), name='success_create_project'),    
     path('like/<int:id>', views.like_post, name='like_post'),

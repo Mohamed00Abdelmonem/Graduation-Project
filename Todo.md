@@ -36,9 +36,9 @@ After time:
 - fix login required for like and show pdf file 
 - app settings for data site   InProgress 
 - caching    (done)
-- review and rate by doctors and supervisors and employee only not (normal user)
+- review and rate by doctors and supervisors and employee only not (normal user) done
 - page not found 
 - show all details or links for project_deatil like (github and another links)
 - add to favorite (wishlist)
-- profile user 
+- profile user  done 
 - simple Dashboard

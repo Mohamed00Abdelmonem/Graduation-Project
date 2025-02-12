@@ -15,6 +15,9 @@ from django.views.decorators.cache import cache_page
 from django.db.models import Q
 
 
+# ___________________________________________________________________________________
+
+
 
 # @cache_page(60 * 5)
 def ProjectList(request):
@@ -85,6 +88,7 @@ def ProjectList(request):
     
 
 
+# ___________________________________________________________________________________
 
 
 
@@ -124,6 +128,7 @@ def add_review(request, slug):
 
         return redirect(f'/project/book/{project.slug}')
 
+# ___________________________________________________________________________________
 
 
 
@@ -178,6 +183,7 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
         return self.request.user.profile.is_leader
 
 
+# ___________________________________________________________________________________
 
 
 
@@ -200,6 +206,7 @@ def approve_project(request, project_id):
     messages.success(request, f'تم قبول مشروعك "{project.title}".')
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+# ___________________________________________________________________________________
 
 
 
@@ -222,6 +229,7 @@ def reject_project(request, project_id):
     messages.success(request, f'تم رفض مشروعك "{project.title}".')
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+# ___________________________________________________________________________________
 
 
 
@@ -230,6 +238,7 @@ def pending_projects(request):
     pending_projects = GraduationProject.objects.filter(status='pending')
     return render(request, 'pending_projects.html', {'projects': pending_projects})
 
+# ___________________________________________________________________________________
 
 
 
@@ -249,6 +258,7 @@ def pending_projects(request):
     #     # Redirect users who don't pass the test_func
     #     return redirect("permission_denied")  # Replace with your desired permission denied URL or view
 
+# ___________________________________________________________________________________
 
 
 
@@ -265,3 +275,7 @@ def like_post(request, id):
             instance.likes.remove(request.user)
             instance.save() 
             return render( request, 'partials/likes_area.html', context={'object':instance})    
+        
+
+
+# ___________________________________________________________________________________

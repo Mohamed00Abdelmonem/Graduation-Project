@@ -1,3 +1,5 @@
+
+# This File for stress test my system using locust
 import os , django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 django.setup()

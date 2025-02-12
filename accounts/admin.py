@@ -6,5 +6,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'phone_number', 'address', 'is_leader')  
     search_fields = ('user', 'phone_number' )
 
+# ___________________________________________________________________________________
+
 
 admin.site.register(Experience)

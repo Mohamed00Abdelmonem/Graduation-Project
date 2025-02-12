@@ -16,7 +16,10 @@ class GraduationProjectAdmin(admin.ModelAdmin):
     ordering = ('-graduation_year',)  # Optional: Order by graduation year (newest first)
     list_per_page = 50  # Display 50 rows per page
 
-    
+ # ___________________________________________________________________________________
+
+
+
 # Register the models with their respective admin configurations
 admin.site.register(GraduationProject, GraduationProjectAdmin)
 admin.site.register(Category)

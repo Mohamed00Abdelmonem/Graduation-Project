@@ -17,6 +17,7 @@ fake = Faker()
 
 
 
+# ___________________________________________________________________________________
 
 
 def seed_users(n):
@@ -67,6 +68,7 @@ def seed_users(n):
         print(f"Created user: {username} with national_id: {national_id}")
 
 
+# ___________________________________________________________________________________
 
 
 
@@ -79,6 +81,7 @@ def seed_users(n):
 #         User.objects.create_user(username=username, email=email, password=password)
 #     print(f"Seeded {n} users successfully.")
 
+# ___________________________________________________________________________________
 
 
 
@@ -125,6 +128,7 @@ def seed_projects(n):
             view_count=random.randint(0, 600),
         )
     print(f"Seeded {n} graduation projects successfully.")
+# ___________________________________________________________________________________
 
 
 def seed_reviews(n):
@@ -140,6 +144,7 @@ def seed_reviews(n):
         )
     print(f"Seeded {n} reviews successfully.")
 
+# ___________________________________________________________________________________
 
 
 def seed_all():
@@ -149,6 +154,10 @@ def seed_all():
     # seed_projects(1500)  # Create 20 dummy projects
     # seed_reviews(2000)  # Create 50 dummy reviews
     print("All data seeded successfully.")
+
+
+# ___________________________________________________________________________________
+
 
 # Run the seeding process
 if __name__ == "__main__":

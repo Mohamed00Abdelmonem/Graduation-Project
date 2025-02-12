@@ -5,6 +5,8 @@ from django.utils.text import slugify
 User = get_user_model()
 
 
+# ___________________________________________________________________________________
+
 
 STATUS_CHOICES = [
         ('pending', 'Pending'),
@@ -72,7 +74,11 @@ class GraduationProject(models.Model):
             self.slug = slugify(self.title)
             super(GraduationProject, self).save(*args, **kwargs) 
 
-            
+
+# ___________________________________________________________________________________
+
+
+
 # Category
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -82,6 +88,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+# ___________________________________________________________________________________
+
 
 
 # Review
@@ -93,3 +102,6 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.project.title} by {self.reviewer.username}"
+
+
+# ___________________________________________________________________________________

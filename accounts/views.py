@@ -16,10 +16,16 @@ from .forms import ExperienceForm  # Ensure this form exists
 from graduation_project.models import GraduationProject
 
 
+
+
+# ___________________________________________________________________________________
+
+
 @login_required
 def home(request):
     return render(request, 'logout.html', {'user': request.user})
 
+# ___________________________________________________________________________________
 
 
 def national_id_login(request):
@@ -39,6 +45,7 @@ def national_id_login(request):
         form = NationalIDLoginForm()
     return render(request, 'login.html', {'form': form})
 
+# ___________________________________________________________________________________
 
 
 
@@ -92,6 +99,7 @@ def upload_excel(request):
     return render(request, 'upload_form.html', {'form': ExcelUploadForm()})
 
 
+# ___________________________________________________________________________________
 
 
 
@@ -106,6 +114,9 @@ def Profile(request):
     ).distinct()  # Use distinct to avoid duplicates
 
     return render(request, 'profile.html', {"user":user, "projects":projects})
+
+# ___________________________________________________________________________________
+
 
 
 @login_required
@@ -123,6 +134,7 @@ def edit_profile(request):
     return render(request, 'edit_profile.html', {'form': form})
 
 
+# ___________________________________________________________________________________
 
 
 
@@ -143,6 +155,7 @@ def add_experience(request):
 
     return render(request, 'add_experience.html', {'form': form})
 
+# ___________________________________________________________________________________
 
 
 
@@ -164,9 +177,15 @@ def update_experience(request, experience_id):
     return render(request, 'update_experience.html', {'form': form, 'experience': experience})
 
 
+# ___________________________________________________________________________________
+
+
 
 @login_required
 def delete_experience(request, experience_id):
     experience = get_object_or_404(Experience, id=experience_id, profile=request.user.profile)
     experience.delete()
     return redirect('profile')
+
+
+# ___________________________________________________________________________________
