@@ -42,3 +42,4 @@ After time:
 - add to favorite (wishlist)
 - profile user  done 
 - simple Dashboard
+- custom admin panel
