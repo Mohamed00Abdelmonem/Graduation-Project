@@ -1,39 +1,189 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block body %}
-    <div class="container mt-5">
-        <h1>Pending Projects</h1>
 
-        <!-- Display Django Messages at the Top of the Page -->
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+ <!-- breadcrumb area  -->
+ <section class="bj_breadcrumb_area text-center banner_animation_03" data-bg-color="#f5f5f5">
+    <div class="bg_one" data-bg-image="{% static 'img/breadcrumb/breadcrumb_banner_bg.png' %}"></div>
+    <div class="bd_shape one wow fadeInDown layer" data-wow-delay="0.3s" data-depth="0.5"><img data-parallax='{"y": -50}' src="{% static 'img/breadcrumb/book_left1.png' %}" alt="">
+    </div>
+    <div class="bd_shape two wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s"><img data-parallax='{"y": 30}' src="{% static 'img/breadcrumb/book-left2.png' %}" alt="">
+    </div>
+    <div class="bd_shape three wow fadeInDown layer" data-wow-delay="0.3s" data-depth="0.5"><img data-parallax='{"y": -50}' src="{% static 'img/breadcrumb/plane-1.png' %}" alt="">
+    </div>
+    <div class="bd_shape four wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s"><img data-parallax='{"y": 30}' src="{% static 'img/breadcrumb/plan-3.png' %}" alt="">
+    </div>
+    <div class="bd_shape five wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s"><img data-parallax='{"y": 80}' src="{% static 'img/breadcrumb/plan-2.png' %}" alt="">
+    </div>
+    <div class="bd_shape six wow fadeInDown layer" data-wow-delay="0.3s" data-depth="0.5"><img data-parallax='{"y": -60}' src="{% static 'img/breadcrumb/book-right.png' %}" alt="">
+    </div>
+    <div class="bd_shape seven wow fadeInUp layer" data-depth="0.6" data-wow-delay="0.4s"><img data-parallax='{"x": 50}' src="{% static 'img/breadcrumb/book-right2.png' %}" alt="">
+    </div>
+    <div class="container">
+        <h2 class="title wow fadeInUp" data-wow-delay="0.2s">Pending Projects</h2>
+        <ol class="breadcrumb justify-content-center wow fadeInUp" data-wow-delay="0.3s">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Pending Projects</li>
+        </ol>
+    </div>
+</section>
+<!-- breadcrumb area  -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .btn-success, .btn-danger {
+            margin-right: 5px;
+        }
+        .messages .alert {
+            margin-bottom: 15px;
+        }
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .project-actions {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mb-4"><i class="fas fa-list"></i> Pending Projects</h1>
+
+                <!-- Display Django Messages -->
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Project List -->
+        <div class="row">
+            {% if projects %}
+                {% for project in projects %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="project-info">
+                                    <div>
+                                        <h5 class="card-title">
+                                            <a href="{% url 'project:project_detail' project.slug %}" class="text-decoration-none">
+                                                <i class="fas fa-book"></i> {{ project.title }}
+                                            </a>
+                                        </h5>
+                                        <p><i class="fas fa-calendar-alt"></i> Updated: {{ project.updated_at|date:"Y-m-d" }}</p>
+                                        <p><i class="fas fa-graduation-cap"></i> Graduation Year: {{ project.graduation_year }}</p>
+                                        <p><i class="fas fa-user-md"></i> Doctor: {{ project.doctor }}</p>
+                                    </div>
+                                    <div class="project-actions">
+                                        <a href="{% url 'project:approve_project' project.id %}" class="btn btn-success">
+                                            <i class="fas fa-check"></i> Approve
+                                        </a>
+                                        <a href="{% url 'project:reject_project' project.id %}" class="btn btn-danger">
+                                            <i class="fas fa-times"></i> Reject
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
-            </div>
-        {% endif %}
-
-        <!-- Iterate Over Projects -->
-        {% for project in projects %}
-            <div class="card mb-5 mt-5">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{% url 'project:project_detail' project.slug %}">{{ project.title }}</a>
-                    </h5>                    
-                    <p>Date: {{ project.updated_at }}</p>
-                    <p>Gradution Year: {{ project.graduation_year }}</p>
-                    <p>By Doctor:{{ project.doctor }}</p>
-
-                    <!-- Action Buttons -->
-                    <a href="{% url 'project:approve_project' project.id %}" class="btn btn-success">Accept</a>
-                    <a href="{% url 'project:reject_project' project.id %}" class="btn btn-danger">Reject</a>
+            {% else %}
+                <div class="col-md-12">
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-info-circle"></i> No pending projects.
+                    </div>
                 </div>
-            </div>
-        {% empty %}
-            <p>No pending projects.</p>
-        {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="text-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination pagi-content">
+                <!-- Previous Page Link -->
+                {% if projects.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ projects.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                            <i class="ti-angle-left"></i> Prev
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link"><i class="ti-angle-left"></i> Prev</span>
+                    </li>
+                {% endif %}
+        
+                <!-- Show first page and ellipsis if needed -->
+                {% if projects.number > 4 %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">1</a>
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                {% endif %}
+        
+                <!-- Show 3 pages to the left and 3 pages to the right of the current page -->
+                {% for num in projects.paginator.page_range %}
+                    {% if num >= projects.number|add:-3 and num <= projects.number|add:3 %}
+                        {% if projects.number == num %}
+                            <li class="page-item active" aria-current="page">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                                    {{ num }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+        
+                <!-- Show last page and ellipsis if needed -->
+                {% if projects.number < projects.paginator.num_pages|add:-3 %}
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ projects.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                            {{ projects.paginator.num_pages }}
+                        </a>
+                    </li>
+                {% endif %}
+        
+                <!-- Next Page Link -->
+                {% if projects.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ projects.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                            Next <i class="ti-angle-right"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Next <i class="ti-angle-right"></i></span>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
 {% endblock %}

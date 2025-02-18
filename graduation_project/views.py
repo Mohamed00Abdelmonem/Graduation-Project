@@ -236,7 +236,18 @@ def reject_project(request, project_id):
 
 def pending_projects(request):
     pending_projects = GraduationProject.objects.filter(status='pending')
-    return render(request, 'pending_projects.html', {'projects': pending_projects})
+       # Pagination
+    page = request.GET.get('page', 1)  # Get the current page number from the request
+    paginator = Paginator(pending_projects, 15)  # Show 10 projects per page
+    try:
+        paginated_projects = paginator.page(page)
+    except PageNotAnInteger:
+        paginated_projects = paginator.page(1)  # If page is not an integer, deliver first page
+    except EmptyPage:
+        paginated_projects = paginator.page(paginator.num_pages)  # If page is out of range, deliver last page
+
+
+    return render(request, 'pending_projects.html', {'projects': pending_projects , "projects": paginated_projects })
 
 # ___________________________________________________________________________________
 
