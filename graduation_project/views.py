@@ -203,7 +203,7 @@ def approve_project(request, project_id):
         fail_silently=False,
     )
 
-    messages.success(request, f'تم قبول مشروعك "{project.title}".')
+    messages.success(request, f' تم قبول مشروع "{project.title}".')
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 # ___________________________________________________________________________________
@@ -226,7 +226,7 @@ def reject_project(request, project_id):
         [user.email],
         fail_silently=False,
     )
-    messages.success(request, f'تم رفض مشروعك "{project.title}".')
+    messages.success(request, f'تم رفض مشروع "{project.title}".')
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 # ___________________________________________________________________________________

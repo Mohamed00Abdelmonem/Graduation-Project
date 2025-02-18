@@ -19,17 +19,17 @@
                             <h2 class="wow fadeInUp" data-wow-delay="0.2s">
                                 You can see All Gradution Projects MET Acadmy
                             </h2>
-                            <p class="wow fadeInUp" data-wow-delay="0.4s">
+                            {% comment %} <p class="wow fadeInUp" data-wow-delay="0.4s">
                                 Unleash your imagination with epic fantasy sagas, mystical
                                 adventures, and tales of otherworldly realms. Embark on quests
                                 with heroes.
-                            </p>
-                            <div class="d-flex">
+                            </p> {% endcomment %}
+                            {% comment %} <div class="d-flex">
                                 <a href="/accounts/login" class="bj_theme_btn wow fadeInLeft" data-wow-delay="0.2s">
                                     Login</a>
                                 <a href="#product_tab_showcase_id" class="bj_theme_btn strock_btn wow fadeInLeft" data-wow-delay="0.3s">
                                     Signup</a>
-                            </div>
+                            </div> {% endcomment %}
                             <div class="d-flex community_info_wrapper wow fadeInUp" data-wow-delay="0.4s">
                                 <div class="community_info">
                                     <h5>Our Community</h5>
@@ -59,8 +59,8 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="bj_banner_img">
-                            <img class="wow fadeInRight" data-wow-delay="0.5s" src="{% static 'img/home/girl.png' %}" alt="" />
+                            <div class="bj_banner_img">
+                                <img class="wow fadeInRight" data-wow-delay="0.10s" src="{% static 'img/boy.png' %}" alt="" />                          
                             <div class="shape_one">
                                 <img class="layer" data-depth="-0.15" src="{% static 'img/home/star-one.png' %}" alt="" />
                             </div>
@@ -71,7 +71,7 @@
                                 <img class="layer" data-depth="-0.15" src="{% static 'img/home/round.png' %}" alt="" />
                             </div>
                             <div class="shape_four">
-                                <img src="{% static 'img/home/dot.png' %}" alt="" />
+                                {% comment %} <img src="{% static 'img/home/dot.png' %}" alt="" /> {% endcomment %}
                             </div>
                         </div>
                     </div>
@@ -132,23 +132,12 @@
                                                         <div class="bj_new_pr_content_two">
                                                             <div class="d-flex justify-content-between">
                                                                 <h5>{{ project.title }}</h5>
-                                                                <div class="book_price">
-                                                                    <sup>created: {{project.created_at|timesince }} ago </sup><sup></sup> <!-- Adjust as needed -->
-                                                                </div>
                                                             </div>
                                                             <div class="writer_name">
                                                                 <i class="icon-user"></i>{{ doctor.user.username }}
+                                                                <p>created: {{project.created_at|timesince }} ago </p><sup></sup> <!-- Adjust as needed -->
                                                             </div>
-                                                            <div class="ratting">
-                                                                <div class="ratting_icon">
-                                                                    <i class="fa-solid fa-star"></i>
-                                                                    <i class="fa-solid fa-star"></i>
-                                                                    <i class="fa-solid fa-star"></i>
-                                                                    <i class="fa-solid fa-star"></i>
-                                                                    <i class="fa-solid fa-star"></i>
-                                                                </div>
-                                                                <span>(252)</span>
-                                                            </div>
+                                                            
                                                             <a href="{% url 'project:project_detail' project.slug %}" class="bj_theme_btn">show</a>
                                                         </div>
                                                     </div>

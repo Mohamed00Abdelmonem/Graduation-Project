@@ -92,12 +92,15 @@
                                         <p><i class="fas fa-graduation-cap"></i> Graduation Year: {{ project.graduation_year }}</p>
                                         <p><i class="fas fa-user-md"></i> Doctor: {{ project.doctor }}</p>
                                     </div>
-                                    <div class="project-actions">
-                                        <a href="{% url 'project:approve_project' project.id %}" class="btn btn-success">
-                                            <i class="fas fa-check"></i> Approve
+                                    <div class="project-actions" style="display: flex; gap: 10px;">
+                                        <a href="{% url 'project:project_detail' project.slug %}" class="btn" style="background-color:rgb(138, 159, 186); color: white; padding: 8px 16px; border: none; border-radius: 4px; text-decoration: none; display: flex; align-items: center;">
+                                            <i class="fas fa-eye" style="margin-right: 5px;"></i>
                                         </a>
-                                        <a href="{% url 'project:reject_project' project.id %}" class="btn btn-danger">
-                                            <i class="fas fa-times"></i> Reject
+                                        <a href="{% url 'project:approve_project' project.id %}" class="btn" style="background-color:rgb(120, 180, 134); color: white; padding: 8px 16px; border: none; border-radius: 4px; text-decoration: none; display: flex; align-items: center;">
+                                            <i class="fas fa-check" style="margin-right: 5px;"></i> Approve
+                                        </a>
+                                        <a href="{% url 'project:reject_project' project.id %}" class="btn" style="background-color:rgb(171, 105, 111); color: white; padding: 8px 16px; border: none; border-radius: 4px; text-decoration: none; display: flex; align-items: center;">
+                                            <i class="fas fa-times" style="margin-right: 5px;"></i> Reject
                                         </a>
                                     </div>
                                 </div>
@@ -187,3 +190,5 @@
         </nav>
     </div>
 {% endblock %}
+
+
