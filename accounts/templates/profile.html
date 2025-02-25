@@ -105,7 +105,7 @@
             <div class="container">
                 <h2 class="title">Profile</h2>
                 <ol class="breadcrumb justify-content-center">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li class="active">Profile</li>
                 </ol>
             </div>
@@ -212,7 +212,6 @@
                         
 
 
-
                             <div class="col-lg-5 col-md-5">
                                 <div class="award_list">
                                     <h4 class="mb-3">Experiences</h4>
@@ -292,6 +291,8 @@
                                 <h5>{{ project.title }}</h5>
                                 <p>description: {{ project.description }}</p>
                                 <p>Created at: {{ project.graduation_year }}</p>
+                                <a href="{% url 'project:update_project' project.slug %}" class="btn btn-primary">تعديل المشروع</a>
+
                             </div>
                             <hr>
                         {% empty %}

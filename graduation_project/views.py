@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.conf import settings 
 from django.db.models import Q, Count
@@ -13,6 +13,14 @@ from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.cache import cache_page
 from django.db.models import Q
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 # ___________________________________________________________________________________
@@ -183,27 +191,86 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
         return self.request.user.profile.is_leader
 
 
+
+
 # ___________________________________________________________________________________
 
 
+class UpdateProject(UserPassesTestMixin, generic.UpdateView):
+    model = GraduationProject
+    fields = ['title', 'description', 'sub_description', 'graduation_year', 'category', 'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video', 'status']  # اضفت status
+    template_name = "update_project.html"
+    success_url = '/'  # يمكن تغير الرابط لصفحة معينة
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        
+        # لو الحالة بقت rejected، نبعت إيميل للطالب اللي قدم المشروع
+        if form.instance.status == 'rejected':
+            send_mail(
+                'مشروعك رُفض',
+                f'للأسف مشروعك "{form.instance.title}" رُفض بسبب السبب التالي: {form.instance.description}',  # اكتب السبب في الوصف
+                settings.EMAIL_HOST_USER,
+                [student.email for student in form.instance.students.all()],  # إرسال لكل الطلاب اللي شاركوا في المشروع
+                fail_silently=False,
+            )
+            messages.warning(self.request, 'تم رفض المشروع بنجاح.')
+        elif form.instance.status == 'accepted':
+            messages.success(self.request, 'تم قبول المشروع بنجاح.')
+
+        return response
+
+    def test_func(self):
+        # فقط المشرفين أو الأدمن يمكنهم تعديل المشاريع
+        return  self.request.user.profile.is_leader
+
+
+
+# ___________________________________________________________________________________
+
+
+from django.shortcuts import get_object_or_404, redirect
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.contrib import messages
+from django.conf import settings
 
 def approve_project(request, project_id):
+    # جلب المشروع بناءً على ID
     project = get_object_or_404(GraduationProject, id=project_id)
-    project.status = 'accepted'  # تغيير حالة المشروع لـ "مقبول"
-    user = request.user
+
+    # تغيير حالة المشروع لـ "مقبول"
+    project.status = 'accepted'
     project.save()
 
-    # إرسال إيميل للقائد
-    send_mail(
-        'تم قبول المشروع',
-        f'تم قبول مشروعك "{project.title}".',
-        settings.EMAIL_HOST_USER,
-        [user.email],
-        fail_silently=False,
-    )
+    # تحديد البيانات الأساسية
+    subject = 'تم قبول مشروعك'
+    to_email = [project.author.email]  # البريد الإلكتروني للقائد
 
-    messages.success(request, f' تم قبول مشروع "{project.title}".')
+    # إنشاء النصوص (HTML وPLAIN)
+    context = {
+        'project_title': project.title,
+    }
+
+    # استخدم قالب HTML للإيميل
+    html_content = render_to_string('emails/approve_project_email.html', context)
+    text_content = strip_tags(html_content)  # نسخة نصية بسيطة من الإيميل
+
+    # إنشاء الرسالة
+    email = EmailMultiAlternatives(
+        subject=subject,
+        body=text_content,
+        from_email=settings.EMAIL_HOST_USER,
+        to=to_email
+    )
+    email.attach_alternative(html_content, "text/html")  # إضافة النسخة HTML
+    email.send()
+
+    # إضافة رسالة نجاح للمشرف
+    messages.success(request, f'تم قبول مشروع "{project.title}" بنجاح.')
+
+    # إعادة التوجيه إلى الصفحة السابقة أو الرئيسية
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 # ___________________________________________________________________________________
@@ -212,24 +279,48 @@ def approve_project(request, project_id):
 
 
 
-def reject_project(request, project_id):
+def reject_project(request,project_id):
+        # جلب المشروع بناءً على ID
     project = get_object_or_404(GraduationProject, id=project_id)
-    project.status = 'rejected'  # تغيير حالة المشروع لـ "مرفوض"
-    user = request.user
+
+    # تغيير حالة المشروع لـ "مرفوض"
+    project.status = 'rejected'
     project.save()
 
-    # إرسال إيميل للقائد
-    send_mail(
-        'تم رفض المشروع',
-        f'تم رفض مشروعك "{project.title}".',
-        settings.EMAIL_HOST_USER,
-        [user.email],
-        fail_silently=False,
+    # جلب سبب الرفض من النموذج
+    rejection_reason = request.POST.get('rejection_reason', 'لم يتم تحديد سبب')
+
+    # تحديد البيانات الأساسية
+    subject = 'تم رفض مشروعك'
+    to_email = [project.author.email]  # البريد الإلكتروني للقائد
+
+    # إنشاء النصوص (HTML وPLAIN)
+    context = {
+        'project_title': project.title,
+        'rejection_reason': rejection_reason,
+    }
+
+    # استخدم قالب HTML للإيميل
+    html_content = render_to_string('emails/reject_project_email.html', context)
+    text_content = strip_tags(html_content)  # نسخة نصية بسيطة من الإيميل
+
+    # إنشاء الرسالة
+    email = EmailMultiAlternatives(
+        subject=subject,
+        body=text_content,
+        from_email=settings.EMAIL_HOST_USER,
+        to=to_email
     )
-    messages.success(request, f'تم رفض مشروع "{project.title}".')
+    email.attach_alternative(html_content, "text/html")  # إضافة النسخة HTML
+    email.send()
+    
+    # إضافة رسالة نجاح للمشرف
+    messages.success(request, f'تم رفض مشروع "{project.title}" بنجاح.')
+
+    # إعادة التوجيه إلى الصفحة السابقة أو الرئيسية
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
-# ___________________________________________________________________________________
+# _______________________________________________________
 
 
 

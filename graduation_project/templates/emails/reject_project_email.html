@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفض المشروع</title>
+    <style>
+        /* الأنماط العامة */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333333;
+        }
+        p {
+            color: #555555;
+            line-height: 1.6;
+        }
+        .reason {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <div class="email-container">
+        <h1>مرحبًا!</h1>
+        <p>لقد تم رفض مشروعك:</p>
+        <h2>{{ project_title }}</h2>
+        <div class="reason">
+            <strong>السبب:</strong> {{ rejection_reason }}
+        </div>
+        <p>إذا كنت بحاجة إلى أي مساعدة أو توضيح إضافي، يرجى التواصل معنا.</p>
+        <p>شكراً لتفهمك.</p>
+    </div>
+</body>
+</html>

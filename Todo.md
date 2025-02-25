@@ -43,3 +43,4 @@ After time:
 - profile user  done 
 - simple Dashboard
 - custom admin panel
+- update project after submited and if reject this project by emplyee send in email why reson rejected 

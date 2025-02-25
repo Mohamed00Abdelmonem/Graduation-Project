@@ -3,8 +3,8 @@ from .models import UserProfile, Experience
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'phone_number', 'address', 'is_leader')  
-    search_fields = ('user', 'phone_number' )
+    list_display = ('id', 'user', 'phone_number', 'address', 'national_id', 'is_leader')  
+    search_fields = ('user', 'full_name', 'national_id',  'phone_number' )
 
 # ___________________________________________________________________________________
 
