@@ -229,12 +229,6 @@ class UpdateProject(UserPassesTestMixin, generic.UpdateView):
 # ___________________________________________________________________________________
 
 
-from django.shortcuts import get_object_or_404, redirect
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.contrib import messages
-from django.conf import settings
 
 def approve_project(request, project_id):
     # جلب المشروع بناءً على ID
@@ -339,26 +333,6 @@ def pending_projects(request):
 
 
     return render(request, 'pending_projects.html', {'projects': pending_projects , "projects": paginated_projects })
-
-# ___________________________________________________________________________________
-
-
-
-
-
-# class AddProject(UserPassesTestMixin, generic.CreateView):
-#     model = GraduationProject
-#     fields = "__all__"
-#     template_name = "add_project.html"
-#     success_url = '/'  # Replace "home" with your desired success URL
-
-#     def test_func(self):
-#         # Only allow access if the user is a leader
-#         return self.request.user.profile.is_leader
-
-    # def handle_no_permission(self):
-    #     # Redirect users who don't pass the test_func
-    #     return redirect("permission_denied")  # Replace with your desired permission denied URL or view
 
 # ___________________________________________________________________________________
 
