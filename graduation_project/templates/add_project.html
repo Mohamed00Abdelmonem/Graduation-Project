@@ -1,6 +1,35 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
 {% block body %}
+
+ 
+
+
+<!-- Display Messages at the Very Top -->
+<div class="container mt-3">
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} custom-alert alert-dismissible fade show mb-3" role="alert" style="color: white;">
+                    <strong>
+                        {% if message.tags == 'success' %}Success:
+                        {% elif message.tags == 'error' %}Error:
+                        {% elif message.tags == 'warning' %}Warning:
+                        {% else %}Info:
+                        {% endif %}
+                    </strong>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+
+
+
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6" style="margin-top: 6rem;">
@@ -245,28 +274,32 @@
     </div>
 </div>
 
-<!-- Display Django Messages -->
-{% if messages %}
-    <div class="messages">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
-    </div>
+
+
+ <!-- Display Django Messages -->
+ {% if messages %}
+ <div class="messages container mt-3">
+     {% for message in messages %}
+         <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-3" role="alert">
+             <strong>{% if message.tags == 'success' %}Success:{% elif message.tags == 'error' %}Error:{% else %}Info:{% endif %}</strong> {{ message }}
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         </div>
+     {% endfor %}
+ </div>
 {% endif %}
 
 <!-- JavaScript for Delay and Redirection -->
 <script>
-    // Check if there are any messages
-    const messages = document.querySelectorAll('.alert');
-    if (messages.length > 0) {
-        // Wait for 5 seconds
-        setTimeout(() => {
-            // Redirect to the success page
-            window.location.href = "{% url 'project:success_create_project' %}";
-        }, 5000); // 5000 milliseconds = 5 seconds
-    }
+ document.addEventListener('DOMContentLoaded', function () {
+     // Get all success messages
+     const successMessages = document.querySelectorAll('.alert-success');
+
+     // If there are any success messages, redirect after 5 seconds
+     if (successMessages.length > 0) {
+         setTimeout(() => {
+             window.location.href = "{% url 'project:success_create_project' %}";
+         }, 5000); // 5000 milliseconds = 5 seconds
+     }
+ });
 </script>
 {% endblock body %}

@@ -155,22 +155,39 @@ def delete_review(request, slug, review_id):
 
 
 # __________________________________________________________________________________
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from django.urls import reverse
+
 class AddProject(UserPassesTestMixin, generic.CreateView):
     model = GraduationProject
-    fields = ['title', 'description', 'sub_description', 'graduation_year', 'category', 'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video']  # Include 'doctors'
+    fields = [
+        'title', 'description', 'sub_description', 'graduation_year', 'category', 
+        'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video'
+    ]
     template_name = "add_project.html"
     success_url = '/'  # Use reverse_lazy for success URL
 
     def form_valid(self, form):
-        # Set the leader and status before saving the form
-        form.instance.leader = self.request.user.profile
+        # Check if the leader has already added a project
+        existing_project = GraduationProject.objects.filter(author=self.request.user).exists()
+        if existing_project:
+            # Display an error message at the top of the page
+            messages.error(self.request, 'لقد قمت بإضافة مشروع واحد بالفعل، لا يمكنك إضافة أكثر من مشروع.')
+            # Invalidate the form and stay on the same page
+            return self.form_invalid(form)
+
+        # Set the author and status before saving the form
         form.instance.author = self.request.user
         form.instance.status = 'pending'  # Set status to pending
+
+        # Save the form and get the response
         response = super().form_valid(form)
 
         # Send email notification to the leader
         send_mail(
-            'مشروع جديد للمراجعه',
+            'مشروع تخرج جديد للمراجعه',
             'تم ارسال مشروعك للمشرف للمراجعه انتظر حين قبوله',
             settings.EMAIL_HOST_USER,
             [self.request.user.email],  # Use self.request.user.email
@@ -182,16 +199,14 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
 
         return response  # Return the response after sending the email
 
+
     def get_success_url(self):
-        # Redirect to the success_create_project page
+        # Redirect to the success_create_project page only if the form is valid
         return reverse('project:success_create_project')
-    
+
     def test_func(self):
         # Only allow access if the user is a leader
         return self.request.user.profile.is_leader
-
-
-
 
 # ___________________________________________________________________________________
 

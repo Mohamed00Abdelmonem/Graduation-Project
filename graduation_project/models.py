@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.text import slugify
-
+from datetime import datetime
 User = get_user_model()
 
 
@@ -14,12 +14,26 @@ STATUS_CHOICES = [
         ('rejected', 'Rejected'),
     ]
 
+
+
+# Get the current year
+current_year = datetime.now().year
+
+# Generate the Graduation_Year list dynamically
+Graduation_Year = [(str(year), str(year)) for year in range(2010, current_year + 1)]
+
+
 class GraduationProject(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null= True, related_name="author_project")
     title = models.CharField(max_length=200)
     description = models.TextField()
     sub_description = models.TextField(blank=True, null=True)
-    graduation_year = models.IntegerField()
+    graduation_year = models.CharField(
+        max_length=4,  # Year is a 4-digit number
+        choices=Graduation_Year,
+        default=str(current_year)  # Set the default to the current year
+    )    
+
     status = models.CharField(
         max_length=10,
         choices=STATUS_CHOICES,
