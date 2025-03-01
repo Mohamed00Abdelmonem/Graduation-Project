@@ -99,18 +99,20 @@
                                         <a href="{% url 'project:approve_project' project.id %}" class="btn" style="background-color:rgb(120, 180, 134); color: white; padding: 8px 16px; border: none; border-radius: 4px; text-decoration: none; display: flex; align-items: center;">
                                             <i class="fas fa-check" style="margin-right: 5px;"></i> Approve
                                         </a>
-                                            <form action="{% url 'project:reject_project' project.id %}" method="POST" class="reject-form">
-                                                {% csrf_token %}
-                                                
-                                                <!-- حقل لكتابة سبب الرفض -->
-                                                <div class="mb-3">
-                                                    <label for="rejection_reason_{{ project.id }}" class="form-label">Reason for Rejection:</label>
-                                                    <textarea name="rejection_reason" id="rejection_reason_{{ project.id }}" class="form-control" rows="3" required></textarea>
-                                                </div>
+                                        <a href="{% url 'project:reject_project' project.id %}" class="btn" style="background-color:rgb(158, 78, 102); color: white; padding: 8px 16px; border: none; border-radius: 4px; text-decoration: none; display: flex; align-items: center;">
+                                            <i class="fas fa-check" style="margin-right: 5px;"></i> Reject
+                                        </a>
+                                        
 
-                                                <!-- زر رفض المشروع -->
-                                                <button type="submit" class="btn btn-danger">Reject</button>
-                                            </form>
+                                        <!-- Temporary Reject Form -->
+                                        <form action="{% url 'project:temporary_reject_project' project.id %}" method="POST" class="temporary-reject-form">
+                                            {% csrf_token %}
+                                            <div class="mb-3">
+                                                <label for="temporary_rejection_reason_{{ project.id }}" class="form-label">Reason for Temporary Rejection:</label>
+                                                <textarea name="rejection_reason" id="temporary_rejection_reason_{{ project.id }}" class="form-control" rows="3" required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-warning">Temporary Reject</button>
+                                        </form>
                                             <i class="fas fa-times" style="margin-right: 5px;"></i> Reject
                                         </a>
                                     </div>

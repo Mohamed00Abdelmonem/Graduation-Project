@@ -74,7 +74,7 @@
                                     <a href="{{object.book_pdf.url}}" class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i>
                                         Look inside</a>
                                     {% else %}
-                                    <a href="#" class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i>
+                                    {% comment %} <a href="{{object.book_pdf.url}}" class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i> {% endcomment %}
                                         Look inside</a>
                                     {% endif %}
                                    
@@ -461,7 +461,7 @@
                     <div class="col-xl-3 col-lg-4 col-sm-6">
                         <div class="bj_new_pr_item mb-0 wow fadeInUp" data-wow-delay="0.2s">
                            
-
+                            {% if project.images %}
                             <a href="#" class="img"><img src="{{project.images.url}}" alt="book"></a>
                             <div class="bj_new_pr_content">
                                 <a href="{% url 'project:project_detail' project.slug%}">
@@ -475,6 +475,9 @@
                                 </div>
                                 
                             </div>
+                            {% else %}
+                            {% endif %}
+                           
                         </div>
                     </div>
                 {% endfor %}

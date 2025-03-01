@@ -211,34 +211,29 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
 # ___________________________________________________________________________________
 
 
+
 class UpdateProject(UserPassesTestMixin, generic.UpdateView):
     model = GraduationProject
-    fields = ['title', 'description', 'sub_description', 'graduation_year', 'category', 'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video', 'status']  # اضفت status
+    fields = [
+        'title', 'description', 'sub_description', 'graduation_year', 'category', 
+        'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video'
+    ]
     template_name = "update_project.html"
-    success_url = '/'  # يمكن تغير الرابط لصفحة معينة
+    success_url = ('/accounts/profile/')  # Use reverse_lazy for dynamic URLs
 
     def form_valid(self, form):
+        # Save the form and get the project instance
         response = super().form_valid(form)
         
-        # لو الحالة بقت rejected، نبعت إيميل للطالب اللي قدم المشروع
-        if form.instance.status == 'rejected':
-            send_mail(
-                'مشروعك رُفض',
-                f'للأسف مشروعك "{form.instance.title}" رُفض بسبب السبب التالي: {form.instance.description}',  # اكتب السبب في الوصف
-                settings.EMAIL_HOST_USER,
-                [student.email for student in form.instance.students.all()],  # إرسال لكل الطلاب اللي شاركوا في المشروع
-                fail_silently=False,
-            )
-            messages.warning(self.request, 'تم رفض المشروع بنجاح.')
-        elif form.instance.status == 'accepted':
-            messages.success(self.request, 'تم قبول المشروع بنجاح.')
+        # Update the project status to 'temporary_rejection'
+        self.object.status = 'temporary_rejection'
+        self.object.save()
 
         return response
 
     def test_func(self):
-        # فقط المشرفين أو الأدمن يمكنهم تعديل المشاريع
-        return  self.request.user.profile.is_leader
-
+        # Only leaders or admins can update projects
+        return self.request.user.profile.is_leader
 
 
 # ___________________________________________________________________________________
@@ -286,14 +281,42 @@ def approve_project(request, project_id):
 
 
 
+def reject_project(request, project_id):
+    # Fetch the project based on the ID
+    project = get_object_or_404(GraduationProject, id=project_id)
+    
+    # Update the project status to 'rejected'
+    project.status = 'rejected'
+    project.save()
+
+    # Send an email to the project leader
+    send_mail(
+        subject='تم رفض مشروعك',  # Email subject
+        message=f'تم رفض مشروعك "{project.title}".',  # Email body
+        from_email=settings.EMAIL_HOST_USER,  # Sender email
+        recipient_list=[project.author.email],  # Recipient email
+        fail_silently=False,  # Raise errors if email fails
+    )
+
+    # Add a success message for the supervisor
+    messages.success(request, f'تم رفض مشروع "{project.title}" بنجاح.')
+
+    # Redirect to the previous page or home page
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
-def reject_project(request,project_id):
+
+
+# ___________________________________________________________________________________
+
+
+
+def temporary_reject_project(request,project_id):
         # جلب المشروع بناءً على ID
     project = get_object_or_404(GraduationProject, id=project_id)
 
     # تغيير حالة المشروع لـ "مرفوض"
-    project.status = 'rejected'
+    project.status = 'temporary_rejection'
     project.save()
 
     # جلب سبب الرفض من النموذج
@@ -324,7 +347,7 @@ def reject_project(request,project_id):
     email.send()
     
     # إضافة رسالة نجاح للمشرف
-    messages.success(request, f'تم رفض مشروع "{project.title}" بنجاح.')
+    messages.success(request, f'تم رفض مشروع "{project.title}" بنجاح مؤقتا. ')
 
     # إعادة التوجيه إلى الصفحة السابقة أو الرئيسية
     return redirect(request.META.get('HTTP_REFERER', '/'))
@@ -335,8 +358,7 @@ def reject_project(request,project_id):
 
 
 def pending_projects(request):
-    pending_projects = GraduationProject.objects.filter(status='pending')
-       # Pagination
+    pending_projects = GraduationProject.objects.filter(status__in=['pending', 'temporary_rejection'])       # Pagination
     page = request.GET.get('page', 1)  # Get the current page number from the request
     paginator = Paginator(pending_projects, 15)  # Show 10 projects per page
     try:

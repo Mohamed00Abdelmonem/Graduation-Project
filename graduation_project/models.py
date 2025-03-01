@@ -12,6 +12,7 @@ STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('accepted', 'Accepted'),
         ('rejected', 'Rejected'),
+        ('temporary_rejection', 'Temporary_Rejection'),
     ]
 
 
@@ -35,7 +36,7 @@ class GraduationProject(models.Model):
     )    
 
     status = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=STATUS_CHOICES,
         default='pending',
         db_index=True  # Add this line to create an index

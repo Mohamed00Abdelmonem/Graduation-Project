@@ -40,7 +40,7 @@ After time:
 - page not found 
 - show all details or links for project_deatil like (github and another links)
 - add to favorite (wishlist)
-- profile user  done 
+- profile user  (done) 
 - simple Dashboard
 - custom admin panel
-- update project after submited and if reject this project by emplyee send in email why reson rejected 
+- update project after submited and if reject this project by emplyee send in email why reson rejected  (done)
