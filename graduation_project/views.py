@@ -211,6 +211,10 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
 # ___________________________________________________________________________________
 
 
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.views import generic
+from .models import GraduationProject
 
 class UpdateProject(UserPassesTestMixin, generic.UpdateView):
     model = GraduationProject
@@ -219,28 +223,40 @@ class UpdateProject(UserPassesTestMixin, generic.UpdateView):
         'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video'
     ]
     template_name = "update_project.html"
-    success_url = ('/accounts/profile/')  # Use reverse_lazy for dynamic URLs
+    success_url = reverse_lazy('profile')  # Use reverse_lazy for dynamic URLs
 
     def form_valid(self, form):
         # Save the form and get the project instance
         response = super().form_valid(form)
         
-        # Update the project status to 'temporary_rejection'
-        self.object.status = 'temporary_rejection'
+        # Update the project status to 'pending' after editing
+        self.object.status = 'pending'
         self.object.save()
 
         return response
 
     def test_func(self):
-        # Only leaders or admins can update projects
-        return self.request.user.profile.is_leader
-
+        # Only the project author (leader) or staff members can update projects
+        project = self.get_object()
+        return self.request.user == project.author or self.request.user.is_staff
 
 # ___________________________________________________________________________________
 
 
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
+from .models import GraduationProject
 
 def approve_project(request, project_id):
+    # التحقق من أن المستخدم موظف (is_staff)
+    if not request.user.is_staff:
+        messages.error(request, 'غير مصرح لك بتنفيذ هذا الإجراء.')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
     # جلب المشروع بناءً على ID
     project = get_object_or_404(GraduationProject, id=project_id)
 
@@ -254,8 +270,10 @@ def approve_project(request, project_id):
 
     # إنشاء النصوص (HTML وPLAIN)
     context = {
-        'project_title': project.title,
-    }
+    'project_title': project.title,
+    'approval_date': project.updated_at.strftime('%Y-%m-%d'),
+    'project_url': request.build_absolute_uri(project.get_absolute_url()),
+}
 
     # استخدم قالب HTML للإيميل
     html_content = render_to_string('emails/approve_project_email.html', context)
@@ -356,11 +374,25 @@ def temporary_reject_project(request,project_id):
 
 
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+from .models import GraduationProject
 
 def pending_projects(request):
-    pending_projects = GraduationProject.objects.filter(status__in=['pending', 'temporary_rejection'])       # Pagination
+    # Get the status filter from the request (default to 'pending' if not provided)
+    status_filter = request.GET.get('status', 'pending')
+
+    # Filter projects based on the selected status
+    if status_filter == 'all':
+        pending_projects = GraduationProject.objects.filter(status__in=['pending', 'temporary_rejection'])
+    elif status_filter == 'temporary_rejection':
+        pending_projects = GraduationProject.objects.filter(status='temporary_rejection')
+    else:
+        pending_projects = GraduationProject.objects.filter(status='pending')
+
+    # Pagination
     page = request.GET.get('page', 1)  # Get the current page number from the request
-    paginator = Paginator(pending_projects, 15)  # Show 10 projects per page
+    paginator = Paginator(pending_projects, 15)  # Show 15 projects per page
     try:
         paginated_projects = paginator.page(page)
     except PageNotAnInteger:
@@ -368,9 +400,11 @@ def pending_projects(request):
     except EmptyPage:
         paginated_projects = paginator.page(paginator.num_pages)  # If page is out of range, deliver last page
 
-
-    return render(request, 'pending_projects.html', {'projects': pending_projects , "projects": paginated_projects })
-
+    # Pass the filtered projects and status filter to the template
+    return render(request, 'pending_projects.html', {
+        'projects': paginated_projects,
+        'status_filter': status_filter,
+    })
 # ___________________________________________________________________________________
 
 

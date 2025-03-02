@@ -10,6 +10,10 @@ from django.forms.widgets import DateInput
 class ExcelUploadForm(forms.Form):
     excel_file = forms.FileField(label="رفع ملف Excel")
 
+
+
+
+
 class NationalIDLoginForm(forms.Form):
     national_id = forms.CharField(label='National ID', max_length=14, widget=forms.TextInput(attrs={
         'class': 'form-control',

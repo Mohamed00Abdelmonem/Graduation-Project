@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
+
 from datetime import datetime
 User = get_user_model()
 
@@ -72,6 +74,10 @@ class GraduationProject(models.Model):
     view_count = models.PositiveIntegerField(default=0)  # Added field
     slug = models.SlugField(unique=True, null=True, blank=True)
 
+
+    def get_absolute_url(self):
+        # استخدم slug بدلاً من id
+        return reverse('project:project_detail', args=[self.slug])
     
     def get_lat_lng(self):
         """Extract latitude and longitude from the location field."""
