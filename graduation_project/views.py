@@ -251,6 +251,7 @@ from django.utils.html import strip_tags
 from django.conf import settings
 from .models import GraduationProject
 
+
 def approve_project(request, project_id):
     # التحقق من أن المستخدم موظف (is_staff)
     if not request.user.is_staff:
@@ -260,6 +261,12 @@ def approve_project(request, project_id):
     # جلب المشروع بناءً على ID
     project = get_object_or_404(GraduationProject, id=project_id)
 
+   
+    # التحقق من وجود author و email
+    if not project.author or not hasattr(project.author, 'email') or not project.author.email:
+        messages.error(request, 'لا يمكن إرسال بريد إلكتروني لأن البريد الإلكتروني للقائد غير متوفر.')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+    
     # تغيير حالة المشروع لـ "مقبول"
     project.status = 'accepted'
     project.save()
@@ -270,10 +277,10 @@ def approve_project(request, project_id):
 
     # إنشاء النصوص (HTML وPLAIN)
     context = {
-    'project_title': project.title,
-    'approval_date': project.updated_at.strftime('%Y-%m-%d'),
-    'project_url': request.build_absolute_uri(project.get_absolute_url()),
-}
+        'project_title': project.title,
+        'approval_date': project.updated_at.strftime('%Y-%m-%d'),
+        'project_url': request.build_absolute_uri(project.get_absolute_url()),
+    }
 
     # استخدم قالب HTML للإيميل
     html_content = render_to_string('emails/approve_project_email.html', context)
@@ -294,54 +301,76 @@ def approve_project(request, project_id):
 
     # إعادة التوجيه إلى الصفحة السابقة أو الرئيسية
     return redirect(request.META.get('HTTP_REFERER', '/'))
-
 # ___________________________________________________________________________________
 
 
-
 def reject_project(request, project_id):
-    # Fetch the project based on the ID
+    # جلب المشروع بناءً على ID
     project = get_object_or_404(GraduationProject, id=project_id)
-    
-    # Update the project status to 'rejected'
+
+   
+
+    # التحقق من وجود author و email
+    if not project.author or not hasattr(project.author, 'email') or not project.author.email:
+        messages.error(request, 'لا يمكن إرسال بريد إلكتروني لأن البريد الإلكتروني للقائد غير متوفر.')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+    # تغيير حالة المشروع لـ "مرفوض"
     project.status = 'rejected'
     project.save()
+    # تحديد البيانات الأساسية
+    subject = 'تم رفض مشروعك'
+    to_email = [project.author.email]  # البريد الإلكتروني للقائد
 
-    # Send an email to the project leader
-    send_mail(
-        subject='تم رفض مشروعك',  # Email subject
-        message=f'تم رفض مشروعك "{project.title}".',  # Email body
-        from_email=settings.EMAIL_HOST_USER,  # Sender email
-        recipient_list=[project.author.email],  # Recipient email
-        fail_silently=False,  # Raise errors if email fails
+    # إنشاء النصوص (HTML وPLAIN)
+    context = {
+        'project_title': project.title,
+    }
+
+    # استخدم قالب HTML للإيميل
+    html_content = render_to_string('emails/reject_project_email.html', context)
+    text_content = strip_tags(html_content)  # نسخة نصية بسيطة من الإيميل
+
+    # إنشاء الرسالة
+    email = EmailMultiAlternatives(
+        subject=subject,
+        body=text_content,
+        from_email=settings.EMAIL_HOST_USER,
+        to=to_email
     )
+    email.attach_alternative(html_content, "text/html")  # إضافة النسخة HTML
+    email.send()
 
-    # Add a success message for the supervisor
+    # إضافة رسالة نجاح للمشرف
     messages.success(request, f'تم رفض مشروع "{project.title}" بنجاح.')
 
-    # Redirect to the previous page or home page
+    # إعادة التوجيه إلى الصفحة السابقة أو الرئيسية
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 
-
 # ___________________________________________________________________________________
 
 
-
-def temporary_reject_project(request,project_id):
-        # جلب المشروع بناءً على ID
+def temporary_reject_project(request, project_id):
+    # جلب المشروع بناءً على ID
     project = get_object_or_404(GraduationProject, id=project_id)
 
-    # تغيير حالة المشروع لـ "مرفوض"
-    project.status = 'temporary_rejection'
-    project.save()
+    
 
     # جلب سبب الرفض من النموذج
     rejection_reason = request.POST.get('rejection_reason', 'لم يتم تحديد سبب')
 
+    # التحقق من وجود author و email
+    if not project.author or not hasattr(project.author, 'email') or not project.author.email:
+        messages.error(request, 'لا يمكن إرسال بريد إلكتروني لأن البريد الإلكتروني للقائد غير متوفر.')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+    
+    # تغيير حالة المشروع لـ "مرفوض مؤقتًا"
+    project.status = 'temporary_rejection'
+    project.save()
+    
     # تحديد البيانات الأساسية
-    subject = 'تم رفض مشروعك'
+    subject = 'تم رفض مشروعك مؤقتًا'
     to_email = [project.author.email]  # البريد الإلكتروني للقائد
 
     # إنشاء النصوص (HTML وPLAIN)
@@ -363,12 +392,13 @@ def temporary_reject_project(request,project_id):
     )
     email.attach_alternative(html_content, "text/html")  # إضافة النسخة HTML
     email.send()
-    
+
     # إضافة رسالة نجاح للمشرف
-    messages.success(request, f'تم رفض مشروع "{project.title}" بنجاح مؤقتا. ')
+    messages.success(request, f'تم رفض مشروع "{project.title}" بنجاح مؤقتًا.')
 
     # إعادة التوجيه إلى الصفحة السابقة أو الرئيسية
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
 
 # _______________________________________________________
 
