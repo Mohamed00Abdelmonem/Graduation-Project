@@ -76,6 +76,8 @@ INTERNAL_IPS = [
     '127.0.0.1',  # Add your local IP address here
 ]
 
+# for show pdf
+X_FRAME_OPTIONS = "ALLOW-FROM http://127.0.0.1:8000"
 
 
 MIDDLEWARE = [

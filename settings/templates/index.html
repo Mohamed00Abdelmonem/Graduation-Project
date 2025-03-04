@@ -13,33 +13,19 @@
                             <div class="offer_text wow fadeInUp">
                                 {% if user.is_authenticated %}
 
-                                    Welcome <span>{{user.first_name}}</span>
+                                    مرحبا <span>{{user.first_name}}</span>
                                     {% endif %}
                             </div>
                             <h2 class="wow fadeInUp" data-wow-delay="0.2s">
-                                You can see All Gradution Projects MET Acadmy
+                                يمكنك رؤية جميع مشاريع التخرج التابعه لمعهد مصر العالي للحاسبات والمعلومات بالمنصوره
                             </h2>
-                            {% comment %} <p class="wow fadeInUp" data-wow-delay="0.4s">
-                                Unleash your imagination with epic fantasy sagas, mystical
-                                adventures, and tales of otherworldly realms. Embark on quests
-                                with heroes.
-                            </p> {% endcomment %}
-                            {% comment %} <div class="d-flex">
-                                <a href="/accounts/login" class="bj_theme_btn wow fadeInLeft" data-wow-delay="0.2s">
-                                    Login</a>
-                                <a href="#product_tab_showcase_id" class="bj_theme_btn strock_btn wow fadeInLeft" data-wow-delay="0.3s">
-                                    Signup</a>
-                            </div> {% endcomment %}
+                             <p class="wow fadeInUp" data-wow-delay="0.4s">
+                                اقراء وشاهد ما صنعه طلاب اكادمية معهد مصر من ابداع في انشاء وصناعة المشاريع التخرج الخاص بهم.
+                            </p>
                             <div class="d-flex community_info_wrapper wow fadeInUp" data-wow-delay="0.4s">
                                 <div class="community_info">
-                                    <h5>Our Community</h5>
+                                    <h5>مجتمعنا</h5>
                                     <div class="people_img">
-                                        <div class="avater_img">
-                                            <img src="{% static '.img/home/avater_one.png' %}" alt="" />
-                                        </div>
-                                        <div class="avater_img">
-                                            <img src="{% static '.img/home/avater2.png' %}" alt="" />
-                                        </div>
                                         <div class="avater_img">
                                             <img src="{% static 'img/home/avater3.png' %}" alt="" />
                                         </div>
@@ -53,26 +39,14 @@
                                 </div>
                                 <div class="community_info_number">
                                     <div class="number"><span class="counter">{{all_users.count}}</span>+</div>
-                                    <p>Book Readers </p>
+                                    <p>قراء الكتب </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                            <div class="bj_banner_img">
-                                <img class="wow fadeInRight" data-wow-delay="0.10s" src="{% static 'img/boy.png' %}" alt="" />                          
-                            <div class="shape_one">
-                                <img class="layer" data-depth="-0.15" src="{% static 'img/home/star-one.png' %}" alt="" />
-                            </div>
-                            <div class="shape_two">
-                                <img class="layer" data-depth="-0.25" src="{% static 'img/home/star-two.png' %}" alt="" />
-                            </div>
-                            <div class="shape_three">
-                                <img class="layer" data-depth="-0.15" src="{% static 'img/home/round.png' %}" alt="" />
-                            </div>
-                            <div class="shape_four">
-                                {% comment %} <img src="{% static 'img/home/dot.png' %}" alt="" /> {% endcomment %}
-                            </div>
+                    <div class="col-lg-6 pt-3">
+                            <div class="bj_banner_img pt-5">
+                                <img class="wow fadeInRight" data-wow-delay="0.10s" src="{% static 'img/logo.avif' %}" alt="" />                          
                         </div>
                     </div>
                 </div>
@@ -81,33 +55,33 @@
         <!-- banner area  -->
 
         <!-- product tab showcase area  -->
-        <section class="product_tab_showcase_area sec_padding" id="product_tab_showcase_id">
+        <section class="product_tab_showcase_area sec_padding p-1" id="product_tab_showcase_id">
             <div class="container">
                 <div class="section_title wow fadeInUp">
-                    <h2 class="title title_two">Filter By Doctors</h2>
+                    <h2 class="title title_two">تصنيف حسب الدكتور</h2>
                 </div>
                 <div class="row wow fadeInUp" data-wow-delay="0.2s">
                     {% comment %} <div class="row"> {% endcomment %}
                         <div class="col-lg-4">
-                            <ul class="nav nav-pills flex-column" id="doctor-tabs" role="tablist">
+                            <ul class="nav nav-pills flex-column" style='cursor: pointer;' id="doctor-tabs" role="tablist">
                                 {% for doctor in doctors %}
                                     <li role="presentation" class="nav-item">
-                                        <a class="nav-link {% if forloop.first %}active{% endif %}" 
+                                        <a class="nav-link disable {% if forloop.first %}active{% endif %}" 
                                            id="tab-{{ doctor.user.id }}" 
                                            data-bs-toggle="pill" 
                                            data-bs-target="#doctor-{{ doctor.user.id }}" 
                                            role="tab" 
                                            aria-controls="doctor-{{ doctor.user.id }}" 
                                            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
-                                            <strong>{{ doctor.user.username }}</strong> 
-                                            <span>({{ doctor.book_count }} Books)</span>
+                                           <span>({{ doctor.book_count }} مشروع)</span>
+                                           <strong>{{ doctor.user.username }}</strong> 
                                         </a>
                                     </li>
                                 {% endfor %}
                             </ul>
                         </div>
                         
-                        <div class="col-lg-8">
+                        <div class="col-lg-8" dir="ltr">
                             <div class="tab-content" id="doctor-content">
                                 {% for doctor in doctors %}
                                     <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" 
@@ -117,11 +91,11 @@
                                         <div class="tab_slider_content slick_slider_tab">
                                             {% for project in doctor.user.doctor_projects.all %}
                                                 <div class="item">
-                                                    <div class="bj_new_pr_item">
+                                                    <div class="bj_new_pr_item" style="height: 420px;">
                                                         <a href="product-single.html" class="img">
                                                             <a href="{% url 'project:project_detail' project.slug %}">
                                                                 {% if project.images %}
-                                                                    <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 200px; height: 200px;" />
+                                                                    <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
                                                                 {% else %}
                                                                     <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 200px; height: 200px;" />
                                                                 {% endif %}
@@ -138,12 +112,12 @@
                                                                 <p>created: {{project.created_at|timesince }} ago </p><sup></sup> <!-- Adjust as needed -->
                                                             </div>
                                                             
-                                                            <a href="{% url 'project:project_detail' project.slug %}" class="bj_theme_btn">show</a>
+                                                            <a href="{% url 'project:project_detail' project.slug %}" class="bj_theme_btn">مشاهدة المزيد</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             {% empty %}
-                                                <p>No projects available for this doctor.</p>
+                                                <p>لا توجد مشاريع متاحة لهذا الدكتور.</p>
                                             {% endfor %}
                                         </div>
                                     </div>
@@ -156,19 +130,18 @@
         </section>
         <!-- product tab showcase area  -->
 
-
         <!-- best selling product area  -->
-        <section class="best_selling_pr_area sec_padding" data-bg-color="#f5f5f5">
+        <section class="best_selling_pr_area pb-4" data-bg-color="#f5f5f5">
             <div class="container">
-                <div class="section_title section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 class="title title_two">Latest 10 Projects</h2>
-                    <p>Reading books helps you to develop your communication skill</p>
+                <div class="section_title mb-0 section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
+                    <h2 class="title title_two">أحدث 10 مشاريع</h2>
+                    <p>قراءة الكتب تساعدك على تطوير مهارات التواصل لديك</p>
                 </div>
                 <div class="row">
                     {% for project in  projects_main %}
                 
-                        <div class="col-xl-4 col-md-6">
-                            <div class="bj_new_pr_item_two d-flex wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="bj_new_pr_item_two d-flex flex-column wow fadeInUp" style="height: 420px;" data-wow-delay="0.2s">
                                 {% if project.images %}
                                 <a href="{% url 'project:project_detail' project.slug %}" class="img"><img src="{{project.images.url}}" alt="book" /></a>
                                 {% else %}
@@ -179,714 +152,26 @@
                                     <a href="{% url 'project:project_detail' project.slug %}">
                                         <h4 class="bj_new_pr_title">{{project}}</h4>
                                     </a>
-                                    <div class="writer_name">By DR:<a href="author-single.html"> {{project.doctor}} </a></div>
-                                    <div class="book_price"><sup>Graduation Year {{project.graduation_year}}</sup></div>
-                                    <a href="checkout.html" class="bj_theme_btn">Detail</a>
+                                    <div class="writer_name"> بواسطة د:<a href="author-single.html"> {{project.doctor}} </a> </div>
+                                    <div class="book_price"><sup>سنة التخرج  {{project.graduation_year}}</sup></div>
+                                    <a href="{% url 'project:project_detail' project.slug %}" class="bj_theme_btn">معرفة المزيد</a>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
-                <div class="text-center mt-4">
-                    <a href="{% url 'project:ProjectList'%}" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">View All</a>
+                <div class="text-center">
+                    <a href="{% url 'project:ProjectList'%}" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp mt-0 " data-wow-delay="0.4s">مشاهدة المزيد من المشاريع</a>
                 </div>
             </div>
         </section>
 
-
-
-
-{% comment %}
-        <section class="best_selling_pr_area sec_padding">
-             <div class="container">
-                <div class="section_title section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 class="title title_two">Peoples Choice</h2>
-                    <p>Reading books helps you to develop your communication skill</p>
-                </div>
-
-                <ul class="nav nav-pills best_pr_tab d-flex justify-content-center wow fadeInUp" data-wow-delay="0.4s" id="pills-tab" role="tablist">
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link px-0 active" id="pills-best-tab" data-bs-toggle="pill" data-bs-target="#pills-best" role="tab" aria-controls="pills-best" aria-selected="true">
-                            BEST SELLING BOOKS</a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link px-0" id="pills-offer-tab" data-bs-toggle="pill" data-bs-target="#pills-offer" role="tab" aria-controls="pills-offer" aria-selected="false">OFFER</a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link px-0" id="pills-featured-tab" data-bs-toggle="pill" data-bs-target="#pills-featured" role="tab" aria-controls="pills-featured" aria-selected="false">FEATURED BOOKS</a>
-                    </li>
-                    <li role="presentation" class="nav-item">
-                        <a class="nav-link px-0" id="pills-trending-tab" data-bs-toggle="pill" data-bs-target="#pills-trending" role="tab" aria-controls="pills-trending" aria-selected="false">TRENDING</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-best" role="tabpanel" aria-labelledby="pills-best-tab">
-                        <div class="best_slider">
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-4.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Echoes of Eternity</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-2.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">I Must Betray You</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Muaz Bin</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-3.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">How To Babysit A..</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-1.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Surprisingly Sarah</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-2.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Surprisingly Sarah</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade explore-menu" id="pills-offer" role="tabpanel" aria-labelledby="pills-offer-tab">
-                        <div class="best_slider">
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-3.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Echoes of Eternity</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-4.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">I Must Betray You</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-1.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">How To Babysit A..</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-2.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Surprisingly Sarah</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-3.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Surprisingly Sarah</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade explore-menu" id="pills-featured" role="tabpanel" aria-labelledby="pills-featured-tab">
-                        <div class="best_slider">
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-4.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Echoes of Eternity</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-3.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">I Must Betray You</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-1.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">How To Babysit A..</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-4.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Surprisingly Sarah</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-1.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Surprisingly Sarah</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade explore-menu" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
-                        <div class="best_slider">
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-2.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Echoes of Eternity</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-3.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">I Must Betray You</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-4.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">How To Babysit A..</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-1.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Surprisingly Sarah</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="bj_new_pr_item">
-                                    <a href="product-single.html" class="img">
-                                        <img src="{% static 'img/home/choice-2.png' %}" alt="book" />
-                                    </a>
-                                    <a href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" class="wish_btn" tabindex="-1"><i class="icon_heart_alt"></i></a>
-                                    <div class="bj_new_pr_content_two">
-                                        <div class="d-flex justify-content-between">
-                                            <a href="product-single.html">
-                                                <h4 class="bj_new_pr_title">Surprisingly Sarah</h4>
-                                            </a>
-                                            <div class="book_price">
-                                                <sup>$</sup>25<sup>.00</sup>
-                                            </div>
-                                        </div>
-                                        <div class="writer_name">
-                                            <i class="icon-user"></i><a href="author-single.html">Rick Riordan</a>
-                                        </div>
-                                        <div class="ratting">
-                                            <div class="ratting_icon">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <span>(252)</span>
-                                        </div>
-                                        <a href="checkout.html" class="bj_theme_btn">Buy Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        </section> {% endcomment %}
-        <!-- best selling product area  -->
-
         <!-- new product area  -->
-        <section class="bj_new_product_area sec_padding" data-bg-color="#f5f5f5">
+        <section class="bj_new_product_area pt-4" data-bg-color="#f5f5f5">
             <div class="container">
                 <div class="section_title section_title_two text-center">
-                    <h2 class="title title_two">Most Poupler Projects have likes </h2>
-                    <p>Reading books helps you to develop your communication skill</p>
+                    <h2 class="title title_two">معظم مشاريع المشهوره لها إعجابات </h2>
+                    <p>قراءة الكتب تساعدك على تطوير مهارات التواصل لديك</p>
                 </div>
                 <div id="clockdiv" class="clock" data-date="2024-12-02"></div>
                 <div class="row">
@@ -894,9 +179,8 @@
                     
                     {% for project in   top_liked_projects %}
 
-                        <div class="col-xl-3 col-lg-4 col-sm-6">
-                            <div class="bj_new_pr_item wow fadeInUp" data-wow-delay="0.2s">
-                                <div class="ribon">👍🏻 {{project.likes.count}}</div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-20" style="height:350px">
+                            <div class="bj_new_pr_item wow fadeInUp h-100" data-wow-delay="0.2s">
                                 {% if project.images %}
 
                                 <a href="{% url 'project:project_detail' project.slug %}" class="img"><img src="{{project.images.url}}" alt="book" /></a>
@@ -908,10 +192,10 @@
                                         <h4 class="bj_new_pr_title">{{project}}</h4>
                                     </a>
                                     <div class="bj_pr_meta">
-                                        <div class="writer_name">by <a href="author-single.html">Dr: {{project.doctor}} </a></div>
-                                        <div class="book_price mt-2">
+                                        <div class="writer_name">بواسطة د / <a href="author-single.html"> {{project.doctor}} </a></div>
+                                        <div class="book_price mt-2 justify-content-around">
                                             👁️ {{project.view_count|intcomma}}
-                                            {% comment %} <del class="me-2">350</del> $125 {% endcomment %}
+                                            <div class="ribon"><i class="fa-solid fa-thumbs-up"></i> {{project.likes.count}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -922,581 +206,13 @@
 
                 </div>
                 <div class="text-center mt-4">
-                    <a href="{% url 'project:ProjectList'%}" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">View All</a>
+                    <a href="{% url 'project:ProjectList'%}" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">مشاهدة المزيد </a>
                 </div>
             </div>
         </section>
         <!-- new product area  -->
 
         <!-- product featured author area  -->
-
-
-
-
-        {% comment %} <section class="pr_featured_author_area sec_padding">
-            <div class="container">
-                <div class="section_title">
-                    <h2 class="title title_two">Featured Author Of Month</h2>
-                </div>
-
-                <div class="row">
-                    <div class="col-xl-4">
-                        <div class="nav nav-pills tab_slider_thumb" id="pills-tab-two" role="tablist">
-                            <a class="nav-link active" id="pills-functional-tab" data-bs-toggle="pill" data-bs-target="#pills-functional" role="tab" aria-controls="pills-functional" aria-selected="true">
-                                <strong>Fictional</strong></a>
-
-                            <a class="nav-link" id="pills-non-tab" data-bs-toggle="pill" data-bs-target="#pills-non" role="tab" aria-controls="pills-non" aria-selected="false"><strong>Non
-                                    Fictional</strong></a>
-
-                            <a class="nav-link" id="pills-religious-tab" data-bs-toggle="pill" data-bs-target="#pills-religious" role="tab" aria-controls="pills-religious" aria-selected="false"><strong>Religious</strong></a>
-
-                            <a class="nav-link" id="pills-academic-tab" data-bs-toggle="pill" data-bs-target="#pills-academic" role="tab" aria-controls="pills-academic" aria-selected="false"><strong>Academic Books</strong></a>
-
-                            <a class="nav-link" id="pills-career-tab" data-bs-toggle="pill" data-bs-target="#pills-career" role="tab" aria-controls="pills-career" aria-selected="false">
-                                <strong>Career Guideline</strong></a>
-
-                            <a class="nav-link" id="pills-philosophys-tab" data-bs-toggle="pill" data-bs-target="#pills-philosophys" role="tab" aria-controls="pills-philosophys" aria-selected="false"><strong>Philosophy</strong></a>
-
-                            <a class="nav-link" id="pills-poetry-tab" data-bs-toggle="pill" data-bs-target="#pills-poetry" role="tab" aria-controls="pills-poetry" aria-selected="false"><strong>Poetry</strong></a>
-
-                            <a class="nav-link" id="pills-sufism-tab" data-bs-toggle="pill" data-bs-target="#pills-sufism" role="tab" aria-controls="pills-sufism" aria-selected="false"><strong>Sufism</strong></a>
-
-                            <a class="nav-link" id="pills-novel-tab" data-bs-toggle="pill" data-bs-target="#pills-novel" role="tab" aria-controls="pills-novel" aria-selected="false"><strong>Novel</strong></a>
-                        </div>
-                    </div>
-                    <div class="col-xl-8">
-                        <div class="tab-arrow-controls">
-                            <button class="tab-arrow prev-tab">
-                                <i class="arrow_carrot-left"></i>
-                            </button>
-                            <button class="tab-arrow next-tab">
-                                <i class="arrow_carrot-right"></i>
-                            </button>
-                        </div>
-                        <div class="tab-content" id="pills-tabContent-three">
-                            <div class="tab-pane fade show active" id="pills-functional" role="tabpanel" aria-labelledby="pills-functional-tab">
-                                <div class="tab_slider_content">
-                                    <div class="bj_author_single d-flex align-items-center">
-                                        <img src="{% static 'img/home/author.jpg' %}" alt="" />
-                                        <div class="bj_author_single_content">
-                                            <h2>Gustavo Carder</h2>
-                                            <p>
-                                                Diam, urna, ornare leo facilisis suspendisse eu rutrum
-                                                id augue cursus tincidunt nisl eget ornare pharetra ac
-                                                pharetra, pulvinar ipsum.
-                                            </p>
-                                            <ul class="book_info">
-                                                <li><span>Position:</span> Book Writer</li>
-                                                <li><span>Book Count:</span>23</li>
-                                                <li><span>Born:</span>1973</li>
-                                                <li>
-                                                    <span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a>
-                                                </li>
-                                                <li>
-                                                    <span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled f_social_round">
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-reddit"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-quora"></i></a>
-                                                </li>
-                                            </ul>
-                                            <a href="author-single.html" class="bj_theme_btn text_btn">More Details<i class="arrow_right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="pills-non" role="tabpanel" aria-labelledby="pills-non-tab">
-                                <div class="tab_slider_content">
-                                    <div class="bj_author_single d-flex align-items-center">
-                                        <img src="{% static 'img/home/author-9.jpg' %}" alt="" />
-                                        <div class="bj_author_single_content">
-                                            <h2>Gustavo Carder</h2>
-                                            <p>
-                                                Diam, urna, ornare leo facilisis suspendisse eu rutrum
-                                                id augue cursus tincidunt nisl eget ornare pharetra ac
-                                                pharetra, pulvinar ipsum.
-                                            </p>
-                                            <ul class="book_info">
-                                                <li><span>Position:</span> Book Writer</li>
-                                                <li><span>Book Count:</span>23</li>
-                                                <li><span>Born:</span>1973</li>
-                                                <li>
-                                                    <span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a>
-                                                </li>
-                                                <li>
-                                                    <span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled f_social_round">
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-reddit"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-quora"></i></a>
-                                                </li>
-                                            </ul>
-                                            <a href="author-single.html" class="bj_theme_btn text_btn">More Details<i class="arrow_right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="pills-religious" role="tabpanel" aria-labelledby="pills-religious-tab">
-                                <div class="tab_slider_content">
-                                    <div class="bj_author_single d-flex align-items-center">
-                                        <img src="{% static 'img/home/author-2.jpg' %}" alt="" />
-                                        <div class="bj_author_single_content">
-                                            <h2>Gustavo Carder</h2>
-                                            <p>
-                                                Diam, urna, ornare leo facilisis suspendisse eu rutrum
-                                                id augue cursus tincidunt nisl eget ornare pharetra ac
-                                                pharetra, pulvinar ipsum.
-                                            </p>
-                                            <ul class="book_info">
-                                                <li><span>Position:</span> Book Writer</li>
-                                                <li><span>Book Count:</span>23</li>
-                                                <li><span>Born:</span>1973</li>
-                                                <li>
-                                                    <span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a>
-                                                </li>
-                                                <li>
-                                                    <span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled f_social_round">
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-reddit"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-quora"></i></a>
-                                                </li>
-                                            </ul>
-                                            <a href="author-single.html" class="bj_theme_btn text_btn">More Details<i class="arrow_right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-academic" role="tabpanel" aria-labelledby="pills-religious-tab">
-                                <div class="tab_slider_content">
-                                    <div class="bj_author_single d-flex align-items-center">
-                                        <img src="{% static 'img/home/author-3.jpg' %}" alt="" />
-                                        <div class="bj_author_single_content">
-                                            <h2>Gustavo Carder</h2>
-                                            <p>
-                                                Diam, urna, ornare leo facilisis suspendisse eu rutrum
-                                                id augue cursus tincidunt nisl eget ornare pharetra ac
-                                                pharetra, pulvinar ipsum.
-                                            </p>
-                                            <ul class="book_info">
-                                                <li><span>Position:</span> Book Writer</li>
-                                                <li><span>Book Count:</span>23</li>
-                                                <li><span>Born:</span>1973</li>
-                                                <li>
-                                                    <span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a>
-                                                </li>
-                                                <li>
-                                                    <span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled f_social_round">
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-reddit"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-quora"></i></a>
-                                                </li>
-                                            </ul>
-                                            <a href="author-single.html" class="bj_theme_btn text_btn">More Details<i class="arrow_right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-career" role="tabpanel" aria-labelledby="pills-religious-tab">
-                                <div class="tab_slider_content">
-                                    <div class="bj_author_single d-flex align-items-center">
-                                        <img src="{% static 'img/home/author-4.jpg' %}" alt="" />
-                                        <div class="bj_author_single_content">
-                                            <h2>Gustavo Carder</h2>
-                                            <p>
-                                                Diam, urna, ornare leo facilisis suspendisse eu rutrum
-                                                id augue cursus tincidunt nisl eget ornare pharetra ac
-                                                pharetra, pulvinar ipsum.
-                                            </p>
-                                            <ul class="book_info">
-                                                <li><span>Position:</span> Book Writer</li>
-                                                <li><span>Book Count:</span>23</li>
-                                                <li><span>Born:</span>1973</li>
-                                                <li>
-                                                    <span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a>
-                                                </li>
-                                                <li>
-                                                    <span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled f_social_round">
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-reddit"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-quora"></i></a>
-                                                </li>
-                                            </ul>
-                                            <a href="author-single.html" class="bj_theme_btn text_btn">More Details<i class="arrow_right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-philosophys" role="tabpanel" aria-labelledby="pills-religious-tab">
-                                <div class="tab_slider_content">
-                                    <div class="bj_author_single d-flex align-items-center">
-                                        <img src="{% static 'img/home/author-5.jpg' %}" alt="" />
-                                        <div class="bj_author_single_content">
-                                            <h2>Gustavo Carder</h2>
-                                            <p>
-                                                Diam, urna, ornare leo facilisis suspendisse eu rutrum
-                                                id augue cursus tincidunt nisl eget ornare pharetra ac
-                                                pharetra, pulvinar ipsum.
-                                            </p>
-                                            <ul class="book_info">
-                                                <li><span>Position:</span> Book Writer</li>
-                                                <li><span>Book Count:</span>23</li>
-                                                <li><span>Born:</span>1973</li>
-                                                <li>
-                                                    <span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a>
-                                                </li>
-                                                <li>
-                                                    <span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled f_social_round">
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-reddit"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-quora"></i></a>
-                                                </li>
-                                            </ul>
-                                            <a href="author-single.html" class="bj_theme_btn text_btn">More Details<i class="arrow_right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-poetry" role="tabpanel" aria-labelledby="pills-religious-tab">
-                                <div class="tab_slider_content">
-                                    <div class="bj_author_single d-flex align-items-center">
-                                        <img src="{% static 'img/home/author-6.jpg' %}" alt="" />
-                                        <div class="bj_author_single_content">
-                                            <h2>Gustavo Carder</h2>
-                                            <p>
-                                                Diam, urna, ornare leo facilisis suspendisse eu rutrum
-                                                id augue cursus tincidunt nisl eget ornare pharetra ac
-                                                pharetra, pulvinar ipsum.
-                                            </p>
-                                            <ul class="book_info">
-                                                <li><span>Position:</span> Book Writer</li>
-                                                <li><span>Book Count:</span>23</li>
-                                                <li><span>Born:</span>1973</li>
-                                                <li>
-                                                    <span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a>
-                                                </li>
-                                                <li>
-                                                    <span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled f_social_round">
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-reddit"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-quora"></i></a>
-                                                </li>
-                                            </ul>
-                                            <a href="author-single.html" class="bj_theme_btn text_btn">More Details<i class="arrow_right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-sufism" role="tabpanel" aria-labelledby="pills-religious-tab">
-                                <div class="tab_slider_content">
-                                    <div class="bj_author_single d-flex align-items-center">
-                                        <img src="{% static 'img/home/author-7.jpg' %}" alt="" />
-                                        <div class="bj_author_single_content">
-                                            <h2>Gustavo Carder</h2>
-                                            <p>
-                                                Diam, urna, ornare leo facilisis suspendisse eu rutrum
-                                                id augue cursus tincidunt nisl eget ornare pharetra ac
-                                                pharetra, pulvinar ipsum.
-                                            </p>
-                                            <ul class="book_info">
-                                                <li><span>Position:</span> Book Writer</li>
-                                                <li><span>Book Count:</span>23</li>
-                                                <li><span>Born:</span>1973</li>
-                                                <li>
-                                                    <span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a>
-                                                </li>
-                                                <li>
-                                                    <span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled f_social_round">
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-reddit"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-quora"></i></a>
-                                                </li>
-                                            </ul>
-                                            <a href="author-single.html" class="bj_theme_btn text_btn">More Details<i class="arrow_right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-novel" role="tabpanel" aria-labelledby="pills-religious-tab">
-                                <div class="tab_slider_content">
-                                    <div class="bj_author_single d-flex align-items-center">
-                                        <img src="{% static 'img/home/author-8.jpg' %}" alt="" />
-                                        <div class="bj_author_single_content">
-                                            <h2>Gustavo Carder</h2>
-                                            <p>
-                                                Diam, urna, ornare leo facilisis suspendisse eu rutrum
-                                                id augue cursus tincidunt nisl eget ornare pharetra ac
-                                                pharetra, pulvinar ipsum.
-                                            </p>
-                                            <ul class="book_info">
-                                                <li><span>Position:</span> Book Writer</li>
-                                                <li><span>Book Count:</span>23</li>
-                                                <li><span>Born:</span>1973</li>
-                                                <li>
-                                                    <span>Category:</span><a href="#">Biography,</a><a href="#">Fantasy,</a><a href="#">Sci-Fi</a>
-                                                </li>
-                                                <li>
-                                                    <span>Language:</span><a href="#">English,</a><a href="#">German</a>
-                                                </li>
-                                            </ul>
-                                            <ul class="list-unstyled f_social_round">
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-reddit"></i></a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><i class="fa-brands fa-quora"></i></a>
-                                                </li>
-                                            </ul>
-                                            <a href="author-single.html" class="bj_theme_btn text_btn">More Details<i class="arrow_right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> {% endcomment %}
-
-
-
-        
-        <!-- product featured author area   -->
-
-        <!-- bj testimonial area -->
-        {% comment %} <section class="bj_testimonial_area sec_padding" data-bg-color="#f5f5f5">
-            <div class="container">
-                <div class="section_title section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 class="title title_two">Testimonial</h2>
-                    <p>What Our Happy Client Said</p>
-                </div>
-                <div class="swiper mySwiper bj_testimonial_inner wow fadeInUp" data-wow-delay="0.4s">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4">
-                                    <img class="testimonail_img" src="{% static 'img/home/testimonial1.jpg' %}" alt="" />
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="bj_testimonial_content">
-                                        <h4>
-                                            “My experience with Mark is a complete sucess, from
-                                            customer service, wide range of products, clean store,
-                                            purchasing experience, the newsletter.Thank you.”
-                                        </h4>
-                                        <div class="author">
-                                            <h5>Leona Paul</h5>
-                                            <span class="position">CEO of Floatcom</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4">
-                                    <img class="testimonail_img" src="{% static 'img/home/testimonial2.jpg' %}" alt="" />
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="bj_testimonial_content">
-                                        <h4>
-                                            “My experience with Mark is a complete sucess, from
-                                            customer service, wide range of products, clean store,
-                                            purchasing experience, the newsletter.Thank you.”
-                                        </h4>
-                                        <div class="author">
-                                            <h5>Michael Anderson</h5>
-                                            <span class="position">Senior Product Manager</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4">
-                                    <img class="testimonail_img" src="{% static 'img/home/testimonial3.jpg' %}" alt="" />
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="bj_testimonial_content">
-                                        <h4>
-                                            “My experience with Mark is a complete sucess, from
-                                            customer service, wide range of products, clean store,
-                                            purchasing experience, the newsletter.Thank you.”
-                                        </h4>
-                                        <div class="author">
-                                            <h5>Jennifer Lee</h5>
-                                            <span class="position">Creative Director</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4">
-                                    <img class="testimonail_img" src="{% static 'img/home/testimonial4.jpg' %}" alt="" />
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="bj_testimonial_content">
-                                        <h4>
-                                            “My experience with Mark is a complete sucess, from
-                                            customer service, wide range of products, clean store,
-                                            purchasing experience, the newsletter.Thank you.”
-                                        </h4>
-                                        <div class="author">
-                                            <h5>Robert Turner</h5>
-                                            <span class="position">IT Manager</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4">
-                                    <img class="testimonail_img" src="{% static 'img/home/testimonial5.jpg' %}" alt="" />
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="bj_testimonial_content">
-                                        <h4>
-                                            “My experience with Mark is a complete sucess, from
-                                            customer service, wide range of products, clean store,
-                                            purchasing experience, the newsletter.Thank you.”
-                                        </h4>
-                                        <div class="author">
-                                            <h5>John Smith</h5>
-                                            <span class="position">Co-founder</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="row align-items-center">
-                                <div class="col-lg-4">
-                                    <img class="testimonail_img" src="{% static 'img/home/testimonial6.jpg' %}" alt="" />
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="bj_testimonial_content">
-                                        <h4>
-                                            “My experience with Mark is a complete sucess, from
-                                            customer service, wide range of products, clean store,
-                                            purchasing experience, the newsletter.Thank you.”
-                                        </h4>
-                                        <div class="author">
-                                            <h5>Richard Brown</h5>
-                                            <span class="position">Financial Analyst</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="slider_pagination_inner">
-                        <div class="swiper-pagination"></div>
-                        <a href="#" class="bj_theme_btn text_btn">See all reviews<i class="arrow_right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section> {% endcomment %}
-        <!-- bj testimonial area -->
-
 
         <!-- bj subscribe area -->
         <section class="bj_subscribe_area_two">
@@ -1516,13 +232,12 @@
                             <img class="layer" data-depth="-0.25" src="{% static 'img/home/cube.png' %}" alt="" />
                         </div>
                     </div>
-                    <h2>You can see All Gradution Projects MET Acadmy</h2>
+                    <h2>يمكنك رؤية جميع مشاريع التخرج لاكادمية معهد مصر العالي للحاسبات والمعلومات بالمنصوره</h2>
                     <p>
-                        Our authors are devoted to their writing and are eager to share
-                        more information about their books with you. After that, you can
-                        Explore anywhere.
+                        مؤلفونا مكرسون لكتاباتهم ويتوقون للمشاركة
+                        مزيد من المعلومات حول كتبهم معك. بعد ذلك، يمكنك
+                        استكشاف في أي مكان.
                     </p>
-                    <a href="#" class="bj_theme_btn">Login NOW</a>
                 </div>
             </div>
         </section>

@@ -21,13 +21,12 @@
     <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
 
     <script src="https://unpkg.com/htmx.org@1.9.0"></script>
-    <title>MET</title>
+    <title>MET </title>
 </head>
 
-<body data-scroll-animation="true">
+<body data-scroll-animation="true" dir="rtl">
     {% comment %} for landing page anamation {% endcomment %}
-
-    {% comment %} <div id="preloader">
+     <div id="preloader">
         <div id="ctn-preloader" class="ctn-preloader">
             <div class="round_spinner">
                 <div class="spinner"></div>
@@ -39,108 +38,155 @@
             <h2 class="head">Did You Know?</h2>
             <p></p>
         </div>
-    </div>  {% endcomment %}
-
-
-
-
-    
-    
+    </div> 
     <div class="body_wrapper">
         <div class="click_capture"></div>
+        {% comment %} start header {% endcomment %}
         <header class="header_area header_relative header_blue">
-            <nav class="navbar navbar-expand-lg menu_one menu_white " id="header">
+            <!-- Top header -->
+            <div class="max" style="color:aliceblue">
+                <!-- Google Translate Element -->
+                <div id="google_translate_element" style="height:40px"></div>
+                <a class="navbar-brand"><i class="bi bi-telephone-outbound-fill"></i> 0502245747</a>
+                <a class="navbar-brand" style="margin-left: 10px;"><i class="bi bi-envelope-arrow-up-fill"></i> info@metmans.edu.eg</a>
+            </div>
+            <hr class="max" style="height:2px; color:aliceblue;">
+            <!-- list header -->
+            <nav class="navbar navbar-expand-lg menu_one menu_white " id="header" style="height:70px;">
                 <div class="container">
-                    <a class="navbar-brand sticky_logo" href="/">
-                        <img class="wow fadeInRight" data-wow-delay="0.5s" src="{% static 'img/home/favicon.ico' %}" alt="logo" />
-                        <img src="{% static 'img/home/favicon.ico' %}" alt="logo" />
-                    </a>
-                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="menu_toggle">
-                            <span class="hamburger">
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                        <!-- button span max (990) -->
+                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_toggle">
+                                <span class="hamburger">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                                <span class="hamburger-cross">
+                                    <span></span>
+                                    <span></span>
+                                </span>
                             </span>
-                            <span class="hamburger-cross">
-                                <span></span>
-                                <span></span>
-                            </span>
-                        </span>
-                    </button>
+                        </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-                        <ul class="navbar-nav menu w_menu ms-auto me-auto">
-                            <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    HOME
-                                </a>
-                                
+                        <ul class="navbar-nav search_cart menu">
+                            <!-- Search Button and Form -->
+                             <li class="nav-item search">
+                                {% comment %} <a class="nav-link search-btn" href="javascript:void(0);">
+                                    <i class="icon-search"></i> <!-- Search Icon -->
+                                </a> {% endcomment %}
+                                <form action="#" method="get" class="menu-search-form">
+                                    <div class="input-group">
+                                        <input type="search" class="form-control" placeholder="Search here.." />
+                                        <button type="submit">
+                                            <i class="ti-arrow-right"></i> <!-- Submit Icon -->
+                                        </button>
+                                    </div>
+                                </form>
                             </li>
-                            <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" href="shop.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Projects
+                            <!-- Pending Projects (for Staff) -->
+                            {% if user.is_staff %}
+                                <li class="nav-item shpping-cart dropdown submenu">
+                                    <a class="nav-link" class="cart-btn nav-link dropdown-toggle" href="{% url 'project:pending_projects' %}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="icon-shopping-basket"></i> <!-- Pending Projects Icon -->
+                                        <span class="num">{{ pending_projects_count }}</span> <!-- Pending Projects Count -->
+                                    </a>
+                                </li>
+                            {% endif %}
+                            
+                            <!-- User Account -->
+                            <li class="nav-item user ms-3">
+                                <a class="nav-link" href="/accounts/profile">
+                                    <i class="icon-user"></i> <!-- User Icon -->
                                 </a>
-
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item dropdown submenu">
-                                        <a class="nav-link dropdown-toggle" href="{% url 'project:ProjectList'%}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            books
+                            </li>
+                            
+                            <!-- Add Project Button (for Leaders) -->
+                            {% if user.is_authenticated and user.profile.is_leader %}
+                                    <li class="nav-item user ms-3" class="nav-item">
+                                        <a class="nav-link" href="{% url 'project:add_project' %}" class="nav-link icon-btn" title="Add Project">
+                                            <i class="fas fa-plus"></i> <!-- Add Project Icon -->
                                         </a>
-                                        
                                     </li>
-                                    
-                                </ul>
+                            {% endif %}
+                            
+                            <!-- Upload Excel Button (for Staff) -->
+                            {% if user.is_staff %}
+                                    <li class="nav-item user ms-3">
+                                        <a href="{% url 'upload_excel' %}" class="nav-link" title="Upload Excel">
+                                            <i class="fas fa-file-upload"></i> <!-- Upload Excel Icon -->
+                                        </a>
+                                    </li>
+                            {% endif %}
+
+                            {% if user.is_authenticated %}
+                                            <i class="nav-item user ms-3">
+                                                <a  href="{% url 'logout' %}" class="nav-link" title="Logout"> 
+                                                    <li class="fas fa-sign-out-alt"></li>
+                                                </a>
+                                            </i>
+                            {% else %}
+                            <i class="nav-item user ms-3">
+                                    <a  href="{% url 'login' %}" class="nav-link" title="Login"> 
+                                        <li class="fas fa-sign-in-alt"></li>
+                                    </a>
+                            </i>
+                            {% endif %}
+                        </ul>
+                        <ul class="navbar-nav menu w_menu ms-auto me-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" href="/" role="button">
+                                    الصفحه الرئيسية
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown ">
+                                <a class="nav-link" href="{% url 'project:ProjectList'%}">
+                                    معرض المشاريع 
+                                </a>
                             </li>
                             <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" href="my-account.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dashboard
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    الصفحه الشخصيه
                                 </a>
-
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">
-                                        <a href="/accounts/profile/" class="nav-link">Users Profile</a>
+                                        <a href="/accounts/profile/" class="nav-link">الصفحه الشخصيه</a>
                                     </li>
-
-                                    
-                                    
-
-                                    <li class="nav-item dropdown submenu">
+                                    <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="my-list.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Create
+                                            انشاء مشروع
                                         </a>
                                         <ul class="dropdown-menu">
                                             {% if user.is_staff %}
                                                 <li class="nav-item">
-                                                    <a href="{% url 'upload_excel' %}" class="nav-link">Add Users by excle sheet</a>
+                                                    <a href="{% url 'upload_excel' %}" class="nav-link">إضافة طلاب</a>
                                                 </li>
                                             {% endif %}
 
                                             {% if user.is_authenticated and user.profile.is_leader %}
                                                 <li class="nav-item">
-                                                    <a href="{% url 'project:add_project' %}" class="nav-link">Add Project</a>
+                                                    <a href="{% url 'project:add_project' %}" class="nav-link">اضافة مشروع</a>
                                                 </li>
                                             {% endif %}
                                         </ul>
                                     </li>
                                     <li class="nav-item dropdown submenu">
                                         <a class="nav-link dropdown-toggle" href="my-address.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Projects
+                                            المشاريع
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li class="nav-item">
-                                                <a href="{% url 'project:ProjectList'%}" class="nav-link">List Projects</a>
+                                                <a href="{% url 'project:ProjectList'%}" class="nav-link">قائمة المشاريع</a>
                                             </li>
                                             {% if user.is_staff %}
                                                 <li class="nav-item">
-                                                    <a href="{% url 'project:pending_projects' %}" class="nav-link">Pinding Projects</a>
+                                                    <a href="{% url 'project:pending_projects' %}" class="nav-link">ربط المشاريع</a>
                                                 </li>
                                             {% endif %}
                                         </ul>
                                     </li>
-
-                                   
                                     <li class="nav-item">
-                                        <a href="my-wishlist.html" class="nav-link">Wishlist</a>
+                                        <a href="my-wishlist.html" class="nav-link">قائمة المفاضله</a>
                                     </li>
                                 </ul>
                             </li>
@@ -332,179 +378,15 @@
                             </li>
                           
                         </ul>
-
-
-                      
-
-                            <ul class="navbar-nav search_cart menu">
-
-                                
-
-                            
-                                <!-- Search Button and Form -->
-                                    <li class="nav-item search">
-                                        <a class="nav-link search-btn" href="javascript:void(0);">
-                                            <i class="icon-search"></i> <!-- Search Icon -->
-                                        </a>
-                                        <form action="#" method="get" class="menu-search-form">
-                                            <div class="input-group">
-                                                <input type="search" class="form-control" placeholder="Search here.." />
-                                                <button type="submit">
-                                                    <i class="ti-arrow-right"></i> <!-- Submit Icon -->
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </li>
-                            
-                                <!-- Pending Projects (for Staff) -->
-                                {% if user.is_staff %}
-                                    <li class="nav-item shpping-cart dropdown submenu">
-                                        <a class="nav-link" class="cart-btn nav-link dropdown-toggle" href="{% url 'project:pending_projects' %}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="icon-shopping-basket"></i> <!-- Pending Projects Icon -->
-                                            <span class="num">{{ pending_projects_count }}</span> <!-- Pending Projects Count -->
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            
-                                <!-- User Account -->
-                                    <li class="nav-item user ms-3">
-                                        <a class="nav-link" href="/accounts/profile">
-                                            <i class="icon-user"></i> <!-- User Icon -->
-                                        </a>
-                                    </li>
-                            
-                                <!-- Add Project Button (for Leaders) -->
-                                {% if user.is_authenticated and user.profile.is_leader %}
-                                    <li class="nav-item user ms-3" class="nav-item">
-                                        <a class="nav-link" href="{% url 'project:add_project' %}" class="nav-link icon-btn" title="Add Project">
-                                            <i class="fas fa-plus"></i> <!-- Add Project Icon -->
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            
-                                <!-- Upload Excel Button (for Staff) -->
-                                {% if user.is_staff %}
-                                    <li class="nav-item user ms-3">
-                                        <a href="{% url 'upload_excel' %}" class="nav-link" title="Upload Excel">
-                                            <i class="fas fa-file-upload"></i> <!-- Upload Excel Icon -->
-                                        </a>
-                                    </li>
-                                {% endif %}
-
-                                {% if user.is_authenticated %}
-                                            <i class="nav-item user ms-3">
-                                                <a  href="{% url 'logout' %}" class="nav-link" title="Logout"> 
-                                                    <li class="fas fa-sign-out-alt"></li>
-                                                </a>
-                                            </i>
-                                {% else %}
-                                <i class="nav-item user ms-3">
-                                    <a  href="{% url 'login' %}" class="nav-link" title="Login"> 
-                                        <li class="fas fa-sign-in-alt"></li>
-                                    </a>
-                                </i>
-                                    
-                                {% endif %}
-
-
-
-
-
-                                <!-- Google Translate -->
-
-                                <style>
-
-
-                                    /* Hide the "Powered by Google Translate" text */
-                                        .goog-logo-link {
-                                            display: none !important;
-                                        }
-
-                                        /* Hide the "Translate" label */
-                                        .goog-te-gadget {
-                                            color: transparent !important;
-                                        }
-
-                                        /* Show the Google Translate dropdown */
-                                        .goog-te-combo {
-                                            padding: 8px 12px; /* Add padding */
-                                            border: 1px solid #ccc; /* Add a border */
-                                            border-radius: 4px; /* Rounded corners */
-                                            background-color:rgb(202, 209, 213); /* Background color */
-                                            font-size: 14px; /* Font size */
-                                            color: #333; /* Text color */
-                                            cursor: pointer; /* Pointer cursor */
-                                        }
-
-                                        /* Hover effect for the dropdown */
-                                        .goog-te-combo:hover {
-                                            background-color: #e9e9e9; /* Change background on hover */
-                                            border-color: #999; /* Change border color on hover */
-                                        }
-
-                                        /* Style the dropdown arrow */
-                                        .goog-te-combo::after {
-                                            content: "▼"; /* Add a custom arrow */
-                                            margin-left: 8px; /* Space between text and arrow */
-                                            font-size: 12px; /* Arrow size */
-                                            color: #666; /* Arrow color */
-                                        }
-
-                                        /* Style the language options in the dropdown */
-                                        .goog-te-menu2 {
-                                            background-color: #fff; /* Background color */
-                                            border: 1px solid #ccc; /* Border */
-                                            border-radius: 4px; /* Rounded corners */
-                                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow */
-                                        }
-
-                                        /* Style individual language options */
-                                        .goog-te-menu2-item {
-                                            padding: 8px 12px; /* Add padding */
-                                            font-size: 14px; /* Font size */
-                                            color: #333; /* Text color */
-                                            cursor: pointer; /* Pointer cursor */
-                                        }
-
-                                        /* Hover effect for language options */
-                                        .goog-te-menu2-item:hover {
-                                            background-color:rgb(206, 196, 196); /* Change background on hover */
-                                        }
-
-                                        /* Selected language option */
-                                        .goog-te-menu2-item-selected {
-                                            background-color:rgb(70, 205, 128); /* Background color for selected option */
-                                        }
-                                </style>
-                            
-                                <!-- Google Translate Element -->
-                                  <!-- Google Translate Element -->
-                                <div id="google_translate_element"></div>
-
-                                <!-- Google Translate API Script -->
-                                <script type="text/javascript">
-                                    function googleTranslateElementInit() {
-                                        new google.translate.TranslateElement({
-                                            pageLanguage: "en",
-                                            includedLanguages: "ar,en,es,fr", // English, Arabic, Spanish, French
-                                        }, "google_translate_element");
-                                    }
-                                </script>
-                                <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-                    <!-- Google Translate -->
-
-
-
-
-
-                            </ul>
-
-                        </div>
-                        </div>
                     </div>
+                    <a class="navbar-brand sticky_logo" href="/">
+                        <img class="wow fadeInRight" data-wow-delay="0.5s" src="{% static 'img/home/favicon.ico' %}" alt="logo" />
+                        <img src="{% static 'img/home/favicon.ico' %}" alt="logo" />
+                    </a>
                 </div>
             </nav>
+        </div>
+            </div>
         </header>
 
 
@@ -518,8 +400,8 @@
 
 
             <!-- footer area css  -->
-            <footer class="bj_footer_area padding_top" data-bg-color="#001F58">
-                <img class="footer_bg_img" src="{% static 'img/home/footer_img.jpg' %}" alt="" />
+            <footer class="bj_footer_area padding_top" data-bg-color="#004658">
+                {% comment %} <img class="footer_bg_img" src="{% static 'img/home/footer_img.jpg' %}" alt="" />
                 <div class="footer_top">
                     <div class="container">
                         <div class="row">
@@ -560,58 +442,33 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6">
-                                <div class="f_widget link_widget ps-lg-5 wow fadeInUp" data-wow-delay="0.4s">
-                                    <h2 class="f_widget_title">Newsletter</h2>
-                                    <p>
-                                        Aenean amet netus aliquam elit eu, sagittis id natoque id.
-                                    </p>
-                                    <form action="#" class="d-flex justify-content-end footer-search">
-                                        <input type="email" class="form-control email-form" placeholder="Your email address" />
-                                        <button class="bj_theme_btn btn-Subscribe" type="submit">
-                                            <i class="arrow_right"></i>
-                                        </button>
-                                    </form>
+                                <div class="footer_middle wow fadeInUp" data-wow-delay="0.5s">
+                                            <div class="col-lg-4 col-md-12 text-center text-lg-start">
+                                                <a href="#" class="f_logo">
+                                                    <img src="{% static 'img/home/favicon.ico' %}" class="img-footer" alt="f_logo" />
+                                                </a>
+                                            </div>
+                                                <div class="footer_social d-flex">
+                                                    تابعنا علي :
+                                                    <ul class="list-unstyled f_social_round">
+                                                        <li>
+                                                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="footer_middle wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-12 text-center text-lg-start">
-                                <a href="#" class="f_logo">
-                                    <img src="{% static 'img/home/favicon.ico' %}" alt="f_logo" />
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="footer_social d-flex justify-content-lg-center">
-                                    Follow Us:
-                                    <ul class="list-unstyled f_social_round">
-                                        <li>
-                                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="footer_terms text-end">
-                                    <a href="terms-condition.html">Terms of service</a>
-                                    <a href="privacy-policy.html">Privacy policy</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> {% endcomment %}
     
                 <div class="footer_bottom text-center wow fadeInUp" data-wow-delay="0.6s">
                     <p>© 2025 MET. All Rights Reserved</p>
@@ -637,6 +494,16 @@
         <script src="{% static 'vendors/swiper/swiper-bundle.min.js' %}"></script>
         <script src="{% static 'vendors/wow/wow.min.js' %}"></script>
         <script src="{% static 'js/custom.js' %}"></script>
+        <!-- Google Translate API Script -->
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: "ar",
+                    includedLanguages: "ar,en,es,fr", // English, Arabic, Spanish, French
+                }, "google_translate_element");
+            }
+        </script>
+        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </body>
     
     </html>
