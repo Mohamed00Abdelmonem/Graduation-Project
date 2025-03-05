@@ -29,6 +29,7 @@ Graduation_Year = [(str(year), str(year)) for year in range(2010, current_year +
 class GraduationProject(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null= True, related_name="author_project")
     title = models.CharField(max_length=200)
+    title_ar = models.CharField(max_length=200)
     description = models.TextField()
     sub_description = models.TextField(blank=True, null=True)
     graduation_year = models.CharField(

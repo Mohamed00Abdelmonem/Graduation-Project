@@ -32,14 +32,14 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = [
-            'full_name', 'phone_number', 'grade', 'image',
-            'job_title', 'whatsapp_number', 'linkedin_link', 'instgram_link', 'porfolio_link', 'short_bio', 'department', 'date_of_birth',
+            'phone_number',  'image',
+            'job_title', 'whatsapp_number', 'linkedin_link', 'instgram_link', 
+            'porfolio_link', 'short_bio',
             'address'
         ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['grade'].choices = [('', '---------')] + list(self.fields['grade'].choices)    
 
 
 

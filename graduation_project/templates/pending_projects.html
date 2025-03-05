@@ -48,6 +48,17 @@
             </div>
         </div>
 
+
+  <!-- Search Form -->
+  <div class="mb-4">
+    <form method="get" action="{% url 'project:pending_projects' %}">
+        <label for="search">Search by Title:</label>
+        <input type="text" id="search" name="search" value="{{ search_query }}" placeholder="Enter project title...">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+
         <!-- Filter Dropdown -->
         <div class="mb-4">
             <form method="get" action="{% url 'project:pending_projects' %}">

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفض المشروع</title>
+    <style>
+        /* الأنماط العامة */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #555555;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 150px;
+            height: auto;
+        }
+        h1 {
+            color: #333333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #444444;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #555555;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .reason {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: center;
+            border: 1px solid #f5c6cb;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777777;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <div class="email-container">
+        <!-- إضافة لوجو -->
+        <div class="logo">
+            <img src="favicon.ico" alt="شعار المعهد">
+        </div>
+
+        <h1>مرحبًا!</h1>
+        <p>نأسف لإبلاغك بأن مشروعك التالي قد تم رفضه مؤقتًا:</p>
+        <h2>{{ project_title }}</h2>
+
+        <!-- سبب الرفض -->
+        <div class="reason">
+            <strong>السبب:</strong> {{ rejection_reason }}
+        </div>
+
+        <!-- رسالة إضافية -->
+        <p>إذا كنت بحاجة إلى أي مساعدة أو توضيح إضافي، يرجى التواصل معنا عبر البريد الإلكتروني أو الهاتف.</p>
+        <p>شكرًا لتفهمك وتعاونك.</p>
+
+        <!-- تذييل البريد -->
+        <div class="footer">
+            <p>مع تحيات،<br>فريق <a href="https://mohamed00abdelmonem.github.io/My-Portfolio/">العمل</a></p>
+            <p>هذا البريد الإلكتروني تم إرساله تلقائيًا، يرجى عدم الرد عليه.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -380,7 +380,7 @@ def temporary_reject_project(request, project_id):
     }
 
     # استخدم قالب HTML للإيميل
-    html_content = render_to_string('emails/reject_project_email.html', context)
+    html_content = render_to_string('emails/temporary_reject_email.html', context)
     text_content = strip_tags(html_content)  # نسخة نصية بسيطة من الإيميل
 
     # إنشاء الرسالة
@@ -403,7 +403,6 @@ def temporary_reject_project(request, project_id):
 # _______________________________________________________
 
 
-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from .models import GraduationProject
@@ -411,6 +410,7 @@ from .models import GraduationProject
 def pending_projects(request):
     # Get the status filter from the request (default to 'pending' if not provided)
     status_filter = request.GET.get('status', 'pending')
+    search_query = request.GET.get('search', '')
 
     # Filter projects based on the selected status
     if status_filter == 'all':
@@ -419,6 +419,10 @@ def pending_projects(request):
         pending_projects = GraduationProject.objects.filter(status='temporary_rejection')
     else:
         pending_projects = GraduationProject.objects.filter(status='pending')
+
+    # Filter projects by title if search query is provided
+    if search_query:
+        pending_projects = pending_projects.filter(title__icontains=search_query)
 
     # Pagination
     page = request.GET.get('page', 1)  # Get the current page number from the request
@@ -430,12 +434,15 @@ def pending_projects(request):
     except EmptyPage:
         paginated_projects = paginator.page(paginator.num_pages)  # If page is out of range, deliver last page
 
-    # Pass the filtered projects and status filter to the template
+    # Pass the filtered projects, status filter, and search query to the template
     return render(request, 'pending_projects.html', {
         'projects': paginated_projects,
         'status_filter': status_filter,
+        'search_query': search_query,
     })
-# ___________________________________________________________________________________
+
+
+# _______________________________________________________________________
 
 
 

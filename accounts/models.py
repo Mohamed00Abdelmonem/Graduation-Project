@@ -15,7 +15,6 @@ Year_Grade = [
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    full_name = models.CharField(max_length=50)
     national_id = models.CharField(max_length=20, unique=True, null=True, blank=True)  # National ID field
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     grade = models.CharField(max_length=20, choices=Year_Grade, blank=True, null=True)
@@ -32,7 +31,6 @@ class UserProfile(models.Model):
     job_title = models.CharField(max_length=100, blank=True, null=True, verbose_name="المسمي الوظيفي")  # Job Title
     short_bio = models.TextField(blank=True, null=True, verbose_name="نبذه مختصره عنه")  # Short Bio
     department = models.CharField(max_length=100, blank=True, null=True, verbose_name="الشعبه")  # Department
-    date_of_birth = models.DateField(blank=True, null=True, verbose_name="تاريخ الميلاد")  # Date of Birth
 
 
     def __str__(self):

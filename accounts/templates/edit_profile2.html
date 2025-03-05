@@ -2,8 +2,7 @@
 {% load static %}
 
 {% block body %}
-<section class="bj_author_single_area sec_padding pb-0" data-bg-color="#f5f5f5">
-<div class="content_body" style=" margin-bottom: 100px; text-align:center">
+<div class="content_body" style="margin-top: 150px; margin-bottom: 100px;">
     <form method="post" enctype="multipart/form-data" >
         {% csrf_token %}
         <div class="row gy-4">
@@ -18,122 +17,120 @@
                         {% endif %}
                     </div>
                     <div class="upload_btn">
-                        تحميل صورة جديدة
+                        Upload New Photo
                         {{ form.image }}
                     </div>
                 </div>
             </div>
 
-            {% comment %} <!-- Full Name Field -->
-            <div class="col-lg-3">
+            <!-- Full Name Field -->
+            <div class="col-lg-6">
                 <div class="form-group">
                     {{ form.full_name }}
-                    <label class="floating-label">الاسم الكامل</label>
-                </div>
-            </div> {% endcomment %}
-
-            <!-- Phone Number Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    {{ form.phone_number }}
-                    <label class="floating-label">رقم الهاتف</label>
+                    <label class="floating-label">Full Name</label>
                 </div>
             </div>
 
-            {% comment %} <!-- Grade/Year Field -->
-            <div class="col-lg-3">
+            <!-- Phone Number Field -->
+            <div class="col-lg-6">
+                <div class="form-group">
+                    {{ form.phone_number }}
+                    <label class="floating-label">Phone Number</label>
+                </div>
+            </div>
+
+            <!-- Grade/Year Field -->
+            <div class="col-lg-6">
                 <div class="form-group">
                     <label class="form-label">Grade/Year</label>
                     {{ form.grade }}
                 </div>
-            </div> {% endcomment %}
+            </div>
             
-{% comment %} 
+
             <!-- Date of Birth Field -->
             <div class="col-lg-6">
                 <div class="form-group">
                     <label class="form-label">Date of Birth</label>
                     {{ form.date_of_birth }}
                 </div>
-            </div> {% endcomment %}
+            </div>
 
             <!-- Job Title Field -->
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="form-group">
                     {{ form.job_title }}
-                    <label class="floating-label">مسمى وظيفي</label>
+                    <label class="floating-label">Job Title</label>
                 </div>
             </div>
-              
 
             <!-- WhatsApp Number Field -->
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="form-group">
                     {{ form.whatsapp_number }}
-                    <label class="floating-label">رقم الواتساب</label>
+                    <label class="floating-label">WhatsApp Number</label>
                 </div>
             </div>
 
             <!-- LinkedIn Link Field -->
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="form-group">
                     {{ form.linkedin_link }}
-                    <label class="floating-label"> رابط لينكدإن </label>
+                    <label class="floating-label">LinkedIn Link</label>
                 </div>
             </div>
 
             <!-- Instagram Link Field -->
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="form-group">
                     {{ form.instgram_link }}
-                    <label class="floating-label">رابط الانستقرام</label>
+                    <label class="floating-label">Instagram Link</label>
                 </div>
             </div>
 
             <!-- Portfolio Link Field -->
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="form-group">
                     {{ form.porfolio_link }}
-                    <label class="floating-label">رابط الصفحه الخاصه بيك</label>
+                    <label class="floating-label">Portfolio Link</label>
                 </div>
             </div>
 
-            {% comment %} <!-- Department Field -->
+            <!-- Department Field -->
             <div class="col-lg-6">
                 <div class="form-group">
                     {{ form.department }}
                     <label class="floating-label">Department</label>
                 </div>
-            </div> {% endcomment %}
+            </div>
 
             <!-- Address Field -->
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="form-group">
                     {{ form.address }}
-                    <label class="floating-label">عنوان</label>
+                    <label class="floating-label">Address</label>
                 </div>
             </div>
 
             <!-- Short Bio Field -->
-            <div class="col-10 text-center" style="padding-right:20px">
+            <div class="col-12">
                 <div class="form-group">
                     {{ form.short_bio }}
-                    <label class="floating-label">سيرة ذاتية قصيرة</label>
+                    <label class="floating-label">Short Bio</label>
                 </div>
             </div>
         </div>
 
         <!-- Save Button -->
-        <button type="submit" class="bj_theme_btn btn btn-primary mt-3 ">حفظ</button>
+        <button class="submit" class="bj_theme_btn mt-3">Save</button>
         
     </form>
 </div>
-</section>
 
 <style>
     /* General Styling */
     .content_body {
-        max-width: 80%;
+        max-width: 800px;
         margin: 50px auto;
         padding: 20px;
         background-color: #f9f9f9;
@@ -146,10 +143,6 @@
     .form-group {
         position: relative;
         margin-bottom: 20px;
-    }
-
-    .form-group textarea{
-        height: 150px
     }
 
     .form-group input,

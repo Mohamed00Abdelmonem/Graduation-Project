@@ -1,15 +1,21 @@
 {% extends "base.html" %}
+{% load static %}
 {% block body %}
-
-<div class="container">
-    <h2 style="margin-top: 0px; margin-bottom: 100px;">Login</h2>
-    <form method="post">
+<div class="login-area">
+    <div class="login-wrapper">
+        <div class="login-left">
+            <a href="index.html" class="logo"><img src="{% static 'img/home/favicon.ico' %}" alt="logo" /></a>
+            <h2 class="title">تسجيل الدخول إلى حسابك</h2>
+            <div class="sibtitle">اهلا بك في مكتبة مصر العالي للحاسبات والمعلومات بالمنصوره!</div>
+    <form method="post" class="text-end">
         {% csrf_token %}
         {{ form.as_p }}
         {% if error %}
             <div class="alert alert-danger">{{ error }}</div>
         {% endif %}
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
     </form>
+    </div>
+</div>
 </div>
 {% endblock %}

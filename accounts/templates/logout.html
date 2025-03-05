@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% block body %}
 
-
+<section class="bj_author_single_area sec_padding pb-0" data-bg-color="#f5f5f5">
 <div class="container"style="margin-top: 200px; margin-bottom: 100px;">
-    <h2>Welcome, {{ user.first_name }}!</h2>
-    <p>Your National ID: {{ user.username }}</p>
-    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    <h2>مرحبا بك, {{ user.first_name }}!</h2>
+    <p>الرقم القومي: {{ user.username }}</p>
+    <a href="{% url 'logout' %}" class="btn btn-danger">تسجيل الخروج</a>
 </div>
+</section>
 
 {% endblock %}

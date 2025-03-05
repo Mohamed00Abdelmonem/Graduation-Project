@@ -1,239 +1,70 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
 {% block body %}
+
     <div class="container mt-5">
         <h2 class="mb-4">Update Graduation Project 🎓</h2>
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
             <!-- General Fields -->
-            <div class="mb-3">
-                {% for field in form %}
-                    {% if field.name != "students" and field.name != "supervisors" and field.name != "doctor" and field.name != "category" and field.name != "status" %}
-                        {% if field.name == "year_graduate" %}
-                            <label class="form-label">{{ field.label }}</label>
-                            <select name="{{ field.name }}" class="form-select">
-                                {% for year in '2010'|make_list|add:'2040' %}
-                                    <option value="{{ year }}" {% if year == form.instance.year_graduate %}selected{% endif %}>
-                                        {{ year }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                        {% else %}
-                            {% bootstrap_field field %}
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-            </div>
+            {% for field in form %}
+                {% if field.name != "students" and field.name != "supervisors" and field.name != "doctor" and field.name != "category" %}
+                    {% bootstrap_field field %}
+                {% endif %}
+            {% endfor %}
 
             <!-- Students Selection -->
             <div class="mb-3">
-                <label for="id_search_students" class="form-label">Search Students:</label>
-                <input 
-                    type="text" 
-                    id="id_search_students" 
-                    class="form-control" 
-                    placeholder="Type to search students..."
-                >
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Select Students:</label><br>
-                {% for student in form.fields.students.queryset %}
-                    <div class="form-check student-checkbox">
-                        <input 
-                            class="form-check-input" 
-                            type="checkbox" 
-                            name="students" 
-                            value="{{ student.id }}" 
-                            id="student_{{ student.id }}"
-                            {% if student in form.instance.students.all %}checked{% endif %}
-                        >
-                        <label class="form-check-label" for="student_{{ student.id }}">
+                <label class="form-label">Search Students:</label>
+                <select name="students" class="form-select" multiple>
+                    {% for student in form.fields.students.queryset %}
+                        <option value="{{ student.id }}" 
+                            {% if student in form.instance.students.all %}selected{% endif %}>
                             {{ student }}
-                        </label>
-                    </div>
-                {% endfor %}
+                        </option>
+                    {% endfor %}
+                </select>
             </div>
-            <!-- JavaScript for Filtering Students -->
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const searchInputStudents = document.getElementById('id_search_students');
-                    const studentCheckboxes = document.querySelectorAll('.student-checkbox');
 
-                    // Add event listener to the search input
-                    searchInputStudents.addEventListener('input', function () {
-                        const query = searchInputStudents.value.toLowerCase().trim(); // Get the search query
-                        studentCheckboxes.forEach(function (checkbox) {
-                            const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
-                            if (label.includes(query)) {
-                                checkbox.style.display = 'block'; // Show if matches
-                            } else {
-                                checkbox.style.display = 'none'; // Hide if doesn't match
-                            }
-                        });
-                    });
-                });
-            </script>
-
-
-            
-           <!-- Supervisors Selection -->
-                <div class="mb-3">
-                    <!-- Search Input for Supervisors -->
-                    <label for="id_search_supervisors" class="form-label">Search Supervisors:</label>
-                    <input 
-                        type="text" 
-                        id="id_search_supervisors" 
-                        class="form-control" 
-                        placeholder="Type to search supervisors..."
-                    >
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Select Supervisors:</label><br>
+            <!-- Supervisors Selection -->
+            <div class="mb-3">
+                <label class="form-label">Search Supervisors:</label>
+                <select name="supervisors" class="form-select" multiple>
                     {% for supervisor in form.fields.supervisors.queryset %}
-                        <div class="form-check supervisor-checkbox">
-                            <input 
-                                class="form-check-input" 
-                                type="checkbox" 
-                                name="supervisors" 
-                                value="{{ supervisor.id }}" 
-                                id="supervisor_{{ supervisor.id }}"
-                                {% if supervisor in form.instance.supervisors.all %}checked{% endif %}
-                            >
-                            <label class="form-check-label" for="supervisor_{{ supervisor.id }}">
-                                {{ supervisor }}
-                            </label>
-                        </div>
+                        <option value="{{ supervisor.id }}" 
+                            {% if supervisor in form.instance.supervisors.all %}selected{% endif %}>
+                            {{ supervisor }}
+                        </option>
                     {% endfor %}
-                </div>
-                <!-- JavaScript for Filtering Supervisors -->
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const searchInputSupervisors = document.getElementById('id_search_supervisors');
-                        const supervisorCheckboxes = document.querySelectorAll('.supervisor-checkbox');
+                </select>
+            </div>
 
-                        // Add event listener to the search input
-                        searchInputSupervisors.addEventListener('input', function () {
-                            const query = searchInputSupervisors.value.toLowerCase().trim(); // Get the search query
-                            supervisorCheckboxes.forEach(function (checkbox) {
-                                const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
-                                if (label.includes(query)) {
-                                    checkbox.style.display = 'block'; // Show if matches
-                                } else {
-                                    checkbox.style.display = 'none'; // Hide if doesn't match
-                                }
-                            });
-                        });
-                    });
-                </script>
-
-            
-            
-            
             <!-- Doctor Selection -->
-                <div class="mb-3">
-                    <!-- Search Input for Doctor -->
-                    <label for="id_search_doctor" class="form-label">Search Doctor:</label>
-                    <input 
-                        type="text" 
-                        id="id_search_doctor" 
-                        class="form-control" 
-                        placeholder="Type to search doctors..."
-                    >
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Select Doctor:</label><br>
+            <div class="mb-3">
+                <label class="form-label">Select Doctor:</label>
+                <select name="doctor" class="form-select">
                     {% for doctor in form.fields.doctor.queryset %}
-                        <div class="form-check doctor-checkbox">
-                            <input 
-                                class="form-check-input" 
-                                type="radio" 
-                                name="doctor" 
-                                value="{{ doctor.id }}" 
-                                id="doctor_{{ doctor.id }}"
-                                {% if doctor == form.instance.doctor %}checked{% endif %}
-                            >
-                            <label class="form-check-label" for="doctor_{{ doctor.id }}">
-                                {{ doctor }}
-                            </label>
-                        </div>
+                        <option value="{{ doctor.id }}" 
+                            {% if doctor == form.instance.doctor %}selected{% endif %}>
+                            {{ doctor }}
+                        </option>
                     {% endfor %}
-                </div>
-                <!-- JavaScript for Filtering Doctors -->
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const searchInputDoctor = document.getElementById('id_search_doctor');
-                        const doctorCheckboxes = document.querySelectorAll('.doctor-checkbox');
-
-                        // Add event listener to the search input
-                        searchInputDoctor.addEventListener('input', function () {
-                            const query = searchInputDoctor.value.toLowerCase().trim(); // Get the search query
-                            doctorCheckboxes.forEach(function (checkbox) {
-                                const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
-                                if (label.includes(query)) {
-                                    checkbox.style.display = 'block'; // Show if matches
-                                } else {
-                                    checkbox.style.display = 'none'; // Hide if doesn't match
-                                }
-                            });
-                        });
-                    });
-                </script>
-
-
-
-
-
+                </select>
+            </div>
 
             <!-- Category Selection -->
             <div class="mb-3">
-                <!-- Search Input for Category -->
-                <label for="id_search_category" class="form-label">Search Category:</label>
-                <input 
-                    type="text" 
-                    id="id_search_category" 
-                    class="form-control" 
-                    placeholder="Type to search categories..."
-                >
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Select Category:</label><br>
-                {% for category in form.fields.category.queryset %}
-                    <div class="form-check category-checkbox">
-                        <input 
-                            class="form-check-input" 
-                            type="radio" 
-                            name="category" 
-                            value="{{ category.id }}" 
-                            id="category_{{ category.id }}"
-                            {% if category == form.instance.category %}checked{% endif %}
-                        >
-                        <label class="form-check-label" for="category_{{ category.id }}">
+                <label class="form-label">Select Category:</label>
+                <select name="category" class="form-select">
+                    {% for category in form.fields.category.queryset %}
+                        <option value="{{ category.id }}" 
+                            {% if category == form.instance.category %}selected{% endif %}>
                             {{ category }}
-                        </label>
-                    </div>
-                {% endfor %}
+                        </option>
+                    {% endfor %}
+                </select>
             </div>
-            <!-- JavaScript for Filtering Categories -->
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const searchInputCategory = document.getElementById('id_search_category');
-                    const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
-
-                    // Add event listener to the search input
-                    searchInputCategory.addEventListener('input', function () {
-                        const query = searchInputCategory.value.toLowerCase().trim(); // Get the search query
-                        categoryCheckboxes.forEach(function (checkbox) {
-                            const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
-                            if (label.includes(query)) {
-                                checkbox.style.display = 'block'; // Show if matches
-                            } else {
-                                checkbox.style.display = 'none'; // Hide if doesn't match
-                            }
-                        });
-                    });
-                });
-            </script>
 
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Update Project</button>
@@ -248,4 +79,5 @@
             </div>
         {% endif %}
     </div>
+
 {% endblock body %}
