@@ -101,6 +101,18 @@ class GraduationProject(models.Model):
 
 
 
+class ProjectImages(models.Model):
+    project = models.ForeignKey(GraduationProject, related_name='project_image', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='project_images', null=True, blank=True)
+
+    def __str__(self) -> str:
+        return str(self.project)  
+    
+
+# ___________________________________________________________________________________
+
+
+
 # Category
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)

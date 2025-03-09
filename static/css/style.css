@@ -266,7 +266,7 @@ a {
 }
 a:hover {
   text-decoration: none;
-  color: #4285F4;
+  color: #3972d2d4;
 }
 
 /** === Container === **/
@@ -361,6 +361,12 @@ button.bj_theme_btn {
   background: #3972d2d4;
   -webkit-transition: width 0.3s linear;
   transition: width 0.3s linear;
+}
+.nav-pills .nav-link.active{
+  background-color: #004658c7 !important;
+}
+.nav-link{
+  color:#004658c7
 }
 .bj_theme_btn i {
   vertical-align: middle;

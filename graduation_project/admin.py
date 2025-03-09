@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GraduationProject, Category, Review
+from .models import GraduationProject, Category, Review, ProjectImages
 
 # Define a custom ModelAdmin for GraduationProject
 class GraduationProjectAdmin(admin.ModelAdmin):
@@ -22,5 +22,6 @@ class GraduationProjectAdmin(admin.ModelAdmin):
 
 # Register the models with their respective admin configurations
 admin.site.register(GraduationProject, GraduationProjectAdmin)
+admin.site.register(ProjectImages)
 admin.site.register(Category)
 admin.site.register(Review)

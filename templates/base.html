@@ -21,7 +21,7 @@
     <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
 
     <script src="https://unpkg.com/htmx.org@1.9.0"></script>
-    <title>MET </title>
+    <title>مكتبة معهد مصر العالي للحاسبات والمعلومات بالمنصوره </title>
 </head>
 
 <body data-scroll-animation="true" dir="rtl">
@@ -35,7 +35,7 @@
                     <h4><span>MET</span></h4>
                 </div>
             </div>
-            <h2 class="head">Did You Know?</h2>
+            <h2 class="head">المكتبه الرقميه</h2>
             <p></p>
         </div>
     </div> 
@@ -43,351 +43,154 @@
         <div class="click_capture"></div>
         {% comment %} start header {% endcomment %}
         <header class="header_area header_relative header_blue">
-            <!-- Top header -->
-            <div class="max" style="color:aliceblue">
-                <!-- Google Translate Element -->
-                <div id="google_translate_element" style="height:40px"></div>
-                <a class="navbar-brand"><i class="bi bi-telephone-outbound-fill"></i> 0502245747</a>
-                <a class="navbar-brand" style="margin-left: 10px;"><i class="bi bi-envelope-arrow-up-fill"></i> info@metmans.edu.eg</a>
-            </div>
-            <hr class="max" style="height:2px; color:aliceblue;">
-            <!-- list header -->
-            <nav class="navbar navbar-expand-lg menu_one menu_white " id="header" style="height:70px;">
-                <div class="container">
-                        <!-- button span max (990) -->
-                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="menu_toggle">
-                                <span class="hamburger">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                <!-- Top header -->
+                <div class="max" style="color:aliceblue">
+                    <!-- Google Translate Element -->
+                    <div id="google_translate_element" style="height:40px; margin-right:20px"></div>
+                    <a class="navbar-brand"><i class="bi bi-telephone-outbound-fill"></i> 0502245747</a>
+                    <a class="navbar-brand" style="margin-left: 10px;"><i class="bi bi-envelope-arrow-up-fill"></i> info@metmans.edu.eg</a>
+                </div>
+                <hr class="max" style="height:2px; color:aliceblue;">
+                <!-- list header -->
+                <nav class="navbar navbar-expand-lg menu_one menu_white " id="header" style="height:70px;">
+                    <div class="container">
+                            <!-- button span max (990) -->
+                            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="menu_toggle">
+                                    <span class="hamburger">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                                    <span class="hamburger-cross">
+                                        <span></span>
+                                        <span></span>
+                                    </span>
                                 </span>
-                                <span class="hamburger-cross">
-                                    <span></span>
-                                    <span></span>
-                                </span>
-                            </span>
-                        </button>
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-                        <ul class="navbar-nav search_cart menu">
-                            <!-- Search Button and Form -->
-                             <li class="nav-item search">
-                                {% comment %} <a class="nav-link search-btn" href="javascript:void(0);">
-                                    <i class="icon-search"></i> <!-- Search Icon -->
-                                </a> {% endcomment %}
-                                <form action="#" method="get" class="menu-search-form">
-                                    <div class="input-group">
-                                        <input type="search" class="form-control" placeholder="Search here.." />
-                                        <button type="submit">
-                                            <i class="ti-arrow-right"></i> <!-- Submit Icon -->
-                                        </button>
-                                    </div>
-                                </form>
-                            </li>
-                            <!-- Pending Projects (for Staff) -->
-                            {% if user.is_staff %}
-                                <li class="nav-item shpping-cart dropdown submenu">
-                                    <a class="nav-link" class="cart-btn nav-link dropdown-toggle" href="{% url 'project:pending_projects' %}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="icon-shopping-basket"></i> <!-- Pending Projects Icon -->
-                                        <span class="num">{{ pending_projects_count }}</span> <!-- Pending Projects Count -->
+                            </button>
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                            <ul class="navbar-nav search_cart menu">
+                                <!-- Search Button and Form -->
+                                <li class="nav-item search">
+                                    {% comment %} <a class="nav-link search-btn" href="javascript:void(0);">
+                                        <i class="icon-search"></i> <!-- Search Icon -->
+                                    </a> {% endcomment %}
+                                    <form action="#" method="get" class="menu-search-form">
+                                        <div class="input-group">
+                                            <input type="search" class="form-control" placeholder="Search here.." />
+                                            <button type="submit">
+                                                <i class="ti-arrow-right"></i> <!-- Submit Icon -->
+                                            </button>
+                                        </div>
+                                    </form>
+                                </li>
+                                <!-- Pending Projects (for Staff) -->
+                                {% if user.is_staff %}
+                                    <li class="nav-item shpping-cart dropdown submenu">
+                                        <a class="nav-link" class="cart-btn nav-link dropdown-toggle" href="{% url 'project:pending_projects' %}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="icon-shopping-basket"></i> <!-- Pending Projects Icon -->
+                                            <span class="num">{{ pending_projects_count }}</span> <!-- Pending Projects Count -->
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                
+                                <!-- User Account -->
+                                {% if user.is_authenticated %}
+                                <li class="nav-item user ms-3">
+                                    <a class="nav-link" href="/accounts/profile">
+                                        <i class="icon-user"></i> <!-- User Icon -->
                                     </a>
                                 </li>
-                            {% endif %}
-                            
-                            <!-- User Account -->
-                            <li class="nav-item user ms-3">
-                                <a class="nav-link" href="/accounts/profile">
-                                    <i class="icon-user"></i> <!-- User Icon -->
-                                </a>
-                            </li>
-                            
-                            <!-- Add Project Button (for Leaders) -->
-                            {% if user.is_authenticated and user.profile.is_leader %}
-                                    <li class="nav-item user ms-3" class="nav-item">
-                                        <a class="nav-link" href="{% url 'project:add_project' %}" class="nav-link icon-btn" title="Add Project">
-                                            <i class="fas fa-plus"></i> <!-- Add Project Icon -->
-                                        </a>
-                                    </li>
-                            {% endif %}
-                            
-                            <!-- Upload Excel Button (for Staff) -->
-                            {% if user.is_staff %}
-                                    <li class="nav-item user ms-3">
-                                        <a href="{% url 'upload_excel' %}" class="nav-link" title="Upload Excel">
-                                            <i class="fas fa-file-upload"></i> <!-- Upload Excel Icon -->
-                                        </a>
-                                    </li>
-                            {% endif %}
+                                {% endif %}
+                                <!-- Add Project Button (for Leaders) -->
+                                {% if user.is_authenticated and user.profile.is_leader %}
+                                        <li class="nav-item user ms-3" class="nav-item">
+                                            <a class="nav-link" href="{% url 'project:add_project' %}" class="nav-link icon-btn" title="Add Project">
+                                                <i class="fas fa-plus"></i> <!-- Add Project Icon -->
+                                            </a>
+                                        </li>
+                                {% endif %}
+                                
+                                <!-- Upload Excel Button (for Staff) -->
+                                {% if user.is_staff %}
+                                        <li class="nav-item user ms-3">
+                                            <a href="{% url 'upload_excel' %}" class="nav-link" title="اضافة طلاب">
+                                                <i class="fas fa-file-upload"></i> <!-- Upload Excel Icon -->
+                                            </a>
+                                        </li>
+                                {% endif %}
 
-                            {% if user.is_authenticated %}
-                                            <i class="nav-item user ms-3">
-                                                <a  href="{% url 'logout' %}" class="nav-link" title="Logout"> 
-                                                    <li class="fas fa-sign-out-alt"></li>
-                                                </a>
-                                            </i>
-                            {% else %}
-                            <i class="nav-item user ms-3">
-                                    <a  href="{% url 'login' %}" class="nav-link" title="Login"> 
-                                        <li class="fas fa-sign-in-alt"></li>
+                                {% if user.is_authenticated %}
+                                                <i class="nav-item user ms-3">
+                                                    <a  href="{% url 'logout' %}" class="nav-link" title="Logout"> 
+                                                        <li class="fas fa-sign-out-alt"></li>
+                                                    </a>
+                                                </i>
+                                {% else %}
+                                <i class="nav-item user ms-3">
+                                        <a  href="{% url 'login' %}" class="nav-link" title="Login"> 
+                                            <li class="fas fa-sign-in-alt"></li>
+                                        </a>
+                                </i>
+                                {% endif %}
+                            </ul>
+                            <ul class="navbar-nav menu w_menu ms-auto me-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="/" role="button">
+                                        الصفحه الرئيسية
                                     </a>
-                            </i>
-                            {% endif %}
-                        </ul>
-                        <ul class="navbar-nav menu w_menu ms-auto me-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="/" role="button">
-                                    الصفحه الرئيسية
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown ">
-                                <a class="nav-link" href="{% url 'project:ProjectList'%}">
-                                    معرض المشاريع 
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    الصفحه الشخصيه
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a href="/accounts/profile/" class="nav-link">الصفحه الشخصيه</a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="my-list.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            انشاء مشروع
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            {% if user.is_staff %}
-                                                <li class="nav-item">
-                                                    <a href="{% url 'upload_excel' %}" class="nav-link">إضافة طلاب</a>
-                                                </li>
-                                            {% endif %}
-
-                                            {% if user.is_authenticated and user.profile.is_leader %}
-                                                <li class="nav-item">
-                                                    <a href="{% url 'project:add_project' %}" class="nav-link">اضافة مشروع</a>
-                                                </li>
-                                            {% endif %}
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item dropdown submenu">
-                                        <a class="nav-link dropdown-toggle" href="my-address.html" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            المشاريع
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item">
-                                                <a href="{% url 'project:ProjectList'%}" class="nav-link">قائمة المشاريع</a>
-                                            </li>
-                                            {% if user.is_staff %}
-                                                <li class="nav-item">
-                                                    <a href="{% url 'project:pending_projects' %}" class="nav-link">ربط المشاريع</a>
-                                                </li>
-                                            {% endif %}
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="my-wishlist.html" class="nav-link">قائمة المفاضله</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown submenu mega_menu tab-demo">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore
-                                </a>
-                                <ul class="dropdown-menu sub">
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-lg-5 tabHeader">
-                                                <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                                    <li class="nav-item active">
-                                                        <a class="nav-link" id="v-pills-tour-tab" data-toggle="pill" href="#v-pills-tour" role="tab" aria-controls="v-pills-tour" aria-selected="false">Utility Pages</a>
-                                                    </li>
+                                </li>
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link" href="{% url 'project:ProjectList'%}">
+                                        معرض المشاريع 
+                                    </a>
+                                </li>
+                                {% if user.is_authenticated %}
+                                <li class="nav-item dropdown submenu">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                         لوحة تحكم
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a href="/accounts/profile/" class="nav-link">البيانات الشخصيه</a>
+                                        </li>
+                                                {% if user.is_staff %}
                                                     <li class="nav-item">
-                                                        <a class="nav-link" id="v-others-menu-tab" data-toggle="pill" href="#v-others-menu" role="tab" aria-controls="v-others-menu" aria-selected="false">Company</a>
+                                                        <a href="{% url 'upload_excel' %}" class="nav-link">إضافة طلاب</a>
                                                     </li>
+                                                {% endif %}
+
+                                                {% if user.is_authenticated and user.profile.is_leader %}
                                                     <li class="nav-item">
-                                                        <a class="nav-link" id="v-pills-doc-tab" data-toggle="pill" href="#v-pills-doc" role="tab" aria-controls="v-pills-doc" aria-selected="true">Shop Pages</a>
+                                                        <a href="{% url 'project:add_project' %}" class="nav-link">اضافة مشروع</a>
                                                     </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" id="v-pills-code-tab" data-toggle="pill" href="#v-pills-code" role="tab" aria-controls="v-pills-code" aria-selected="false">Dashboard</a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" id="v-pills-layout-tab" data-toggle="pill" href="#v-pills-layout" role="tab" aria-controls="v-pills-layout" aria-selected="false">Blog & Author</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <div class="tab-content tabContent" id="v-pills-tabContent">
-                                                    <div class="tab-pane fade active show" id="v-pills-tour" role="tabpanel" aria-labelledby="v-pills-tour-tab">
-                                                        <div class="d-flex">
-                                                            <ul class="list-unstyled tab_list w_100">
-                                                                <li>
-                                                                    <a href="login.html">Sign In</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="registration.html">Sign Up</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="typography.html">Typography</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="page-banner-style-2.html">Banner style
-                                                                        02</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="page-banner-style-3.html">Banner style
-                                                                        03</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="v-others-menu" role="tabpanel" aria-labelledby="v-others-menu-tab">
-                                                        <div class="d-flex">
-                                                            <ul class="list-unstyled tab_list w_100">
-                                                                <li>
-                                                                    <a href="book-listing.html">Book Listing</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="about.html">About</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="contact.html">Contact Us</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="terms-condition.html">Terms & Services</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="privacy-policy.html">Privacy Policy</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="v-pills-doc" role="tabpanel" aria-labelledby="v-pills-doc-tab">
-                                                        <div class="d-flex">
-                                                            <ul class="list-unstyled tab_list">
-                                                                <li>
-                                                                    <a href="shop.html">Shop</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="shop-no-sidebar.html">Shop No Sidebar</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="product-single.html">Product Details</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="cart.html">Cart</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="cart-guest.html">Cart Guest</a>
-                                                                </li>
-                                                            </ul>
-                                                            <ul class="list-unstyled tab_list">
-                                                                <li>
-                                                                    <a href="checkout.html">Checkout</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="checkout-gift.html">Checkout Gift</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="checkout-login.html">Checkout Login</a>
-                                                                </li>
-
-                                                                <li>
-                                                                    <a href="my-wishlist.html">Wishlist</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="v-pills-code" role="tabpanel" aria-labelledby="v-pills-code-tab">
-                                                        <div class="d-flex">
-                                                            <ul class="list-unstyled tab_list">
-                                                                <li>
-                                                                    <a href="my-account.html">User Profile</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="my-orders.html">Orders</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="order-track.html">Order Tracking</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="order-confrmation.html">Thank You Page</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="my-ebook-library.html">Ebook Library</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="my-following-authors.html">Following
-                                                                        Authors</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="my-rating-reviews.html">Rating &
-                                                                        Authors</a>
-                                                                </li>
-
-                                                            </ul>
-                                                            <ul class="list-unstyled tab_list">
-                                                                <li>
-                                                                    <a href="my-list.html">Book List</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="my-list-details.html">Book List Details</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="my-list-create.html">Create Book List</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="my-address.html">Address Book</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="add-new-address.html">Add New Address</a>
-
-                                                                </li>
-
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane fade" id="v-pills-layout" role="tabpanel" aria-labelledby="v-pills-layout-tab">
-                                                        <div class="d-flex">
-                                                            <ul class="list-unstyled tab_list">
-                                                                <li>
-                                                                    <a href="blog-grid.html">Blog Grid</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog-extend-grid.html">Extended Grid</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog-list.html">Blog List</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="blog-details.html">Blog Details</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="author.html">Author</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="author-single.html">Author Single</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                          
-                        </ul>
+                                                {% endif %}
+                                                {% if user.is_staff %}
+                                        <li class="nav-item">
+                                            <a href="{% url 'project:pending_projects' %}" class="nav-link">المشاريع المعلقه </a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                                {%endif%}
+                                <li class="nav-item dropdown mega_menu tab-demo">
+                                    <a class="nav-link" href="about.html">معلومات الموقع
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="navbar-brand sticky_logo" href="/">
+                            <img class="wow fadeInRight" data-wow-delay="0.5s" src="{% static 'img/home/favicon.ico' %}" alt="logo" />
+                            <img src="{% static 'img/home/favicon.ico' %}" alt="logo" />
+                        </a>
                     </div>
-                    <a class="navbar-brand sticky_logo" href="/">
-                        <img class="wow fadeInRight" data-wow-delay="0.5s" src="{% static 'img/home/favicon.ico' %}" alt="logo" />
-                        <img src="{% static 'img/home/favicon.ico' %}" alt="logo" />
-                    </a>
+                </nav>
                 </div>
-            </nav>
-        </div>
             </div>
         </header>
+                        
+                                    
+                          
 
 
 

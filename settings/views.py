@@ -60,14 +60,12 @@ def home(request):
     # Fetch the top 10 projects with the most likes
     top_liked_projects = get_top_liked_projects()
 
-    # Fetch all users (if necessary; consider limiting or filtering if the dataset is large)
-    all_users = UserProfile.objects.all().select_related('user')  # Optimize by fetching related user data
+  
 
     return render(request, "index.html", {
         "projects_main": projects_main,
         "top_liked_projects": top_liked_projects,  
         "doctors": doctors,
-        "all_users": all_users,
     })
 
 

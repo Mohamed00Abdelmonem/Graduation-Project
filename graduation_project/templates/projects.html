@@ -12,25 +12,12 @@
                 <!-- Container to display search results -->
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <div class="shop_top d-flex align-items-center justify-content-between">
-                    <div class="shop_menu_left">
+                    {% comment %} <div class="shop_menu_left">
                         الكتب المتوفرة  : {{projects_count }}  
                         <br>  
                         عد ترقيم الصفحات : {{projects|length}}
-                    </div>
-                    <!-- Search Input -->
-                    <form role="search" method="get" class="pr_search_form input-group w-75" action="#">
-                        <input type="text" 
-                        name="q" 
-                        class="form-control search-field" 
-                        id="searchInput" 
-                        placeholder="Search off book store.."
-                        hx-get="{% url 'project:ProjectList' %}"
-                        hx-target="#project-list"
-                        hx-trigger="keyup changed delay:500ms"
-                        value="{{ request.GET.q|default:'' }}"
-                        >
-                        <button type="submit"><i class="ti-search"></i></button>
-                    </form>
+                    </div> {% endcomment %}
+                    
                 </div>
                 <div class="row">
                     <!-- Sidebar for Filters -->
@@ -97,6 +84,20 @@
                     <!-- Project List -->
                     <div class="col-lg-9">
                         <div class="row"> 
+                            <!-- Search Input -->
+                    <form role="search" method="get" class="pr_search_form input-group w-100 mb-2" action="#">
+                        <input type="text" 
+                        name="q" 
+                        class="form-control search-field" 
+                        id="searchInput" 
+                        placeholder="ابحث عن المشروع .."
+                        hx-get="{% url 'project:ProjectList' %}"
+                        hx-target="#project-list"
+                        hx-trigger="keyup changed delay:500ms"
+                        value="{{ request.GET.q|default:'' }}"
+                        >
+                        <button type="submit"><i class="ti-search"></i></button>
+                    </form>
                             <!-- Search Results -->
                             <div id="project-list">
                                 {% include "partials/project_list.html" %}
