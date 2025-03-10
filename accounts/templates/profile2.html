@@ -22,7 +22,6 @@
 
     .award_list_item ul {
         margin-bottom: 10px;
-        padding-right:0px
     }
 
     .award_list_item li {
@@ -34,7 +33,6 @@
     .award_list_item strong {
         font-weight: bold;
         color: #007bff;
-        margin-left: 5px
     }
 
     .award_list_item a {
@@ -85,173 +83,6 @@
         font-style: italic;
     }
 </style>
-<!-- Modal -->
-<div class="modal fade product-quickview-modal" id="productQuickView" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content p-3">
-                <div class="account_dashboard_body">
-                    <div class="account_dashboard_content">
-                        <div class="account_dashboard_content_header">
-                            المشاريع المفاضله
-                            {% comment %} <p>لديك 3 مشاريع في قائمة المفاضله</p> {% endcomment %}
-                        </div>
-                        
-
-                        {% for project_likes in user.likes_project.all %}
-                            <div class="content_body">
-                                <div class="wishlist_product_list">
-                                    <div class="my_account_book list-view">
-                                        <div class="my_account_book_img">
-                                            <img src="{{ project_likes.images.url }}" alt="{{ project_likes.title }}">
-                                        </div>
-                                        <div class="my_account_book_content">
-                                            <a href="{% url 'project:project_detail' project_likes.slug %}">
-                                                <div class="my_account_book_title">{{ project_likes.title }}</div>
-                                            </a>
-                                            <div class="author_name">{{ project_likes.author.get_full_name }}</div>
-                                            <div class="book_rating_info">
-                                                <a href="#">{{ project_likes.view_count }} المشاهدات</a>
-                                                <div class="separator"></div>
-                                                <a href="#">{{ project_likes.likes.count }} الاعجاب</a>
-                                            </div>
-                                            <button class="bj_theme_btn strock_btn add-to-cart-automated" data-name="{{ project_likes.title }}" data-price="19.99" data-img="{{ project_likes.images.url }}" data-mrp="29.99"> مشاهدة المشروع</button>
-                                        </div>
-                                        <div class="my_account_book_action">
-                                            <a href="{% url 'project:project_detail' project_likes.slug %}" class="remove_btn"><i class="bi bi-trash3"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                       
-                      
-                    </div>
-                </div>
-            </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade product-quickview-modal" id="commentQuickView" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-            <div class="account_dashboard_body">
-                <div class="account_dashboard_content">
-                    <div class="account_dashboard_content_header">
-                        تقيماتي
-                    </div>
-                    <div class="content_body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="Reviewed" role="tabpanel" aria-labelledby="Reviewed-tab">
-                                <div class="my_rating_reviews_list">
-
-                                    <div class="my_account_book list-view border_bottom">
-                                        <div class="my_account_book_img">
-                                            <img src="./img/home/book5.jpg" alt="cart">
-                                        </div>
-                                        <div class="my_account_book_content">
-                                            <a href="product-single.html">
-                                                <div class="my_account_book_title">اسم المشروع
-                                                </div>
-                                            </a>
-                                            <div class="book_rating">
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <div>5 <small class="small ms-2">(لقد قيمت هذا المشروع)</small>
-                                                </div>
-                                            </div>
-                                            <div class="source">
-                                                هذا المشروع رائع ويستحق ان يصبح احسن مشروع هذا العام لانه ساعد الطلاب
-                                            </div>
-                                            <a href="product-single.html#product_review" class="item_link mt-2">تعديل التعليق</a>
-                                        </div>
-                                    </div>
-                                    <div class="my_account_book list-view border_bottom">
-                                        <div class="my_account_book_img">
-                                            <img src="./img/home/book5.jpg" alt="cart">
-                                        </div>
-                                        <div class="my_account_book_content">
-                                            <a href="product-single.html">
-                                                <div class="my_account_book_title">عنوان المشروع
-                                                </div>
-                                            </a>
-                                            <div class="book_rating">
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <div>5 <small class="small ms-2">(لقد قيمت هذا المشروع)</small>
-                                                </div>
-                                            </div>
-                                            <div class="source">
-                                                هذا المشروع رائع ويستحق ان يصبح احسن مشروع هذا العام لانه ساعد الطلاب
-                                            </div>
-                                            <a href="product-single.html#product_review" class="item_link mt-2">تعديل التعليق</a>
-                                        </div>
-                                    </div>
-                                    <div class="my_account_book list-view border_bottom">
-                                        <div class="my_account_book_img">
-                                            <img src="./img/home/book6.jpg" alt="cart">
-                                        </div>
-                                        <div class="my_account_book_content">
-                                            <a href="product-single.html">
-                                                <div class="my_account_book_title">عنوان المشروع
-                                                </div>
-                                            </a>
-                                           
-                                            <div class="book_rating">
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <div>5 <small class="small ms-2">(لقد قيمت هذا المشروع)</small>
-                                                </div>
-                                            </div>
-                                            <div class="source">
-                                                هذا المشروع رائع ويستحق ان يصبح احسن مشروع هذا العام لانه ساعد الطلاب
-                                            </div>
-                                            <a href="product-single.html#product_review" class="item_link mt-2">تعديل التعليق</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="my_account_book list-view pb-0 mb-0">
-                                        <div class="my_account_book_img">
-                                            <img src="./img/home/book6.jpg" alt="cart">
-                                        </div>
-                                        <div class="my_account_book_content">
-                                            <a href="product-single.html">
-                                                <div class="my_account_book_title">عنوان المشروع
-                                                </div>
-                                            </a>
-                                           
-                                            <div class="book_rating">
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <div>5 <small class="small ms-2">(لقد قيمت هذا المشروع)</small>
-                                                </div>
-                                            </div>
-                                            <div class="source">
-                                                هذا المشروع رائع ويستحق ان يصبح احسن مشروع هذا العام لانه ساعد الطلاب
-                                            </div>
-                                            <a href="product-single.html#product_review" class="item_link mt-2">تعديل التعليق</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
-
 
         <!-- author single area  -->
         <section class="bj_author_single_area sec_padding pb-0" data-bg-color="#f5f5f5">
@@ -290,22 +121,10 @@
                             </div>
                             <div class="sidebar_widget_body p-0">
                                 <ul class="sidebar_widget_menu">
-                                    <li><a class="" href="/accounts/profile/">البيانات الشخصيه</a></li>
-                                    {% if not user.is_staff %}
-                                    <li><a href="#"  id="user_like" data-bs-toggle="modal" data-bs-target="#productQuickView" type="button" role="tab" aria-controls="users_like" aria-selected="false">المشاريع المفضله</a></li>
-                                    {% endif %}
-                                    {% if user.is_staff %}
-                                    <li><a href="{% url 'project:pending_projects' %}">المشاريع المعلقه</a></li>
-                                    {% endif %}
-                                    {% if user.is_staff %}
-                                    <li><a href="{% url 'upload_excel' %}"> اضف طلاب </a></li>
-                                    {% endif %}
-                                    {% if user.is_authenticated and user.profile.is_leader %}
-                                    <li><a href="{% url 'project:add_project' %}">ارسال المشروع</a></li>
-                                    {% endif %}
-                                    {% if not user.is_staff %}
-                                    <li><a data-bs-toggle="modal" data-bs-target="#commentQuickView" > التعلقات</a></li>
-                                    {% endif %}
+                                    <li><a class="active " href="my-account.html">البيانات الشخصيه</a></li>
+                                    <li><a href="my-wishlist.html">المشاريع المفضله</a></li>
+                                    <li><a href="my-wishlist.html">ارسال المشروع</a></li>
+                                    <li><a href="my-rating-reviews.html">التقيمات والمراجعات</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -340,12 +159,8 @@
                                 <!-- User Information -->
                                 <ul class="book_info">
                                     <li><span>المسمي الوظيفي:</span> {{ user.profile.job_title|default:"Not specified" }}</li>
-                                    <li><span>الرقم التعريفي:</span> {{ user.profile.national_id }}</li>
-                                    {% if not user.is_staff %}
                                     <li><span>السنه الدراسيه:</span> {{ user.profile.grade|default:"Not a student" }}</li>
                                     <li><span>الشعبه:</span> {{ user.profile.department|default:"Not specified" }}</li>
-                                    {% endif %}
-                                    <li><span>تاريخ الميلاد:</span> {{ user.profile.date_of_birth|date:"Y-m-d"|default:"Not provided" }}</li>
                                     <li><span>رقم الهاتف:</span> {{ user.profile.phone_number|default:"Not provided" }}</li>
                                     <li><span>العنوان:</span> {{ user.profile.address|default:"Not specified" }}</li>
                                    
@@ -412,22 +227,22 @@
                                         <div class="award_list_item mb-4 p-3 border rounded shadow-sm">
                                             <h5 class="mb-2">{{ experience.company }} - {{ experience.position }}</h5>
                                             <ul class="list-unstyled book_meta mb-3">
-                                                <li><strong>الفتره: </strong> 
+                                                <li><strong>الفتره:</strong> 
                                                     {{ experience.from_date|date:"Y" }}
                                                     {% if experience.to_date %} - {{ experience.to_date|date:"Y" }}{% else %} - Present{% endif %}
                                                 </li>
-                                                <li><strong>أفضل مشروع: </strong> 
+                                                <li><strong>أفضل مشروع:</strong> 
                                                     {{ experience.projects_worked_name }}
                                                     {% if experience.projects_worked_url %}
                                                         (<a href="{{ experience.projects_worked_url }}" target="_blank">View</a>)
                                                     {% endif %}
                                                 </li>
-                                                <li><strong>وصف: </strong> 
+                                                <li><strong>وصف:</strong> 
                                                     {{ experience.description|truncatewords:25 }}
                                                 </li>
                                             </ul>
                                             <!-- Buttons -->
-                                            <div class="d-flex justify-content-around">
+                                            <div class="d-flex justify-content-end">
                                                 <a href="{% url 'update_experience' experience.id %}" class="btn btn-primary btn-sm me-2">تعديل</a>
                                                <!-- Add Delete Button -->
                                                 <form action="{% url 'delete_experience' experience.id %}" method="POST" style="display:inline;">
@@ -452,8 +267,6 @@
                             </marquee>
                         </div>
                     </div>
-                    </div>
-                </div>
                 </div>
             </div>
         </section>
@@ -462,7 +275,6 @@
         </section>
         <!-- author single area  -->
         <!-- new product area  -->
-        {% if not user.is_staff %}
         <section class="bj_new_product_area_four">
             <div class="container">
                 <div class="section_title text-center">
@@ -497,6 +309,5 @@
                 </div>
             </div>
         </section>
-        {% endif %}
         <!-- new product area  -->
         {% endblock body %}
