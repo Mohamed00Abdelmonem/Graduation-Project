@@ -84,31 +84,6 @@
                                         </div>
                                     </form>
                                 </li>
-                                {% if user.is_authenticated %}
-                                <i class="nav-item user ms-3">
-                                    <a  href="{% url 'logout' %}" class="nav-link" title="Logout"> 
-                                        <li class="fas fa-sign-out-alt"></li>
-                                    </a>
-                                </i>
-                                {% else %}
-                                <i class="nav-item user ms-3">
-                                    <a  href="{% url 'login' %}" class="nav-link" title="Login"> 
-                                        <li class="fas fa-sign-in-alt"></li>
-                                    </a>
-                                </i>
-                                {% endif %}
-                
-                
-                                
-                
-                                <!-- User Account -->
-                                {% if user.is_authenticated %}
-                                <li class="nav-item user ms-3">
-                                    <a class="nav-link" href="/accounts/profile">
-                                        <i class="icon-user"></i> <!-- User Icon -->
-                                    </a>
-                                </li>
-                                {% endif %}
                                 <!-- Pending Projects (for Staff) -->
                                 {% if user.is_staff %}
                                     <li class="nav-item shpping-cart dropdown submenu">
@@ -119,6 +94,14 @@
                                     </li>
                                 {% endif %}
                                 
+                                <!-- User Account -->
+                                {% if user.is_authenticated %}
+                                <li class="nav-item user ms-3">
+                                    <a class="nav-link" href="/accounts/profile">
+                                        <i class="icon-user"></i> <!-- User Icon -->
+                                    </a>
+                                </li>
+                                {% endif %}
                                 <!-- Add Project Button (for Leaders) -->
                                 {% if user.is_authenticated and user.profile.is_leader %}
                                         <li class="nav-item user ms-3" class="nav-item">
@@ -135,6 +118,20 @@
                                                 <i class="fas fa-file-upload"></i> <!-- Upload Excel Icon -->
                                             </a>
                                         </li>
+                                {% endif %}
+
+                                {% if user.is_authenticated %}
+                                                <i class="nav-item user ms-3">
+                                                    <a  href="{% url 'logout' %}" class="nav-link" title="Logout"> 
+                                                        <li class="fas fa-sign-out-alt"></li>
+                                                    </a>
+                                                </i>
+                                {% else %}
+                                <i class="nav-item user ms-3">
+                                        <a  href="{% url 'login' %}" class="nav-link" title="Login"> 
+                                            <li class="fas fa-sign-in-alt"></li>
+                                        </a>
+                                </i>
                                 {% endif %}
                             </ul>
                             <ul class="navbar-nav menu w_menu ms-auto me-auto">
@@ -157,7 +154,7 @@
                                         <li class="nav-item">
                                             <a href="/accounts/profile/" class="nav-link">البيانات الشخصيه</a>
                                         </li>
-                                                {% if  user.is_staff %}
+                                                {% if user.is_staff %}
                                                     <li class="nav-item">
                                                         <a href="{% url 'upload_excel' %}" class="nav-link">إضافة طلاب</a>
                                                     </li>
@@ -177,7 +174,7 @@
                                 </li>
                                 {%endif%}
                                 <li class="nav-item dropdown mega_menu tab-demo">
-                                    <a class="nav-link" href="#">معلومات الموقع
+                                    <a class="nav-link" href="about.html">معلومات الموقع
                                     </a>
                                 </li>
                             </ul>

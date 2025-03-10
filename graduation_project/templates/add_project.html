@@ -290,6 +290,56 @@
                             {% endif %}
                         </div>
                     
+
+                        <!-- الفيديو -->
+                        <div class="form-group">
+                            <label for="id_video">رابط الفيديو</label>
+                            <input type="file" name="video" accept="video/*">
+                            {% if form.video.errors %}
+                                <div class="alert alert-danger">{{ form.video.errors }}</div>
+                            {% endif %}
+                        </div>
+                        
+
+                         
+                        
+                        
+                        <!-- الصور -->
+                       <div class="form-group">
+                        <label for="id_images">صور المشروع (يمكنك تحميل حتى 4 صور)</label>
+                        <input 
+                            type="file" 
+                            class="form-control-file" 
+                            id="id_images" 
+                            name="images" 
+                            multiple 
+                            accept="image/*"
+                            onchange="validateImageCount(this)"
+                        >
+                        {% if form.images.errors %}
+                            <div class="alert alert-danger">{{ form.images.errors }}</div>
+                        {% endif %}
+                    </div>
+                     
+                    
+                    {% comment %} // Validate Image Count {% endcomment %}
+        <script>
+            function validateImageCount(input) {
+            if (input.files.length > 4) {
+                alert('يمكنك تحميل حتى 4 صور فقط.');
+                        input.value = ''; // Clear the input
+                    }
+                }
+            
+        </script>
+
+
+
+
+
+
+
+        
                         <!-- زر الإرسال -->
                         <button type="submit" class="btn btn-primary">إرسال المشروع</button>
                     </div>

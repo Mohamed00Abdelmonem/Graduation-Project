@@ -1503,9 +1503,6 @@ ul.ordered-list li::before {
   display: inline-block;
   margin-right: 0;
 }
-.tok .slick-track {
-  width: 100% !important;
-}
 .navbar .search_cart .search a.nav-link {
   font-size: 16px;
   position: relative;
@@ -1528,7 +1525,7 @@ ul.ordered-list li::before {
 }
 .navbar .search_cart .shpping-cart .num {
   position: absolute;
-  width: 30px;
+  width: 16px;
   height: 16px;
   border-radius: 50%;
   background: #202124;
@@ -7497,9 +7494,8 @@ input::-webkit-inner-spin-button {
   font-weight: 600;
 }
 .reviews-item .review-text .small-2 {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 26px;
-  color:#ffffff9e;
 }
 .reviews-item .review-text .r-icon {
   font-weight: 400;
@@ -7513,7 +7509,7 @@ input::-webkit-inner-spin-button {
 }
 .reviews-item .review-text .r-icon span {
   font-weight: 400;
-  font-size: 20px;
+  font-size: 14px;
   line-height: 22px;
   color: #b9b9b9;
 }

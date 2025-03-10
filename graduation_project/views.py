@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.conf import settings 
 from django.db.models import Q, Count
-from .models import GraduationProject, Category, Review
+from .models import GraduationProject, Category, Review, ProjectImages
 from accounts.models import UserProfile
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -159,12 +159,15 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse
+from django.views import generic
+from django.contrib.auth.mixins import UserPassesTestMixin
+from .models import GraduationProject, ProjectImages
 
 class AddProject(UserPassesTestMixin, generic.CreateView):
     model = GraduationProject
     fields = [
-        'title', 'description', 'sub_description', 'graduation_year', 'category', 
-        'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video'
+        'title', 'title_ar', 'description', 'sub_description', 'graduation_year', 
+        'category', 'doctor', 'students', 'supervisors', 'book_pdf', 'video'
     ]
     template_name = "add_project.html"
     success_url = '/'  # Use reverse_lazy for success URL
@@ -173,17 +176,24 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
         # Check if the leader has already added a project
         existing_project = GraduationProject.objects.filter(author=self.request.user).exists()
         if existing_project:
-            # Display an error message at the top of the page
             messages.error(self.request, 'لقد قمت بإضافة مشروع واحد بالفعل، لا يمكنك إضافة أكثر من مشروع.')
-            # Invalidate the form and stay on the same page
             return self.form_invalid(form)
 
         # Set the author and status before saving the form
         form.instance.author = self.request.user
         form.instance.status = 'pending'  # Set status to pending
 
-        # Save the form and get the response
-        response = super().form_valid(form)
+        # Save the form and get the project instance
+        project = form.save()  # Save the form first to get the project instance
+
+        # Handle uploaded images
+        images = self.request.FILES.getlist('images')
+        if len(images) > 4:
+            messages.error(self.request, 'يمكنك تحميل حتى 4 صور فقط.')
+            return self.form_invalid(form)
+
+        for image in images:
+            ProjectImages.objects.create(project=project, image=image)
 
         # Send email notification to the leader
         send_mail(
@@ -197,8 +207,7 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
         # Add a success message to be displayed on the same page
         messages.success(self.request, 'تم إرسال المشروع بنجاح! سيتم مراجعته من قبل المشرف.')
 
-        return response  # Return the response after sending the email
-
+        return super().form_valid(form)
 
     def get_success_url(self):
         # Redirect to the success_create_project page only if the form is valid
@@ -207,7 +216,6 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
     def test_func(self):
         # Only allow access if the user is a leader
         return self.request.user.profile.is_leader
-
 # ___________________________________________________________________________________
 
 

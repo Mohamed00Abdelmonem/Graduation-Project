@@ -19,17 +19,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Modal -->
-                            <div class="modal fade product-quickview-modal" id="videoQuickView" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog  modal-dialog-centered">
-                                    <div class="modal-content p-3">
-                                        <video width="100%" controls>
-                                            <source src="{{ object.video.url }}" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
-                                </div>
-                            </div>
 
                         <div class="product_details_sidebar">
                             <a class="details_header" data-bs-toggle="collapse" href="#product_details_collapse" role="button" aria-expanded="false" aria-controls="product_details_collapse">
@@ -66,22 +55,6 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">اللغات المستخدمه :</span>
-                                        <div class="product_details_section_value">
-                                            <a href="https://www.packtpub.com/en-us/data/language/python" class="fw-600">
-                                                Python (Expert)
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product_details_section_content mb-3">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#videoQuickView" class="video-container">
-                                            <video width="100%" controls height="150px">
-                                                <source src="{{ object.video.url }}" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </a>
-                                    </div>
                                     {% comment %} <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">Category :</span>
                                         <div class="product_details_section_value">
@@ -90,6 +63,14 @@
                                             </a>
                                         </div>
                                     </div> {% endcomment %}
+                                    <div class="product_details_section_content mb-3">
+                                        <span class="product_details_section_key">اللغات المستخدمه :</span>
+                                        <div class="product_details_section_value">
+                                            <a href="https://www.packtpub.com/en-us/data/language/python" class="fw-600">
+                                                Python (Expert)
+                                            </a>
+                                        </div>
+                                    </div>
                                     {% comment %} <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">Concepts :</span>
                                         <div class="product_details_section_value">
@@ -115,35 +96,23 @@
                     </div>
                     <div class="col-xl-9">
                         <div class="bj_book_single me-xl-3">
-                            <div class="bj_book_img flip col-xl-6" style="margin-left:10px">
+                            <div class="bj_book_img flip">
+                                <div class="front"><img class="img-fluid" src="assets/img/book-single1.jpg" alt="">
+                                </div>
                                 {% if object.book_pdf %}
-                                <a href="{{object.book_pdf.url}}" tabindex="-1" data-bs-toggle="modal" data-bs-target="#productQuickView">           
-                                 {% if  object.images %}
-                                 <img class="img-fluid" id="mainImage" style="height:290px" src="{{object.images.url}}" alt="">
-                                 
-                                 {% endif %}
+                                <a href="{{object.book_pdf.url}}" tabindex="-1">           
+                                    <img class="img-fluid" src="{{object.images.url}}" alt="">
                                 </a>
+                               
+                                
+                                <a class="" href="{{object.book_pdf.url}}"> </a>
                                 {% else %}
                                 {% endif %}
-                                
                                 <div class="pr_ribbon">
                                     <span class="product-badge">👁️ مشاهده: {{object.view_count|intcomma  }}</span>
                                 </div>
-                                <div class="special-offers-page-select mt-4 d-flex">
-                                    {% for project_image in object.project_image.all %}
-
-                                        <img class="img-fluid" onClick="changeImage('{{ project_image.image.url}}')" style="margin-left:15px; width:22% " src="{{ project_image.image.url}}" alt="">
-                                 
-                                    {% endfor %}             
-                                </div>
-
                             </div>
-                            <script>
-                                function changeImage(imageSrc) {
-                                    document.getElementById('mainImage').src = imageSrc;
-                                }
-                            </script>
-                            <div class="bj_book_details text-center col-lg-6">
+                            <div class="bj_book_details text-center">
                                 <a data-bs-toggle="modal" data-bs-target="#productQuickView" class="" style="font-size:24px">{{object.title}}</a>
                                 <ul class="list-unstyled book_meta">
                                     {% comment %} <li>By:<a href="author-single.html">Phillip Siphron</a></li> {% endcomment %}
@@ -167,6 +136,8 @@
                                 <p>{{object.sub_description}}.</p>
                                 <div class="product_meta d-flex justify-content-around list-unstyled">
                                     <span>تاريخ النشر:{{object.created_at}}</span>
+                                    {% comment %} <li><span>Print length:</span>320 pages</li> {% endcomment %}
+                                    <span>اللغه:عربي </span>
                                     <span>فئه:<a href="">{{object.category}}</a></span>
                                 </div>
                                     {% comment %} <a href="#" class="bj_theme_btn strock_btn flip_btn">Flip to Back</a> {% endcomment %}
@@ -318,7 +289,7 @@
                                                 {% comment %} <h3 class="postbox__comment-form-title">Review ({{ object.reviews.count }})</h3> {% endcomment %}
                                                 <div class="row">
                                                     <div class="col-xxl-12">
-                                                        <div class="postbox__comment-input" style="width:750px">
+                                                        <div class="postbox__comment-input">
                                                             <textarea name="comments" id="comment" class="w-100" placeholder="Enter your comment..."></textarea>
                                                         </div>
                                                     </div>
@@ -332,11 +303,11 @@
                                         </div>
                                     
                                         <!-- Display Reviews -->
-                                        <div class="review-list" style="background:#004658; display: flex; justify-content: space-between; align-items: center;">
+                                        <div class="review-list">
                                             {% for review in object.reviews.all %}
                                             <div class="d-md-flex align-items-start mb-4">
                                                 <!-- User Profile Image -->
-                                                <div class="m-3">
+                                                <div class="me-3">
                                                     {% if review.reviewer.profile.image %}
                                                     <img src="{{ review.reviewer.profile.image.url }}" alt="User Profile Image" class="rounded-circle" width="50" height="50">
                                                     {% else %}
@@ -349,22 +320,21 @@
                                                 <div class="review-text">
                                                     <p class="r-title sub-regular-2">{{ review.reviewer.get_full_name|default_if_none:user.username }}</p>
                                                     <div class="r-icon d-flex align-items-center">
-                                                        <span class="ms-2">At {{ review.created_at|date:"F d, Y" }}</span>
+                                                
+                                                        <span class="ms-2 text-muted">At {{ review.created_at|date:"F d, Y" }}</span>
                                                     </div>
                                                     <p class="small-2 mb-3">{{ review.comments }}</p>
-                                                </div>
-                                                </div>
-
                                                     <!-- Delete Button (Only for the Owner) -->
                                                     {% if request.user == review.reviewer %}
                                                     <form method="post" action="{% url 'project:delete_review' object.slug review.id %}" style="display: inline;">
                                                         {% csrf_token %}
-                                                        <button type="submit" class="btn btn-danger btn-sm delete-btn m-3" title="Delete Review">
+                                                        <button type="submit" class="btn btn-danger btn-sm delete-btn" title="Delete Review">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                     {% endif %}
 
+                                                </div>
                                             </div>
                                             {% empty %}
                                             <div class="text-center">
@@ -374,7 +344,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {% comment %} <div class="tab-pane fade show active" id="users_like" role="tabpanel" aria-labelledby="product_description-tab">
+                                <div class="tab-pane fade show active" id="users_like" role="tabpanel" aria-labelledby="product_description-tab">
                                     <div class="product_book_content_details">
                                         <div>
                                             <h5 class="content_header mb-2"> المستخدمون الذين أبدوا إعجابهم بهذا المنشور:</h5>
@@ -385,7 +355,7 @@
                                         <div>
                                         </div>
                                     </div>
-                                </div> {% endcomment %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -408,10 +378,10 @@
                         <div class="bj_new_pr_item mb-0 wow fadeInUp" data-wow-delay="0.2s">
                            
 
-                            <a href="#" class="img"  style="height:130px" ><img src="{{project.images.url}}" alt="book"></a>
+                            <a href="#" class="img"><img src="{{project.images.url}}" alt="book"></a>
                             <div class="bj_new_pr_content">
                                 <a href="{% url 'project:project_detail' project.slug%}">
-                                    <h4 class="bj_new_pr_title">{{project|truncatechars:22}}</h4>
+                                    <h4 class="bj_new_pr_title">{{project}}</h4>
                                 </a>
                                 <div class="bj_pr_meta d-flex">
                                     <div class="norm_text">{{project.created_at.date}}</div>
