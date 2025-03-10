@@ -180,57 +180,88 @@
                                     {% endfor %}
                                 </div>
 
-                                <!-- ملف PDF -->
-                                <div class="form-group">
-                                    <label for="id_book_pdf">ملف PDF</label>
-                                    <input type="file" class="form-control-file" id="id_book_pdf" name="book_pdf">
-                                    {% if form.book_pdf.errors %}
-                                        <div class="alert alert-danger">{{ form.book_pdf.errors }}</div>
-                                    {% endif %}
-                                </div>
-
-                                <!-- الصور -->
-                                <div class="form-group">
-                                    <label for="id_images">صور المشروع (يمكنك تحميل حتى 4 صور)</label>
-                                    <input 
-                                        type="file" 
-                                        class="form-control-file" 
-                                        id="id_images" 
-                                        name="images" 
-                                        multiple 
-                                        accept="image/*"
-                                        onchange="validateImageCount(this)"
-                                    >
-                                    {% if form.images.errors %}
-                                        <div class="alert alert-danger">{{ form.images.errors }}</div>
-                                    {% endif %}
-                                </div>
-
 
 
 
                                 
-                                 <!-- الصور -->
-                                <div class="form-group">
-                                    <label for="id_images">الصور</label>
-                                    <input type="file" class="form-control-file" id="id_images" name="images" multiple required>
-                                    {% if form.images.errors %}
-                                        <div class="alert alert-danger">{{ form.images.errors }}</div>
-                                    {% endif %}
+                                <!-- ملف PDF -->
+                        <div class="form-group">
+                            <label for="id_book_pdf">ملف PDF</label>
+                            {% if existing_book_pdf %}
+                                <p>الملف الحالي: <a href="{{ existing_book_pdf }}" target="_blank">عرض الملف</a></p>
+                            {% endif %}
+                            <input type="file" class="form-control-file" id="id_book_pdf" name="book_pdf">
+                            {% if form.book_pdf.errors %}
+                                <div class="alert alert-danger">{{ form.book_pdf.errors }}</div>
+                            {% endif %}
+                        </div>
+
+
+
+
+
+
+                        <!--  الصوره الحاليه -->
+                        <div class="preview">
+                            {% if form.images.value %}
+                            {% comment %} <img class="profile-picture" src="{{ form.instance.images.url }}" alt="Profile Picture"> {% endcomment %}
+                            {% endif %}
+                        </div>
+                        <div class="upload_btn">
+                            تحميل صورة جديدة
+                            {{ form.images }}
+                        </div>
+
+
+
+
+
+
+                        <!-- الصور -->
+                        <div class="form-group">
+                            <label for="id_images">صور المشروع (يمكنك تحميل حتى 4 صور)</label>
+                            {% if existing_images %}
+                                <div>
+                                    <p>الصور الحالية:</p>
+                                    <div style="display: flex; gap: 10px;">
+                                        {% for image in existing_images %}
+                                            <img src="{{ image.image.url }}" alt="صورة المشروع" style="width: 100px; height: 100px; object-fit: cover;">
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                    
+                            {% endif %}
+                            <input 
+                                type="file" 
+                                class="form-control-file" 
+                                id="id_images" 
+                                name="images" 
+                                multiple 
+                                accept="image/*"
+                                onchange="validateImageCount(this)"
+                            >
+                            {% if form.images.errors %}
+                                <div class="alert alert-danger">{{ form.images.errors }}</div>
+                            {% endif %}
+                        </div>
 
 
 
+                                                        
 
-                                <!-- الفيديو -->
-                                <div class="form-group">
-                                    <label for="id_video">رابط الفيديو</label>
-                                    <input type="file" name="video" accept="video/*">
-                                    {% if form.video.errors %}
-                                        <div class="alert alert-danger">{{ form.video.errors }}</div>
-                                    {% endif %}
-                                </div>
+                                                        <!-- الفيديو -->
+                        <div class="form-group">
+                            <label for="id_video"> الفيديو</label>
+                            {% if existing_video %}
+                                <p>الفيديو الحالي: <a href="{{ existing_video }}" target="_blank">عرض الفيديو</a></p>
+                            {% endif %}
+                            <input type="file" name="video" accept="video/*">
+                            {% if form.video.errors %}
+                                <div class="alert alert-danger">{{ form.video.errors }}</div>
+                            {% endif %}
+                        </div>
+
+
+
 
                                 <!-- زر التحديث -->
                                 <button type="submit" class="btn btn-primary">تحديث المشروع</button>

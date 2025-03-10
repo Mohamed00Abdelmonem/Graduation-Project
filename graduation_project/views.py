@@ -155,6 +155,8 @@ def delete_review(request, slug, review_id):
 
 
 # __________________________________________________________________________________
+
+
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -216,32 +218,73 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
     def test_func(self):
         # Only allow access if the user is a leader
         return self.request.user.profile.is_leader
-# ___________________________________________________________________________________
+    
 
+# ___________________________________________________________________________________
 
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views import generic
-from .models import GraduationProject
-
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib import messages
+from .models import GraduationProject, ProjectImages
 class UpdateProject(UserPassesTestMixin, generic.UpdateView):
     model = GraduationProject
     fields = [
-        'title', 'description', 'sub_description', 'graduation_year', 'category', 
-        'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video'
+        'title', 'title_ar', 'description', 'sub_description', 'graduation_year', 
+        'category', 'doctor', 'students', 'supervisors', 'book_pdf', "images", 'video'
     ]
     template_name = "update_project.html"
     success_url = reverse_lazy('profile')  # Use reverse_lazy for dynamic URLs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        project = self.get_object()
+
+        # Add existing images to the context
+        context['existing_images'] = ProjectImages.objects.filter(project=project)
+
+        # Add existing book_pdf and video URLs to the context
+        if project.book_pdf:
+            context['existing_book_pdf'] = project.book_pdf.url
+        if project.video:
+            context['existing_video'] = project.video.url
+
+        return context
+
     def form_valid(self, form):
         # Save the form and get the project instance
-        response = super().form_valid(form)
-        
-        # Update the project status to 'pending' after editing
-        self.object.status = 'pending'
-        self.object.save()
+        project = form.save()
 
-        return response
+        # Handle uploaded images
+        images = self.request.FILES.getlist('images')
+        if len(images) > 4:
+            messages.error(self.request, 'يمكنك تحميل حتى 4 صور فقط.')
+            return self.form_invalid(form)
+
+        # Delete existing images and add new ones
+        ProjectImages.objects.filter(project=project).delete()
+        for image in images:
+            ProjectImages.objects.create(project=project, image=image)
+
+        # Update the project status to 'pending' after editing
+        project.status = 'pending'
+        project.save()
+
+        # Send email notification to the leader
+        send_mail(
+            'تم تحديث مشروع التخرج',
+            'تم تحديث مشروعك بنجاح وسيتم مراجعته من قبل المشرف.',
+            settings.EMAIL_HOST_USER,
+            [self.request.user.email],
+            fail_silently=False,
+        )
+
+        # Add a success message to be displayed on the same page
+        messages.success(self.request, 'تم تحديث المشروع بنجاح! سيتم مراجعته من قبل المشرف.')
+
+        return super().form_valid(form)
 
     def test_func(self):
         # Only the project author (leader) or staff members can update projects
