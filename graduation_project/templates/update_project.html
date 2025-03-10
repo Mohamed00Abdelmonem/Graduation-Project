@@ -206,6 +206,23 @@
                                     {% endif %}
                                 </div>
 
+
+
+
+                                
+                                 <!-- الصور -->
+                                <div class="form-group">
+                                    <label for="id_images">الصور</label>
+                                    <input type="file" class="form-control-file" id="id_images" name="images" multiple required>
+                                    {% if form.images.errors %}
+                                        <div class="alert alert-danger">{{ form.images.errors }}</div>
+                                    {% endif %}
+                                </div>
+                    
+
+
+
+
                                 <!-- الفيديو -->
                                 <div class="form-group">
                                     <label for="id_video">رابط الفيديو</label>

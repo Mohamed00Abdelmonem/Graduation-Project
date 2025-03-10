@@ -281,14 +281,6 @@
                             {% endif %}
                         </div>
                     
-                        <!-- الفيديو -->
-                        <div class="form-group">
-                            <label for="id_video">رابط الفيديو</label>
-                            <input type="url" class="form-control col-md-6" id="id_video" name="video" value="{{ form.video.value|default_if_none:'' }}" required>
-                            {% if form.video.errors %}
-                                <div class="alert alert-danger">{{ form.video.errors }}</div>
-                            {% endif %}
-                        </div>
                     
 
                         <!-- الفيديو -->

@@ -167,7 +167,7 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
     model = GraduationProject
     fields = [
         'title', 'title_ar', 'description', 'sub_description', 'graduation_year', 
-        'category', 'doctor', 'students', 'supervisors', 'book_pdf', 'video'
+        'category', 'doctor', 'students', 'supervisors', "images", 'book_pdf', 'video'
     ]
     template_name = "add_project.html"
     success_url = '/'  # Use reverse_lazy for success URL
