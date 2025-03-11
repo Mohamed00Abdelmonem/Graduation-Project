@@ -57,7 +57,7 @@
                                 <!-- وصف المشروع -->
                                 <div class="form-group col-md-4">
                                     <label for="id_description">وصف المشروع</label>
-                                    <textarea class="form-control" id="id_description" name="description" style="height: 165px" rows="5" required>{{ form.description.value|default_if_none:'' }}</textarea>
+                                    <textarea class="form-control" id="id_description" name="description" rows="5" required>{{ form.description.value|default_if_none:'' }}</textarea>
                                     {% if form.description.errors %}
                                         <div class="alert alert-danger">{{ form.description.errors }}</div>
                                     {% endif %}
@@ -66,7 +66,7 @@
                                 <!-- وصف اختصار المشروع -->
                                 <div class="form-group col-md-4">
                                     <label for="id_sub_description">وصف اختصار المشروع</label>
-                                    <textarea class="form-control" id="id_sub_description" name="sub_description" style="height: 165px" rows="5" required>{{ form.sub_description.value|default_if_none:'' }}</textarea>
+                                    <textarea class="form-control" id="id_sub_description" name="sub_description" rows="5" required>{{ form.sub_description.value|default_if_none:'' }}</textarea>
                                     {% if form.sub_description.errors %}
                                         <div class="alert alert-danger">{{ form.sub_description.errors }}</div>
                                     {% endif %}
@@ -98,36 +98,7 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                                        <!-- JavaScript for Filtering Category -->
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                const searchInputCategory = document.getElementById('id_search_category');
-                                const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
-                                
-                                function filterCategory() {
-                                    const query = searchInputCategory.value.toLowerCase();
-                                    let counter = 0;  // بداية من الصفر
-                                    
-                                    categoryCheckboxes.forEach(function (checkbox) {
-                                        const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
-                                        
-                                        if (query === '' || label.includes(query)) {
-                                            if (counter < 5) {
-                                                checkbox.style.display = 'block';  // عرض العنصر إذا كان يتطابق مع النص المدخل أو البحث فارغ
-                                                counter++;  // زيادة العداد
-                                            } else {
-                                                checkbox.style.display = 'none';  // إخفاء العناصر إذا تم عرض 5 بالفعل
-                                            }
-                                        } else {
-                                            checkbox.style.display = 'none';  // إخفاء العنصر إذا لم يتطابق
-                                        }
-                                    });
-                                }
-                        
-                                searchInputCategory.addEventListener('input', filterCategory);
-                                filterCategory();  // لتصفية العناصر عند تحميل الصفحة
-                            });
-                        </script>
+
                                 <!-- Custom rendering for doctor (dropdown with search) -->
                                 <div class="mb-3 col-md-3">
                                     <label for="id_search_doctor" class="form-label">البحث عن الدكتوره:</label>
@@ -154,40 +125,6 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                                        <!-- JavaScript for Filtering Doctor -->
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                const searchInputDoctor = document.getElementById('id_search_doctor');
-                                const doctorCheckboxes = document.querySelectorAll('.doctor-checkbox');
-                                function filterDoctors() {
-                                    const query = searchInputDoctor.value.toLowerCase();
-                                    if (query === '') {
-                                        let counter = 0;
-                                        doctorCheckboxes.forEach(function (checkbox, index) {
-                                            if (counter < 5) {
-                                                checkbox.style.display = 'block';
-                                                counter++;
-                                            } else {
-                                                checkbox.style.display = 'none';
-                                            }
-                                        });
-                                    }else {
-                                        let counter = 0;  // بداية من الصفر
-                                        doctorCheckboxes.forEach(function (checkbox) {
-                                            const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
-                                            if (label.includes(query) && counter < 5) {
-                                                checkbox.style.display = 'block';  // عرض العنصر إذا كان يتطابق مع النص المدخل
-                                                counter++;  // زيادة العداد
-                                            } else {
-                                                checkbox.style.display = 'none';  // إخفاء العنصر إذا لم يتطابق أو إذا تجاوزنا العدد 5
-                                            }
-                                        });
-                                    }  
-                                }
-                                searchInputDoctor.addEventListener('input', filterDoctors);
-                                filterDoctors();
-                            });
-                        </script>
 
                                 <!-- Custom rendering for students (checkboxes with search) -->
                                 <div class="mb-3 col-md-3">
@@ -215,41 +152,6 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                                        <!-- JavaScript for Filtering Students -->
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                const searchInputStudents = document.getElementById('id_search_students');
-                                const studentCheckboxes = document.querySelectorAll('.student-checkbox');
-                                function filterStudents() {
-                                    const query = searchInputStudents.value.toLowerCase();
-                                    let counter = 0;  // بداية من الصفر
-                                    studentCheckboxes.forEach(function (checkbox) {
-                                        const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
-                                        if (query === '' || label.includes(query)) {
-                                            if (counter < 5) {
-                                                checkbox.style.display = 'block';  // عرض العنصر إذا كان يتطابق مع النص المدخل أو البحث فارغ
-                                                counter++;  // زيادة العداد
-                                            } else {
-                                                checkbox.style.display = 'none';  // إخفاء العناصر إذا تم عرض 5 بالفعل
-                                            }
-                                        } else {
-                                            let counter = 0;  // بداية من الصفر
-                                            studentCheckboxes.forEach(function (checkbox) {
-                                                const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
-                                                if (label.includes(query) && counter < 5) {
-                                                    checkbox.style.display = 'block';  // عرض العنصر إذا كان يتطابق مع النص المدخل
-                                                    counter++;  // زيادة العداد
-                                                } else {
-                                                    checkbox.style.display = 'none';  // إخفاء العنصر إذا لم يتطابق أو إذا تجاوزنا العدد 5
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                                searchInputStudents.addEventListener('input', filterStudents);
-                                filterStudents();  // لتصفية العناصر عند تحميل الصفحة
-                            });
-                        </script>
 
                                 <!-- Custom rendering for supervisors (checkboxes with search) -->
                                 <div class="mb-3 col-md-3">
@@ -278,46 +180,35 @@
                                     {% endfor %}
                                 </div>
 
-                                                        <!-- JavaScript for Filtering Supervisors -->
-                                                        <script>
-                                                            document.addEventListener('DOMContentLoaded', function () {
-                                                                const searchInputSupervisors = document.getElementById('id_search_supervisors');
-                                                                const supervisorCheckboxes = document.querySelectorAll('.supervisor-checkbox');
-                                                                
-                                                                function filterSupervisors() {
-                                                                    const query = searchInputSupervisors.value.toLowerCase();
-                                                                    let counter = 0;  // بداية من الصفر
-                                                        
-                                                                    supervisorCheckboxes.forEach(function (checkbox) {
-                                                                        const label = checkbox.querySelector('.form-check-label').textContent.toLowerCase();
-                                                                        
-                                                                        if (query === '' || label.includes(query)) {
-                                                                            if (counter < 5) {
-                                                                                checkbox.style.display = 'block';  // عرض العنصر إذا كان يتطابق مع النص المدخل أو البحث فارغ
-                                                                                counter++;  // زيادة العداد
-                                                                            } else {
-                                                                                checkbox.style.display = 'none';  // إخفاء العناصر إذا تم عرض 5 بالفعل
-                                                                            }
-                                                                        } else {
-                                                                            checkbox.style.display = 'none';  // إخفاء العنصر إذا لم يتطابق
-                                                                        }
-                                                                    });
-                                                                }
-                                                        
-                                                                searchInputSupervisors.addEventListener('input', filterSupervisors);
-                                                                filterSupervisors();  // لتصفية العناصر عند تحميل الصفحة
-                                                            });
-                                                        </script>
+
+
+
+                                
+                                <!-- ملف PDF -->
+                        <div class="form-group">
+                            <label for="id_book_pdf">ملف PDF</label>
+                            {% if existing_book_pdf %}
+                                <p>الملف الحالي: <a href="{{ existing_book_pdf }}" target="_blank">عرض الملف</a></p>
+                            {% endif %}
+                            <input type="file" class="form-control-file" id="id_book_pdf" name="book_pdf">
+                            {% if form.book_pdf.errors %}
+                                <div class="alert alert-danger">{{ form.book_pdf.errors }}</div>
+                            {% endif %}
+                        </div>
+
+
+
 
 
 
                         <!--  الصوره الحاليه -->
-                         <div class="preview col-lg-4">
+                        <div class="preview">
                             {% if form.images.value %}
-                            <img class="profile-picture" style="width: 100px; height: 100px;" src="{{ form.instance.images.url }}" alt="Profile Picture">
+                            {% comment %} <img class="profile-picture" src="{{ form.instance.images.url }}" alt="Profile Picture"> {% endcomment %}
                             {% endif %}
-                        </div> 
-                        <div class="upload_btn col-lg-8">
+                        </div>
+                        <div class="upload_btn">
+                            تحميل صورة جديدة
                             {{ form.images }}
                         </div>
 
@@ -327,7 +218,7 @@
 
 
                         <!-- الصور -->
-                        <div class="form-group col-lg-6">
+                        <div class="form-group">
                             <label for="id_images">صور المشروع (يمكنك تحميل حتى 4 صور)</label>
                             {% if existing_images %}
                                 <div>
@@ -352,43 +243,28 @@
                                 <div class="alert alert-danger">{{ form.images.errors }}</div>
                             {% endif %}
                         </div>
-                        <!-- الفيديو -->
-                        <div class="form-group col-lg-6">
-                        <label for="id_video"> الفيديو</label>
-                        {% if existing_video %}
-                        <p>الفيديو الحالي: <a href="{{ existing_video }}" target="_blank">عرض الفيديو</a></p>
-                        {% endif %}
-                        <input type="file" name="video" accept="video/*">
-                        {% if form.video.errors %}
-                        <div class="alert alert-danger">{{ form.video.errors }}</div>
-                        {% endif %}
-                        </div>
-                         
 
 
 
                                                         
 
-                        <!-- ملف PDF -->
-                        <div class="form-group col-lg-4">
-                            <label for="id_book_pdf">ملف PDF</label>
-                            {% if existing_book_pdf %}
-                                <p>الملف الحالي: <a href="{{ existing_book_pdf }}" target="_blank">عرض الملف</a></p>
+                                                        <!-- الفيديو -->
+                        <div class="form-group">
+                            <label for="id_video"> الفيديو</label>
+                            {% if existing_video %}
+                                <p>الفيديو الحالي: <a href="{{ existing_video }}" target="_blank">عرض الفيديو</a></p>
                             {% endif %}
-                            <input type="file" class="form-control-file" id="id_book_pdf" name="book_pdf">
-                            {% if form.book_pdf.errors %}
-                                <div class="alert alert-danger">{{ form.book_pdf.errors }}</div>
+                            <input type="file" name="video" accept="video/*">
+                            {% if form.video.errors %}
+                                <div class="alert alert-danger">{{ form.video.errors }}</div>
                             {% endif %}
                         </div>
 
 
 
 
-
                                 <!-- زر التحديث -->
-                                <div class="button_seo">
-                                    <button type="submit" class="btn seo">إرسال المشروع</button>
-                                     </div>
+                                <button type="submit" class="btn btn-primary">تحديث المشروع</button>
                             </div>
                         </form>
                     </div>
@@ -399,17 +275,8 @@
 </section>
 
 <style>
-    .button_seo{
-        text-align: center;
-    }
-    .seo{
-        background: rgb(0, 70, 88);
-        width: 200px;
-        border-radius: 12px;
-        color: white;
-    }
-    textarea{
-        height:100px
+    textarea {
+        height: 100px;
     }
 </style>
 

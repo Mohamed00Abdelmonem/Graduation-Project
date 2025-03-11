@@ -2,46 +2,58 @@
 {% load static %}
 {% block body %}
 
-                            <!-- Modal -->
-                            <div class="modal fade product-quickview-modal" id="productQuickView" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog  modal-dialog-centered">
-                                    <div class="modal-content p-3">
-                                        <div class="mb-3">
-                                            <label for="rejection_reason_{{ project.id }}" class="form-label">سبب الرفض:</label>
-                                            <textarea name="rejection_reason" id="rejection_reason_{{ project.id }}" class="form-control" rows="3" required></textarea>
-                                            <button type="button" class="btn btn-primary mt-2">ارسال</button>
-                                        </div>  
-                                    </div>
-                                </div>
-                            </div>
+<!-- Modal for Temporary Rejection -->
+{% for project in projects %}
+<div class="modal fade" id="temporaryRejectModal{{ project.id }}" tabindex="-1" aria-labelledby="temporaryRejectModalLabel{{ project.id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+            <div class="mb-3">
+                <form action="{% url 'project:temporary_reject_project' project.id %}" method="POST" class="temporary-reject-form">
+                    {% csrf_token %}
+                    <label for="rejection_reason_{{ project.id }}" class="form-label">سبب الرفض:</label>
+                    <textarea name="rejection_reason" id="rejection_reason_{{ project.id }}" class="form-control" rows="3" required></textarea>
+                    <button type="submit" class="btn btn-primary mt-2">ارسال</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease-in-out;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .btn-success, .btn-danger {
-            margin-right: 5px;
-        }
-        .messages .alert {
-            margin-bottom: 15px;
-        }
-        .project-info {
-            display: flex;
-            justify-content: space-between;
-            {% comment %} align-items: center; {% endcomment %}
-            flex-direction: column;
-        }
-        .project-actions {
-            display: flex;
-            gap: 10px;
-        }
-    </style>
-    <section class="bj_author_single_area sec_padding pb-0" style="padding-top:10rem" data-bg-color="#f5f5f5">
+<!-- Button trigger modal -->
+{% for project in projects %}
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#temporaryRejectModal{{ project.id }}">
+    رفض مؤقت
+</button>
+{% endfor %}
+
+<!-- Rest of your template remains unchanged -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .btn-success, .btn-danger {
+        margin-right: 5px;
+    }
+    .messages .alert {
+        margin-bottom: 15px;
+    }
+    .project-info {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+    .project-actions {
+        display: flex;
+        gap: 10px;
+    }
+</style>
+<section class="bj_author_single_area sec_padding pb-0" style="padding-top:10rem" data-bg-color="#f5f5f5">
     <div class="container text-center">
         <div class="row">
             <div class="col-md-12">
@@ -61,29 +73,28 @@
             </div>
         </div>
 
-          <!-- Search Form -->
-           <div class="row">
-  <div class="mb-4 col-lg-6">
-    <form method="get" action="{% url 'project:pending_projects' %}">
-        <label for="search">ابحث بواسطة العنوان:</label>
-        <input type="text" id="search" name="search" value="{{ search_query }}" placeholder="ادخل عنوان المشروع...">
-        <button type="submit" class="" style="background:#004658; color:white; width:60px; height:30px">بحث</button>
-    </form>
-</div>
+        <!-- Search Form -->
+        <div class="row">
+            <div class="mb-4 col-lg-6">
+                <form method="get" action="{% url 'project:pending_projects' %}">
+                    <label for="search">ابحث بواسطة العنوان:</label>
+                    <input type="text" id="search" name="search" value="{{ search_query }}" placeholder="ادخل عنوان المشروع...">
+                    <button type="submit" class="" style="background:#004658; color:white; width:60px; height:30px">بحث</button>
+                </form>
+            </div>
 
-
-        <!-- Filter Dropdown -->
-        <div class="mb-4 col-lg-6">
-            <form method="get" action="{% url 'project:pending_projects' %}">
-                <label for="status_filter">Filter by Status:</label>
-                <select name="status" id="status_filter" onchange="this.form.submit()">
-                    <option value="all" {% if status_filter == 'all' %}selected{% endif %}>All</option>
-                    <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>قيد الانتظار</option>
-                    <option value="temporary_rejection" {% if status_filter == 'temporary_rejection' %}selected{% endif %}>الرفض المؤقت</option>
-                </select>
-            </form>
+            <!-- Filter Dropdown -->
+            <div class="mb-4 col-lg-6">
+                <form method="get" action="{% url 'project:pending_projects' %}">
+                    <label for="status_filter">Filter by Status:</label>
+                    <select name="status" id="status_filter" onchange="this.form.submit()">
+                        <option value="all" {% if status_filter == 'all' %}selected{% endif %}>All</option>
+                        <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>قيد الانتظار</option>
+                        <option value="temporary_rejection" {% if status_filter == 'temporary_rejection' %}selected{% endif %}>الرفض المؤقت</option>
+                    </select>
+                </form>
+            </div>
         </div>
-    </div>
 
         <!-- Project List -->
         <div class="row">
@@ -111,21 +122,13 @@
                                         <a href="{% url 'project:approve_project' project.id %}" class="btn" style="background-color:rgb(120, 180, 134); color: white; padding: 8px 16px; border: none; border-radius: 4px; text-decoration: none; display: flex; align-items: center;">
                                             <i class="fas fa-check" style="margin-right: 5px;"></i> قبول
                                         </a>
-                                            <form action="{% url 'project:reject_project' project.id %}" method="POST" class="reject-form">
-                                                {% csrf_token %}
-                                                
-                                                <!-- حقل لكتابة سبب الرفض -->
-                                                {% comment %} <div class="mb-3">
-                                                    <label for="rejection_reason_{{ project.id }}" class="form-label">سبب الرفض:</label>
-                                                    <textarea name="rejection_reason" id="rejection_reason_{{ project.id }}" class="form-control" rows="3" required></textarea>
-                                                </div> {% endcomment %}
-
-                                                <!-- زر رفض المشروع -->
-                                                <button type="submit" class="btn btn-danger">رفض</button>
-                                            </form>
-                                            {% comment %} <i class="fas fa-times" style="margin-right: 5px;"></i> Reject {% endcomment %}
-                                            <span data-bs-toggle="tooltip" data-bs-placement="right"><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#productQuickView"> رفض مؤقت </button></span>
-                                        </a>
+                                        <form action="{% url 'project:reject_project' project.id %}" method="POST" class="reject-form">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">رفض</button>
+                                        </form>
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#temporaryRejectModal{{ project.id }}">
+                                            رفض مؤقت
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -143,77 +146,75 @@
     </div>
 </section>
 
+<!-- Pagination -->
+<div class="text-center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination pagi-content">
+            <!-- Previous Page Link -->
+            {% if projects.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ projects.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                        <i class="ti-angle-left"></i> Prev
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link"><i class="ti-angle-left"></i> Prev</span>
+                </li>
+            {% endif %}
 
-    <div class="text-center">
-        <nav aria-label="Page navigation">
-            <ul class="pagination pagi-content">
-                <!-- Previous Page Link -->
-                {% if projects.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ projects.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
-                            <i class="ti-angle-left"></i> Prev
-                        </a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <span class="page-link"><i class="ti-angle-left"></i> Prev</span>
-                    </li>
-                {% endif %}
-        
-                <!-- Show first page and ellipsis if needed -->
-                {% if projects.number > 4 %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">1</a>
-                    </li>
-                    <li class="page-item disabled">
-                        <span class="page-link">...</span>
-                    </li>
-                {% endif %}
-        
-                <!-- Show 3 pages to the left and 3 pages to the right of the current page -->
-                {% for num in projects.paginator.page_range %}
-                    {% if num >= projects.number|add:-3 and num <= projects.number|add:3 %}
-                        {% if projects.number == num %}
-                            <li class="page-item active" aria-current="page">
-                                <span class="page-link">{{ num }}</span>
-                            </li>
-                        {% else %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
-                                    {{ num }}
-                                </a>
-                            </li>
-                        {% endif %}
+            <!-- Show first page and ellipsis if needed -->
+            {% if projects.number > 4 %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">1</a>
+                </li>
+                <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+            {% endif %}
+
+            <!-- Show 3 pages to the left and 3 pages to the right of the current page -->
+            {% for num in projects.paginator.page_range %}
+                {% if num >= projects.number|add:-3 and num <= projects.number|add:3 %}
+                    {% if projects.number == num %}
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                                {{ num }}
+                            </a>
+                        </li>
                     {% endif %}
-                {% endfor %}
-        
-                <!-- Show last page and ellipsis if needed -->
-                {% if projects.number < projects.paginator.num_pages|add:-3 %}
-                    <li class="page-item disabled">
-                        <span class="page-link">...</span>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ projects.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
-                            {{ projects.paginator.num_pages }}
-                        </a>
-                    </li>
                 {% endif %}
-        
-                <!-- Next Page Link -->
-                {% if projects.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ projects.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
-                            Next <i class="ti-angle-right"></i>
-                        </a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <span class="page-link">Next <i class="ti-angle-right"></i></span>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
+            {% endfor %}
+
+            <!-- Show last page and ellipsis if needed -->
+            {% if projects.number < projects.paginator.num_pages|add:-3 %}
+                <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ projects.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                        {{ projects.paginator.num_pages }}
+                    </a>
+                </li>
+            {% endif %}
+
+            <!-- Next Page Link -->
+            {% if projects.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ projects.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.doctor %}&doctor={{ request.GET.doctor }}{% endif %}{% if request.GET.graduation_year %}&graduation_year={{ request.GET.graduation_year }}{% endif %}">
+                        Next <i class="ti-angle-right"></i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Next <i class="ti-angle-right"></i></span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
 {% endblock %}
-
-

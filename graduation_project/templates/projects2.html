@@ -4,6 +4,7 @@
 
 {% block body %}
 
+
     <!-- shop area  -->
     <section class="bj_shop_area sec_padding pb-0" data-bg-color="#f5f5f5">
         <div class="container">
@@ -94,16 +95,8 @@
                         hx-target="#project-list"
                         hx-trigger="keyup changed delay:500ms"
                         value="{{ request.GET.q|default:'' }}"
-                        style="border-radius: 20px;"
                         >
-                    <button type="submit" 
-                    style="
-                        position: absolute;
-                        left: 20px;
-                        width: 50px;
-                        height: 60px;
-                        border: none;
-                    "><i class="ti-search"></i></button>
+                        <button type="submit"><i class="ti-search"></i></button>
                     </form>
                             <!-- Search Results -->
                             <div id="project-list">

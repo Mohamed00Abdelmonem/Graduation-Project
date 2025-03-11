@@ -311,69 +311,60 @@
                                 </div>
                                 <div class="tab-pane fade" id="product_review" role="tabpanel" aria-labelledby="product_review-tab">
                                     <div class="reviews-item" id="scrollspyReviews">
-                                        <div class="d-flex flex-wrap text-center justify-content-between mb-40 gap-3">
-                                            <!-- Review Form -->
-                                            <form id="review-form" class="review-form" method="post" action="{% url 'project:add_review' object.slug %}">
-                                                {% csrf_token %}
-                                                {% comment %} <h3 class="postbox__comment-form-title">Review ({{ object.reviews.count }})</h3> {% endcomment %}
-                                                <div class="row">
-                                                    <div class="col-xxl-12">
-                                                        <div class="postbox__comment-input" style="width:750px">
-                                                            <textarea name="comments" id="comment" class="w-100" placeholder="Enter your comment..."></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xxl-12">
-                                                        <div class="postbox__comment-btn">
-                                                            <button type="submit" class="tp-btn">اضف تعليق</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    
-                                        <!-- Display Reviews -->
-                                        <div class="review-list" style="background:#004658; display: flex; justify-content: space-between; align-items: center;">
-                                            {% for review in object.reviews.all %}
-                                            <div class="d-md-flex align-items-start mb-4">
-                                                <!-- User Profile Image -->
-                                                <div class="m-3">
-                                                    {% if review.reviewer.profile.image %}
-                                                    <img src="{{ review.reviewer.profile.image.url }}" alt="User Profile Image" class="rounded-circle" width="50" height="50">
-                                                    {% else %}
-                                                    <img src="{% static 'img/default-avatar.png'%}" alt="User Profile Image" class="rounded-circle" width="50" height="50">
-
-                                                    {% endif %}
-                                                </div>
-                                    
-                                                <!-- Review Content -->
-                                                <div class="review-text">
-                                                    <p class="r-title sub-regular-2">{{ review.reviewer.get_full_name|default_if_none:user.username }}</p>
-                                                    <div class="r-icon d-flex align-items-center">
-                                                        <span class="ms-2">At {{ review.created_at|date:"F d, Y" }}</span>
-                                                    </div>
-                                                    <p class="small-2 mb-3">{{ review.comments }}</p>
-                                                </div>
-                                                </div>
-
-                                                    <!-- Delete Button (Only for the Owner) -->
-                                                    {% if request.user == review.reviewer %}
-                                                    <form method="post" action="{% url 'project:delete_review' object.slug review.id %}" style="display: inline;">
-                                                        {% csrf_token %}
-                                                        <button type="submit" class="btn btn-danger btn-sm delete-btn m-3" title="Delete Review">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
-                                                    {% endif %}
-
-                                            </div>
-                                            {% empty %}
-                                            <div class="text-center">
-                                                <p class="text-muted">No reviews yet. Be the first to leave a review!</p>
-                                            </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
+                                      <div class="d-flex flex-wrap text-center justify-content-between mb-40 gap-3">
+                                    <!-- Review Form -->
+                                    <form id="review-form" class="review-form" method="post" action="{% url 'project:add_review' object.slug %}">
+                                    {% csrf_token %}
+                                       <div class="row">
+                                         <div class="col-xxl-12">
+                                         <div class="postbox__comment-input" style="width:750px">
+                                          <textarea name="comments" id="comment" class="w-100" style="border-radius: 10px;" placeholder="اضف تعليق..."></textarea>
+                                 </div>
+                                   </div>
+                                    <div class="col-xxl-12">
+                                      <div class="postbox__comment-btn">
+                                <button type="submit" class="tp-btn btn btn-success">اضف تعليق</button>
+                                   </div>
+                                     </div> </div>
+                                </form>  </div>
+                                    <!-- Display Reviews -->
+                                     {% for review in object.reviews.all %}
+                                      <div class="review-list mb-3" style="background:#004658; border-radius: 10px; padding-right: 15px; display: flex; justify-content: space-between; align-items: center;">
+                                   <div class="d-md-flex align-items-start mb-4">
+                                     <!-- User Profile Image -->
+                                        <div class="m-3">
+                                    {% if review.reviewer.profile.image %}
+                                  <img src="{{ review.reviewer.profile.image.url }}" alt="User Profile Image" class="rounded-circle" width="50" height="50">
+                                 {% else %}
+                                 <img src="{% static 'img/default-avatar.png'%}" alt="User Profile Image" class="rounded-circle" width="50" height="50">
+                                    {% endif %}
                                 </div>
+                                <!-- Review Content -->
+                                <div class="review-text">
+                                <p class="r-title sub-regular-2">{{ review.reviewer.get_full_name|default_if_none:user.username }}</p>
+                                                                                       <div class="r-icon d-flex align-items-center">
+                                                                                           <span class="ms-2">At {{ review.created_at|date:"F d, Y" }}</span>
+                                                                                       </div>
+                                                                                       <p class="small-2 mb-3">{{ review.comments }}</p>
+                                                                                   </div>
+                                                                               </div>
+                                                                               <!-- Delete Button (Only for the Owner) -->
+                                                                               {% if request.user == review.reviewer %}
+                                                                                   <form method="post" action="{% url 'project:delete_review' object.slug review.id %}" style="display: inline;">
+                                                                                       {% csrf_token %}
+                                                                                       <button type="submit" class="btn btn-danger btn-sm delete-btn m-3" title="Delete Review">
+                                                                                           <i class="fas fa-trash-alt"></i>
+                                                                                       </button>
+                                                                                   </form>
+                                                                               {% endif %}
+                                                                           </div>
+                                                                           {% empty %}
+                                                                           <div class="text-center">
+                                                                               <p class="" style="font-size: 20px; color: #fff;">No reviews yet. Be the first to leave a review!</p>
+                                                                           </div>
+                                                                       {% endfor %}
+                                                                   </div>
+                                                               </div>
                                 {% comment %} <div class="tab-pane fade show active" id="users_like" role="tabpanel" aria-labelledby="product_description-tab">
                                     <div class="product_book_content_details">
                                         <div>

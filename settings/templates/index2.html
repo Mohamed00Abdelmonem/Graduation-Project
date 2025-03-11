@@ -5,74 +5,63 @@
 
     <!-- Modal -->
     {% for project in projects_main %}
-        <div class="modal fade product-quickview-modal" id="productQuickView{{ project.id }}" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content text-center">
-                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
-                    <div class="bj_book_single flex-column">
-                        <h2>{{ project.title }}</h2>
-                        <div class="row">
-                            <div class="bj_book_img flip col-lg-12" style=" height:275px">
-                                <div class="special-offers-page-select mt-4 d-flex overflow-auto">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                </div>
-                                {% comment %} <div class="pr_ribbon">
-                                    <span class="product-badge">{{ project.graduation_year }}</span>
-                                </div> {% endcomment %}
-                            </div>
+    <div class="modal fade product-quickview-modal" id="productQuickView{{ project.id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+                <div class="bj_book_single flex-column">
+                    <div class="bj_book_img flip" style="width:165px; height:450px">
+                        {% if project.images %}
+                        <a href="{% url 'project:project_detail' project.id %}" class="img-fluid"><img src="{{ project.images.url }}" class="h-100" alt="book"></a>
+                        {% else %}
+                        <a href="#"><img src="" alt="book"></a>
+                        {% endif %}
+                        <div class="pr_ribbon">
+                            <span class="product-badge">{{ project.graduation_year }}</span>
                         </div>
-                        <div class="bj_book_details">
-                            <h2>{{ project.title_ar }}</h2>
-                            <h2>{{ project.title }}</h2>
-                            <p>{{ project.sub_description }}.</p>
-                            <ul class="product_meta list-unstyled p-0 row">
-                                <li class="col-lg-6">تاريخ النشر : {{ project.created_at }}</li>
-                                <li class="col-lg-6">مجال : {{ project.category }}</li>
-                                <li> اعضاء هيئة المعاونه :
-                                    {% if project.supervisors.all %}
-                                        {% for supervisor in project.supervisors.all %}
-                                            {{ supervisor }} |
+                    </div>
+                    <div class="bj_book_details">
+                        {% comment %} <h2>اسم المشروع باللغه العربية</h2> {% endcomment %}
+                        <h2>{{ project.title_ar }}</h2>
+                        <h2>{{ project.title }}</h2>
+                        {% comment %} <ul class="list-unstyled book_meta p-0">
+                            <li style="font-size:18px"> اسم المشرف:<a href="author-single.html">اسم الدكتور </a></li>
+                            <li style="font-size:18px">مجال:<a href="shop-sidebar.html"> {{ project.category }} </a></li>
+                            <li style="font-size:18px">الشعبه العلميه:<a href="shop-sidebar.html"> نظم المعلومات الاداريه </a></li>
+                            <li style="font-size:18px"><a href="#product_review" class="woocommerce-review-link">
+                                <span class="count"> {{ project.likes.count }} </span>اعجاب
+                            </a></li>
+                        </ul> {% endcomment %}
+                        <p>{{ project.sub_description }}.</p>
+                        <ul class="product_meta list-unstyled p-0">
+                            <li><span>تاريخ النشر:</span>{{ project.created_at }}</li>
+                            <li><span>مجال :</span>{{ project.category }}</li>
+                            <li><span>اعضاء هيئة المعاونه:</span>
+                                {% if project.supervisors.all %}
+                                    {% for supervisor in project.supervisors.all %}
+                                        {{ supervisor }}
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="no-data">لا يوجد مشرفين. </span>
+                                {% endif %}
+                            </li>
+                            <li><span> اسماء فريق العمل: </span>
+                                <ul class="p-0">
+                                    {% if project.students.all %}
+                                        {% for student in project.students.all %}
+                                            <li><strong>الاسم:</strong> {{ student }}</li>
                                         {% endfor %}
                                     {% else %}
-                                        <span class="no-data">لا يوجد مشرفين. </span>
+                                        <li class="no-data">لا يوجد طالبه.</li>
                                     {% endif %}
-                                </li>
-                                <li><span> اسماء فريق العمل : </span>
-                                    <ul class="p-0 row">
-                                        {% if project.students.all %}
-                                            {% for student in project.students.all %}
-                                                <li class="col-lg-3 mb-2"> {{ student }}</li>
-                                            {% endfor %}
-                                        {% else %}
-                                            <li class="no-data">لا يوجد طالبه.</li>
-                                        {% endif %}
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <style>
-                            .special-offers-page-select {
-                                white-space: nowrap;
-                            }
-                            .special-offers-page-select img {
-                                display: inline-block; 
-                            }
-                            .overflow-auto {
-                                overflow-x: auto; 
-                            }
-                        </style>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
-                    {% if user.is_authenticated %}
-                    {%endif %}
                 </div>
             </div>
         </div>
+    </div>
     {% endfor %}
 
 
@@ -103,6 +92,11 @@
                         </div>
                         </div>
                     </div>
+                    {% comment %} <div class="col-lg-6 pt-3">
+                            <div class="bj_banner_img pt-5">
+                                <img class="wow fadeInRight" data-wow-delay="0.10s" src="{% static 'img/3.svg' %}" alt="" />                          
+                            </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </section>
@@ -115,6 +109,7 @@
                     <h2 class="title title_two">تصنيف حسب الدكتور</h2>
                 </div>
                 <div class="row wow fadeInUp" data-wow-delay="0.2s">
+                    {% comment %} <div class="row"> {% endcomment %}
                         <div class="col-lg-4">
                             <ul class="nav nav-pills flex-column" style='cursor: pointer;' id="doctor-tabs" role="tablist">
                                 {% for doctor in doctors %}
@@ -154,7 +149,7 @@
                                                         {% endif %}
                                                         </a>
                                                         {% else %}
-                                                        <a href="#">
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#productQuickView">
                                                             {% if project.images %}
                                                             <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
                                                         {% else %}
@@ -260,9 +255,9 @@
                                 <div class="modal-content">
                                     <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
                                     <div class="bj_book_single flex-column">
-                                        <div class="bj_book_img flip" style=" height:400px">
+                                        <div class="bj_book_img flip" style="width:165px; height:450px">
                                             {% if project.images %}
-                                            <img src="{{ project.images.url }}" class="h-100 w-100" alt="book">
+                                            <a href="{% url 'project:project_detail' project.id %}" class="img-fluid"><img src="{{ project.images.url }}" class="h-100" alt="book"></a>
                                             {% else %}
                                             <a href="#"><img src="" alt="book"></a>
                                             {% endif %}
@@ -271,8 +266,16 @@
                                             </div>
                                         </div>
                                         <div class="bj_book_details">
-                                            <h2>{{ project.title_ar }}</h2>
+                                            <h2>اسم المشروع باللغه العربية</h2>
                                             <h2>{{ project.title }}</h2>
+                                            <ul class="list-unstyled book_meta p-0">
+                                                <li style="font-size:18px"> اسم المشرف:<a href="author-single.html">اسم الدكتور </a></li>
+                                                <li style="font-size:18px">مجال:<a href="shop-sidebar.html"> {{ project.category }} </a></li>
+                                                <li style="font-size:18px">الشعبه العلميه:<a href="shop-sidebar.html"> نظم المعلومات الاداريه </a></li>
+                                                <li style="font-size:18px"><a href="#product_review" class="woocommerce-review-link">
+                                                    <span class="count"> {{ project.likes.count }} </span>اعجاب
+                                                </a></li>
+                                            </ul>
                                             <p>{{ project.sub_description }}.</p>
                                             <ul class="product_meta list-unstyled p-0">
                                                 <li><span>تاريخ النشر:</span>{{ project.created_at }}</li>
@@ -300,8 +303,6 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    {% if user.is_authenticated %}
-                                    {%endif %}
                                 </div>
                             </div>
                         </div>

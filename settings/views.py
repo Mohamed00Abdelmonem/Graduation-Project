@@ -12,6 +12,14 @@ from django.db.models import Count
 
 
 
+def about(request):
+    return render(request, 'about.html')
+
+
+# ___________________________________________________________________________________
+
+
+
 def get_top_liked_projects():
     # Fetch the top 10 projects with the most likes
     top_liked_projects = (
