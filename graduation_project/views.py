@@ -188,15 +188,11 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
         # Save the form and get the project instance
         project = form.save()  # Save the form first to get the project instance
 
-        # Handle uploaded images
+       # Handle uploaded images
         images = self.request.FILES.getlist('images')
-        if len(images) > 4:
-            messages.error(self.request, 'يمكنك تحميل حتى 4 صور فقط.')
-            return self.form_invalid(form)
 
         for image in images:
             ProjectImages.objects.create(project=project, image=image)
-
         # Send email notification to the leader
         send_mail(
             'مشروع تخرج جديد للمراجعه',
@@ -259,9 +255,9 @@ class UpdateProject(UserPassesTestMixin, generic.UpdateView):
 
         # Handle uploaded images
         images = self.request.FILES.getlist('images')
-        if len(images) > 4:
-            messages.error(self.request, 'يمكنك تحميل حتى 4 صور فقط.')
-            return self.form_invalid(form)
+
+        for image in images:
+            ProjectImages.objects.create(project=project, image=image)
 
         # Delete existing images and add new ones
         ProjectImages.objects.filter(project=project).delete()
@@ -291,7 +287,17 @@ class UpdateProject(UserPassesTestMixin, generic.UpdateView):
         project = self.get_object()
         return self.request.user == project.author or self.request.user.is_staff
 
-# ___________________________________________________________________________________
+# ______________________________________________________________
+
+
+def delete_proejct(request, slug):
+    project = GraduationProject.objects.get(slug=slug)
+    project.delete()
+    return redirect('profile')
+
+
+
+# _____________________
 
 
 from django.shortcuts import get_object_or_404, redirect
@@ -368,6 +374,7 @@ def reject_project(request, project_id):
     # تغيير حالة المشروع لـ "مرفوض"
     project.status = 'rejected'
     project.save()
+    project.delete()
     # تحديد البيانات الأساسية
     subject = 'تم رفض مشروعك'
     to_email = [project.author.email]  # البريد الإلكتروني للقائد

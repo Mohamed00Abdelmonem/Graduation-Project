@@ -8,6 +8,7 @@ urlpatterns = [
     path('books/', views.ProjectList, name="ProjectList"),
     path('book/<slug:slug>', views.project_detail, name="project_detail"),
     path('project/<slug:slug>/update/', views.UpdateProject.as_view(), name='update_project'),  # تأكد من اسم الرابط
+    path('project/<slug:slug>/delete/', views.delete_proejct, name='delete_project'),  # تأكد من اسم الرابط
     path('book/<slug:slug>/add-review/', views.add_review, name='add_review'),
     path('projects/<slug:slug>/delete-review/<int:review_id>/', views.delete_review, name='delete_review'),
     path('add-project', views.AddProject.as_view(), name="add_project"),

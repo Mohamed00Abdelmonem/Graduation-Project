@@ -355,9 +355,10 @@
                                 <ul class="list-unstyled f_social_round">
                                     <!-- Portfolio Link -->
                                     {% if user.profile.porfolio_link %}
-                                        <li>
+                                        <li style="">
+                                        <li style="">
                                             <a href="{{ user.profile.porfolio_link }}" target="_blank">
-                                                <i class="fa fa-globe"></i>
+                                                <i class="bi bi-globe"></i>
                                             </a>
                                         </li>
                                     {% endif %}
@@ -382,7 +383,7 @@
                                     {% if user.profile.whatsapp_number %}
                                         <li>
                                             <a href="https://wa.me/{{ user.profile.whatsapp_number }}" target="_blank">
-                                                <i class="fa fa-whatsapp"></i> <!-- Corrected icon class -->
+                                                <i class="bi bi-whatsapp"></i> <!-- Corrected icon class -->
                                             </a>
                                         </li>
                                     {% endif %}
@@ -482,6 +483,7 @@
                                 <p>وصف: {{ project.description }}</p>
                                 <p>تم إنشاؤه في: {{ project.graduation_year }}</p>
                                 <a href="{% url 'project:update_project' project.slug %}" class="btn btn-primary">تعديل المشروع</a>
+                                <a href="{% url 'project:delete_project' project.slug %}" class="btn btn-dinger">حذف المشروع</a>
 
                             </div>
                             <hr>

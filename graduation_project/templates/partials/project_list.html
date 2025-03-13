@@ -9,12 +9,11 @@
                         <h2>{{ book.title }}</h2>
                         <div class="bj_book_img flip col-lg-12" style="height:275px">
                             <div class="special-offers-page-select mt-4 d-flex overflow-auto">
-                            <img style="margin-left:15px; width:40%; height:250px;" src="{{ book.images.url }}" alt="">
-                            <img style="margin-left:15px; width:40%; height:250px;" src="{{ book.images.url }}" alt="">
-                            <img style="margin-left:15px; width:40%; height:250px;" src="{{ book.images.url }}" alt="">
-                            <img style="margin-left:15px; width:40%; height:250px;" src="{{ book.images.url }}" alt="">
-                            <img style="margin-left:15px; width:40%; height:250px;" src="{{ book.images.url }}" alt="">
-                            {% comment %} <div class="pr_ribbon">
+                                {% comment %} fix this yaa kamal {% endcomment %}
+                                {% for project_image in  book.project_image.all %}
+
+                                <img style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
+                                {% endfor %}                            {% comment %} <div class="pr_ribbon">
                                 <span class="product-badge">{{ book.graduation_year }}</span>
                             </div> {% endcomment %}
                             </div>

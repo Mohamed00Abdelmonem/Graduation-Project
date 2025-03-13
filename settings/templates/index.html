@@ -14,12 +14,10 @@
                         <div class="row">
                             <div class="bj_book_img flip col-lg-12" style=" height:275px">
                                 <div class="special-offers-page-select mt-4 d-flex overflow-auto">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
-                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project.images.url }}" alt="">
+                                    {% for project_image in  project.project_image.all %}
+                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
+
+                                    {% endfor %}
                                 </div>
                                 {% comment %} <div class="pr_ribbon">
                                     <span class="product-badge">{{ project.graduation_year }}</span>

@@ -113,7 +113,7 @@
                                         <p class="col-md-6"><i class="fas fa-calendar-alt"></i> تم التحديث: {{ project.updated_at|date:"Y-m-d" }}</p>
                                         <p class="col-md-6"><i class="fas fa-graduation-cap"></i> سنة التخرج: {{ project.graduation_year }}</p>
                                         <p class="col-md-8"><i class="fas fa-user-md"></i> الدكتور: {{ project.doctor }}</p>
-                                        <p class="col-md-8"><i class="fas fa-user-md"></i> الدكتور: {{ project.author.username }}</p>
+                                        <p class="col-md-8"><i class="fas fa-user-md"></i> الليدر: {{ project.author.username }}</p>
                                     </div>
                                     <div class="project-actions" style="display: flex; gap: 10px;">
                                         <a href="{% url 'project:project_detail' project.slug %}" class="btn" style="background-color:rgb(138, 159, 186); color: white; padding: 8px 16px; border: none; border-radius: 4px; text-decoration: none; display: flex; align-items: center;">

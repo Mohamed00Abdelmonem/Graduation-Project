@@ -130,11 +130,13 @@
                                     <span class="product-badge">👁️ مشاهده: {{object.view_count|intcomma  }}</span>
                                 </div>
                                 <div class="special-offers-page-select mt-4 d-flex">
+
                                     {% for project_image in object.project_image.all %}
 
                                         <img class="img-fluid" onClick="changeImage('{{ project_image.image.url}}')" style="margin-left:15px; width:22% " src="{{ project_image.image.url}}" alt="">
                                  
-                                    {% endfor %}             
+                                    {% endfor %}     
+                                            
                                 </div>
 
                             </div>
@@ -342,29 +344,29 @@
                                 <!-- Review Content -->
                                 <div class="review-text">
                                 <p class="r-title sub-regular-2">{{ review.reviewer.get_full_name|default_if_none:user.username }}</p>
-                                                                                       <div class="r-icon d-flex align-items-center">
-                                                                                           <span class="ms-2">At {{ review.created_at|date:"F d, Y" }}</span>
-                                                                                       </div>
-                                                                                       <p class="small-2 mb-3">{{ review.comments }}</p>
-                                                                                   </div>
-                                                                               </div>
-                                                                               <!-- Delete Button (Only for the Owner) -->
-                                                                               {% if request.user == review.reviewer %}
-                                                                                   <form method="post" action="{% url 'project:delete_review' object.slug review.id %}" style="display: inline;">
-                                                                                       {% csrf_token %}
-                                                                                       <button type="submit" class="btn btn-danger btn-sm delete-btn m-3" title="Delete Review">
-                                                                                           <i class="fas fa-trash-alt"></i>
-                                                                                       </button>
-                                                                                   </form>
-                                                                               {% endif %}
-                                                                           </div>
-                                                                           {% empty %}
-                                                                           <div class="text-center">
-                                                                               <p class="" style="font-size: 20px; color: #fff;">No reviews yet. Be the first to leave a review!</p>
-                                                                           </div>
-                                                                       {% endfor %}
-                                                                   </div>
-                                                               </div>
+                                                        <div class="r-icon d-flex align-items-center">
+                                                            <span class="ms-2">At {{ review.created_at|date:"F d, Y" }}</span>
+                                                        </div>
+                                                        <p class="small-2 mb-3">{{ review.comments }}</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Delete Button (Only for the Owner) -->
+                                                {% if request.user == review.reviewer %}
+                                                    <form method="post" action="{% url 'project:delete_review' object.slug review.id %}" style="display: inline;">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger btn-sm delete-btn m-3" title="Delete Review">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
+                                            </div>
+                                            {% empty %}
+                                            <div class="text-center">
+                                                <p class="" style="font-size: 20px; color: #fff;">No reviews yet. Be the first to leave a review!</p>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
                                 {% comment %} <div class="tab-pane fade show active" id="users_like" role="tabpanel" aria-labelledby="product_description-tab">
                                     <div class="product_book_content_details">
                                         <div>

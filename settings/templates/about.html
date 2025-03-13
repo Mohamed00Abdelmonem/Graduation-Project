@@ -1,203 +1,272 @@
+{% extends "base.html" %} {% block body %} {% load static %}
 
-{% extends "base.html" %}
-{% block body %}
-
-                    <!-- mission area  -->
-                    <section class="bj_shop_area sec_padding" data-bg-color="#f5f5f5">
-                        <div class="container">
-                            <div class="row mth align-items-center ">
-                                <div class="col-lg-6">
-                                    <div class="bj_mission_content pe-5 wow fadeInRight" data-wow-delay="0.3s">
-                                        <h2 class="title">مهمتنا</h2>
-                                        <p>
-                                            مهمتنا هي مساعدة الطالب علي معرفة المشاريع السابقه في الكليه واتاحة المشاريع في اي وقت ومساعدة طلاب الفرقه الرابعه علي ان يرسلو المشروع الخاص بهم الي المكتبه . </p>
-                                        <p>انضم إلى مجتمعنا واستمتع بمشاريع متعددة ومؤلفين ومراجعات ونقاد حديثين  وتفاعل الطلاب علي المشاريع السابقه ومعرفة مشاريع الذي قام انشاءها الطلاب تحت رعاية الدكتره والمشرفين!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 await">
-                        <div class="bj_video_inner wow fadeInLeft" data-wow-delay="0.2s">
-                            <img class="img-fluid" src="./img/home/about_img.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="row features_box">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="bj_features_item text-center wow fadeInUp" data-wow-delay="0.3s">
-                            <i class="bi bi-feather icon"></i>
-                            <h3>ابحث عن المشروع الذي يناسبك</h3>
-                            <p>مشاريع السابقه كثيره جدًا، لذلك نحن
-                                 تقديم أوسع تشكيلة لمشاريع ومعرفة الطلاب والدكتره الذي عملو علي المشاريع.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="bj_features_item text-center wow fadeInUp" data-wow-delay="0.4s">
-                            <i class="bi bi-book icon"></i>
-                            <h3>التفاعل مع المشاريع وروئية تفاعل الطلاب</h3>
-                            <p>ستجد مراجعات لمشاريع بالتفاصيل عن كل مشروع وتفاعل المستخدمين مع بعضهم لبعض </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="bj_features_item text-center wow fadeInUp" data-wow-delay="0.4s">
-                            <i class="bi bi-send icon"></i>
-                            <h3> مساعدة قائد التيم لصف الرابع علي ارسال المشروع الي الكليه</h3>
-                            <p>مساعدة قائد التيم لصف الرابع علي ارسال المشروع الي الكليه </p>
-                        </div>
-                    </div>
-                </div>
+<!-- mission area  -->
+<section class="bj_banner_area banner_animation_03" data-bg-color="#0046582b">
+  <div class="container">
+    <div class="row mth align-items-center" style="margin-top: 125px">
+      <div class="col-lg-6">
+        <div
+          class="bj_mission_content pe-5 wow fadeInRight"
+          data-wow-delay="0.3s"
+        >
+          <h2 class="title">مهمتنا</h2>
+          <p>
+            مهمتنا هي مساعدة الطالب علي معرفة المشاريع السابقه في الكليه واتاحة
+            المشاريع في اي وقت ومساعدة طلاب الفرقه الرابعه علي ان يرسلو المشروع
+            الخاص بهم الي المكتبه .
+          </p>
+          <p>
+            انضم إلى مجتمعنا واستمتع بمشاريع متعددة ومؤلفين ومراجعات ونقاد
+            حديثين وتفاعل الطلاب علي المشاريع السابقه ومعرفة مشاريع الذي قام
+            انشاءها الطلاب تحت رعاية الدكتره والمشرفين!
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-6 await">
+        <div class="bj_video_inner wow fadeInLeft" data-wow-delay="0.2s">
+          <img
+            class="img-fluid"
+            src="{% static 'img/about_image.jpg' %}"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- mission area  -->
+<!-- bj author area  -->
+<section class="bj_author_area mt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <div
+          class="bj_features_item text-center wow fadeInUp"
+          data-wow-delay="0.3s"
+        >
+          <i class="bi bi-feather icon"></i>
+          <h3>ابحث عن المشروع الذي يناسبك</h3>
+          <p>
+            مشاريع السابقه كثيره جدًا، لذلك نحن تقديم أوسع تشكيلة لمشاريع ومعرفة
+            الطلاب والدكتره الذي عملو علي المشاريع.
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div
+          class="bj_features_item text-center wow fadeInUp"
+          data-wow-delay="0.4s"
+        >
+          <i class="bi bi-book icon"></i>
+          <h3>التفاعل مع المشاريع وروئية تفاعل الطلاب</h3>
+          <p>
+            ستجد مراجعات لمشاريع بالتفاصيل عن كل مشروع وتفاعل المستخدمين مع
+            بعضهم لبعض
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div
+          class="bj_features_item text-center wow fadeInUp"
+          data-wow-delay="0.4s"
+        >
+          <i class="bi bi-send icon"></i>
+          <h3>مساعدة قائد التيم لصف الرابع علي ارسال المشروع الي الكليه</h3>
+          <p>مساعدة قائد التيم لصف الرابع علي ارسال المشروع الي الكليه</p>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-5 text-center">
+      <div class="col-lg-12" style="text-align: center">
+        <h2 class="title wow fadeInLeft" data-wow-delay="0.2s">فريق العمل</h2>
+        <p>
+          النسخه التجربيه (مشروع التخرج لطلاب الفرقه الرابعه - نظم المعلومات)
+          2024 - 2025
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.2s">
+          <div class="team_img m-3">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
             </div>
-        </section>
-        <!-- mission area  -->
-                 <!-- bj author area  -->
-        <section class="bj_author_area sec_padding">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-8" style="text-align: center;">
-                        <h2 class="title wow fadeInLeft" data-wow-delay="0.2s"> فريق العمل </h2>
-                        <p>النسخه التجربيه (مشروع التخرج لطلاب الفرقه الرابعه - نظم المعلومات) 2024 - 2025</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                                <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                                <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                                <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                                <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                                <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                                <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                                <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="team_img">
-                                <img src="./img/home/testimonial2.jpg" alt="">
-                                <div class="social_icon">
-                                    <a href="#"><i class="bi bi-facebook"></i></a>
-                                    <a href="#"><i class="bi bi-instagram"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                                <h5>kamal mohamed</h5>
-                            <span class="name">frontend developer</span>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <h5 class="m-0">Mohamed Abdelmonem</h5>
+          <span class="name">Backend developer</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.3s">
+          <div class="team_img">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
             </div>
-        </section>
-        {% endblock %}
+          </div>
+          <h5 class="m-0">Kamal Mohamed</h5>
+          <span class="name">Frontend developer</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.4s">
+          <div class="team_img">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <h5 class="m-0">Mohamed Shaheen</h5>
+          <span class="name">Backend developer</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
+          <div class="team_img">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <h5 class="m-0">Moamen Hosam</h5>
+          <span class="name">Backend developer</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
+          <div class="team_img">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <h5 class="m-0">Mohamed Ebrhem</h5>
+          <span class="name">Backend developer</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
+          <div class="team_img">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <h5 class="m-0">Mohamed Abdelpasser</h5>
+          <span class="name">Frontend developer</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
+          <div class="team_img">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <h5 class="m-0">Yossef Hossam</h5>
+          <span class="name">UI,UX design</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
+          <div class="team_img">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <h5 class="m-0">Youssef Tharwat</h5>
+          <span class="name">Frontend developer</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
+          <div class="team_img">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <h5 class="m-0">Mohamed Fa</h5>
+          <span class="name">frontend developer</span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="bj_team_item wow fadeInUp" data-wow-delay="0.5s">
+          <div class="team_img">
+            <img
+              style="width: 200px"
+              src="{% static 'img/home/testimonial2.jpg' %}"
+              alt=""
+            />
+            <div class="social_icon">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+          <h5 class="m-0">kamal mohamed</h5>
+          <span class="name">frontend developer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

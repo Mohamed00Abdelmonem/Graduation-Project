@@ -67,11 +67,12 @@
                                 <div class="alert alert-danger">{{ form.description.errors }}</div>
                             {% endif %}
                         </div>
+                
                         <!-- وصف  اختصار المشروع -->
                         <div class="form-group col-md-4">
-                            <label for="id_description">وصف اختصار المشروع</label>
-                            <textarea class="form-control" id="id_description" name="description" style="height: 165px" rows="5" required>{{ form.sub_description.value|default_if_none:'' }}</textarea>
-                            {% if form.description.errors %}
+                            <label for="id_sub_description">وصف اختصار المشروع</label>
+                            <textarea class="form-control" id="id_sub_description" name="sub_description" style="height: 165px" rows="5" required>{{ form.sub_description.value|default_if_none:'' }}</textarea>
+                            {% if form.sub_description.errors %}
                                 <div class="alert alert-danger">{{ form.sub_description.errors }}</div>
                             {% endif %}
                         </div>
@@ -335,9 +336,9 @@
                             {% endif %}
                         </div>
                     
-                        <!-- الصور -->
+                        <!-- الصوره-->
                         <div class="form-group col-lg-4">
-                            <label for="id_images">الصور</label>
+                            <label for="id_images">الصوره الرئيسه</label>
                             <input type="file" class="form-control-file" id="id_images" name="images" multiple required>
                             {% if form.images.errors %}
                                 <div class="alert alert-danger">{{ form.images.errors }}</div>
@@ -361,7 +362,7 @@
                         
                         <!-- الصور -->
                        <div class="form-group">
-                        <label for="id_images">صور المشروع (يمكنك تحميل حتى 4 صور)</label>
+                        <label for="id_images">صور المشروع </label>
                         <input 
                             type="file" 
                             class="form-control-file" 
@@ -378,15 +379,15 @@
                      
                     
                     {% comment %} // Validate Image Count {% endcomment %}
-        <script>
-            function validateImageCount(input) {
-            if (input.files.length > 4) {
-                alert('يمكنك تحميل حتى 4 صور فقط.');
-                        input.value = ''; // Clear the input
-                    }
-                }
-            
-        </script>
+                        {% comment %} <script>
+                            function validateImageCount(input) {
+                            if (input.files.length > 4) {
+                                alert('يمكنك تحميل حتى 4 صور فقط.');
+                                        input.value = ''; // Clear the input
+                                    }
+                                }
+                            
+                        </script> {% endcomment %}
 
 
 
@@ -426,14 +427,25 @@
 </style>
 
 <!-- JavaScript for Delay and Redirection -->
+<!-- JavaScript for Delay and Redirection -->
 <script>
     const messages = document.querySelectorAll('.alert');
-    if (messages.length > 0) {
-        // Wait for 5 seconds
+    let hasError = false;
+
+    // تحقق من وجود أي رسائل خطأ
+    messages.forEach(message => {
+        if (message.textContent.toLowerCase().includes('error')) {
+            hasError = true;
+        }
+    });
+
+    // إذا لم يكن هناك خطأ، قم بالتوجيه بعد 5 ثوانٍ
+    if (messages.length > 0 && !hasError) {
         setTimeout(() => {
-            // Redirect to the success page
             window.location.href = "{% url 'project:success_create_project' %}";
-        }, 5000); // 5000 milliseconds = 5 seconds
+        }, 5000); // 5000 مللي ثانية = 5 ثوانٍ
     }
 </script>
+
+
 {% endblock body %}
