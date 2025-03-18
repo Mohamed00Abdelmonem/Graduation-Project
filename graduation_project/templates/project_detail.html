@@ -116,35 +116,38 @@
                     <div class="col-xl-9">
                         <div class="bj_book_single me-xl-3">
                             <div class="bj_book_img flip col-xl-6" style="margin-left:10px">
-                                {% if object.book_pdf %}
-                                <a href="{{object.book_pdf.url}}" tabindex="-1" data-bs-toggle="modal" data-bs-target="#productQuickView">           
-                                 {% if  object.images %}
-                                 <img class="img-fluid" id="mainImage" style="height:290px" src="{{object.images.url}}" alt="">
-                                 
-                                 {% endif %}
-                                </a>
-                                {% else %}
-                                {% endif %}
-                                
-                                <div class="pr_ribbon">
-                                    <span class="product-badge">👁️ مشاهده: {{object.view_count|intcomma  }}</span>
-                                </div>
-                                <div class="special-offers-page-select mt-4 d-flex">
+    {% if object.images %}
+        <a href="{{ object.images.url }}" tabindex="-1" data-bs-toggle="modal" data-bs-target="#productQuickView">
+            <img class="img-fluid" id="mainImage" style="height:290px" src="{{ object.images.url }}" alt="Main Image">
+        </a>
+    {% endif %}
 
-                                    {% for project_image in object.project_image.all %}
+    <div class="pr_ribbon">
+        <span class="product-badge">👁️ مشاهده: {{ object.view_count|intcomma }}</span>
+    </div>
 
-                                        <img class="img-fluid" onClick="changeImage('{{ project_image.image.url}}')" style="margin-left:15px; width:22% " src="{{ project_image.image.url}}" alt="">
-                                 
-                                    {% endfor %}     
-                                            
-                                </div>
+    {% if object.project_image.all %}
+        <div class="special-offers-page-select mt-4 d-flex flex-wrap">
+            {% for project_image in object.project_image.all %}
+                <img class="img-fluid sub-image" 
+                     style="margin-left:10px; width:22%; cursor:pointer;" 
+                     src="{{ project_image.image.url }}" 
+                     alt="Sub Image"
+                     onclick="changeImage('{{ project_image.image.url }}')">
+            {% endfor %}
+        </div>
+    {% endif %}
+    </div>
 
-                            </div>
-                            <script>
-                                function changeImage(imageSrc) {
-                                    document.getElementById('mainImage').src = imageSrc;
-                                }
-                            </script>
+    <script>
+        function changeImage(newSrc) {
+            document.getElementById('mainImage').src = newSrc;
+        }
+    </script>
+
+    
+
+                            
                             <div class="bj_book_details text-center col-lg-6">
                                 <a data-bs-toggle="modal" data-bs-target="#productQuickView" class="" style="font-size:24px">{{object.title}}</a>
                                 <ul class="list-unstyled book_meta">

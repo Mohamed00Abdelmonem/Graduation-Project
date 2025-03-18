@@ -1,393 +1,0 @@
-{% extends "base.html" %}
-{% load static %}
-{% block body %}
-{% load humanize %}
-
-    <!-- Modal -->
-    {% for project in projects_main %}
-    <div class="modal fade product-quickview-modal" id="productQuickView{{ project.id }}" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
-                <div class="bj_book_single flex-column">
-                    <div class="bj_book_img flip" style="width:165px; height:450px">
-                        {% if project.images %}
-                        <a href="{% url 'project:project_detail' project.id %}" class="img-fluid"><img src="{{ project.images.url }}" class="h-100" alt="book"></a>
-                        {% else %}
-                        <a href="#"><img src="" alt="book"></a>
-                        {% endif %}
-                        <div class="pr_ribbon">
-                            <span class="product-badge">{{ project.graduation_year }}</span>
-                        </div>
-                    </div>
-                    <div class="bj_book_details">
-                        {% comment %} <h2>اسم المشروع باللغه العربية</h2> {% endcomment %}
-                        <h2>{{ project.title_ar }}</h2>
-                        <h2>{{ project.title }}</h2>
-                        {% comment %} <ul class="list-unstyled book_meta p-0">
-                            <li style="font-size:18px"> اسم المشرف:<a href="author-single.html">اسم الدكتور </a></li>
-                            <li style="font-size:18px">مجال:<a href="shop-sidebar.html"> {{ project.category }} </a></li>
-                            <li style="font-size:18px">الشعبه العلميه:<a href="shop-sidebar.html"> نظم المعلومات الاداريه </a></li>
-                            <li style="font-size:18px"><a href="#product_review" class="woocommerce-review-link">
-                                <span class="count"> {{ project.likes.count }} </span>اعجاب
-                            </a></li>
-                        </ul> {% endcomment %}
-                        <p>{{ project.sub_description }}.</p>
-                        <ul class="product_meta list-unstyled p-0">
-                            <li><span>تاريخ النشر:</span>{{ project.created_at }}</li>
-                            <li><span>مجال :</span>{{ project.category }}</li>
-                            <li><span>اعضاء هيئة المعاونه:</span>
-                                {% if project.supervisors.all %}
-                                    {% for supervisor in project.supervisors.all %}
-                                        {{ supervisor }}
-                                    {% endfor %}
-                                {% else %}
-                                    <span class="no-data">لا يوجد مشرفين. </span>
-                                {% endif %}
-                            </li>
-                            <li><span> اسماء فريق العمل: </span>
-                                <ul class="p-0">
-                                    {% if project.students.all %}
-                                        {% for student in project.students.all %}
-                                            <li><strong>الاسم:</strong> {{ student }}</li>
-                                        {% endfor %}
-                                    {% else %}
-                                        <li class="no-data">لا يوجد طالبه.</li>
-                                    {% endif %}
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-
-
-        <!-- banner area  -->
-        <section class="bj_banner_area banner_animation_03" data-bg-color="#0046582b">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 mb-2 m-lg-4 ">
-                        <div class="bj_banner_content row">
-                            <div class="bj_banner_img col-lg-4 h-25">
-                                <img class="wow fadeInRight" data-wow-delay="0.10s" src="{% static 'img/1.svg' %}" alt="" />                          
-                            </div>
-                            <div class="col-lg-8">
-                            <div class="offer_text wow fadeInUp">
-                                {% if user.is_authenticated %}
-                                    مرحبا <span>{{user.first_name}}</span>
-                                {% endif %}
-                            </div>
-                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" style="font-size:30px">
-                                المكتبه الرقميه  معهد مصر العالي للحاسبات والمعلومات بالمنصوره
-                            </h2>
-                            <p class="wow fadeInUp mb-0" data-wow-delay="0.4s">
-                                         يمكنك رؤية جميع مشاريع التخرج التابعه للاكادمية
-                            </p>
-                            <p class="wow fadeInUp mb-0" data-wow-delay="0.4s">
-                                        اقراء وشاهد ما صنعه طلاب اكادمية من ابداع في انشاء وصناعة المشاريع التخرج الخاص بهم.
-                            </p>
-                        </div>
-                        </div>
-                    </div>
-                    {% comment %} <div class="col-lg-6 pt-3">
-                            <div class="bj_banner_img pt-5">
-                                <img class="wow fadeInRight" data-wow-delay="0.10s" src="{% static 'img/3.svg' %}" alt="" />                          
-                            </div>
-                    </div> {% endcomment %}
-                </div>
-            </div>
-        </section>
-        <!-- banner area  -->
-
-        <!-- product tab showcase area  -->
-        <section class="product_tab_showcase_area sec_padding p-1" id="product_tab_showcase_id">
-            <div class="container">
-                <div class="section_title wow fadeInUp">
-                    <h2 class="title title_two">تصنيف حسب الدكتور</h2>
-                </div>
-                <div class="row wow fadeInUp" data-wow-delay="0.2s">
-                    {% comment %} <div class="row"> {% endcomment %}
-                        <div class="col-lg-4">
-                            <ul class="nav nav-pills flex-column" style='cursor: pointer;' id="doctor-tabs" role="tablist">
-                                {% for doctor in doctors %}
-                                    <li role="presentation" class="nav-item">
-                                        <a class="nav-link disable {% if forloop.first %}active{% endif %}" 
-                                           id="tab-{{ doctor.user.id }}" 
-                                           data-bs-toggle="pill" 
-                                           data-bs-target="#doctor-{{ doctor.user.id }}" 
-                                           role="tab" 
-                                           aria-controls="doctor-{{ doctor.user.id }}" 
-                                           aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
-                                           <strong>{{ doctor.user.username }}</strong> 
-                                           <span>({{ doctor.book_count }} مشروع)</span>
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        
-                        <div class="col-lg-8" dir="ltr">
-                            <div class="tab-content" id="doctor-content">
-                                {% for doctor in doctors %}
-                                    <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" 
-                                         id="doctor-{{ doctor.user.id }}" 
-                                         role="tabpanel" 
-                                         aria-labelledby="tab-{{ doctor.user.id }}">
-                                        <div class="tab_slider_content slick_slider_tab">
-                                            {% for project in doctor.user.doctor_projects.all %}
-                                                <div class="item">
-                                                    <div class="bj_new_pr_item" style="height: 390px;">
-                                                        {% if user.is_authenticated %}
-                                                        <a href="{% url 'project:project_detail' project.slug %}"> 
-                                                            {% if project.images %}
-                                                            <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
-                                                        {% else %}
-                                                            <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 200px; height: 200px;" />
-                                                        {% endif %}
-                                                        </a>
-                                                        {% else %}
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#productQuickView">
-                                                            {% if project.images %}
-                                                            <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
-                                                        {% else %}
-                                                            <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 200px; height: 200px;" />
-                                                        {% endif %}
-                                                        </a>
-                                                        {% endif %}
-                                                        
-                                                        <div class="bj_new_pr_content_two">
-                                                            <div class="d-flex justify-content-between">
-                                                                <h5>{{ project.title|truncatechars:25 }}</h5>
-                                                            </div>
-                                                            <div class="writer_name">
-                                                                <i class="icon-user"></i>{{ doctor.user.username }}
-                                                                <p>created: {{project.created_at|timesince }} ago </p><sup></sup> <!-- Adjust as needed -->
-                                                            </div>
-                                                            {% if user.is_authenticated %}
-                                                            <a href="{% url 'project:project_detail' project.slug %}" class="bj_theme_btn">مشاهدة المزيد</a>
-                                                            {% else %}
-                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#productQuickView" class="bj_theme_btn">مشاهدة المزيد</a>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            {% empty %}
-                                                <p>لا توجد مشاريع متاحة لهذا الدكتور.</p>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    
-            </div>
-        </section>
-        <!-- product tab showcase area  -->
-
-        <!-- best selling product area  -->
-        <section class="best_selling_pr_area pb-4" data-bg-color="#f5f5f5">
-            <div class="container">
-                <div class="section_title mb-0 section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 class="title title_two">أحدث 10 مشاريع</h2>
-                    <p>قراءة الكتب تساعدك على تطوير مهارات التواصل لديك</p>
-                </div>
-                <div class="row">
-                    {% for project in projects_main %}
-                        <div class="col-xl-3 col-md-6">
-                            <div class="bj_new_pr_item_two d-flex flex-column wow fadeInUp" style="height: 370px;" data-wow-delay="0.2s">
-                                {% if user.is_authenticated %}
-                                <a href="{% url 'project:project_detail' project.slug %}" style="height:175px" class="img">
-                                    {% if project.images %}
-                                    <img src="{{ project.images.url }}" alt="book" class="h-100" />
-                                    {% else %}
-                                    <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" class="h-100" style="width: 200px; " />
-                                    {% endif %}
-                                </a>
-                                {% else %}
-                                <a href="#" style="height:175px" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}" class="img">
-                                    {% if project.images %}
-                                    <img src="{{ project.images.url }}" class="h-100" alt="book" />
-                                    {% else %}
-                                    <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px;" />
-                                    {% endif %}
-                                </a>
-                                {% endif %}
-                                <div class="bj_new_pr_content_two">
-                                    <a href="shop-sidebar.html" class="category">{{ project.category }}</a>
-                                        <h4 class="bj_new_pr_title">{{ project|truncatechars:18 }}</h4>
-                                    <div class="writer_name"> بواسطة د:<a href="#"> {{ project.doctor }} </a> </div>
-                                    <div class="book_price"><sup>سنة التخرج  {{ project.graduation_year }}</sup></div>
-                                    {% if user.is_authenticated %}
-                                    <a href="{% url 'project:project_detail' project.slug %}" class="bj_theme_btn">معرفة المزيد</a>
-                                    {% else %}
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}" class="bj_theme_btn">معرفة المزيد</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="text-center">
-                    <a href="{% url 'project:ProjectList'%}" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp mt-0 " data-wow-delay="0.4s">مشاهدة المزيد من المشاريع</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- new product area  -->
-        <section class="bj_new_product_area pt-4" data-bg-color="#f5f5f5">
-            <div class="container">
-                <div class="section_title section_title_two text-center">
-                    <h2 class="title title_two">معظم مشاريع المشهوره لها إعجابات </h2>
-                    <p>قراءة الكتب تساعدك على تطوير مهارات التواصل لديك</p>
-                </div>
-                <div id="clockdiv" class="clock" data-date="2024-12-02"></div>
-                <div class="row">
-
-                    
-                    {% for project in top_liked_projects %}
-                        <!-- Unique Modal for Each Project -->
-                        <div class="modal fade product-quickview-modal" id="productQuickView{{ project.id }}" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
-                                    <div class="bj_book_single flex-column">
-                                        <div class="bj_book_img flip" style="width:165px; height:450px">
-                                            {% if project.images %}
-                                            <a href="{% url 'project:project_detail' project.id %}" class="img-fluid"><img src="{{ project.images.url }}" class="h-100" alt="book"></a>
-                                            {% else %}
-                                            <a href="#"><img src="" alt="book"></a>
-                                            {% endif %}
-                                            <div class="pr_ribbon">
-                                                <span class="product-badge">{{ project.graduation_year }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="bj_book_details">
-                                            <h2>اسم المشروع باللغه العربية</h2>
-                                            <h2>{{ project.title }}</h2>
-                                            <ul class="list-unstyled book_meta p-0">
-                                                <li style="font-size:18px"> اسم المشرف:<a href="author-single.html">اسم الدكتور </a></li>
-                                                <li style="font-size:18px">مجال:<a href="shop-sidebar.html"> {{ project.category }} </a></li>
-                                                <li style="font-size:18px">الشعبه العلميه:<a href="shop-sidebar.html"> نظم المعلومات الاداريه </a></li>
-                                                <li style="font-size:18px"><a href="#product_review" class="woocommerce-review-link">
-                                                    <span class="count"> {{ project.likes.count }} </span>اعجاب
-                                                </a></li>
-                                            </ul>
-                                            <p>{{ project.sub_description }}.</p>
-                                            <ul class="product_meta list-unstyled p-0">
-                                                <li><span>تاريخ النشر:</span>{{ project.created_at }}</li>
-                                                <li><span>مجال :</span>{{ project.category }}</li>
-                                                <li><span>اعضاء هيئة المعاونه:</span>
-                                                    {% if project.supervisors.all %}
-                                                        {% for supervisor in project.supervisors.all %}
-                                                            {{ supervisor }}
-                                                        {% endfor %}
-                                                    {% else %}
-                                                        <span class="no-data">لا يوجد مشرفين. </span>
-                                                    {% endif %}
-                                                </li>
-                                                <li><span> اسماء فريق العمل: </span>
-                                                    <ul class="p-0">
-                                                        {% if project.students.all %}
-                                                            {% for student in project.students.all %}
-                                                                <li><strong>الاسم:</strong> {{ student }}</li>
-                                                            {% endfor %}
-                                                        {% else %}
-                                                            <li class="no-data">لا يوجد طالبه.</li>
-                                                        {% endif %}
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-    <!-- Project Card -->
-    <div class="col-xl-3 col-lg-4 col-sm-6 mb-20" style="height:325px">
-        <div class="bj_new_pr_item wow fadeInUp h-100" data-wow-delay="0.2s">
-            {% if user.is_authenticated %}
-            <a href="{% url 'project:project_detail' project.slug %}" class="img" style="height:175px">
-                {% if project.images %}
-                <img src="{{ project.images.url }}" class="h-100" alt="book" />
-                {% else %}
-                <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px;" />
-                {% endif %}
-            </a>
-            {% else %}
-            <a href="#" style="height:175px" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}" class="img">
-                {% if project.images %}
-                <img src="{{ project.images.url }}" class="h-100" alt="book" />
-                {% else %}
-                <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px; height: 200px;" />
-                {% endif %}
-            </a>
-            {% endif %}
-            <div class="bj_new_pr_content">
-                {% if user.is_authenticated %}
-                <a href="{% url 'project:project_detail' project.slug %}">
-                    <h4 class="bj_new_pr_title">{{ project|truncatechars:20 }}</h4>
-                </a>
-                {% else %}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}">
-                    <h4 class="bj_new_pr_title">{{ project|truncatechars:20 }}</h4>
-                </a>
-                {% endif %}
-                <div class="bj_pr_meta">
-                    <div class="writer_name">بواسطة د / <a href="author-single.html"> {{ project.doctor }} </a></div>
-                    <div class="book_price mt-2 justify-content-around">
-                        <div>
-                        👁️ {{ project.view_count|intcomma }}
-                        </div>
-                        <div class="ribon"><i class="fa-solid fa-thumbs-up"></i> {{ project.likes.count }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endfor %}
-
-                </div>
-                <div class="text-center mt-4">
-                    <a href="{% url 'project:ProjectList'%}" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">مشاهدة المزيد </a>
-                </div>
-            </div>
-        </section>
-        <!-- new product area  -->
-
-        <!-- product featured author area  -->
-
-        <!-- bj subscribe area -->
-        <section class="bj_subscribe_area_two">
-            <div class="container">
-                <div class="bj_subscribe_inner_two text-center wow fadeInUp banner_animation_03" data-wow-delay="0.2s" data-bg-color="#f5f5f5">
-                    <div class="bg_shap">
-                        <div class="shap_one">
-                            <img class="layer" data-depth="-0.15" src="{% static 'img/home/round_s1.png' %}" alt="" />
-                        </div>
-                        <div class="shap_one">
-                            <img class="layer" data-depth="-0.25" src="{% static 'img/home/star_s_2.png' %}" alt="" />
-                        </div>
-                        <div class="shap_one">
-                            <img class="layer" data-depth="0.15" src="{% static 'img/home/star_s_1.png' %}" alt="" />
-                        </div>
-                        <div class="shap_one">
-                            <img class="layer" data-depth="-0.25" src="{% static 'img/home/cube.png' %}" alt="" />
-                        </div>
-                    </div>
-                    <h2>يمكنك رؤية جميع مشاريع التخرج لاكادمية معهد مصر العالي للحاسبات والمعلومات بالمنصوره</h2>
-                    <p>
-                        مؤلفونا مكرسون لكتاباتهم ويتوقون للمشاركة
-                        مزيد من المعلومات حول كتبهم معك. بعد ذلك، يمكنك
-                        استكشاف في أي مكان.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <!-- bj subscribe area -->
-
-        {% endblock body %}
