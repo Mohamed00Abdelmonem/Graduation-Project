@@ -6,7 +6,7 @@ django.setup()
 import random
 from faker import Faker
 from django.contrib.auth.models import User
-from graduation_project.models import GraduationProject, Category, Review
+from graduation_project.models import GraduationProject, Category, Review, ProjectImages
 from accounts.models import UserProfile
 import string
 
@@ -131,6 +131,36 @@ def seed_projects(n):
 # ___________________________________________________________________________________
 
 
+def seed_images_projects(n):
+    project = GraduationProject.objects.all()
+
+    dummy_images = [
+        "dummy_images_books/2.jpg",
+        "dummy_images_books/1.jpg",
+        "dummy_images_books/3.jpg",
+        "dummy_images_books/4.jpg",
+        "dummy_images_books/5.jpeg",
+        "dummy_images_books/6.jpg",
+        "dummy_images_books/7.jpg",
+        "dummy_images_books/8.jpeg",
+        "dummy_images_books/9.jpg",
+    ]
+
+
+
+    for _ in range(n):
+        ProjectImages.objects.create(
+            
+            project=random.choice(project),
+            image=random.choice(dummy_images),  # Assign a random image
+
+         
+        )
+    print(f"Seeded {n} graduation images projects successfully.")
+
+# ___________________________________________________________________________________
+
+
 def seed_reviews(n):
     """Create dummy reviews."""
     projects = GraduationProject.objects.all()
@@ -151,7 +181,8 @@ def seed_all():
     """Seed all data."""
     # seed_users(10)  # Create 10 dummy users
     # seed_categories(5)  # Create 5 dummy categories
-    seed_projects(1000)  # Create 20 dummy projects
+    # seed_projects(1000)  # Create 20 dummy projects
+    seed_images_projects(10000)  # Create 20 dummy images projects
     # seed_reviews(2000)  # Create 50 dummy reviews
     print("All data seeded successfully.")
 
