@@ -38,7 +38,9 @@ ALLOWED_HOSTS = [
     '.vercel.app',
     '.now.sh',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    'graduation-project-five-zeta.vercel.app'  # Your specific domain
+
 ]
 
 # Static files (CSS, JavaScript, Images)
