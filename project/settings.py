@@ -30,6 +30,21 @@ SECRET_KEY = 'django-insecure-_=e0@#_o21+)w^@vc2usfoufg0#gyy27lr5#*@z+5tcxzj4@)i
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False #for deploy
+# DEBUG = False  # صحيح للنشر
+# ولكنك تحتاج لتسجيل الأخطاء في الإنتاج:
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}
 # DEBUG = True
 # ________________
 
@@ -46,6 +61,7 @@ ALLOWED_HOSTS = [
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Database configuration
