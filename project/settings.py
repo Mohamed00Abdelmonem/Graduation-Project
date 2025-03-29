@@ -48,7 +48,13 @@ LOGGING = {
 # DEBUG = True
 # ________________
 
-ALLOWED_HOSTS = ['*']  # يسمح بجميع النطاقات (لأغراض الاختبار فقط)
+ALLOWED_HOSTS = [
+    'graduation-project-*.vercel.app',
+    '.vercel.app',
+    'localhost',
+]
+
+X_FRAME_OPTIONS = 'DENY'  # Prevents clickjacking attacks
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
@@ -172,13 +178,27 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# DATABASES['default'] = dj_database_url.config()
+
+
+
+import os
+import dj_database_url
+
+# إعداد قاعدة البيانات
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
+        conn_max_age=600,  # يحسن الأداء
+    )
 }
-DATABASES['default'] = dj_database_url.config()
+
 
 
 # __________________________
