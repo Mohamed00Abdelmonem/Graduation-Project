@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env.
-
+# في بداية الملف
 
 
 from pathlib import Path
