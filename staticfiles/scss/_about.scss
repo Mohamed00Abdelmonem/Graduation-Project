@@ -1,0 +1,148 @@
+// /*======= About banner area ========*/
+
+// @-webkit-keyframes slideInnewRotate {
+//     0% {
+//       opacity: 0;
+//       -webkit-transform: translate(80px, -80px) rotate(-21.71deg);
+//       transform: translate(80px, -80px) rotate(-21.71deg);
+//     }
+  
+//     100% {
+//       -webkit-transform: translate(0, 0) rotate(-21.71deg);
+//       transform: translate(0, 0) rotate(-21.71deg);
+//     }
+//   }
+  
+//   @keyframes slideInnewRotate {
+//     0% {
+//       opacity: 0;
+//       -webkit-transform: translate(80px, -80px) rotate(-21.71deg);
+//       -ms-transform: translate(80px, -80px) rotate(-21.71deg);
+//       transform: translate(80px, -80px) rotate(-21.71deg);
+//     }
+  
+//     100% {
+//       -webkit-transform: translate(0, 0) rotate(-21.71deg);
+//       -ms-transform: translate(0, 0) rotate(-21.71deg);
+//       transform: translate(0, 0) rotate(-21.71deg);
+//     }
+//   }
+  
+//   .slideInnew {
+//     -webkit-animation-name: slideInnew;
+//     animation-name: slideInnew;
+//   }
+  
+//   .slideInnewRotate {
+//     -webkit-animation-name: slideInnewRotate;
+//     animation-name: slideInnewRotate;
+//   }
+
+
+
+// .about_banner_area{
+//     position: relative;
+//     .about_shape_area{
+//         .book_shape1{
+//             position: absolute;
+//             left: 80px;
+//             bottom: 30px;
+//         }
+//         .book_shape2{
+//             position: absolute;
+//             left: 370px;
+//             top: 75px;
+//         }
+//         .book_shape3{
+//             position: absolute;
+//             right: 470px;
+//             bottom: 190px;
+//         }
+//         .book_shape4{
+//             position: absolute;
+//             right: 314px;
+//             top: 78px;
+//         }
+//         .aeroplane_shape1{
+//             position: absolute;
+//             left: 80px;
+//             top: 10px;
+//         }
+//         .aeroplane_shape2{
+//             position: absolute;
+//             left: 340px;
+//             bottom: -35px;
+//         }
+//         .aeroplane_shape3{
+//             position: absolute;
+//             right: 26px;
+//             top: 25px;
+//         }
+//     }
+// }
+/*======= bj mission area ========*/
+.bj_video_inner{
+    display: inline-block;
+    position: relative;
+    margin-left: 80px;
+}
+.bj_mission_content {
+    .title{
+        margin-bottom: 40px;
+    }
+    p{
+        margin-bottom: 25px;
+    }
+}
+.play-btn{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s linear;
+    &:before{
+        content: "";
+        position: absolute;
+        width: 150%;
+        height: 150%;
+        animation-delay: 0s;
+        -webkit-animation: pulsate1 2s;
+        animation: pulsate1 2s;
+        animation-direction: forwards;
+        animation-iteration-count: infinite;
+        animation-timing-function: steps;
+        opacity: 1;
+        border-radius: 50%;
+        border: 5px solid #fff;
+        top: -25%;
+        left: -25%;
+        background: rgba(198, 16, 0, 0);
+    }
+    &:hover{
+        transform: scale(1.05) translate(-50%, -50%);
+    }
+}
+
+@keyframes pulsate1 {
+    0% {
+        -webkit-transform: scale(0.6);
+        transform: scale(0.6);
+        opacity: 1;
+        box-shadow: inset 0px 0px 25px 3px rgba(255, 255, 255, 0.75),
+        0px 0px 25px 10px rgba(255, 255, 255, 0.75);
+    }
+    100% {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1);
+        opacity: 0;
+        box-shadow: none;
+    }
+}

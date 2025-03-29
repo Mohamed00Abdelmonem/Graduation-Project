@@ -1,0 +1,136 @@
+/*============= book_price_area ==========*/
+.p_text {
+  color: $gray_light;
+  margin-bottom: 0;
+  margin-top: 50px;
+  a {
+    color: $blue;
+    text-decoration: underline;
+  }
+}
+.book_price_item {
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 8px 20px -2px rgba(33, 40, 51, 0.05);
+  padding: 60px 0px;
+  transition: all 0.3s linear;
+  h5 {
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+  .price {
+    font-size: 72px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1;
+    margin-bottom: 25px;
+    sub,
+    sup {
+      font-size: 16px;
+      font-weight: 400;
+    }
+    sup {
+      top: -43px;
+    }
+  }
+  p {
+    color: $gray_light;
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+  ul {
+    li {
+      font-size: 16px;
+      color: #000;
+      margin-top: 20px;
+    }
+  }
+  .bj_theme_btn {
+    margin-left: 0;
+    margin-top: 30px;
+  }
+  &:hover {
+    box-shadow: 0px 25px 60px -5px rgba(33, 40, 51, 0.12);
+    .bj_theme_btn {
+      border-color: $blue;
+      color: #fff;
+      &::before {
+        width: 100%;
+        background: $blue;
+        left: 0;
+        right: auto;
+      }
+    }
+  }
+}
+/*============= book_price_area ==========*/
+/*========= bj price area two ==========*/
+.bj_price_area_two {
+  background: linear-gradient(45deg, #f6fae1 0%, #faf6e1 100%);
+}
+.pricing-item-2 {
+  border-radius: 8px;
+  padding: 60px 22px 40px 23px;
+  text-align: center;
+  box-shadow: 30px 0 40px 0 #17161a1a;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: $blue;
+    h5,
+    p,
+    i {
+      color: #fff;
+    }
+    .purchase-btn {
+      box-shadow: 20px 0 40px 0 #17161a1a;
+
+      color: $blue;
+      gap: 10px;
+      span {
+        display: block;
+      }
+    }
+  }
+  i {
+    font-size: 70px;
+    transition: all 0.3s linear;
+  }
+  h5 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    transition: all 0.3s ease-in-out;
+    margin-top: 40px;
+  }
+  p {
+    margin-top: 20px;
+    font-size: 16px;
+    margin-bottom: 40px;
+    transition: all 0.3s ease-in-out;
+  }
+  .purchase-btn {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 40px;
+    border-radius: 5px;
+    padding: 10px 30px;
+    display: inline-flex;
+    background-color: #fff;
+    align-items: center;
+    color: $dark;
+    gap: 10px;
+
+    transition: all 0.3s ease-in-out;
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 18px;
+      color: $blue;
+      display: none;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+}

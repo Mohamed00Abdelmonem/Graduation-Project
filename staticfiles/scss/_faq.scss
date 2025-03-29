@@ -1,0 +1,158 @@
+.accordion-flush-3 {
+  .accordion-item {
+    border-radius: 6px;
+    overflow: hidden;
+    border: none;
+    margin-top: 24px;
+    &:first-child {
+      margin-top: 0;
+    }
+    .accordion-button {
+      padding: 24px 35px 28px 44px;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 30px;
+      border: none;
+      color: #fff;
+      box-shadow: none;
+      background-color: $blue;
+      span {
+        display: inline-block;
+        margin-right: 20px;
+      }
+      &.collapsed {
+        color: $dark;
+        background-color: #f5f5f5;
+      }
+
+      &:not(.collapsed) {
+        &::after {
+          content: "\f068";
+          transform: rotate(0deg);
+          color: #fff;
+        }
+      }
+
+      &::after {
+        content: "\f067";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        background: none;
+        font-size: 18px;
+        color: $dark;
+      }
+    }
+    .accordion-body {
+      background-color: $blue;
+      padding-top: 0;
+      padding-right: 48px;
+      p {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 27px;
+        color: #fff;
+        margin-left: 83px;
+      }
+    }
+  }
+}
+.faq-nav-tab-content {
+  margin-left: 55px;
+}
+.faq-navigation-tab {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 24px 30px;
+  border: 0px;
+  h3 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-bottom: 25px;
+  }
+  .nav-link {
+    display: block;
+    font-size: 16px;
+    line-height: 40px;
+    color: $gray_light;
+    width: 100%;
+    border: none !important;
+    cursor: pointer;
+    padding: 0;
+    &.active {
+      background-color: rgba(#4285f4, 0.1);
+      color: $blue;
+      padding-left: 10px;
+    }
+    &:hover {
+      color: $blue;
+    }
+  }
+}
+
+/*============= bj_author_area ==============*/
+
+.bj_team_item {
+  margin-bottom: 10px;
+  .team_img {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    img {
+      transition: all 0.5s linear;
+    }
+    .social_icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      text-align: center;
+      a {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #fff;
+        color: $dark;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transform: scale(0);
+        &:nth-child(1) {
+          transition: transform 0.3s linear;
+        }
+        &:nth-child(2) {
+          transition: transform 0.4s linear;
+        }
+        &:nth-child(3) {
+          transition: transform 0.5s linear;
+        }
+        &:hover {
+          background: $blue;
+          color: #fff;
+        }
+      }
+    }
+  }
+  h5 {
+    font-size: 22px;
+    transition: color 0.3s linear;
+    &:hover {
+      color: $blue;
+    }
+  }
+  .name {
+    color: $gray_light;
+    font-size: 14px;
+  }
+  &:hover {
+    .team_img {
+      img {
+        transform: scale(1.05);
+      }
+      a {
+        transform: scale(1);
+      }
+    }
+  }
+}

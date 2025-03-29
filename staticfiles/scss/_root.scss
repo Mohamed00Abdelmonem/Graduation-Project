@@ -1,0 +1,10 @@
+:root {
+  //   Color variables
+  @each $color, $value in $theme-colors {
+    --#{$variable-prefix}#{$color}: #{$value};
+  }
+
+  //   fonts variables
+  --#{$variable-prefix}Libre-Baskerville: #{inspect($lb)};
+  --#{$variable-prefix}Open: #{inspect($open)};
+}
