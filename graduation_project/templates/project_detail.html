@@ -120,6 +120,8 @@
                                
                                 <img class="img-fluid lazy-load" 
                                 data-src="{% if object.images %}{{ object.images.url }}{% else %}default-image.jpg{% endif %}" 
+                                {% comment %} دا عشان لما ميعرفش يوصل للصوره يحط الصوره دي افتراضيا {% endcomment %}
+
                                 data-fallback="https://images.pexels.com/photos/762687/pexels-photo-762687.jpeg?auto=compress&cs=tinysrgb&w=600"
                                 alt="Product Image"
                                 style="height:290px;">
