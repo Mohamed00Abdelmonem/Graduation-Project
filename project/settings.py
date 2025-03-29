@@ -30,6 +30,12 @@ SECRET_KEY = 'django-insecure-_=e0@#_o21+)w^@vc2usfoufg0#gyy27lr5#*@z+5tcxzj4@)i
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+
+
+WSGI_APPLICATION = 'api.wsgi.app'
+
+
 
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ["*"]
@@ -70,6 +76,12 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default fallback
 ]
 
+
+# for trust csrf in pinngy for share server for test project 
+CSRF_TRUSTED_ORIGINS = [
+    'https://rnztq-197-35-43-199.a.free.pinggy.link',
+    # Add other domains as needed
+]
 
 # for debug_toolbar
 INTERNAL_IPS = [
@@ -123,6 +135,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+# DATABASES['default'] = dj_database_url.config()
 
 
 
