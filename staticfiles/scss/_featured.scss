@@ -1,0 +1,488 @@
+// bj_promo_area css
+.bj_promo_area {
+  padding: 140px 0px;
+}
+.bj_promo_item {
+  box-shadow: 0px 8px 20px -2px rgba(33, 40, 51, 0.05);
+  border-radius: 10px;
+  padding: 17px 50px;
+  align-items: center;
+  background: #fff;
+  img {
+    margin-right: 20px;
+  }
+  p {
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: var(--bj-Open);
+    color: var(--bj-darks);
+    line-height: 1.6;
+  }
+}
+
+// bj_promo_featured_inner css
+.bj_promo_featured_item {
+  display: flex;
+  padding: 50px 30px;
+  align-items: flex-end;
+  margin-top: 30px;
+  border-radius: 4px;
+  .bj_promo_text {
+    flex: 1;
+    h4 {
+      font-size: 28px;
+      letter-spacing: 0.56px;
+      font-family: var(--bj-Open);
+      color: var(--bj-darks);
+      font-weight: 700;
+      margin-bottom: 35px;
+    }
+  }
+}
+.bj_theme_btn_two {
+  font-size: 16px;
+  letter-spacing: 0.32px;
+  font-weight: 600;
+  color: var(--bj-blue);
+  padding: 7px 15px 7px 0px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  transition: all 0.4s;
+  z-index: 1;
+  &:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    opacity: 0;
+    position: absolute;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s cubic-bezier(0, 0, 1, 1);
+    z-index: -1;
+  }
+  i {
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+  &:hover {
+    padding-left: 15px;
+    &:before {
+      transform: translateX(-50%) scale(20);
+      opacity: 1;
+    }
+  }
+  &.style_two {
+    color: var(--bj-darks);
+    &:before {
+      background: var(--bj-blue);
+    }
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+// promotion_box_area css
+.promotion_box_inner {
+  position: relative;
+  padding: 110px 0px;
+  overflow: hidden;
+  .content {
+    position: relative;
+    z-index: 1;
+  }
+  h5 {
+    color: #4d4e50;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    margin-bottom: 25px;
+  }
+  .bj_theme_btn {
+    margin-top: 45px;
+  }
+}
+.shap_img {
+  li {
+    position: absolute;
+    &:nth-child(1) {
+      top: -50px;
+      left: 0px;
+    }
+    &:nth-child(2) {
+      bottom: 20px;
+      left: 20px;
+    }
+    &:nth-child(3) {
+      bottom: 100px;
+      right: 1px;
+      z-index: 1;
+    }
+    &:nth-child(4) {
+      bottom: -40px;
+      right: 170px;
+    }
+    &:nth-child(5) {
+      bottom: -35px;
+      right: -45px;
+    }
+  }
+}
+
+/*=========== shortlist_product_promo_area css ============*/
+.shortlist_product_promo_area {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  .bg_top {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
+  .title {
+    font-size: 40px;
+    margin-bottom: 0;
+  }
+}
+.shortlist_book {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 80px 0px;
+  .round {
+    width: 415px;
+    height: 415px;
+    border-radius: 50%;
+    background: #cdf0f0;
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    margin-left: -207px;
+    z-index: -1;
+  }
+}
+
+/*======= bj_promoter_area css ======*/
+.bj_promoter_area {
+  .border_bottom {
+    margin-top: 110px;
+  }
+  .clients_logo_inner {
+    .clients_logo_item {
+      width: calc(100% / 4);
+    }
+  }
+}
+.border_bottom {
+  border-bottom: 1px solid var(--black_50);
+}
+.promoter_content {
+  h3 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  p {
+    font-size: 16px;
+    color: $text_color;
+  }
+}
+
+/*======= bj_book_service_area css ====*/
+.bj_book_service_area {
+  padding-bottom: 130px;
+}
+.bj_book_service_item {
+  border-radius: 5px;
+  padding: 55px 30px;
+  margin-top: 30px;
+  i {
+    font-size: 60px;
+    margin-bottom: 30px;
+    display: block;
+  }
+  h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  p {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+}
+
+/*========== bj_award_gallery_area  css =======*/
+.bj_award_gallery_area {
+}
+.bj_award_gallery_item {
+  &:not(:first-child) {
+    margin-top: 150px;
+  }
+}
+.award_content {
+  p {
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+  .award_logo_inner {
+    display: flex;
+    padding-top: 25px;
+    .award_logo_item {
+      width: calc(100% / 4);
+      padding-right: 12px;
+      img {
+        max-width: 100%;
+      }
+      h4 {
+        font-size: 22px;
+        font-weight: 600;
+        color: #3d3d4e;
+        line-height: 32px;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+.award_img {
+  position: relative;
+  .border_radius {
+    border-radius: 10px;
+  }
+  .shape {
+    position: absolute;
+    right: 0;
+    top: 40%;
+    z-index: 0;
+  }
+}
+.bj_award_gallery_item_two {
+  .award_img {
+    .shape {
+      right: auto;
+      left: -70px;
+      top: -50px;
+      z-index: -1;
+    }
+  }
+  .award_content .award_logo_inner .award_logo_item h4 {
+    font-size: 14px;
+    max-width: 100px;
+    margin-left: auto;
+    line-height: 20px;
+    margin-right: auto;
+  }
+}
+
+/*=========== bj_fact_area css =========*/
+.bj_fact_area {
+  background-attachment: fixed !important;
+  padding: 120px 0px;
+  position: relative;
+  z-index: 1;
+  &:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #1d2e59;
+    opacity: 0.8;
+    z-index: -1;
+  }
+}
+.bj_fact_item {
+  text-align: center;
+  i {
+    font-size: 60px;
+    color: #fff;
+  }
+  p {
+    font-size: 18px;
+    color: #d2d2d3;
+    font-weight: 400;
+    margin-top: 15px;
+  }
+  .number {
+    color: #fff;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.48px;
+  }
+}
+
+.version {
+  margin-top: 39px;
+  h5 {
+    font-size: 22px;
+  }
+  p {
+    padding: 0 15px;
+    font-size: 16px;
+    color: #4d4e50;
+    margin-bottom: 0;
+  }
+}
+.chapter-tab {
+  gap: 10px;
+  border: none;
+  .nav-link {
+    border-radius: 8px;
+    padding: 20px 42px 18px 35px;
+    border: none;
+    box-shadow: none;
+    background-color: #fff;
+    box-shadow: 0px 8px 20px -2px rgba(33, 40, 51, 0.05);
+    cursor: pointer;
+    width: 100%;
+
+    &:hover {
+      background-color: rgba($blue, 0.2);
+    }
+    &.active {
+      background-color: $blue;
+      .tab_title {
+        color: #fff;
+      }
+      p {
+        color: #fff;
+      }
+    }
+    .tab_title {
+      font-weight: 600;
+      margin-bottom: 2px;
+      color: $dark;
+    }
+    p {
+      margin-bottom: 0;
+      font-size: 16px;
+      color: $text_color;
+    }
+  }
+}
+
+.chapter-tab-content {
+  text-align: center;
+  .main-img {
+    border-radius: 5px;
+    box-shadow: 16.148149490356445px 24.222225189208984px 40.3703727722168px 0
+      #0000001a;
+    overflow: hidden;
+    display: inline-block;
+  }
+}
+
+/*=========== bj_features_item  css =========*/
+.features_box {
+  margin-top: 100px;
+}
+.bj_features_item {
+  padding: 0px 30px;
+  margin-top: 30px;
+  .icon {
+    font-size: 50px;
+    color: $dark;
+    margin-bottom: 40px;
+    display: inline-block;
+  }
+  h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .text_btn {
+    color: $dark;
+    margin-top: 22px;
+    &:before {
+      display: none;
+    }
+    i {
+      transition: all 0.2s linear;
+      display: inline-block;
+    }
+    &:hover {
+      color: $blue;
+      i {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.my-books-area {
+  padding-top: 135px;
+  padding-bottom: 64px;
+  h3 {
+    border-bottom: 1px solid #d2d2d3;
+    padding-bottom: 34px;
+    margin-bottom: 70px;
+    font-size: 32px;
+  }
+
+  .single-book {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 100px;
+    align-items: center;
+    .book-img {
+      display: inline-block;
+      box-shadow: 5px 10px 30px -2px rgba(33, 40, 51, 0.15);
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      overflow: hidden;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+    .book-info {
+      margin-left: 100px;
+      p {
+        max-width: 360px;
+        margin-top: 20px;
+        font-size: 16px;
+      }
+
+      .bj_theme_btn {
+        margin-top: 35px;
+        color: $dark;
+        font-size: 18px;
+        &:before {
+          display: none;
+        }
+        &:hover {
+          color: $blue;
+        }
+      }
+    }
+  }
+
+  .books-sidebar {
+    position: sticky;
+    left: 0;
+    top: 130px;
+    ul {
+      li {
+        margin-bottom: 10px;
+        width: 100%;
+        a {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 30px;
+          color: $dark;
+          padding: 0px;
+          &:hover,
+          &.active {
+            color: $blue;
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}

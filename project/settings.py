@@ -29,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_=e0@#_o21+)w^@vc2usfoufg0#gyy27lr5#*@z+5tcxzj4@)i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False #for deploy
+# DEBUG = True
 # ________________
 
 # Required for Vercel
@@ -77,11 +77,8 @@ WSGI_APPLICATION = 'api.wsgi.app'
 
 
 
-ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = [
-    'https://rngna-197-35-92-181.a.free.pinggy.link',
-]
+# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://rngna-197-35-92-181.a.free.pinggy.link',
@@ -135,6 +132,8 @@ X_FRAME_OPTIONS = "ALLOW-FROM http://127.0.0.1:8000"
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # أضف هذا
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -250,13 +249,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [BASE_DIR / "static"]
+# STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
 
-STATIC_ROOT = "static_root"
-MEDIA_URL = '/media/'
-MEDIA_ROOT = "media_root"
+# STATIC_ROOT = "static_root"
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = "media_root"
 
 
 # Default primary key field type

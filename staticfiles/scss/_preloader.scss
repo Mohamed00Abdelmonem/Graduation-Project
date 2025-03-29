@@ -1,0 +1,109 @@
+/*----------------------------------------*/
+/*   Preloader CSS
+/*----------------------------------------*/
+#preloader {
+  background: #fff;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  .loading {
+    display: flex;
+  }
+  .ctn-preloader {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .spinner {
+    animation: spinner 3s infinite linear;
+    border-radius: 50%;
+    border: 3px solid #f1f6f8;
+    border-left-color: $blue;
+    border-top-color: $blue;
+    margin: 0 auto 0em auto;
+    position: absolute;
+    left: -40px;
+    right: -40px;
+    bottom: -40px;
+    top: -40px;
+    &:before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      border: 6px solid #fff;
+      box-shadow: 0 0 20px 0 rgba(4, 46, 56, 0.2);
+      background: $blue;
+      position: absolute;
+      right: 31px;
+      top: 41px;
+      border-radius: 50%;
+      @media (max-width: 576px) {
+        top: 18px;
+      }
+    }
+  }
+  .round_spinner {
+    border-width: 1px;
+    border-color: rgb(238, 243, 244);
+    border-style: solid;
+    border-radius: 50%;
+    background-color: rgb(253, 253, 253);
+    box-shadow: 0 0 100px 0 rgba(4, 46, 56, 0.14);
+    width: 248px;
+    height: 248px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 40px auto 80px;
+    @media (max-width: 576px) {
+      width: 155px;
+      height: 155px;
+    }
+    h4 {
+      font-size: 30px;
+      font-weight: 400;
+      margin-bottom: 0;
+      color: $heading_color;
+      margin-top: 10px;
+      span {
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+#preloader .head {
+  color: $heading_color;
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 5.2px;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 5% 0 1% 0;
+  padding: 0;
+}
+#preloader p {
+  color: $text_color;
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotateZ(360deg);
+  }
+}
