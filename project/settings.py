@@ -153,18 +153,43 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # DATABASES['default'] = dj_database_url.config()
 
 
+# __________________________
+import os
+import dj_database_url
+from pathlib import Path
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'
+BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Database configuration
 DATABASES = {
-    'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.environ.get('DB_HOST'),
-        "PORT": os.getenv("DB_PORT"),
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
+
+# For production on Vercel
+if os.environ.get('VERCEL'):
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+# __________________________
+
+
+
+# DATABASES = {
+#     'default': {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv("DB_NAME"),
+#         "USER": os.getenv("DB_USER"),
+#         "PASSWORD": os.getenv("DB_PASSWORD"),
+#         "HOST": os.environ.get('DB_HOST'),
+#         "PORT": os.getenv("DB_PORT"),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
