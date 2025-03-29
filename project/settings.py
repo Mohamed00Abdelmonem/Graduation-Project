@@ -33,6 +33,31 @@ DEBUG = True
 
 # ________________
 
+# Required for Vercel
+ALLOWED_HOSTS = [
+    '.vercel.app',
+    '.now.sh',
+    'localhost',
+    '127.0.0.1'
+]
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Database configuration
+import dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(
+        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
+}
+
+
+
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
@@ -155,27 +180,27 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 # __________________________
 # Static files config for Vercel
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Database config
-import dj_database_url
-DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
-}
+# # Database config
+# import dj_database_url
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
+#         conn_max_age=600,
+#         conn_health_checks=True,
+#     )
+# }
 
-# Required for Vercel
-ALLOWED_HOSTS = [
-    '.vercel.app', 
-    '.now.sh',
-    'localhost',
-    '127.0.0.1'
-]
+# # Required for Vercel
+# ALLOWED_HOSTS = [
+#     '.vercel.app', 
+#     '.now.sh',
+#     'localhost',
+#     '127.0.0.1'
+# ]
 # __________________________
 
 
