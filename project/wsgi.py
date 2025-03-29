@@ -7,11 +7,29 @@ For more information on this file, see
 https://docs.djangoproject.com/en/5.1/howto/deployment/wsgi/
 """
 
-import os
+# import os
 
+# from django.core.wsgi import get_wsgi_application
+
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
+# app = get_wsgi_application()
+
+# application = get_wsgi_application()
+
+
+
+# ________________
+
+
+
+import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
-app = get_wsgi_application()
 
 application = get_wsgi_application()
+
+app = application  # Vercel expects 'app' variable
+
+
+# ________________
