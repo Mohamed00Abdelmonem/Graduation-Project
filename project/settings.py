@@ -200,6 +200,13 @@ DATABASES = {
 }
 
 
+# لتعطيل source maps في الإنتاج
+if not DEBUG:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
+    
 
 # __________________________
 # Static files config for Vercel
