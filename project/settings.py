@@ -57,11 +57,15 @@ ALLOWED_HOSTS = [
 X_FRAME_OPTIONS = 'DENY'  # Prevents clickjacking attacks
 
 # Static files (CSS, JavaScript, Images)
+# إعدادات الملفات الثابتة
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # مهم لـ collectstatic
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # مجلد static الأساسي
+]
 
+# إذا كنت تستخدم Whitenoise (مطلوب لـ Vercel)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Database configuration
 import dj_database_url
 
@@ -206,7 +210,7 @@ if not DEBUG:
 else:
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-    
+
 
 # __________________________
 # Static files config for Vercel
