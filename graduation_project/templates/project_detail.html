@@ -116,14 +116,43 @@
                     <div class="col-xl-9">
                         <div class="bj_book_single me-xl-3">
                             <div class="bj_book_img flip col-xl-6" style="margin-left:10px">
-    {% if object.images %}
-        <a href="{{ object.images.url }}" tabindex="-1" data-bs-toggle="modal" data-bs-target="#productQuickView">
-            <img class="img-fluid" id="mainImage" style="height:290px" src="{{ object.images.url }}" alt="Main Image">
-        </a>
-    {% endif %}
+                               
+                               
+                                <img class="img-fluid lazy-load" 
+                                data-src="{% if object.images %}{{ object.images.url }}{% else %}default-image.jpg{% endif %}" 
+                                data-fallback="https://images.pexels.com/photos/762687/pexels-photo-762687.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Product Image"
+                                style="height:290px;">
+                                
+                                {% comment %} دا عشان لما ميعرفش يوصل للصوره يحط الصوره دي افتراضيا {% endcomment %}
+                                <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const images = document.querySelectorAll('.lazy-load');
+                                    
+                                    const imageObserver = new IntersectionObserver((entries) => {
+                                        entries.forEach(entry => {
+                                            if (entry.isIntersecting) {
+                                                const img = entry.target;
+                                                img.src = img.dataset.src;
+                                                img.onerror = function() {
+                                                    this.src = this.dataset.fallback;
+                                                    this.onerror = null;
+                                                };
+                                                imageObserver.unobserve(img);
+                                            }
+                                        });
+                                    });
+                                
+                                    images.forEach(img => imageObserver.observe(img));
+                                });
+                            </script>
+
+
+
+
 
     <div class="pr_ribbon">
-        <span class="product-badge">👁️ مشاهده: {{ object.view_count|intcomma }}</span>
+        <span class="product-badge">👁️ مشااااهده: {{ object.view_count|intcomma }}</span>
     </div>
 
     {% if object.project_image.all %}

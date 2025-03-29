@@ -67,7 +67,14 @@ class GraduationProject(models.Model):
     )
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, related_name="projects")
     book_pdf = models.FileField(upload_to="projects/books/", blank=True, null=True)
-    images = models.ImageField(upload_to="projects/images/", blank=True, null=True)
+    # images = models.ImageField(upload_to="projects/images/", blank=True, null=True)
+    images = models.URLField(
+        max_length=500,
+        blank=True,
+        null=True,
+        verbose_name="رابط الصورة"
+    ) 
+    
     video = models.FileField(upload_to='videos/', blank=True, null=True)
     likes = models.ManyToManyField(User, blank=True, related_name="likes_project")
     created_at = models.DateTimeField(auto_now_add=True)

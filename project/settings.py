@@ -198,11 +198,11 @@ import dj_database_url
 # إعداد قاعدة البيانات
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
+        default='postgresql://postgres:aSMpTwRMJxkxhKoWlSLMHhAdajbNtWhh@maglev.proxy.rlwy.net:10239/railway',
         conn_max_age=600,  # يحسن الأداء
     )
 }
-
+# default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
 
 # لتعطيل source maps في الإنتاج
 if not DEBUG:
