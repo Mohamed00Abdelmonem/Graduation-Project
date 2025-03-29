@@ -154,28 +154,28 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # __________________________
-import os
+# Static files config for Vercel
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Database config
 import dj_database_url
-from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Database configuration
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
         conn_max_age=600,
         conn_health_checks=True,
     )
 }
 
-# For production on Vercel
-if os.environ.get('VERCEL'):
-    DATABASES['default'] = dj_database_url.config(
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+# Required for Vercel
+ALLOWED_HOSTS = [
+    '.vercel.app', 
+    '.now.sh',
+    'localhost',
+    '127.0.0.1'
+]
 # __________________________
 
 
