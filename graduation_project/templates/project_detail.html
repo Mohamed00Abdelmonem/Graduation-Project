@@ -120,7 +120,7 @@
                                
                                 <img class="img-fluid lazy-load" 
                                 data-src="{% if object.images %}{{ object.images.url }}{% else %}default-image.jpg{% endif %}" 
-                                {% comment %} دا عشان لما ميعرفش يوصل للصوره يحط الصوره دي افتراضيا {% endcomment %}
+                                        {% comment %} دا عشان لما ميعرفش يوصل للصوره يحط الصوره دي افتراضيا {% endcomment %}
 
                                 data-fallback="https://images.pexels.com/photos/762687/pexels-photo-762687.jpeg?auto=compress&cs=tinysrgb&w=600"
                                 alt="Product Image"
@@ -435,7 +435,12 @@
                         <div class="bj_new_pr_item mb-0 wow fadeInUp" data-wow-delay="0.2s">
                            
 
+                            {% if project.images %}
                             <a href="#" class="img"  style="height:130px" ><img src="{{project.images.url}}" alt="book"></a>
+                            {% else %}
+                            <a href="#" class="img"  style="height:130px" ><img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" alt="book"></a>
+
+                            {% endif %}   
                             <div class="bj_new_pr_content">
                                 <a href="{% url 'project:project_detail' project.slug%}">
                                     <h4 class="bj_new_pr_title">{{project|truncatechars:22}}</h4>

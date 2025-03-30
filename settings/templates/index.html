@@ -148,7 +148,7 @@
                                                             {% if project.images %}
                                                             <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
                                                         {% else %}
-                                                            <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 200px; height: 200px;" />
+                                                            <img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" alt="Default Image" style="width: 200px; height: 200px;" />
                                                         {% endif %}
                                                         </a>
                                                         {% else %}
@@ -156,7 +156,7 @@
                                                             {% if project.images %}
                                                             <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
                                                         {% else %}
-                                                            <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 200px; height: 200px;" />
+                                                            <img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" alt="Default Image" style="width: 200px; height: 200px;" />
                                                         {% endif %}
                                                         </a>
                                                         {% endif %}
@@ -207,16 +207,16 @@
                                     {% if project.images %}
                                     <img src="{{ project.images.url }}" alt="book" class="h-100" />
                                     {% else %}
-                                    <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" class="h-100" style="width: 200px; " />
+                                    <img src="https://placeit-img-1-p.cdn.aws.placeit.net/uploads/stage/stage_image/61583/optimized_large_thumb_2.jpg" alt="Default Image" class="h-100" style="width: 200px; " />
                                     {% endif %}
                                 </a>
                                 {% else %}
                                 <a href="#" style="height:175px" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}" class="img">
                                     {% if project.images %}
                                     <img src="{{ project.images.url }}" class="h-100" alt="book" />
-                                    {% else %}
-                                    <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px;" />
-                                    {% endif %}
+                                {% else %}
+                                    <img src="https://placeit-img-1-p.cdn.aws.placeit.net/uploads/stage/stage_image/61583/optimized_large_thumb_2.jpg" class="h-100" alt="Default Image" style="width: 200px;" />
+                                {% endif %}
                                 </a>
                                 {% endif %}
                                 <div class="bj_new_pr_content_two">
@@ -262,7 +262,7 @@
                                             {% if project.images %}
                                             <img src="{{ project.images.url }}" class="h-100 w-100" alt="book">
                                             {% else %}
-                                            <a href="#"><img src="" alt="book"></a>
+                                            <a href="#"><img src="https://placeit-img-1-p.cdn.aws.placeit.net/uploads/stage/stage_image/61583/optimized_large_thumb_2.jpg" alt="book kkkkk"></a>
                                             {% endif %}
                                             <div class="pr_ribbon">
                                                 <span class="product-badge">{{ project.graduation_year }}</span>
@@ -312,7 +312,7 @@
                 {% if project.images %}
                 <img src="{{ project.images.url }}" class="h-100" alt="book" />
                 {% else %}
-                <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px;" />
+                <img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" class="h-100" alt="Default Image" style="width: 200px;" />
                 {% endif %}
             </a>
             {% else %}
@@ -320,7 +320,7 @@
                 {% if project.images %}
                 <img src="{{ project.images.url }}" class="h-100" alt="book" />
                 {% else %}
-                <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px; height: 200px;" />
+                <img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" class="h-100" alt="Default Image" style="width: 200px; height: 200px;" />
                 {% endif %}
             </a>
             {% endif %}
