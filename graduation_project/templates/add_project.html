@@ -330,7 +330,7 @@
                         <!-- ملف PDF -->
                         <div class="form-group col-lg-4">
                             <label for="id_book_pdf">ملف PDF</label>
-                            <input type="file" class="form-control-file" id="id_book_pdf" name="book_pdf" required>
+                            <input type="file" class="form-control-file" id="id_book_pdf" name="book_pdf" >
                             {% if form.book_pdf.errors %}
                                 <div class="alert alert-danger">{{ form.book_pdf.errors }}</div>
                             {% endif %}
@@ -339,7 +339,7 @@
                         <!-- الصوره-->
                         <div class="form-group col-lg-4">
                             <label for="id_images">الصوره الرئيسه</label>
-                            <input type="file" class="form-control-file" id="id_images" name="images" multiple required>
+                            <input type="file" class="form-control-file" id="id_images" name="images" multiple >
                             {% if form.images.errors %}
                                 <div class="alert alert-danger">{{ form.images.errors }}</div>
                             {% endif %}
