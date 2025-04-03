@@ -1,121 +1,183 @@
-<!-- Include Font Awesome (if not already included) -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<!-- Include Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 <style>
-    /* Style for like button */
-    #like-button {
-        background-color:rgb(224, 226, 219);;
+    /* Like button styling */
+    .like-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .like-btn {
+        background-color: #f8f9fa;
         border: none;
         border-radius: 8px;
-
+        padding: 10px 15px;
         cursor: pointer;
         display: flex;
-        justify-content: center;
         align-items: center;
-        padding: 10px;
+        gap: 8px;
         transition: all 0.3s ease;
     }
 
-    /* Default color for the icon when not liked (black) */
-    #like-button i {
-        font-size: 24px;
-        color: #000000; /* Black by default */
-        transition: color 10.3s ease, transform 0.3s ease;
+    /* Unliked state */
+    .like-btn.unliked i {
+        color: rgb(5, 20, 50);
     }
 
-    /* Style for liked button (blue color) */
-    #like-button.liked i {
-        color: #007bff; /* Blue color when liked */
+    /* Liked state */
+    .like-btn.liked i {
+        color: #1877F2;
     }
 
-    /* Hover effect for the button */
-    #like-button:hover i {
-        transform: scale(2.5); /* Slightly enlarge on hover */
+    /* Hover effect */
+    .like-btn:hover {
+        background-color: #e7f3ff;
     }
 
-    /* Style for the like count */
-    #likesarea p {
+    .like-btn i {
+        font-size: 20px;
+        transition: all 0.3s ease;
+    }
+
+    /* Like count */
+    .like-count {
         color: #333;
-        margin: 0;
         font-size: 16px;
         font-weight: bold;
         cursor: pointer;
-        display: inline-block;
-        margin-right: 15px;
+        transition: all 0.2s;
     }
 
-    /* Style for the user list display */
-    #like-users-list {
-        background-color:rgb(164, 175, 183);
-        border-radius: 8px;
-        padding: 10px;
+    .like-count:hover {
+        color: #1877F2;
+    }
+
+    /* Likers list */
+    .likers-list {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
         margin-top: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        border: 1px solid #e4e6eb;
+        display: none;
+        animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .likers-list p {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .likers-list ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .likers-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .likers-list li:last-child {
+        border-bottom: none;
     }
 </style>
 
-<div class="list-group list-group-horizontal btn-group" id="likesarea" role="group">
-    <p>{{ post.likes.count }}👁️ likes</p>
-
-    <!-- Like button -->
-
+<div class="like-container" id="likesarea">
+    <span class="like-count">{{ object.likes.count }} 👁️</span>
+    
     {% if request.user.is_authenticated %}
-        <button hx-post="{% url 'project:like_post' object.id %}" id="like-button" 
-            hx-target="#likesarea" hx-swap="outerHTML" class="btn btn-light" onclick="toggleLike(this)">
-            {% if request.user in post.likes.all %}
-                <!-- "Liked" icon: Heart (love like) -->
+        <button hx-post="{% url 'project:like_post' object.id %}" 
+                class="like-btn {% if request.user in post.likes.all %}liked{% else %}unliked{% endif %}"
+                hx-target="#likesarea" 
+                hx-swap="outerHTML"
+                onclick="toggleLike(this)">
+            {% if request.user in object.likes.all %}
                 <i class="fas fa-heart"></i>
+                <span>معجب</span>
             {% else %}
-                <!-- "Unliked" icon: Thumbs-up -->
                 <i class="far fa-thumbs-up"></i>
+                <span>أعجبني</span>
             {% endif %}
         </button>
     {% else %}
-     <!-- If the user is not authenticated, show a message or link to login -->
-    <a href="{% url 'login' %}" class="btn btn-light">
-        <i class="far fa-thumbs-up"></i> Log in to like
-    </a>
+        <a href="{% url 'login' %}?next={{ request.path }}" class="like-btn unliked">
+            <i class="far fa-thumbs-up"></i>
+            <span>سجل دخول للإعجاب</span>
+        </a>
     {% endif %}
     
-
-    <!-- Display list of users who liked the post -->
-    <div id="like-users-list" style="display:none;">
-        <p>Users who liked this post:</p>
+    <div class="likers-list">
+        <p>المعجبون</p>
         <ul>
             {% for user in object.likes.all %}
                 <li>{{ user.username }}</li>
+            {% empty %}
+                <li>لا يوجد معجبين بعد</li>
             {% endfor %}
         </ul>
     </div>
 </div>
 
-<!-- Script to toggle visibility of like user list -->
 <script>
-    // Show or hide the user list when the like count is clicked
-    document.querySelector("#likesarea p").addEventListener("click", function() {
-        const usersList = document.querySelector("#like-users-list");
-        if (usersList.style.display === "none") {
-            usersList.style.display = "block";
+    // Toggle like state immediately for better UX
+    function toggleLike(btn) {
+        if (btn.classList.contains('liked')) {
+            btn.classList.remove('liked');
+            btn.classList.add('unliked');
+            btn.innerHTML = '<i class="far fa-thumbs-up"></i><span>أعجبني</span>';
         } else {
-            usersList.style.display = "none";
-        }
-    });
-
-    // Toggle like state when button is clicked
-    function toggleLike(button) {
-        const icon = button.querySelector('i');
-        
-        // Toggle the liked class to mark as liked
-        button.classList.toggle('liked');
-
-        // Change icon based on the like state
-        if (button.classList.contains('liked')) {
-            // Change to heart icon and blue color (delayed effect)
-            icon.classList.remove('far', 'fa-thumbs-up');
-            icon.classList.add('fas', 'fa-heart');
-        } else {
-            // Revert to thumbs-up icon and black color
-            icon.classList.remove('fas', 'fa-heart');
-            icon.classList.add('far', 'fa-thumbs-up');
+            btn.classList.remove('unliked');
+            btn.classList.add('liked');
+            btn.innerHTML = '<i class="fas fa-heart"></i><span>معجب</span>';
         }
     }
+
+    // Show/hide likers list
+    document.querySelector(".like-count").addEventListener("click", function(e) {
+        e.stopPropagation();
+        const list = document.querySelector(".likers-list");
+        list.style.display = list.style.display === "block" ? "none" : "block";
+    });
+
+    // Close likers list when clicking outside
+    document.addEventListener("click", function() {
+        document.querySelector(".likers-list").style.display = "none";
+    });
+
+    // Prevent closing when clicking inside the list
+    document.querySelector(".likers-list").addEventListener("click", function(e) {
+        e.stopPropagation();
+    });
+
+    // Handle HTMX after swap to maintain state
+    document.addEventListener("htmx:afterSwap", function(evt) {
+        if (evt.detail.target.id === "likesarea") {
+            // Update the like count display
+            const response = JSON.parse(evt.detail.xhr.responseText);
+            document.querySelector(".like-count").textContent = `${response.count} 👁️`;
+            
+            // Update button state based on response
+            const likeBtn = document.querySelector(".like-btn");
+            if (response.status === 'liked') {
+                likeBtn.classList.remove('unliked');
+                likeBtn.classList.add('liked');
+                likeBtn.innerHTML = '<i class="fas fa-heart"></i><span>معجب</span>';
+            } else {
+                likeBtn.classList.remove('liked');
+                likeBtn.classList.add('unliked');
+                likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i><span>أعجبني</span>';
+            }
+        }
+    });
 </script>

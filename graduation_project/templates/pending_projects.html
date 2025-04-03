@@ -21,11 +21,15 @@
 {% endfor %}
 
 <!-- Button trigger modal -->
-{% for project in projects %}
+
+
+{% comment %} {% for project in projects %}
 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#temporaryRejectModal{{ project.id }}">
     رفض مؤقت
 </button>
-{% endfor %}
+{% endfor %} {% endcomment %}
+
+
 
 <!-- Rest of your template remains unchanged -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -73,28 +77,40 @@
             </div>
         </div>
 
-        <!-- Search Form -->
-        <div class="row">
-            <div class="mb-4 col-lg-6">
-                <form method="get" action="{% url 'project:pending_projects' %}">
-                    <label for="search">ابحث بواسطة العنوان:</label>
-                    <input type="text" id="search" name="search" value="{{ search_query }}" placeholder="ادخل عنوان المشروع...">
-                    <button type="submit" class="" style="background:#004658; color:white; width:60px; height:30px">بحث</button>
-                </form>
+      <!-- Search and Filter Section - Responsive -->
+<div class="row">
+    <!-- Search Form -->
+    <div class="mb-4 col-12 col-lg-6">
+        <form method="get" action="{% url 'project:pending_projects' %}" class="row g-2 align-items-center">
+            <div class="col-8 col-sm-9">
+                <label for="search" class="form-label mb-0 d-block d-sm-inline">ابحث بواسطة العنوان:</label>
+                <input type="text" id="search" name="search" value="{{ search_query }}" 
+                       class="form-control mt-1 mt-sm-0" 
+                       placeholder="ادخل عنوان المشروع...">
             </div>
+            <div class="col-4 col-sm-3">
+                <button type="submit" class="btn w-100" style="background:#004658; color:white;">بحث</button>
+            </div>
+        </form>
+    </div>
 
-            <!-- Filter Dropdown -->
-            <div class="mb-4 col-lg-6">
-                <form method="get" action="{% url 'project:pending_projects' %}">
-                    <label for="status_filter">Filter by Status:</label>
-                    <select name="status" id="status_filter" onchange="this.form.submit()">
-                        <option value="all" {% if status_filter == 'all' %}selected{% endif %}>All</option>
-                        <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>قيد الانتظار</option>
-                        <option value="temporary_rejection" {% if status_filter == 'temporary_rejection' %}selected{% endif %}>الرفض المؤقت</option>
-                    </select>
-                </form>
+    <!-- Filter Dropdown -->
+    <div class="mb-4 col-12 col-lg-6">
+        <form method="get" action="{% url 'project:pending_projects' %}" class="row g-2 align-items-center">
+            <div class="col-8 col-sm-9">
+                <label for="status_filter" class="form-label mb-0 d-block d-sm-inline">تصفية حسب الحالة:</label>
+                <select name="status" id="status_filter" class="form-select mt-1 mt-sm-0" onchange="this.form.submit()">
+                    <option value="all" {% if status_filter == 'all' %}selected{% endif %}>الكل</option>
+                    <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>قيد الانتظار</option>
+                    <option value="temporary_rejection" {% if status_filter == 'temporary_rejection' %}selected{% endif %}>الرفض المؤقت</option>
+                </select>
             </div>
-        </div>
+            <div class="col-4 col-sm-3 d-none d-sm-block">
+                <!-- Empty column for alignment -->
+            </div>
+        </form>
+    </div>
+</div>
 
         <!-- Project List -->
         <div class="row">

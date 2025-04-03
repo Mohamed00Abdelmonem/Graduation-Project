@@ -261,15 +261,7 @@
                                             <h5 class="content_header mb-2">ماذا سوف تتعلم</h5>
                                             <ul class="content_text mb-2">
                                                 <li>
-                                                    إتقان الأطر والنماذج والتقنيات التي تمكن الآلات ل التعلم من البيانات
-                                                </li>
-                                                <li>
-                                                    إتقان الأطر والنماذج والتقنيات التي تمكن الآلات ل التعلم من البيانات
-                                                </li>
-                                                <li>
-                                                    إتقان الأطر والنماذج والتقنيات التي تمكن الآلات ل التعلم من البيانات
-                                                </li>
-                                                <li>
+
                                                     إتقان الأطر والنماذج والتقنيات التي تمكن الآلات ل التعلم من البيانات
                                                 </li>
                                                 <li>
@@ -345,24 +337,37 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                
                                 <div class="tab-pane fade" id="product_review" role="tabpanel" aria-labelledby="product_review-tab">
                                     <div class="reviews-item" id="scrollspyReviews">
                                       <div class="d-flex flex-wrap text-center justify-content-between mb-40 gap-3">
-                                    <!-- Review Form -->
-                                    <form id="review-form" class="review-form" method="post" action="{% url 'project:add_review' object.slug %}">
-                                    {% csrf_token %}
-                                       <div class="row">
-                                         <div class="col-xxl-12">
-                                         <div class="postbox__comment-input" style="width:750px">
-                                          <textarea name="comments" id="comment" class="w-100" style="border-radius: 10px;" placeholder="اضف تعليق..."></textarea>
+
+                                            <form id="review-form" class="review-form w-100" method="post" action="{% url 'project:add_review' object.slug %}">
+                                                {% csrf_token %}
+                                                <div class="row g-3">
+                                                    <div class="col-12">
+                                                        <div class="postbox__comment-input">
+                                                            <textarea name="comments" id="comment" 
+                                                                      class="form-control w-100 p-3"
+                                                                      style="border-radius: 10px; min-height: 120px;"
+                                                                      placeholder="اضف تعليق..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="postbox__comment-btn text-center text-md-end">
+                                                            <button type="submit" 
+                                                                    class="tp-btn btn btn-success px-4 py-2"
+                                                                    style="min-width: 150px;">
+                                                                اضف تعليق
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form> 
                                  </div>
-                                   </div>
-                                    <div class="col-xxl-12">
-                                      <div class="postbox__comment-btn">
-                                <button type="submit" class="tp-btn btn btn-success">اضف تعليق</button>
-                                   </div>
-                                     </div> </div>
-                                </form>  </div>
+
+
                                     <!-- Display Reviews -->
                                      {% for review in object.reviews.all %}
                                       <div class="review-list mb-3" style="background:#004658; border-radius: 10px; padding-right: 15px; display: flex; justify-content: space-between; align-items: center;">

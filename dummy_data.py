@@ -179,11 +179,11 @@ def seed_reviews(n):
 
 def seed_all():
     """Seed all data."""
-    seed_users(10)  # Create 10 dummy users
+    # seed_users(10)  # Create 10 dummy users
     # seed_categories(5)  # Create 5 dummy categories
     seed_projects(50)  # Create 20 dummy projects
-    # seed_images_projects(10000)  # Create 20 dummy images projects
-    # seed_reviews(2000)  # Create 50 dummy reviews
+    seed_images_projects(100)  # Create 20 dummy images projects
+    seed_reviews(100)  # Create 50 dummy reviews
     print("All data seeded successfully.")
 
 
