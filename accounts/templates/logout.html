@@ -2,11 +2,66 @@
 {% block body %}
 
 <section class="bj_author_single_area sec_padding pb-0" data-bg-color="#f5f5f5">
-<div class="container"style="margin-top: 200px; margin-bottom: 100px;">
-    <h2>مرحبا بك, {{ user.first_name }}!</h2>
-    <p>الرقم القومي: {{ user.username }}</p>
-    <a href="{% url 'logout' %}" class="btn btn-danger">تسجيل الخروج</a>
-</div>
+    <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="user-profile-card text-center p-4 shadow-sm rounded" style="background: white;">
+                    <div class="user-avatar mb-3">
+                        <i class="fas fa-user-circle" style="font-size: 4rem; color: #4e73df;"></i>
+                    </div>
+                    <h2 class="mb-3" style="color: #2e3a59;">مرحباً بك، {{ user.username }}!</h2>
+                    
+                    <div class="user-details p-3 mb-4 rounded" style="background: #f8f9fc;">
+                        <div class="detail-item mb-2">
+                            <span class="detail-label font-weight-bold">اسم المستخدم:</span>
+                            <span class="detail-value">{{ user.username }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label font-weight-bold">الرقم القومي:</span>
+                            <span class="detail-value">{{ user.national_id }}</span>
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'logout' %}" class="btn btn-danger btn-lg px-4 py-2" style="border-radius: 30px;">
+                        <i class="fas fa-sign-out-alt ml-2"></i> تسجيل الخروج
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
+<style>
+    .user-profile-card {
+        border: 1px solid #e3e6f0;
+        transition: all 0.3s ease;
+    }
+    
+    .user-profile-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .detail-label {
+        color: #5a5c69;
+        margin-left: 8px;
+    }
+    
+    .detail-value {
+        color: #2e3a59;
+    }
+    
+    .btn-danger {
+        background-color: #e74a3b;
+        border-color: #e74a3b;
+        transition: all 0.3s;
+    }
+    
+    .btn-danger:hover {
+        background-color: #be2617;
+        border-color: #be2617;
+        transform: scale(1.05);
+    }
+</style>
 
 {% endblock %}
