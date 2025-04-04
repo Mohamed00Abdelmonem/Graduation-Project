@@ -426,8 +426,7 @@
     }
 </style>
 
-<!-- JavaScript for Delay and Redirection -->
-<!-- JavaScript for Delay and Redirection -->
+{% comment %} <!-- JavaScript for Delay and Redirection -->
 <script>
     const messages = document.querySelectorAll('.alert');
     let hasError = false;
@@ -445,7 +444,7 @@
             window.location.href = "{% url 'project:success_create_project' %}";
         }, 5000); // 5000 مللي ثانية = 5 ثوانٍ
     }
-</script>
+</script> {% endcomment %}
 
 
 {% endblock body %}
