@@ -23,10 +23,18 @@
                             <div class="modal fade product-quickview-modal" id="videoQuickView" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog  modal-dialog-centered">
                                     <div class="modal-content p-3">
+                                        {% if object.video %}
                                         <video width="100%" controls>
                                             <source src="{{ object.video.url }}" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
+                                        {% else %}
+                                        <video width="100%" controls>
+                                            <source src="" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        {% endif %}
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -76,10 +84,18 @@
                                     </div>
                                     <div class="product_details_section_content mb-3">
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#videoQuickView" class="video-container">
+                                            {% if object.video %}
                                             <video width="100%" controls height="150px">
                                                 <source src="{{ object.video.url }}" type="video/mp4">
                                                 Your browser does not support the video tag.
                                             </video>
+                                            {% else %}
+                                            <video width="100%" controls height="150px">
+                                                <source src="" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                            {% endif %}
+                                            
                                         </a>
                                     </div>
                                     {% comment %} <div class="product_details_section_content mb-3">
