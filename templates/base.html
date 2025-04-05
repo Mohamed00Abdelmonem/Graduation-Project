@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -26,173 +27,267 @@
     <title>مكتبة معهد مصر العالي للحاسبات والمعلومات بالمنصوره </title>
 </head>
 
-<body data-scroll-animation="true" dir="rtl">
-    {% comment %} for landing page anamation {% endcomment %}
-     {% comment %} <div id="preloader">
-        <div id="ctn-preloader" class="ctn-preloader">
-            <div class="round_spinner">
-                <div class="spinner"></div>   
-                <div class="text">
-                    <img src="{% static 'img/home/favicon.ico' %}" alt="Image" /> 
-                    <h4><span>MET</span></h4>
-                </div>
-            </div>
-            <h2 class="head">المكتبه الرقميه</h2>
-            <p></p>
-        </div>
-    </div>  {% endcomment %}
-    <div class="body_wrapper">
-        <div class="click_capture"></div>
-        {% comment %} start header {% endcomment %}
-        <header class="header_area header_relative header_blue">
-                <!-- Top header -->
-                <div class="max" style="color:aliceblue">
-                    <!-- Google Translate Element -->
-                    <div id="google_translate_element" style="height:40px; margin-right:20px"></div>
-                    <a class="navbar-brand"><i class="bi bi-telephone-outbound-fill"></i> 0502245747</a>
-                    <a class="navbar-brand" style="margin-left: 10px;"><i class="bi bi-envelope-arrow-up-fill"></i> info@metmans.edu.eg</a>
-                </div>
-                <hr class="max" style="height:2px; color:aliceblue;">
-                <!-- list header -->
-                <nav class="navbar navbar-expand-lg menu_one menu_white " id="header" style="height:70px;">
-                    <div class="container">
-                            <!-- button span max (990) -->
-                            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="menu_toggle">
-                                    <span class="hamburger">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </span>
-                                    <span class="hamburger-cross">
-                                        <span></span>
-                                        <span></span>
-                                    </span>
-                                </span>
-                            </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-                            <ul class="navbar-nav search_cart menu">
-                                <!-- Search Button and Form -->
-                                <li class="nav-item search">
-                                    {% comment %} <a class="nav-link search-btn" href="javascript:void(0);">
-                                        <i class="icon-search"></i> <!-- Search Icon -->
-                                    </a> {% endcomment %}
-                                    <form action="#" method="get" class="menu-search-form">
-                                        <div class="input-group">
-                                            <input type="search" class="form-control" placeholder="Search here.." />
-                                            <button type="submit">
-                                                <i class="ti-arrow-right"></i> <!-- Submit Icon -->
-                                            </button>
-                                        </div>
-                                    </form>
-                                </li>
-                                {% if user.is_authenticated %}
-                                <i class="nav-item user ms-3">
-                                    <a  href="/accounts" class="nav-link" title="Logout"> 
-                                        <li class="fas fa-sign-out-alt"></li>
-                                    </a>
-                                </i>
-                                {% else %}
-                                <i class="nav-item user ms-3">
-                                    <a  href="{% url 'login' %}" class="nav-link" title="Login"> 
-                                        <li class="fas fa-sign-in-alt"></li>
-                                    </a>
-                                </i>
-                                {% endif %}
-                
-                
-                                
-                
-                                <!-- User Account -->
-                                {% if user.is_authenticated %}
-                                <li class="nav-item user ms-3">
-                                    <a class="nav-link" href="/accounts/profile">
-                                        <i class="icon-user"></i> <!-- User Icon -->
-                                    </a>
-                                </li>
-                                {% endif %}
-                                <!-- Pending Projects (for Staff) -->
-                                {% if user.is_staff %}
-                                    <li class="nav-item shpping-cart dropdown submenu">
-                                        <a class="nav-link" class="cart-btn nav-link dropdown-toggle" href="{% url 'project:pending_projects' %}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="icon-shopping-basket"></i> <!-- Pending Projects Icon -->
-                                            <span class="num">{{ pending_projects_count }}</span> <!-- Pending Projects Count -->
-                                        </a>
-                                    </li>
-                                {% endif %}
-                                
-                                <!-- Add Project Button (for Leaders) -->
-                                {% if user.is_authenticated and user.profile.is_leader %}
-                                        <li class="nav-item user ms-3" class="nav-item">
-                                            <a class="nav-link" href="{% url 'project:add_project' %}" class="nav-link icon-btn" title="Add Project">
-                                                <i class="fas fa-plus"></i> <!-- Add Project Icon -->
-                                            </a>
-                                        </li>
-                                {% endif %}
-                                
-                                <!-- Upload Excel Button (for Staff) -->
-                                {% if user.is_staff %}
-                                        <li class="nav-item user ms-3">
-                                            <a href="{% url 'upload_excel' %}" class="nav-link" title="اضافة طلاب">
-                                                <i class="fas fa-file-upload"></i> <!-- Upload Excel Icon -->
-                                            </a>
-                                        </li>
-                                {% endif %}
-                            </ul>
-                            <ul class="navbar-nav menu w_menu ms-auto me-auto">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="/" role="button">
-                                        الصفحه الرئيسية
-                                    </a>
-                                </li>
-                                <li class="nav-item dropdown ">
-                                    <a class="nav-link" href="{% url 'project:ProjectList'%}">
-                                        معرض المشاريع 
-                                    </a>
-                                </li>
-                                {% if user.is_authenticated %}
-                                <li class="nav-item dropdown submenu">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                         لوحة تحكم
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a href="/accounts/profile/" class="nav-link">البيانات الشخصيه</a>
-                                        </li>
-                                                {% if  user.is_staff %}
-                                                    <li class="nav-item">
-                                                        <a href="{% url 'upload_excel' %}" class="nav-link">إضافة طلاب</a>
-                                                    </li>
-                                                {% endif %}
 
-                                                {% if user.is_authenticated and user.profile.is_leader %}
-                                                    <li class="nav-item">
-                                                        <a href="{% url 'project:add_project' %}" class="nav-link">اضافة مشروع</a>
-                                                    </li>
-                                                {% endif %}
-                                                {% if user.is_staff %}
-                                        <li class="nav-item">
-                                            <a href="{% url 'project:pending_projects' %}" class="nav-link">المشاريع المعلقه </a>
-                                        </li>
-                                        {% endif %}
-                                    </ul>
-                                </li>
-                                {%endif%}
-                                <li class="nav-item dropdown mega_menu tab-demo">
-                                    <a class="nav-link" href="/about">معلومات الموقع
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a class="navbar-brand sticky_logo" href="/">
-                            <img class="wow fadeInRight" data-wow-delay="0.5s" src="{% static 'img/home/favicon.ico' %}" alt="logo" />
-                            <img src="{% static 'img/home/favicon.ico' %}" alt="logo" />
-                        </a>
+    <body data-scroll-animation="true" dir="rtl">
+        {% comment %} for landing page anamation {% endcomment %}
+         {% comment %} <div id="preloader">
+            <div id="ctn-preloader" class="ctn-preloader">
+                <div class="round_spinner">
+                    <div class="spinner"></div>   
+                    <div class="text">
+                        <img src="{% static 'img/home/favicon.ico' %}" alt="Image" /> 
+                        <h4><span>MET</span></h4>
                     </div>
-                </nav>
+                </div>
+                <h2 class="head">المكتبه الرقميه</h2>
+                <p></p>
+            </div>
+        </div>  {% endcomment %}
+        <div class="body_wrapper">
+            <div class="click_capture"></div>
+    <header class="header_area header_relative header_blue">
+
+
+
+        <!-- Top header -->
+        {% comment %} 
+         <div class="top-header max" style="color:aliceblue">
+            <!-- Google Translate Element -->
+            <div id="google_translate_element" style="height:40px; margin-right:20px"></div>
+            <a class="navbar-brand"><i class="bi bi-telephone-outbound-fill"></i> 0502245747</a>
+            <a class="navbar-brand" style="margin-left: 10px;"><i class="bi bi-envelope-arrow-up-fill"></i> info@metmans.edu.eg</a>
+         </div>
+         {% endcomment %}
+        <hr class="max" style="height:2px; color:aliceblue; margin: 0;">
+        
+        <!-- Main navigation -->
+        <nav class="navbar navbar-expand-lg menu_one menu_white" id="header" style="height:70px;">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand sticky_logo" href="/">
+                    <img class="wow fadeInRight" data-wow-delay="0.5s" src="{% static 'img/home/favicon.ico' %}" alt="logo" />
+                    <img src="{% static 'img/home/favicon.ico' %}" alt="logo" />
+                </a>
+                
+                <!-- Mobile menu button -->
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="menu_toggle">
+                        <span class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span class="hamburger-cross">
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Main menu items -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu w_menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">الصفحة الرئيسية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'project:ProjectList'%}">معرض المشاريع</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                لوحة تحكم
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/accounts/profile/">البيانات الشخصية</a></li>
+                                {% if user.is_staff %}
+                                <li><a class="dropdown-item" href="{% url 'upload_excel' %}">إضافة طلاب</a></li>
+                                {% endif %}
+                                {% if user.profile.is_leader %}
+                                <li><a class="dropdown-item" href="{% url 'project:add_project' %}">إضافة مشروع</a></li>
+                                {% endif %}
+                                {% if user.is_staff %}
+                                <li><a class="dropdown-item" href="{% url 'project:pending_projects' %}">المشاريع المعلقة</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">معلومات الموقع</a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Right side icons -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 search_cart menu">
+                        <!-- Search Button and Form -->
+                        <li class="nav-item search">
+                            <form action="#" method="get" class="menu-search-form">
+                                <div class="input-group">
+                                    <input type="search" class="form-control" placeholder="Search here.." />
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="ti-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </li>
+                        
+                        
+                        
+                        <!-- Staff and leader specific buttons -->
+                        {% if user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link position-relative" href="{% url 'project:pending_projects' %}" title="Pending Projects">
+                                <i class="icon-shopping-basket"></i>
+                                {% if pending_projects_count > 0 %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{ pending_projects_count }}
+                                </span>
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% endif %}
+                        
+                        {% if user.is_authenticated and user.profile.is_leader %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'project:add_project' %}" title="Add Project">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+                        
+                        {% if user.is_staff %}
+                        <li class="nav-item">
+                            <a href="{% url 'upload_excel' %}" class="nav-link" title="اضافة طلاب">
+                                <i class="fas fa-file-upload"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        <!-- Authentication buttons -->
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts/profile" title="Profile">
+                                <i class="icon-user"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/accounts" class="nav-link" title="Logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </li>
+                        
+                        {% else %}
+                        <li class="nav-item">
+                            <a href="{% url 'login' %}" class="nav-link" title="Login">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+
+
+                    </ul>
                 </div>
             </div>
-        </header>
+        </nav>
+    </header>
+    
+    <style>
+        /* Mobile responsive styles */
+        @media (max-width: 991.98px) {
+            .header_area {
+                position: relative;
+            }
+            
+            .top-header {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .top-header .navbar-brand {
+                margin-left: 5px !important;
+                font-size: 12px;
+            }
+            
+            #google_translate_element {
+                margin-right: 5px !important;
+                height: 30px !important;
+            }
+            
+            .navbar {
+                height: auto !important;
+                padding: 10px 0;
+            }
+            
+            .navbar-brand img {
+                max-height: 40px;
+            }
+            
+            .navbar-collapse {
+                background: #fff;
+                margin-top: 10px;
+                padding: 15px;
+                border-radius: 5px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            
+            .dropdown-menu {
+                border: none;
+                margin: 5px 0;
+            }
+            
+            .nav-item {
+                margin-bottom: 5px;
+            }
+            
+            .menu-search-form {
+                margin: 10px 0;
+            }
+            
+            .badge {
+                font-size: 10px;
+                padding: 3px 5px;
+            }
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 992px) {
+            .navbar-nav.menu {
+                margin-right: auto !important;
+                margin-left: auto !important;
+            }
+            
+            .search_cart {
+                margin-left: 0 !important;
+            }
+            
+            .dropdown-menu {
+                text-align: right;
+            }
+        }
+        
+        /* General improvements */
+        .nav-link {
+            padding: 8px 15px;
+        }
+        
+        .dropdown-item {
+            padding: 8px 20px;
+        }
+        
+        .menu-search-form .form-control {
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .menu-search-form button {
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .badge {
+            font-size: 11px;
+        }
+    </style>
+
                         
                                     
                           
@@ -302,7 +397,10 @@
         <script src="{% static 'vendors/swiper/swiper-bundle.min.js' %}"></script>
         <script src="{% static 'vendors/wow/wow.min.js' %}"></script>
         <script src="{% static 'js/custom.js' %}"></script>
+        
+        
         <!-- Google Translate API Script -->
+        {% comment %} 
         <script type="text/javascript">
             function googleTranslateElementInit() {
                 new google.translate.TranslateElement({
@@ -310,7 +408,9 @@
                     includedLanguages: "ar,en,es,fr", // English, Arabic, Spanish, French
                 }, "google_translate_element");
             }
-        </script>
+        </script> 
+        {% endcomment %}
+
         <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </body>
     

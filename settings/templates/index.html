@@ -3,6 +3,48 @@
 {% block body %}
 {% load humanize %}
 
+
+
+<style>
+    /* Mobile-specific styles */
+    @media (max-width: 767px) {
+        /* Projects grid - show 2 items per row */
+        .best_selling_pr_area .col-xl-3,
+        .bj_new_product_area .col-xl-3 {
+            width: 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        
+        /* For slightly larger phones, show 3 items */
+        @media (min-width: 480px) and (max-width: 767px) {
+            .best_selling_pr_area .col-xl-3,
+            .bj_new_product_area .col-xl-3 {
+                width: 33.33%;
+                flex: 0 0 33.33%;
+                max-width: 33.33%;
+            }
+        }
+        
+        /* Adjust project card height */
+        .bj_new_pr_item,
+        .bj_new_pr_item_two {
+            height: auto !important;
+            margin-bottom: 15px;
+        }
+        
+        /* Reduce image height */
+        .bj_new_pr_item .img,
+        .bj_new_pr_item_two .img {
+            height: 150px !important;
+        }
+    }
+</style>
+
+
+
     <!-- Modal -->
     {% for project in projects_main %}
         <div class="modal fade product-quickview-modal" id="productQuickView{{ project.id }}" tabindex="-1" aria-hidden="true">
