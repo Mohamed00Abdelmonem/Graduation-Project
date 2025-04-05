@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>مشروع تخرج جديد</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .header {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #888;
+            text-align: center;
+        }
+        .highlight {
+            color: #4caf50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h2>تم إرسال مشروع جديد للمراجعة</h2>
+    </div>
+    <p>مرحباً <span class="highlight">{{ user.get_full_name }}</span>،</p>
+    <p>لقد قمت بإرسال مشروع التخرج الخاص بك بنجاح. سيتم مراجعته من قبل المشرف.</p>
+
+    <p><strong>عنوان المشروع:</strong> {{ project.title }}</p>
+    <p><strong>السنة:</strong> {{ project.graduation_year }}</p>
+
+    <p>سوف يتم إشعارك عند قبول أو رفض المشروع.</p>
+
+    <div class="footer">
+        <p>شكراً لاستخدامك منصتنا التعليمية.</p>
+    </div>
+</div>
+</body>
+</html>

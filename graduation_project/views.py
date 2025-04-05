@@ -193,16 +193,28 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
 
         for image in images:
             ProjectImages.objects.create(project=project, image=image)
-        # Send email notification to the leader
-        send_mail(
-            'مشروع تخرج جديد للمراجعه',
-            'تم ارسال مشروعك للمشرف للمراجعه انتظر حين قبوله',
-            settings.EMAIL_HOST_USER,
-            [self.request.user.email],  # Use self.request.user.email
-            fail_silently=False,
-        )
 
-        # Add a success message to be displayed on the same page
+        # Send email notification to the leader
+        # Prepare context for email
+        context = {
+            'user': self.request.user,
+            'project': project,
+        }
+
+        # Render email content
+        html_content = render_to_string('emails/new_project.html', context)
+        text_content = strip_tags(html_content)
+
+        # Send the email
+        email = EmailMultiAlternatives(
+            subject='مشروع تخرج جديد للمراجعة',
+            body=text_content,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[self.request.user.email]
+        )
+        email.attach_alternative(html_content, "text/html")
+        email.send()
+
         messages.success(self.request, 'تم إرسال المشروع بنجاح! سيتم مراجعته من قبل المشرف.')
 
         return super().form_valid(form)
