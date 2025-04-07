@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row g-3">
     {% if projects %}
         {% for book in projects %}
             <!-- Modal -->
@@ -57,12 +57,13 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-sm-6 projects_item mb-4">
+            <!-- Project Item -->
+            <div class="col-6 col-sm-6 col-lg-3 projects_item">
                 <div class="best_product_item best_product_item_two shop_product h-100">
-                    <div class="img" style="height: 200px; overflow: hidden;">
+                    <div class="img" style="overflow: hidden;">
                         {% if book.images %}
                             <a href="{% url 'project:project_detail' book.slug %}" class="h-100 d-block">
-                                <img src="{{ book.images.url }}" class="h-100 w-100 object-fit-cover" alt="{{ book.title }}">
+                                <img src="{{ book.images.url }}" class="w-100 object-fit-cover" alt="{{ book.title }}">
                             </a>
                         {% else %}
                             <a href="{% url 'project:project_detail' book.slug %}" class="h-100 d-flex align-items-center justify-content-center bg-light">
@@ -107,40 +108,62 @@
     {% endif %}
 </div>
 
+
+
+
 <style>
-    .special-offers-page-select {
-        white-space: nowrap;
+    /* تصميم عام */
+.row.g-3 {
+    margin-right: 7px; /* إضافة مارجين يمين فقط */
+    margin-left: 0; /* تأكد من عدم وجود مارجين يسار غير مرغوب فيه */
+}
+
+.projects_item {
+    padding: 0 5px; /* إضافة مسافة صغيرة بين العناصر */
+}
+
+.best_product_item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    min-height: 450px; /* ارتفاع الكارت الافتراضي */
+}
+
+.best_product_item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.best_product_item .img {
+    height: 250px; /* ارتفاع الصورة الافتراضي */
+}
+
+.best_product_item .bj_new_pr_content {
+    padding: 15px; /* التباعد الداخلي للمحتوى */
+}
+
+.bj_new_pr_title {
+    font-size: 1.2rem; /* حجم العنوان */
+    font-weight: bold;
+}
+
+/* تصميم خاص بشاشات الموبايل */
+@media (max-width: 576px) {
+    .projects_item {
+        padding: 0 10px; /* زيادة المسافة بين العناصر على الموبايل */
     }
-    .special-offers-page-select img {
-        display: inline-block;
-        object-fit: cover;
-    }
-    .overflow-auto {
-        overflow-x: auto;
-        scrollbar-width: thin;
-    }
+
     .best_product_item {
-        transition: transform 0.3s, box-shadow 0.3s;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        min-height: 400px; /* زيادة ارتفاع الكارت على الموبايل */
     }
-    .best_product_item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    .best_product_item .img {
+        height: 200px; /* زيادة ارتفاع الصورة على الموبايل */
     }
-    .quick_button {
-        background: rgba(255,255,255,0.9);
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #333;
-        border: none;
+
+    .bj_new_pr_title {
+        font-size: 1.2rem; /* زيادة حجم العنوان على الموبايل */
     }
-    .object-fit-cover {
-        object-fit: cover;
-    }
+}
 </style>
