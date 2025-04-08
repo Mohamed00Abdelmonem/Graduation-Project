@@ -29,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_=e0@#_o21+)w^@vc2usfoufg0#gyy27lr5#*@z+5tcxzj4@)i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False #for deploy
-DEBUG = True  # صحيح للنشر
+DEBUG = False #for deploy
+# DEBUG = True  
 # ولكنك تحتاج لتسجيل الأخطاء في الإنتاج:
 LOGGING = {
     'version': 1,
@@ -197,13 +197,13 @@ import dj_database_url
 
 # إعداد قاعدة البيانات
 
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
-#         # default='postgresql://postgres:aSMpTwRMJxkxhKoWlSLMHhAdajbNtWhh@maglev.proxy.rlwy.net:10239/railway',
-#         conn_max_age=600,  # يحسن الأداء
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
+        # default='postgresql://postgres:aSMpTwRMJxkxhKoWlSLMHhAdajbNtWhh@maglev.proxy.rlwy.net:10239/railway',
+        conn_max_age=600,  # يحسن الأداء
+    )
+}
 # default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
 
 # لتعطيل source maps في الإنتاج
@@ -214,16 +214,16 @@ else:
 
 
 
-DATABASES = {
-    'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.environ.get('DB_HOST'),
-        "PORT": os.getenv("DB_PORT"),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv("DB_NAME"),
+#         "USER": os.getenv("DB_USER"),
+#         "PASSWORD": os.getenv("DB_PASSWORD"),
+#         "HOST": os.environ.get('DB_HOST'),
+#         "PORT": os.getenv("DB_PORT"),
+#     }
+# }
     
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
