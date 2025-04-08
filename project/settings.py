@@ -141,6 +141,8 @@ INTERNAL_IPS = [
 
 # for show pdf
 X_FRAME_OPTIONS = "ALLOW-FROM http://127.0.0.1:8000"
+X_FRAME_OPTIONS = "ALLOW-FROM https://graduation-project-five-zeta.vercel.app/"
+
 
 
 MIDDLEWARE = [

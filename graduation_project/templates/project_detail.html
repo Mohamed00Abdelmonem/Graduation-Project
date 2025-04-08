@@ -9,6 +9,22 @@
                     <div class="col-xl-3">
                             <!-- Modal -->
                             <div class="modal fade product-quickview-modal" id="productQuickView" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content p-3">
+                                        {% if object.book_pdf %}
+                                            <iframe style="width:100%; height:515px" src="{{ object.book_pdf.url }}"></iframe>
+                                        {% else %}
+                                        <iframe style="width:100%; height:515px" src="https://static.realpython.com/python-basics-sample-chapters.pdf"></iframe>
+
+                                            <!-- هنا يمكنك إظهار رسالة بدلاً من تقديم رابط PDF غير موجود -->
+                                            <p>PDF غير متوفر</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal -->
+                            {% comment %} <div class="modal fade product-quickview-modal" id="productQuickView" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog  modal-dialog-centered">
                                     <div class="modal-content p-3">
                                         {% if object.book_pdf %}
@@ -18,7 +34,7 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             <!-- Modal -->
                             <div class="modal fade product-quickview-modal" id="videoQuickView" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog  modal-dialog-centered">
@@ -95,9 +111,9 @@
                                                     Your browser does not support the video tag.
                                                 </video>
                                             {% endif %}
-                                        
                                         </a>
                                     </div>
+                                    
                                     {% comment %} <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">Category :</span>
                                         <div class="product_details_section_value">
@@ -256,13 +272,15 @@
                                     <div class="d-flex justify-content-around">
                                         
                                         {% if object.book_pdf %}
-                                        <a href="{{ object.book_pdf.url }}" class="bj_theme_btn strock_btn mb-3 gallerypdf" data-bs-toggle="modal" data-bs-target="#productQuickView">
-                                            <i class="fa-regular fa-eye"></i> قراءة كتاب المشروع
+                                        <a href="{{object.book_pdf.url}}" class="bj_theme_btn strock_btn mb-3 gallerypdf" data-bs-toggle="modal" data-bs-target="#productQuickView">
+                                            <i class="fa-regular fa-eye"></i>   
+                                            قراءة كتاب المشروع
                                         </a>
                                         {% else %}
-                                            <a href="https://static.realpython.com/python-basics-sample-chapters.pdf" class="bj_theme_btn strock_btn gallerypdf">
-                                                <i class="fa-regular fa-eye"></i> PDF غير متوفر
-                                            </a>
+                                        <a href="https://static.realpython.com/python-basics-sample-chapters.pdf" class="bj_theme_btn strock_btn mb-3 gallerypdf" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="fa-regular fa-eye"></i>
+                                             PDF غير متوفر
+                                        </a>
+                                           
                                         {% endif %}
                                     
                                     {% comment %} likes {% endcomment %}
