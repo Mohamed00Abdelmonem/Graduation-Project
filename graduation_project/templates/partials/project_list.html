@@ -9,9 +9,16 @@
                         <h2>{{ project.title }}</h2>
                         <div class="bj_book_img flip col-lg-12" style="height:275px">
                             <div class="special-offers-page-select mt-4 d-flex overflow-auto">
-                                {% for project_image in project.project_image.all %}
-                                    <img style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
-                                {% endfor %}
+                                {% if project.project_image %}
+                                    {% for project_image in project.project_image.all %}
+                                        <img style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
+                                    {% endfor %}
+                                {% else %}
+                                    <img style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/45718/pexels-photo-45718.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+                                    <img style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/45718/pexels-photo-45718.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+                                    <img style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/45718/pexels-photo-45718.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+                                {% endif %}
+                                
                             </div>
                         </div>
                         <div class="bj_book_details">
@@ -78,7 +85,7 @@
                         <img src="{{ project.images.url }}" class="h-100" alt="project">
                     </a>
                     {% else %}
-                    <a href="#"><img src="" alt="no image"></a>
+                    <a href="#"><img src="https://images.pexels.com/photos/45718/pexels-photo-45718.jpeg?auto=compress&cs=tinysrgb&w=600" alt="no image"></a>
                     {% endif %}
                     <div class="pr_ribbon">
                         <span class="product-badge">{{ project.graduation_year }}</span>
