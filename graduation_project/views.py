@@ -19,6 +19,15 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from django.urls import reverse
+from django.views import generic
+from django.contrib.auth.mixins import UserPassesTestMixin
+from .models import GraduationProject, ProjectImages
+
+
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -36,7 +45,7 @@ def ProjectList(request):
     graduation_year = request.GET.get('graduation_year')
 
     # Start with all accepted projects
-    projects = GraduationProject.objects.filter(status='accepted')
+    projects = GraduationProject.objects.filter(status='accepted').order_by('-created_at')
     projects_count = GraduationProject.objects.filter(status='accepted').count()
     projects_count = GraduationProject.objects.filter(status='accepted').count()
     
@@ -156,14 +165,6 @@ def delete_review(request, slug, review_id):
 
 # __________________________________________________________________________________
 
-
-from django.contrib import messages
-from django.core.mail import send_mail
-from django.conf import settings
-from django.urls import reverse
-from django.views import generic
-from django.contrib.auth.mixins import UserPassesTestMixin
-from .models import GraduationProject, ProjectImages
 
 class AddProject(UserPassesTestMixin, generic.CreateView):
     model = GraduationProject
