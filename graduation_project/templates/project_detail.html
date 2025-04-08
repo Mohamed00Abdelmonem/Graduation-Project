@@ -30,7 +30,7 @@
                                         </video>
                                         {% else %}
                                         <video width="100%" controls>
-                                            <source src="" type="video/mp4">
+                                            <source src="https://videos.pexels.com/video-files/854416/854416-sd_640_360_25fps.mp4" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
                                         {% endif %}
@@ -74,28 +74,28 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="product_details_section_content mb-3">
+                                    {% comment %} <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">اللغات المستخدمه :</span>
                                         <div class="product_details_section_value">
                                             <a href="https://www.packtpub.com/en-us/data/language/python" class="fw-600">
                                                 Python (Expert)
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
                                     <div class="product_details_section_content mb-3">
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#videoQuickView" class="video-container">
                                             {% if object.video %}
-                                            <video width="100%" controls height="150px">
-                                                <source src="{{ object.video.url }}" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
+                                                <video width="100%" controls height="150px">
+                                                    <source src="{{ object.video.url }}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
                                             {% else %}
-                                            <video width="100%" controls height="150px">
-                                                <source src="" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
+                                                <video width="100%" controls height="150px">
+                                                    <source src="https://videos.pexels.com/video-files/854416/854416-sd_640_360_25fps.mp4" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
                                             {% endif %}
-                                            
+                                        
                                         </a>
                                     </div>
                                     {% comment %} <div class="product_details_section_content mb-3">
@@ -187,6 +187,15 @@
                                             onclick="changeImage('{{ project_image.image.url }}')">
                                     {% endfor %}
                                 </div>
+                                {% comment %} مؤقته ي منعم عشان مشكله الميديا اللي ف الديبلوي {% endcomment %}
+                            {% else %}
+                            <div class="special-offers-page-select mt-4 d-flex flex-wrap">
+                                    <img class="img-fluid sub-image" 
+                                        style="margin-left:10px; width:22%; cursor:pointer;" 
+                                        src="https://images.pexels.com/photos/45718/pexels-photo-45718.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                                        alt="Sub Image"
+                                        onclick="changeImage('https://images.pexels.com/photos/45718/pexels-photo-45718.jpeg?auto=compress&cs=tinysrgb&w=600')">
+                            </div>
                             {% endif %} 
                             </div>
 
@@ -233,13 +242,17 @@
                                 </div>
                                     {% comment %} <a href="#" class="bj_theme_btn strock_btn flip_btn">Flip to Back</a> {% endcomment %}
                                     <div class="d-flex justify-content-around">
-                                    {% if object.book_pdf %}
-                                    <a href="{{object.book_pdf.url}}" class="bj_theme_btn strock_btn mb-3 gallerypdf" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="fa-regular fa-eye"></i>
-                                        قراءة كتاب المشروع</a>
-                                    {% else %}
-                                    <a href="#" class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i>
-                                        PDF غير متوفر</a>
-                                    {% endif %}
+                                        
+                                        {% if object.book_pdf %}
+                                        <a href="{{ object.book_pdf.url }}" class="bj_theme_btn strock_btn mb-3 gallerypdf" data-bs-toggle="modal" data-bs-target="#productQuickView">
+                                            <i class="fa-regular fa-eye"></i> قراءة كتاب المشروع
+                                        </a>
+                                        {% else %}
+                                            <a href="https://static.realpython.com/python-basics-sample-chapters.pdf" class="bj_theme_btn strock_btn gallerypdf">
+                                                <i class="fa-regular fa-eye"></i> PDF غير متوفر
+                                            </a>
+                                        {% endif %}
+                                    
                                     {% comment %} likes {% endcomment %}
                                     {% include "partials/likes_area.html" %}
                                 </div>

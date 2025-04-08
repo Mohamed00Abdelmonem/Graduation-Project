@@ -181,7 +181,7 @@ def seed_all():
     """Seed all data."""
     # seed_users(5)  # Create 10 dummy users
     # seed_categories(5)  # Create 5 dummy categories
-    # seed_projects(30)  # Create 20 dummy projects
+    seed_projects(5)  # Create 20 dummy projects
     # seed_images_projects(500)  # Create 20 dummy images projects
     # seed_reviews(50)  # Create 50 dummy reviews
     print("All data seeded successfully.")
