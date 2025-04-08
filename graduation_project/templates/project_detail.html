@@ -129,6 +129,10 @@
                             </div>
                         </div>
                     </div>
+
+
+                    
+                    
                     <div class="col-xl-9">
                         <div class="bj_book_single me-xl-3">
                             <div class="bj_book_img flip col-xl-6" style="margin-left:10px">
@@ -136,11 +140,10 @@
                                
                                 <img class="img-fluid lazy-load" 
                                 data-src="{% if object.images %}{{ object.images.url }}{% else %}default-image.jpg{% endif %}" 
-                                        {% comment %} دا عشان لما ميعرفش يوصل للصوره يحط الصوره دي افتراضيا {% endcomment %}
-
                                 data-fallback="https://images.pexels.com/photos/762687/pexels-photo-762687.jpeg?auto=compress&cs=tinysrgb&w=600"
                                 alt="Product Image"
-                                style="height:290px;">
+                                style="height:290px; width:100%; object-fit:cover;" />
+
                                 
                                 {% comment %} دا عشان لما ميعرفش يوصل للصوره يحط الصوره دي افتراضيا {% endcomment %}
                                 <script>
@@ -169,30 +172,37 @@
 
 
 
-    <div class="pr_ribbon">
-        <span class="product-badge">👁️ مشااااهده: {{ object.view_count|intcomma }}</span>
-    </div>
+                            <div class="pr_ribbon">
+                                <span class="product-badge">👁️ مشااااهده: {{ object.view_count|intcomma }}</span>
+                            </div>
 
-    {% if object.project_image.all %}
-        <div class="special-offers-page-select mt-4 d-flex flex-wrap">
-            {% for project_image in object.project_image.all %}
-                <img class="img-fluid sub-image" 
-                     style="margin-left:10px; width:22%; cursor:pointer;" 
-                     src="{{ project_image.image.url }}" 
-                     alt="Sub Image"
-                     onclick="changeImage('{{ project_image.image.url }}')">
-            {% endfor %}
-        </div>
-    {% endif %}
-    </div>
+                             <!-- عرض الصور المصغرة -->
+                            {% if object.project_image.all %}
+                                <div class="special-offers-page-select mt-4 d-flex flex-wrap">
+                                    {% for project_image in object.project_image.all %}
+                                        <img class="img-fluid sub-image" 
+                                            style="margin-left:10px; width:22%; cursor:pointer;" 
+                                            src="{{ project_image.image.url }}" 
+                                            alt="Sub Image"
+                                            onclick="changeImage('{{ project_image.image.url }}')">
+                                    {% endfor %}
+                                </div>
+                            {% endif %} 
+                            </div>
 
-    <script>
-        function changeImage(newSrc) {
-            document.getElementById('mainImage').src = newSrc;
-        }
-    </script>
+                            <!-- تغيير الصورة الرئيسية عند النقر على صورة مصغرة -->
+                            <script>
+                            function changeImage(newSrc) {
+                                var mainImage = document.querySelector('.bj_book_img img');
+                                if (mainImage) {
+                                    mainImage.src = newSrc;
+                                }
+                            }
+                            </script>
 
     
+
+
 
                             
                             <div class="bj_book_details text-center col-lg-6">
@@ -322,7 +332,13 @@
                                                         <ul>
                                                             {% if object.students.all %}
                                                                 {% for student in object.students.all %}
-                                                                    <li><strong>الاسم:</strong> {{ student }}</li>
+                                                                    <li><strong>الاسم:</strong>
+                                                                        <li class="col-lg-3 mb-2">
+                                                                            <a href="{% url 'profile_user' student.username %}">
+                                                                                {{ student.get_full_name|default:student.username }}
+                                                                            </a>
+                                                                        </li>
+                                                                        </li>
                                                                     {% comment %} <li><strong>Phone Number:</strong> {{ student.phone_number|default:"Not provided" }}</li>
                                                                     <li>
                                                                         <strong>Image:</strong> {% endcomment %}

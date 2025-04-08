@@ -117,6 +117,13 @@ def Profile(request):
 
 # ___________________________________________________________________________________
 
+def Profile_User(request, username):
+    user = get_object_or_404(User, username=username)
+    return render(request, 'profile_user.html', {'user': user})
+
+
+# ___________________________________________________________________________________
+
 
 
 @login_required

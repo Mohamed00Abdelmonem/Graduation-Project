@@ -1,0 +1,339 @@
+{% extends "base.html" %}
+{% block body %}
+{% load static %}
+
+<style>
+    :root {
+        --primary-color: #004658;
+        --secondary-color: #ffffff;
+        --accent-color: #f8f9fa;
+    }
+    
+    body {
+        background-color: var(--secondary-color);
+    }
+    
+    /* Sidebar Styling */
+    .account_dashboard_sidebar {
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .sidebar_widget_menu {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .sidebar_widget_menu li {
+        margin-bottom: 10px;
+    }
+    
+    .sidebar_widget_menu a {
+        display: block;
+        padding: 10px 15px;
+        color: var(--primary-color);
+        text-decoration: none;
+        border-radius: 5px;
+        transition: all 0.3s;
+    }
+    
+    .sidebar_widget_menu a:hover,
+    .sidebar_widget_menu a.active {
+        background-color: rgba(0, 70, 88, 0.1);
+        color: var(--primary-color);
+    }
+    
+    /* Main Content Styling */
+    .bj_author_single_area {
+        background-color: var(--secondary-color);
+    }
+    
+    .bj_author_single {
+        background-color: var(--secondary-color);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .profile-image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 3px solid var(--primary-color);
+    }
+    
+    /* Info Cards */
+    .info-card {
+        background-color: var(--secondary-color);
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    /* Buttons */
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+    
+    .btn-primary:hover {
+        background-color: #003540;
+        border-color: #003540;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <div class="row">
+       
+        <!-- Main Content Column -->
+        <div class="col-lg-9">
+            <div class="bj_author_single d-flex flex-column flex-md-row align-items-center">
+                {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" alt="Profile Picture" class="profile-image me-md-4 mb-4 mb-md-0"
+                     onerror="this.onerror=null;this.src='{% static 'img/default-avatar.png' %}';">
+                {% else %}
+                <img src="{% static 'img/default-avatar.png' %}" alt="Profile Picture" class="profile-image me-md-4 mb-4 mb-md-0">
+                {% endif %}
+                
+                <div class="bj_author_single_content">
+                    <h2 class="mb-3" style="color: var(--primary-color);">
+                        {% if user.get_full_name %}
+                            {{ user.get_full_name|default_if_none:user.username }}
+                        {% else %}
+                            {{ user.profile.full_name }}
+                        {% endif %}
+                    </h2>
+                    
+                    
+                    <ul class="book_info list-unstyled">
+                        <li class="mb-2"><span>المسمى الوظيفي:</span> {{ user.profile.job_title|default:"غير محدد" }}</li>
+                        {% comment %} <li class="mb-2"><span>الرقم التعريفي:</span> {{ user.profile.national_id|default:"غير محدد" }}</li> {% endcomment %}
+                        {% if not user.is_staff %}
+                        <li class="mb-2"><span>السنة الدراسية:</span> {{ user.profile.grade|default:"غير محدد" }}</li>
+                        <li class="mb-2"><span>الشعبة:</span> {{ user.profile.department|default:"غير محدد" }}</li>
+                        {% endif %}
+                        {% comment %} <li class="mb-2"><span>تاريخ الميلاد:</span> {{ user.profile.date_of_birth|date:"Y-m-d"|default:"غير محدد" }}</li> {% endcomment %}
+                        <li class="mb-2"><span>رقم الهاتف:</span> {{ user.profile.phone_number|default:"غير محدد" }}</li>
+                        <li class="mb-2"><span>العنوان:</span> {{ user.profile.address|default:"غير محدد" }}</li>
+                    </ul>
+                    
+                    <div class="social-links mt-3">
+                        {% if user.profile.porfolio_link %}
+                        <a href="{{ user.profile.porfolio_link }}" class="text-decoration-none me-2" target="_blank">
+                            <i class="fas fa-globe fa-lg" style="color: var(--primary-color);"></i>
+                        </a>
+                        {% endif %}
+                        
+                        {% if user.profile.linkedin_link %}
+                        <a href="{{ user.profile.linkedin_link }}" class="text-decoration-none me-2" target="_blank">
+                            <i class="fab fa-linkedin-in fa-lg" style="color: var(--primary-color);"></i>
+                        </a>
+                        {% endif %}
+                        
+                        {% if user.profile.instagram_link %}
+                        <a href="{{ user.profile.instagram_link }}" class="text-decoration-none me-2" target="_blank">
+                            <i class="fab fa-instagram fa-lg" style="color: var(--primary-color);"></i>
+                        </a>
+                        {% endif %}
+                        
+                        {% if user.profile.whatsapp_number %}
+                        <a href="https://wa.me/{{ user.profile.whatsapp_number }}" class="text-decoration-none" target="_blank">
+                            <i class="fab fa-whatsapp fa-lg" style="color: var(--primary-color);"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Sections -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="info-card h-100">
+                        <h4 class="mb-3" style="color: var(--primary-color);">السيرة الذاتية</h4>
+                        <p>{{ user.profile.short_bio|default:"لا يوجد سيرة ذاتية متاحة." }}</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="info-card h-100">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 style="color: var(--primary-color);">الخبرات</h4>
+                        </div>
+                        
+                        {% for experience in user.profile.experiences.all %}
+                        <div class="mb-3 pb-3 {% if not forloop.last %}border-bottom{% endif %}">
+                            <h5>{{ experience.position }}</h5>
+                            <p class="text-muted mb-1">{{ experience.company }}</p>
+                            <p class="text-muted small">
+                                {{ experience.from_date|date:"Y" }} - 
+                                {% if experience.to_date %}{{ experience.to_date|date:"Y" }}{% else %}حتى الآن{% endif %}
+                            </p>
+                            
+                            
+                        </div>
+                        {% empty %}
+                        <p class="text-muted">لا توجد خبرات مضافة حتى الآن.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Graduation Projects Section -->
+            {% if not user.is_staff %}
+            <div class="info-card mt-4">
+                <h4 class="mb-4" style="color: var(--primary-color);">مشاريع التخرج</h4>
+                
+                <div class="row">
+                    {% for project in projects %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            {% if project.images %}
+                            <img src="{{ project.images.url }}" class="card-img-top" alt="{{ project.title }}"
+                                 style="height: 180px; object-fit: cover;"
+                                 onerror="this.onerror=null;this.src='{% static 'img/default-project.png' %}';">
+                            {% else %}
+                            <img src="{% static 'img/default-project.png' %}" class="card-img-top" alt="صورة افتراضية"
+                                 style="height: 180px; object-fit: cover;">
+                            {% endif %}
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">{{ project.title }}</h5>
+                                <p class="card-text text-muted small">{{ project.description|truncatechars:100|default:"لا يوجد وصف" }}</p>
+                            </div>
+                            
+                            <div class="card-footer bg-white">
+                                <div class="d-flex justify-content-between">
+                                    <a href="{% url 'project:project_detail' project.slug %}" class="btn btn-sm btn-outline-primary">عرض</a>
+                                    <div>
+                                        <a href="{% url 'project:update_project' project.slug %}" class="btn btn-sm btn-outline-secondary me-1">تعديل</a>
+                                        <a href="{% url 'project:delete_project' project.slug %}" class="btn btn-sm btn-outline-danger"
+                                           onclick="return confirm('هل أنت متأكد من حذف هذا المشروع؟')">حذف</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <p class="text-muted">لا توجد مشاريع مضافة حتى الآن.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<!-- Favorite Projects Modal -->
+<div class="modal fade" id="productQuickView" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">المشاريع المفضلة</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% for project_likes in user.likes_project.all %}
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            {% if project_likes.images %}
+                            <img src="{{ project_likes.images.url }}" class="img-fluid rounded-start h-100" alt="{{ project_likes.title }}"
+                                 onerror="this.onerror=null;this.src='{% static 'img/default-project.png' %}';">
+                            {% else %}
+                            <img src="{% static 'img/default-project.png' %}" class="img-fluid rounded-start h-100" alt="صورة افتراضية">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ project_likes.title }}</h5>
+                                <p class="card-text">{{ project_likes.author.get_full_name }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">{{ project_likes.likes.count }} إعجاب</small>
+                                    <a href="{% url 'project:project_detail' project_likes.slug %}" class="btn btn-sm btn-primary">عرض المشروع</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="alert alert-info text-center">لا توجد مشاريع مفضلة حتى الآن</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Comments Modal -->
+<div class="modal fade" id="commentQuickView" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">تعليقاتي</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Sample Comment - Replace with dynamic content -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="card-title mb-0">اسم المشروع</h6>
+                            <div class="rating">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                        </div>
+                        <p class="card-text">هذا المشروع رائع ويستحق أن يكون أفضل مشروع هذا العام لأنه ساعد الطلاب بشكل كبير.</p>
+                        <small class="text-muted">تم النشر في 12/05/2023</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+
+<!-- Scripts -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Confirm before deleting
+    const deleteButtons = document.querySelectorAll('.btn-outline-danger');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (!confirm('هل أنت متأكد من هذا الإجراء؟ لا يمكن التراجع عنه.')) {
+                e.preventDefault();
+            }
+        });
+    });
+    
+    // Initialize tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+</script>
+
+{% endblock body %}

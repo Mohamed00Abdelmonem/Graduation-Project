@@ -255,10 +255,10 @@
                                 {% else %}
                                 <a href="#" style="height:175px" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}" class="img">
                                     {% if project.images %}
-                                    <img src="{{ project.images.url }}" class="h-100" alt="book" />
-                                {% else %}
-                                    <img src="https://placeit-img-1-p.cdn.aws.placeit.net/uploads/stage/stage_image/61583/optimized_large_thumb_2.jpg" class="h-100" alt="Default Image" style="width: 200px;" />
-                                {% endif %}
+                                        <img src="{{ project.images.url }}" class="h-100" alt="book" />
+                                    {% else %}
+                                        <img src="https://placeit-img-1-p.cdn.aws.placeit.net/uploads/stage/stage_image/61583/optimized_large_thumb_2.jpg" class="h-100" alt="Default Image" style="width: 200px;" />
+                                    {% endif %}
                                 </a>
                                 {% endif %}
                                 <div class="bj_new_pr_content_two">

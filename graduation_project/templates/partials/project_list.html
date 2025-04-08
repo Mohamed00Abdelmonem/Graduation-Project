@@ -1,169 +1,112 @@
-<div class="row g-3">
-    {% if projects %}
-        {% for book in projects %}
-            <!-- Modal -->
-            <div class="modal fade product-quickview-modal" id="productQuickView{{ book.id }}" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content text-center">
-                        <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
-                        <div class="bj_book_single flex-column">
-                            <h2>{{ book.title }}</h2>
-                            <div class="bj_book_img flip col-lg-12" style="height:275px">
-                                <div class="special-offers-page-select mt-4 d-flex overflow-auto">
-                                    {% for project_image in book.project_image.all %}
-                                        <img style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
-                                    {% endfor %}
-                                </div>
+<div class="row">
+    {% for project in projects %}
+        <!-- Modal -->
+        <div class="modal fade product-quickview-modal" id="projectQuickView{{ project.id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-center">
+                    <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+                    <div class="bj_book_single flex-column">
+                        <h2>{{ project.title }}</h2>
+                        <div class="bj_book_img flip col-lg-12" style="height:275px">
+                            <div class="special-offers-page-select mt-4 d-flex overflow-auto">
+                                {% for project_image in project.project_image.all %}
+                                    <img style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
+                                {% endfor %}
                             </div>
-                            <div class="bj_book_details">
-                                <h2>{{ book.title_ar }}</h2>
-                                <h2>{{ book.title }}</h2>
-                                <p>{{ book.sub_description }}.</p>
-                                <ul class="product_meta list-unstyled p-0 row">
-                                    <li class="col-lg-6">تاريخ النشر : {{ book.created_at|date:"Y-m-d" }}</li>
-                                    <li class="col-lg-6">مجال : {{ book.category.name }}</li>
-                                    <li class="col-lg-6"> دكتور:
-                                        {% if book.doctor %}
-                                            {{ book.doctor.user.get_full_name }}
-                                        {% else %}
-                                            <span class="text-muted">لا يوجد دكتور</span>
-                                        {% endif %}
-                                    </li>
-                                    <li class="col-lg-6"> اعضاء هيئة المعاونه : 
-                                        {% if book.supervisors.all %}
-                                            {% for supervisor in book.supervisors.all %}
-                                                {{ supervisor.user.get_full_name }}{% if not forloop.last %} - {% endif %}
+                        </div>
+                        <div class="bj_book_details">
+                            <h2>{{ project.title_ar }}</h2>
+                            <p>{{ project.sub_description }}.</p>
+                            <ul class="product_meta list-unstyled p-0 row">
+                                <li class="col-lg-6">تاريخ النشر : {{ project.created_at }}</li>
+                                <li class="col-lg-6">المجال : {{ project.category }}</li>
+                                <li class="col-lg-6">الدكتور :
+                                    {% if project.doctor %}
+                                        {{ project.doctor }}
+                                    {% else %}
+                                        <span class="no-data">لا يوجد دكتور.</span>
+                                    {% endif %}
+                                </li>
+                                <li class="col-lg-6">المشرفين:
+                                    {% if project.supervisors.all %}
+                                        {% for sup in project.supervisors.all %}
+                                            {{ sup }} -
+                                        {% endfor %}
+                                    {% else %}
+                                        <span class="no-data">لا يوجد مشرفين.</span>
+                                    {% endif %}
+                                </li>
+                                <li><span>أعضاء الفريق:</span>
+                                    <ul class="p-0">
+                                        {% if project.students.all %}
+                                            {% for student in project.students.all %}
+                                            <li class="col-lg-3 mb-2">
+                                                <a href="{% url 'profile_user' student.username %}">
+                                                    {{ student.get_full_name|default:student.username }}
+                                                </a>
+                                            </li>
                                             {% endfor %}
                                         {% else %}
-                                            <span class="text-muted">لا يوجد مشرفين</span>
+                                            <li class="no-data">لا يوجد طلاب.</li>
                                         {% endif %}
-                                    </li>
-                                    <li class="col-12">
-                                        <span>اسماء فريق العمل: </span>
-                                        <div class="row mt-2">
-                                            {% if book.students.all %}
-                                                {% for student in book.students.all %}
-                                                    <div class="col-6 col-md-4 mb-2">{{ student.user.get_full_name }}</div>
-                                                {% endfor %}
-                                            {% else %}
-                                                <div class="col-12 text-muted">لا يوجد طلاب</div>
-                                            {% endif %}
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                    <style>
+                        .special-offers-page-select {
+                            white-space: nowrap;
+                        }
+                        .special-offers-page-select img {
+                            display: inline-block;
+                        }
+                        .overflow-auto {
+                            overflow-x: auto;
+                        }
+                    </style>
                 </div>
-            </div>
-
-            <!-- Project Item -->
-            <div class="col-6 col-sm-6 col-lg-3 projects_item">
-                <div class="best_product_item best_product_item_two shop_product h-100">
-                    <div class="img" style="overflow: hidden;">
-                        {% if book.images %}
-                            <a href="{% url 'project:project_detail' book.slug %}" class="h-100 d-block">
-                                <img src="{{ book.images.url }}" class="w-100 object-fit-cover" alt="{{ book.title }}">
-                            </a>
-                        {% else %}
-                            <a href="{% url 'project:project_detail' book.slug %}" class="h-100 d-flex align-items-center justify-content-center bg-light">
-                                <i class="fas fa-book-open fa-3x text-secondary"></i>
-                            </a>
-                        {% endif %}
-                        <div class="pr_ribbon">
-                            <span class="product-badge">{{ book.graduation_year }}</span>
-                        </div>
-                        <div class="hover_item">
-                            <span data-bs-toggle="tooltip" data-bs-placement="right" title="معلومات عامه">
-                                <button class="quick_button" data-bs-toggle="modal" data-bs-target="#productQuickView{{ book.id }}">
-                                    <i class="fas fa-info-circle"></i>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="bj_new_pr_content p-3">
-                        <a href="{% url 'project:project_detail' book.slug %}">
-                            <h4 class="bj_new_pr_title mb-2">{{ book.title|truncatechars:30 }}</h4>
-                        </a>
-                        <div class="bj_pr_meta d-flex justify-content-between align-items-center">
-                            <div class="text-muted small">
-                                <i class="fas fa-tag me-1"></i> {{ book.category.name|default:"غير محدد" }}
-                            </div>
-                            <div class="book_price">
-                                <i class="fas fa-thumbs-up me-1"></i>{{ book.likes.count }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <div class="col-12 text-center py-5">
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle fa-2x mb-3"></i>
-                <h4>لا توجد نتائج مطابقة للبحث</h4>
-                <p class="mb-0">حاول تعديل فلتر البحث أو استخدام كلمات بحث مختلفة</p>
             </div>
         </div>
-    {% endif %}
+
+        <!-- Project Card -->
+        <div class="col-xl-3 col-lg-4 col-sm-6 projects_item">
+            <div class="best_product_item best_product_item_two shop_product">
+                <div class="img" style='height:180px;'>
+                    {% if project.images %}
+                    <a href="{% url 'project:project_detail' project.slug %}" class="h-100">
+                        <img src="{{ project.images.url }}" class="h-100" alt="project">
+                    </a>
+                    {% else %}
+                    <a href="#"><img src="" alt="no image"></a>
+                    {% endif %}
+                    <div class="pr_ribbon">
+                        <span class="product-badge">{{ project.graduation_year }}</span>
+                    </div>
+                    <div class="hover_item">
+                        <span data-bs-toggle="tooltip" data-bs-placement="right" title="معلومات عامه">
+                            <button class="quick_button" data-bs-toggle="modal" data-bs-target="#projectQuickView{{ project.id }}">
+                                <i class="arrow_move"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="bj_new_pr_content">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'project:project_detail' project.slug %}">
+                            <h4 class="bj_new_pr_title mb-2">{{ project.title|truncatechars:30 }}</h4>
+                        </a>
+                    {% else %}
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#projectQuickView{{ project.id }}">
+                            <h4 class="bj_new_pr_title mb-2">{{ project.title|truncatechars:30 }}</h4>
+                        </a>
+                    {% endif %}
+                
+                    <div class="bj_pr_meta d-flex">
+                        <div class="book_price"><i class="fa-solid fa-thumbs-up m-1"></i>{{ project.likes.count }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 </div>
-
-
-
-
-<style>
-    /* تصميم عام */
-.row.g-3 {
-    margin-right: 7px; /* إضافة مارجين يمين فقط */
-    margin-left: 0; /* تأكد من عدم وجود مارجين يسار غير مرغوب فيه */
-}
-
-.projects_item {
-    padding: 0 5px; /* إضافة مسافة صغيرة بين العناصر */
-}
-
-.best_product_item {
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    min-height: 450px; /* ارتفاع الكارت الافتراضي */
-}
-
-.best_product_item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.best_product_item .img {
-    height: 250px; /* ارتفاع الصورة الافتراضي */
-}
-
-.best_product_item .bj_new_pr_content {
-    padding: 15px; /* التباعد الداخلي للمحتوى */
-}
-
-.bj_new_pr_title {
-    font-size: 1.2rem; /* حجم العنوان */
-    font-weight: bold;
-}
-
-/* تصميم خاص بشاشات الموبايل */
-@media (max-width: 576px) {
-    .projects_item {
-        padding: 0 10px; /* زيادة المسافة بين العناصر على الموبايل */
-    }
-
-    .best_product_item {
-        min-height: 400px; /* زيادة ارتفاع الكارت على الموبايل */
-    }
-
-    .best_product_item .img {
-        height: 200px; /* زيادة ارتفاع الصورة على الموبايل */
-    }
-
-    .bj_new_pr_title {
-        font-size: 1.2rem; /* زيادة حجم العنوان على الموبايل */
-    }
-}
-</style>

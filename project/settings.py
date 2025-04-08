@@ -29,8 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_=e0@#_o21+)w^@vc2usfoufg0#gyy27lr5#*@z+5tcxzj4@)i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False #for deploy
-# DEBUG = False  # صحيح للنشر
+# DEBUG = False #for deploy
+DEBUG = True  # صحيح للنشر
 # ولكنك تحتاج لتسجيل الأخطاء في الإنتاج:
 LOGGING = {
     'version': 1,
@@ -79,8 +79,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # For Vercel deployment
 ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1', 'localhost']
@@ -197,14 +197,14 @@ import dj_database_url
 
 # إعداد قاعدة البيانات
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
-        # default='postgresql://postgres:aSMpTwRMJxkxhKoWlSLMHhAdajbNtWhh@maglev.proxy.rlwy.net:10239/railway',
-        conn_max_age=600,  # يحسن الأداء
-    )
-}
-default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
+#         # default='postgresql://postgres:aSMpTwRMJxkxhKoWlSLMHhAdajbNtWhh@maglev.proxy.rlwy.net:10239/railway',
+#         conn_max_age=600,  # يحسن الأداء
+#     )
+# }
+# default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
 
 # لتعطيل source maps في الإنتاج
 if not DEBUG:
@@ -214,17 +214,17 @@ else:
 
 
 
-# DATABASES = {
-#     'default': {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.getenv("DB_NAME"),
-#         "USER": os.getenv("DB_USER"),
-#         "PASSWORD": os.getenv("DB_PASSWORD"),
-#         "HOST": os.environ.get('DB_HOST'),
-#         "PORT": os.getenv("DB_PORT"),
-#     }
-# }
-
+DATABASES = {
+    'default': {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.environ.get('DB_HOST'),
+        "PORT": os.getenv("DB_PORT"),
+    }
+}
+    
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -264,8 +264,8 @@ USE_TZ = True
 # STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
 
 # STATIC_ROOT = "static_root"
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = "media_root"
+MEDIA_URL = '/media/'
+MEDIA_ROOT = "media_root"
 
 
 # Default primary key field type

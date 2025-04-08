@@ -121,7 +121,7 @@ def seed_projects(n):
             doctor=random.choice(users.filter(profile__is_doctor=True)),
             category=random.choice(categories),
             book_pdf=None,  # You can add logic to upload dummy PDFs if needed
-            # images=random.choice(dummy_images),  # Assign a random image
+            images=random.choice(dummy_images),  # Assign a random image
 
             # images=None,  # You can add logic to upload dummy images if needed
             video=fake.url(),
@@ -182,7 +182,7 @@ def seed_all():
     # seed_users(5)  # Create 10 dummy users
     # seed_categories(5)  # Create 5 dummy categories
     # seed_projects(30)  # Create 20 dummy projects
-    # seed_images_projects(50)  # Create 20 dummy images projects
+    # seed_images_projects(500)  # Create 20 dummy images projects
     # seed_reviews(50)  # Create 50 dummy reviews
     print("All data seeded successfully.")
 
