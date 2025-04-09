@@ -193,147 +193,15 @@
                 </div>
             </div>
             
-            <!-- Graduation Projects Section -->
-            {% if not user.is_staff %}
-            <div class="info-card mt-4">
-                <h4 class="mb-4" style="color: var(--primary-color);">مشاريع التخرج</h4>
-                
-                <div class="row">
-                    {% for project in projects %}
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100">
-                            {% if project.images %}
-                            <img src="{{ project.images.url }}" class="card-img-top" alt="{{ project.title }}"
-                                 style="height: 180px; object-fit: cover;"
-                                 onerror="this.onerror=null;this.src='{% static 'img/default-project.png' %}';">
-                            {% else %}
-                            <img src="{% static 'img/default-project.png' %}" class="card-img-top" alt="صورة افتراضية"
-                                 style="height: 180px; object-fit: cover;">
-                            {% endif %}
-                            
-                            <div class="card-body">
-                                <h5 class="card-title">{{ project.title }}</h5>
-                                <p class="card-text text-muted small">{{ project.description|truncatechars:100|default:"لا يوجد وصف" }}</p>
-                            </div>
-                            
-                            <div class="card-footer bg-white">
-                                <div class="d-flex justify-content-between">
-                                    <a href="{% url 'project:project_detail' project.slug %}" class="btn btn-sm btn-outline-primary">عرض</a>
-                                    <div>
-                                        <a href="{% url 'project:update_project' project.slug %}" class="btn btn-sm btn-outline-secondary me-1">تعديل</a>
-                                        <a href="{% url 'project:delete_project' project.slug %}" class="btn btn-sm btn-outline-danger"
-                                           onclick="return confirm('هل أنت متأكد من حذف هذا المشروع؟')">حذف</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% empty %}
-                    <div class="col-12">
-                        <p class="text-muted">لا توجد مشاريع مضافة حتى الآن.</p>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %}
+        
         </div>
     </div>
 </div>
 
-<!-- Modals -->
-<!-- Favorite Projects Modal -->
-<div class="modal fade" id="productQuickView" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">المشاريع المفضلة</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                {% for project_likes in user.likes_project.all %}
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            {% if project_likes.images %}
-                            <img src="{{ project_likes.images.url }}" class="img-fluid rounded-start h-100" alt="{{ project_likes.title }}"
-                                 onerror="this.onerror=null;this.src='{% static 'img/default-project.png' %}';">
-                            {% else %}
-                            <img src="{% static 'img/default-project.png' %}" class="img-fluid rounded-start h-100" alt="صورة افتراضية">
-                            {% endif %}
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ project_likes.title }}</h5>
-                                <p class="card-text">{{ project_likes.author.get_full_name }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">{{ project_likes.likes.count }} إعجاب</small>
-                                    <a href="{% url 'project:project_detail' project_likes.slug %}" class="btn btn-sm btn-primary">عرض المشروع</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% empty %}
-                <div class="alert alert-info text-center">لا توجد مشاريع مفضلة حتى الآن</div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Comments Modal -->
-<div class="modal fade" id="commentQuickView" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">تعليقاتي</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Sample Comment - Replace with dynamic content -->
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h6 class="card-title mb-0">اسم المشروع</h6>
-                            <div class="rating">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
-                        </div>
-                        <p class="card-text">هذا المشروع رائع ويستحق أن يكون أفضل مشروع هذا العام لأنه ساعد الطلاب بشكل كبير.</p>
-                        <small class="text-muted">تم النشر في 12/05/2023</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
 
-<!-- Scripts -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Confirm before deleting
-    const deleteButtons = document.querySelectorAll('.btn-outline-danger');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            if (!confirm('هل أنت متأكد من هذا الإجراء؟ لا يمكن التراجع عنه.')) {
-                e.preventDefault();
-            }
-        });
-    });
-    
-    // Initialize tooltips
-    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
-});
-</script>
+
 
 {% endblock body %}
