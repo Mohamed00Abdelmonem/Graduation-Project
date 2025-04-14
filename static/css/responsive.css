@@ -34,7 +34,7 @@
     right: -10px;
   }
   .bj_banner_img {
-    margin-right: -80px;
+    /* margin-right: -80px; */
     margin-left: 0;
   }
   .bj_testimonial_inner {
@@ -1260,4 +1260,18 @@
   .single_product_price_variation .variation_single .price-details {
     width: 110px;
   }
+}
+
+
+@media (max-width: 992px) and (min-width: 300px)
+{
+  .tab_slider_content .slick-arrow{
+    top:10px;
+    z-index: 1;
+    left: auto;
+  }
+  .bj_banner_content{
+    margin-top: 20px;
+  }
+
 }

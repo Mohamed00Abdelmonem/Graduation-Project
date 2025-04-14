@@ -29,8 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_=e0@#_o21+)w^@vc2usfoufg0#gyy27lr5#*@z+5tcxzj4@)i'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False #for deploy
-# DEBUG = True  
+# DEBUG = False #for deploy
+
+DEBUG = True  
+
 # ولكنك تحتاج لتسجيل الأخطاء في الإنتاج:
 LOGGING = {
     'version': 1,
