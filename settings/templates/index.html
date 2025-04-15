@@ -14,9 +14,19 @@
                         <div class="row">
                             <div class="bj_book_img flip col-lg-12" style=" height:275px">
                                 <div class="special-offers-page-select mt-4 d-flex overflow-auto">
-                                    {% for project_image in  project.project_image.all %}
-                                        <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
-                                    {% endfor %}
+                                    {% if  project_image %}
+
+                                        {% for project_image in  project.project_image.all %}
+                                            <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
+                                        {% endfor %}
+
+                                    {% else %}
+                                            <img  style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="">
+                                            <img  style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/8647727/pexels-photo-8647727.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="">
+                                            <img  style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="">
+                                    {% endif %}
+                                    
+                                        
                                 </div>
                             </div>
                         </div>
@@ -144,7 +154,7 @@
                                                             {% if project.images %}
                                                             <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
                                                         {% else %}
-                                                            <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 100%; height: 200px;" />
+                                                            <img src="https://images.pexels.com/photos/8647727/pexels-photo-8647727.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Default Image" style="width: 100%; height: 200px;" />
                                                         {% endif %}
                                                         </a>
                                                         {% else %}
@@ -152,7 +162,7 @@
                                                             {% if project.images %}
                                                             <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
                                                         {% else %}
-                                                            <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 100%; height: 200px;" />
+                                                            <img src="https://images.pexels.com/photos/8647727/pexels-photo-8647727.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Default Image" style="width: 100%; height: 200px;" />
                                                         {% endif %}
                                                         </a>
                                                         {% endif %}
@@ -203,7 +213,7 @@
                                     {% if project.images %}
                                     <img src="{{ project.images.url }}" alt="book" class="h-100" />
                                     {% else %}
-                                    <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" class="h-100" style="width: 200px; " />
+                                    <img src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Default Image" class="h-100" style="width: 200px; " />
                                     {% endif %}
                                 </a>
                                 {% else %}
@@ -211,7 +221,7 @@
                                     {% if project.images %}
                                     <img src="{{ project.images.url }}" class="h-100" alt="book" />
                                     {% else %}
-                                    <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px;" />
+                                    <img src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="h-100" alt="Default Image" style="width: 200px;" />
                                     {% endif %}
                                 </a>
                                 {% endif %}
@@ -258,7 +268,7 @@
                                             {% if project.images %}
                                             <img src="{{ project.images.url }}" class="h-100 w-100" alt="book">
                                             {% else %}
-                                            <a href="#"><img src="" alt="book"></a>
+                                            <a href=""><img src="https://images.pexels.com/photos/8647727/pexels-photo-8647727.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="book"></a>
                                             {% endif %}
                                             <div class="pr_ribbon">
                                                 <span class="product-badge">{{ project.graduation_year }}</span>
@@ -308,7 +318,7 @@
                 {% if project.images %}
                 <img src="{{ project.images.url }}" class="h-100" alt="book" />
                 {% else %}
-                <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px;" />
+                <img src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="h-100" alt="Default Image" style="width: 200px;" />
                 {% endif %}
             </a>
             {% else %}
@@ -316,7 +326,7 @@
                 {% if project.images %}
                 <img src="{{ project.images.url }}" class="h-100" alt="book" />
                 {% else %}
-                <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px; height: 200px;" />
+                <img src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="h-100" alt="Default Image" style="width: 200px; height: 200px;" />
                 {% endif %}
             </a>
             {% endif %}
