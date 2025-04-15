@@ -1,0 +1,128 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?tsd0p7');
+  src:  url('fonts/icomoon.eot?tsd0p7#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?tsd0p7') format('truetype'),
+    url('fonts/icomoon.woff?tsd0p7') format('woff'),
+    url('fonts/icomoon.svg?tsd0p7#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-search:before {
+  content: "\e91c";
+}
+.icon-user:before {
+  content: "\e91d";
+}
+.icon-shopping-basket:before {
+  content: "\e91b";
+}
+.icon-category-icon:before {
+  content: "\e917";
+}
+.icon-pen:before {
+  content: "\e918";
+}
+.icon-price:before {
+  content: "\e919";
+}
+.icon-star:before {
+  content: "\e91a";
+}
+.icon-open-book1:before {
+  content: "\e914";
+}
+.icon-feather-pen:before {
+  content: "\e915";
+}
+.icon-gift:before {
+  content: "\e916";
+}
+.icon-quote:before {
+  content: "\e913";
+  color: #4285f4;
+}
+.icon-book:before {
+  content: "\e901";
+}
+.icon-open-book:before {
+  content: "\e902";
+}
+.icon-read:before {
+  content: "\e903";
+}
+.icon-pdf:before {
+  content: "\e900";
+}
+.icon-processing:before {
+  content: "\e908";
+}
+.icon-success:before {
+  content: "\e909";
+}
+.icon-speech-bubble:before {
+  content: "\e90a";
+}
+.icon-practice:before {
+  content: "\e90b";
+}
+.icon-coffee-icon:before {
+  content: "\e904";
+  color: #fff;
+}
+.icon-copy-icon:before {
+  content: "\e905";
+  color: #fff;
+}
+.icon-product-release-icon:before {
+  content: "\e906";
+  color: #fff;
+}
+.icon-smile-icon:before {
+  content: "\e907";
+  color: #fff;
+}
+.icon-biography:before {
+  content: "\e90c";
+}
+.icon-drama:before {
+  content: "\e90d";
+}
+.icon-fiction:before {
+  content: "\e90e";
+}
+.icon-heart:before {
+  content: "\e90f";
+}
+.icon-history:before {
+  content: "\e910";
+}
+.icon-mystery:before {
+  content: "\e911";
+}
+.icon-uncategorized:before {
+  content: "\e912";
+}
+.icon-facebook2:before {
+  content: "\ea91";
+}
+.icon-linkedin:before {
+  content: "\eac9";
+}
