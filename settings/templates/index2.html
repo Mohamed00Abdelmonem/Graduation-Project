@@ -3,6 +3,48 @@
 {% block body %}
 {% load humanize %}
 
+
+
+<style>
+    /* Mobile-specific styles */
+    @media (max-width: 767px) {
+        /* Projects grid - show 2 items per row */
+        .best_selling_pr_area .col-xl-3,
+        .bj_new_product_area .col-xl-3 {
+            width: 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        
+        /* For slightly larger phones, show 3 items */
+        @media (min-width: 480px) and (max-width: 767px) {
+            .best_selling_pr_area .col-xl-3,
+            .bj_new_product_area .col-xl-3 {
+                width: 33.33%;
+                flex: 0 0 33.33%;
+                max-width: 33.33%;
+            }
+        }
+        
+        /* Adjust project card height */
+        .bj_new_pr_item,
+        .bj_new_pr_item_two {
+            height: auto !important;
+            margin-bottom: 15px;
+        }
+        
+        /* Reduce image height */
+        .bj_new_pr_item .img,
+        .bj_new_pr_item_two .img {
+            height: 150px !important;
+        }
+    }
+</style>
+
+
+
     <!-- Modal -->
     {% for project in projects_main %}
         <div class="modal fade product-quickview-modal" id="productQuickView{{ project.id }}" tabindex="-1" aria-hidden="true">
@@ -15,9 +57,13 @@
                             <div class="bj_book_img flip col-lg-12" style=" height:275px">
                                 <div class="special-offers-page-select mt-4 d-flex overflow-auto">
                                     {% for project_image in  project.project_image.all %}
-                                        <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
+                                    <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
+
                                     {% endfor %}
                                 </div>
+                                {% comment %} <div class="pr_ribbon">
+                                    <span class="product-badge">{{ project.graduation_year }}</span>
+                                </div> {% endcomment %}
                             </div>
                         </div>
                         <div class="bj_book_details">
@@ -144,7 +190,7 @@
                                                             {% if project.images %}
                                                             <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
                                                         {% else %}
-                                                            <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 100%; height: 200px;" />
+                                                            <img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" alt="Default Image" style="width: 100%; height: 200px;" />
                                                         {% endif %}
                                                         </a>
                                                         {% else %}
@@ -152,7 +198,7 @@
                                                             {% if project.images %}
                                                             <img src="{{ project.images.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px;" />
                                                         {% else %}
-                                                            <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" style="width: 100%; height: 200px;" />
+                                                            <img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" alt="Default Image" style="width: 100%; height: 200px;" />
                                                         {% endif %}
                                                         </a>
                                                         {% endif %}
@@ -203,15 +249,15 @@
                                     {% if project.images %}
                                     <img src="{{ project.images.url }}" alt="book" class="h-100" />
                                     {% else %}
-                                    <img src="{% static 'path/to/default/image.png' %}" alt="Default Image" class="h-100" style="width: 200px; " />
+                                    <img src="https://placeit-img-1-p.cdn.aws.placeit.net/uploads/stage/stage_image/61583/optimized_large_thumb_2.jpg" alt="Default Image" class="h-100" style="width: 200px; " />
                                     {% endif %}
                                 </a>
                                 {% else %}
                                 <a href="#" style="height:175px" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}" class="img">
                                     {% if project.images %}
-                                    <img src="{{ project.images.url }}" class="h-100" alt="book" />
+                                        <img src="{{ project.images.url }}" class="h-100" alt="book" />
                                     {% else %}
-                                    <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px;" />
+                                        <img src="https://placeit-img-1-p.cdn.aws.placeit.net/uploads/stage/stage_image/61583/optimized_large_thumb_2.jpg" class="h-100" alt="Default Image" style="width: 200px;" />
                                     {% endif %}
                                 </a>
                                 {% endif %}
@@ -258,7 +304,7 @@
                                             {% if project.images %}
                                             <img src="{{ project.images.url }}" class="h-100 w-100" alt="book">
                                             {% else %}
-                                            <a href="#"><img src="" alt="book"></a>
+                                            <a href="#"><img src="https://placeit-img-1-p.cdn.aws.placeit.net/uploads/stage/stage_image/61583/optimized_large_thumb_2.jpg" alt="book kkkkk"></a>
                                             {% endif %}
                                             <div class="pr_ribbon">
                                                 <span class="product-badge">{{ project.graduation_year }}</span>
@@ -308,7 +354,7 @@
                 {% if project.images %}
                 <img src="{{ project.images.url }}" class="h-100" alt="book" />
                 {% else %}
-                <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px;" />
+                <img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" class="h-100" alt="Default Image" style="width: 200px;" />
                 {% endif %}
             </a>
             {% else %}
@@ -316,7 +362,7 @@
                 {% if project.images %}
                 <img src="{{ project.images.url }}" class="h-100" alt="book" />
                 {% else %}
-                <img src="{% static 'path/to/default/image.png' %}" class="h-100" alt="Default Image" style="width: 200px; height: 200px;" />
+                <img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" class="h-100" alt="Default Image" style="width: 200px; height: 200px;" />
                 {% endif %}
             </a>
             {% endif %}

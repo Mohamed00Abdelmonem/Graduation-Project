@@ -34,7 +34,7 @@
     right: -10px;
   }
   .bj_banner_img {
-    margin-right: -8px;
+    /* margin-right: -80px; */
     margin-left: 0;
   }
   .bj_testimonial_inner {
@@ -216,9 +216,6 @@
 @media (max-width: 1199px) and (min-width: 992px) {
   .best_selling_pr_area .best_slider {
     margin: 0 30px;
-  }
-  .pes{
-    margin-top: 1rem;
   }
 }
 
@@ -441,7 +438,7 @@
     display: inline-block;
   }
   .header_area.header_relative + section {
-    /* margin-top: 64px; */
+    margin-top: 64px;
   }
   .features_box {
     margin-top: 50px;
@@ -1265,67 +1262,16 @@
   }
 }
 
-@media (max-width: 992px) and (min-width: 300px) {
-  .menu_one{
-    height: 80px !important;
-    top: -10px;
-  }
-  .login-area{
-    min-height: 91.7vh;
-    padding-top: 0%;
-  }
-  .navbar .search_cart .search{
-    display: none;
-  }
-  .navbar-collapse{
-    display: flex;
-    flex-direction: column;
-  }
-  .navbar-collapse ul{
-    display: flex;
-    align-items: center;
-  }
-  .navbar .search_cart .user{
-    margin-top: -35px;
-  }
-  .navbar-collapse ul:first-child{
-    height: 40px;
-  }
-  .navbar-collapse ul li a{
-    font-size: 14px !important;
+
+@media (max-width: 992px) and (min-width: 300px)
+{
+  .tab_slider_content .slick-arrow{
+    top:10px;
+    z-index: 1;
+    left: auto;
   }
   .bj_banner_content{
     margin-top: 20px;
   }
-  .bj_banner_img{
-    margin-right: -4px !important;
-  }
-  
-.tab_slider_content .slick-arrow{
-  top:10px;
-  z-index: 1;
-  left: auto;
-}
-.sec-pad{
-  padding-top: 5px;
-}
-#project-list{
-  display: grid;
-    justify-content: space-evenly;
-    justify-items: end;
-    padding-left: calc(var(--bs-gutter-x) * .2);
-    padding-right: calc(var(--bs-gutter-x) * 0.8);
-}
-.whi{
-  width: 130px;
-}
-.project-actions .btn{
-  height: 55px;
-}
-.sec_padding{
-  padding-top: 5rem !important;
-}
-.mth{
-  margin-top: 40px !important;
-}
+
 }
