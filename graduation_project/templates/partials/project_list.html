@@ -9,16 +9,17 @@
                         <h2>{{ project.title }}</h2>
                         <div class="bj_book_img flip col-lg-12" style="height:275px">
                             <div class="special-offers-page-select mt-4 d-flex overflow-auto">
-                                {% if project.project_image %}
-                                    {% for project_image in project.project_image.all %}
-                                        <img style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
-                                    {% endfor %}
+                                {% if  project_image %}
+
+                                    {% for project_image in  project.project_image.all %}
+                                         <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
+                                     {% endfor %}
+
                                 {% else %}
-                                    <img style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/45718/pexels-photo-45718.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
-                                    <img style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/2168382/pexels-photo-2168382.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
-                                    <img style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/45718/pexels-photo-45718.jpeg?auto=compress&cs=tinysrgb&w=600" alt="">
+                                        <img  style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="">
+                                        <img  style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/8647727/pexels-photo-8647727.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="">
+                                        <img  style="margin-left:15px; width:40%; height:250px;" src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="">
                                 {% endif %}
-                                
                             </div>
                         </div>
                         <div class="bj_book_details">
