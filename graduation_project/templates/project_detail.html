@@ -66,10 +66,11 @@
                                         <span class="product_details_section_key">تاريخ النشر :</span>
                                         <span class="product_details_section_value">{{object.created_at.date}}</span>
                                     </div>
-                                    <div class="product_details_section_content mb-3">
+                                    {% comment %} <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">اعجاب</span>
                                         <span class="product_details_section_value">{{object.likes.count}}</span>
-                                    </div>
+                                    </div> {% endcomment %}
+
                                     {% comment %} <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">Edition :</span>
                                         <span class="product_details_section_value">3rd Edition</span>
@@ -243,7 +244,7 @@
 
                             
                             <div class="bj_book_details text-center col-lg-6">
-                                <a data-bs-toggle="modal" data-bs-target="#productQuickView" class="" style="font-size:24px">{{object.title}}</a>
+                                <a data-bs-toggle="modal" data-bs-target="#productQuickView" class="" style="font-size:24px">Project: {{object.title}}</a>
                                 <ul class="list-unstyled book_meta">
                                     {% comment %} <li>By:<a href="author-single.html">Phillip Siphron</a></li> {% endcomment %}
                                    
@@ -278,7 +279,7 @@
                                         </a>
                                         {% else %}
                                         <a href="https://static.realpython.com/python-basics-sample-chapters.pdf" class="bj_theme_btn strock_btn mb-3 gallerypdf" data-bs-toggle="modal" data-bs-target="#productQuickView"><i class="fa-regular fa-eye"></i>
-                                             PDF غير متوفر
+                                             PDF X 
                                         </a>
                                            
                                         {% endif %}
@@ -315,9 +316,9 @@
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="product_review-tab" data-bs-toggle="tab" data-bs-target="#product_review" type="button" role="tab" aria-controls="product_review" aria-selected="false">التعليقات <sup>({{ object.reviews.count }})</sup></button>
                                 </li>
-                                <li class="nav-item" role="presentation">
+                                {% comment %} <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="user_like" data-bs-toggle="tab" data-bs-target="#users_like" type="button" role="tab" aria-controls="users_like" aria-selected="false">{{ post.likes.count }}👁️ اعجاب</button>
-                                </li>
+                                </li> {% endcomment %}
                             </ul>
                             <div class="tab-content bj_book_single_tab_content mt-4">
                                 <div class="tab-pane fade show active" id="product_description" role="tabpanel" aria-labelledby="product_description-tab">
@@ -326,7 +327,7 @@
                                             <h5 class="content_header mb-2">وصف المشروع</h5>
                                             <p class="content_text mb-2">{{object.description}}.</p>
                                         </div>
-                                        <div>
+                                        {% comment %} <div>
                                             <h5 class="content_header mb-2">ماذا سوف تتعلم</h5>
                                             <ul class="content_text mb-2">
                                                 <li>
@@ -337,7 +338,7 @@
                                                     إتقان الأطر والنماذج والتقنيات التي تمكن الآلات ل التعلم من البيانات
                                                 </li>
                                             </ul>
-                                        </div>
+                                        </div> {% endcomment %}
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="product_aurhor_desc" role="tabpanel" aria-labelledby="product_aurhor_desc-tab">

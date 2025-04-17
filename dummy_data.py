@@ -120,11 +120,11 @@ def seed_projects(n):
             status=random.choice(['pending', 'accepted', 'rejected']),
             doctor=random.choice(users.filter(profile__is_doctor=True)),
             category=random.choice(categories),
-            book_pdf=None,  # You can add logic to upload dummy PDFs if needed
+            # book_pdf=None,  # You can add logic to upload dummy PDFs if needed
             # images=random.choice(dummy_images),  # Assign a random image
 
             # images=None,  # You can add logic to upload dummy images if needed
-            video=fake.url(),
+            # video=fake.url(),
             view_count=random.randint(0, 600),
         )
     print(f"Seeded {n} graduation projects successfully.")

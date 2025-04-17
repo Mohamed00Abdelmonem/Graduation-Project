@@ -6,8 +6,8 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('profile/', views.Profile, name='profile'),
-    path('profile/<slug:username>/', views.Profile_User, name='profile_user'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('profile/<slug:username>/', views.Profile_User, name='profile_user'),
     path('profile/experience/add/', views.add_experience, name='add_experience'),
     path('profile/experience/update/<int:experience_id>/', views.update_experience, name='update_experience'),
     path('profile/experience/delete/<int:experience_id>/', views.delete_experience, name='delete_experience'),
