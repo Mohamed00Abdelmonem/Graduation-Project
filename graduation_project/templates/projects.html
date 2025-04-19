@@ -136,22 +136,7 @@
                             </div>
                             
                             <!-- Division Filter -->
-                            {% comment %} <div class="widget author_widget">
-                                <h4 class="shop_sidebar_title_small">
-                                    <i class="fas fa-code-branch me-2"></i>الشعبة
-                                </h4>
-                                <div class="mt-2">
-                                    <select class="form-select" 
-                                            hx-get="{% url 'project:ProjectList' %}?q={{ request.GET.q|default:'' }}" 
-                                            hx-target="#project-list" 
-                                            hx-trigger="change"
-                                            name="division">
-                                        <option value="">جميع الشعب</option>
-                                        <option value="burt" {% if request.GET.division == "burt" %}selected{% endif %}>نظم المعلومات الإدارية</option>
-                                        <option value="candy" {% if request.GET.division == "candy" %}selected{% endif %}>علوم حاسب</option>
-                                    </select>
-                                </div>
-                            </div> {% endcomment %}
+                            
                         </div>
                     </div>
                     
@@ -403,7 +388,7 @@
             </div>
             
             <!-- Division Filter -->
-            <div class="widget author_widget">
+            {% comment %} <div class="widget author_widget">
                 <h4 class="shop_sidebar_title_small">
                     <i class="fas fa-code-branch me-2"></i>الشعبة
                 </h4>
@@ -418,7 +403,7 @@
                         <option value="candy" {% if request.GET.division == "candy" %}selected{% endif %}>علوم حاسب</option>
                     </select>
                 </div>
-            </div>
+            </div> {% endcomment %}
             
             <!-- Sort Filter -->
             {% comment %} <div class="widget author_widget mt-4">
