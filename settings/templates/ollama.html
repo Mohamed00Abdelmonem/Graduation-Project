@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+<style>
+/* التنسيقات نفس اللي عندك */
+body, h1, h2, h3, p, ul, ol, li, textarea, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Lugrasimo', cursive;
+}
+body {
+    font-size: 16px;
+    background-color: #f8f9fa;
+}
+.generator-section {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    color:rgb(67, 29, 29);
+    background-color:rgb(47, 108, 107);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(220, 66, 66, 0.1);
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(203, 162, 37);
+}
+h2 {
+    margin-top: 20px;
+    color: rgb(148, 182, 38)
+}
+.generated-text {
+    margin-top: 20px;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: rgb(203, 162, 37);
+
+}
+.btn-primary {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: #17a2b8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-primary:hover {
+    background-color: #138496;
+}
+</style>
+
+<div class="generator-section">
+    <h1 class="mt-5">MET (LLM)</h1>
+
+    <div class="generated-text mt-5 markdown-body" id="result">
+        <h2>Result:</h2>
+        <div id="output"></div>
+    </div>
+
+    <div class="input-form">
+        <form id="aiForm" class="d-flex" onsubmit="sendRequest(event)">
+            {% csrf_token %}
+            <div class="form-group flex-grow-1">
+                <textarea class="form-control" id="input_text" name="input_text" rows="4" placeholder="Enter your text here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-warning">Send</button>
+        </form>
+    </div>
+</div>
+
+<script>
+async function sendRequest(event) {
+    event.preventDefault();
+
+    const inputText = document.getElementById('input_text').value;
+    const outputDiv = document.getElementById('output');
+    outputDiv.innerHTML = ''; // clear previous result
+
+    const formData = new FormData();
+    formData.append('input_text', inputText);
+
+    const response = await fetch("{% url 'generate' %}", {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: formData
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        typeText(data.generated_text, outputDiv);
+    } else {
+        outputDiv.innerText = 'Error occurred while generating text.';
+    }
+}
+
+function typeText(text, element, delay = 30) {
+    // remove any HTML-like tags such as <think>...</think>
+    const cleanText = text.replace(/<[^>]*>/g, '');
+
+    let index = 0;
+    function typeChar() {
+        if (index < cleanText.length) {
+            element.innerHTML += cleanText.charAt(index);
+            index++;
+            setTimeout(typeChar, delay);
+        }
+    }
+    typeChar();
+}
+</script>
+{% endblock %}

@@ -80,3 +80,21 @@ def home(request):
 
 # ___________________________________________________________________________________
 
+from django.shortcuts import render
+from django.http import JsonResponse
+from langchain_community.llms import Ollama
+from django.views.decorators.csrf import csrf_exempt
+
+def ollama_page(request):
+    return render(request, 'ollama.html')  # فقط تعرض الصفحة
+
+@csrf_exempt
+def generate_ollama_text(request):
+    if request.method == 'POST':
+        input_text = request.POST.get('input_text', '')
+        llm = Ollama(model="deepseek-r1:1.5b")
+        generated_text = llm(input_text)
+        return JsonResponse({'generated_text': generated_text})
+
+
+# ___________________________________________________________________________________
