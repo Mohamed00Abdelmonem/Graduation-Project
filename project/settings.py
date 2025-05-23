@@ -105,6 +105,9 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
+    "unfold.contrib.forms",  # لو عايز ستايل حلو في النماذج
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,6 +127,27 @@ INSTALLED_APPS = [
     'accounts',
     'graduation_project',
 ]
+
+# for change theme admin panel
+UNFOLD = {
+    "SITE_TITLE": "MET Dashboard",
+    "SITE_HEADER": "Gradution Projects",
+    "SITE_BRAND": "Monem",
+    "SHOW_COUNTS": True,
+    "COLLAPSIBLE_NAV": True,  # يجعل القائمة الجانبية قابلة للطي
+    "DARK_MODE": True,        # يدعم المظهر الداكن
+    "SHOW_UI_BUILDER": True,
+
+    # أهم حاجة هنا:
+    "SIDEBAR_NAV_OPTIONS": {
+        "auto_collapse": True,  # يخلي الـ sidebar يتقفل على الشاشات الصغيرة
+    },
+    
+}
+
+
+
+
 #for Auth (login) by id_notional mabye
 AUTHENTICATION_BACKENDS = [
     'accounts.auth_backends.NationalIDAuthenticationBackend',  # Custom backend for National ID
@@ -202,13 +226,13 @@ import dj_database_url
 
 # إعداد قاعدة البيانات
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
-        # default='postgresql://postgres:aSMpTwRMJxkxhKoWlSLMHhAdajbNtWhh@maglev.proxy.rlwy.net:10239/railway',
-        conn_max_age=600,  # يحسن الأداء
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
+#         # default='postgresql://postgres:aSMpTwRMJxkxhKoWlSLMHhAdajbNtWhh@maglev.proxy.rlwy.net:10239/railway',
+#         conn_max_age=600,  # يحسن الأداء
+#     )
+# }
 # default='postgresql://neondb_owner:npg_QG4ZWgw7ROqH@ep-dawn-poetry-a5ibwxba-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require',
 
 # لتعطيل source maps في الإنتاج
@@ -219,16 +243,16 @@ else:
 
 
 
-# DATABASES = {
-#     'default': {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.getenv("DB_NAME"),
-#         "USER": os.getenv("DB_USER"),
-#         "PASSWORD": os.getenv("DB_PASSWORD"),
-#         "HOST": os.environ.get('DB_HOST'),
-#         "PORT": os.getenv("DB_PORT"),
-#     }
-# }
+DATABASES = {
+    'default': {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.environ.get('DB_HOST'),
+        "PORT": os.getenv("DB_PORT"),
+    }
+}
     
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
