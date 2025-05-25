@@ -30,9 +30,9 @@ SECRET_KEY = 'django-insecure-_=e0@#_o21+)w^@vc2usfoufg0#gyy27lr5#*@z+5tcxzj4@)i
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False # For Deploy
+# DEBUG = False # For Deploy
 
-# DEBUG = True  
+DEBUG = True  
 
 # ولكنك تحتاج لتسجيل الأخطاء في الإنتاج:
 LOGGING = {
@@ -293,8 +293,12 @@ USE_TZ = True
 # STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
 
 # STATIC_ROOT = "static_root"
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = "media_root"
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type

@@ -7,7 +7,62 @@ from datetime import datetime
 User = get_user_model()
 
 
+
+from gtts import gTTS
+import os
+from django.core.files.base import ContentFile
+from io import BytesIO
+from django.db import models
+from django.utils.text import slugify
+from django.urls import reverse
+from django.core.files.base import ContentFile
+from django.contrib.auth.models import User
+import pyttsx3
+from googletrans import Translator
+import os
 # ___________________________________________________________________________________
+
+
+
+def text_to_speech_arabic_to_english(arabic_text, instance):
+    # 1. ترجمة النص العربي إلى إنجليزي
+    translator = Translator()
+    translated = translator.translate(arabic_text, src='ar', dest='en')
+    english_text = translated.text
+    print("Translated text:", english_text)
+
+    # 2. توليد صوت بالإنجليزي باستخدام pyttsx3
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+
+    # اختيار صوت ذكر (هنا بنجرب نختار صوت إنجليزي ذكر)
+    selected_voice = None
+    for voice in voices:
+        # لو لقيت صوت إنجليزي وذكر خليه
+        if "english" in voice.name.lower() and ("male" in voice.name.lower() or "male" in voice.id.lower()):
+            selected_voice = voice.id
+            break
+    if not selected_voice:
+        # لو مالقيناش صوت محدد، نستخدم الافتراضي
+        selected_voice = voices[0].id
+
+    engine.setProperty('voice', selected_voice)
+    engine.setProperty('rate', 150)  # سرعة الكلام
+
+    # حفظ الملف مؤقتاً
+    temp_audio_path = f"temp_audio_{instance.pk}.mp3"
+    engine.save_to_file(english_text, temp_audio_path)
+    engine.runAndWait()
+
+    # حفظ الملف في حقل audio_file في الـ instance
+    with open(temp_audio_path, 'rb') as f:
+        instance.audio_file.save(f"audio_{instance.pk}.mp3", ContentFile(f.read()), save=False)
+
+    # حذف الملف المؤقت
+    os.remove(temp_audio_path)
+
+    # حفظ التغييرات في الحقل audio_file فقط
+    instance.save(update_fields=['audio_file'])
 
 
 STATUS_CHOICES = [
@@ -32,6 +87,7 @@ class GraduationProject(models.Model):
     title_ar = models.CharField(max_length=200)
     description = models.TextField()
     sub_description = models.TextField(blank=True, null=True)
+    audio_file = models.FileField(upload_to="projects/audio/", blank=True, null=True)
     graduation_year = models.CharField(
         max_length=4,  # Year is a 4-digit number
         choices=Graduation_Year,
@@ -80,22 +136,21 @@ class GraduationProject(models.Model):
         # استخدم slug بدلاً من id
         return reverse('project:project_detail', args=[self.slug])
     
-    def get_lat_lng(self):
-        """Extract latitude and longitude from the location field."""
-        if self.location:
-            lat_lng = self.location.split(',')
-            if len(lat_lng) == 2:
-                return lat_lng[0], lat_lng[1]
-        return '0', '0'  # default values
+    
 
     def __str__(self):
         return self.title
 
-    # Add slug
-    def save(self, *args, **kwargs):
-            self.slug = slugify(self.title)
-            super(GraduationProject, self).save(*args, **kwargs) 
 
+    def save(self, *args, **kwargs):
+        if not self.slug and self.title:
+            self.slug = slugify(self.title)
+
+        super().save(*args, **kwargs)  # حفظ عشان يبقى فيه pk
+
+        if self.sub_description and not self.audio_file:
+            # تحويل النص العربي إلى صوت إنجليزي بصوت ذكر
+            text_to_speech_arabic_to_english(self.sub_description, self)
 
 # ___________________________________________________________________________________
 

@@ -265,6 +265,14 @@
                                 </div> {% endcomment %}
                                 {% comment %} <div class="price">$10</div> {% endcomment %}
                                 <p>{{object.sub_description}}.</p>
+                                {% if object.audio_file %}
+                                    <audio controls>
+                                        <source src="{{ object.audio_file.url }}" type="audio/mpeg">
+                                        المتصفح لا يدعم تشغيل الصوت.
+                                    </audio>
+                                {% endif %}
+
+
                                 <div class="product_meta d-flex justify-content-around list-unstyled">
                                     <span>تاريخ النشر:{{object.created_at}}</span>
                                     <span>فئه:<a href="">{{object.category}}</a></span>

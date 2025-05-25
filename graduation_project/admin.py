@@ -30,7 +30,12 @@ class GraduationProjectAdmin(ModelAdmin):  # استخدم ModelAdmin من unfold
     # تقسيم الحقول إلى أقسام منظمة داخل صفحة الإضافة/التعديل
     fieldsets = (
         ('Basic Info', {
-            'fields': ('title', 'description', 'graduation_year', 'category', 'status')
+        'fields': (
+            'title', 'title_ar', 'description', 'sub_description',
+            'graduation_year', 'status', 'students', 'doctor', 'supervisors',
+            'category', 'book_pdf', 'images', 'video', 'audio_file',
+            'likes', 'slug', 'view_count'
+        ),
         }),
         ('Additional Info', {
             'fields': ('created_at', 'updated_at'),
