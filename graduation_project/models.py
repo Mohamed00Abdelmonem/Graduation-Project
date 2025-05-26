@@ -23,46 +23,41 @@ import os
 # ___________________________________________________________________________________
 
 
-
 def text_to_speech_arabic_to_english(arabic_text, instance):
-    # 1. ترجمة النص العربي إلى إنجليزي
-    translator = Translator()
-    translated = translator.translate(arabic_text, src='ar', dest='en')
-    english_text = translated.text
-    print("Translated text:", english_text)
+    try:
+        translator = Translator()
+        translated = translator.translate(arabic_text, src='ar', dest='en')
+        english_text = translated.text
+        print("Translated text:", english_text)
+    except Exception as e:
+        print("Translation failed:", e)
+        english_text = arabic_text  # استخدم النص الأصلي كبديل أو تجاهل
 
-    # 2. توليد صوت بالإنجليزي باستخدام pyttsx3
-    engine = pyttsx3.init()
-    voices = engine.getProperty('voices')
+    # تابع الباقي بشكل عادي
+    try:
+        engine = pyttsx3.init()
+        voices = engine.getProperty('voices')
+        selected_voice = None
+        for voice in voices:
+            if "english" in voice.name.lower() and ("male" in voice.name.lower() or "male" in voice.id.lower()):
+                selected_voice = voice.id
+                break
+        if not selected_voice:
+            selected_voice = voices[0].id
+        engine.setProperty('voice', selected_voice)
+        engine.setProperty('rate', 150)
 
-    # اختيار صوت ذكر (هنا بنجرب نختار صوت إنجليزي ذكر)
-    selected_voice = None
-    for voice in voices:
-        # لو لقيت صوت إنجليزي وذكر خليه
-        if "english" in voice.name.lower() and ("male" in voice.name.lower() or "male" in voice.id.lower()):
-            selected_voice = voice.id
-            break
-    if not selected_voice:
-        # لو مالقيناش صوت محدد، نستخدم الافتراضي
-        selected_voice = voices[0].id
+        temp_audio_path = f"temp_audio_{instance.pk}.mp3"
+        engine.save_to_file(english_text, temp_audio_path)
+        engine.runAndWait()
 
-    engine.setProperty('voice', selected_voice)
-    engine.setProperty('rate', 150)  # سرعة الكلام
+        with open(temp_audio_path, 'rb') as f:
+            instance.audio_file.save(f"audio_{instance.pk}.mp3", ContentFile(f.read()), save=False)
+        os.remove(temp_audio_path)
+        instance.save(update_fields=['audio_file'])
 
-    # حفظ الملف مؤقتاً
-    temp_audio_path = f"temp_audio_{instance.pk}.mp3"
-    engine.save_to_file(english_text, temp_audio_path)
-    engine.runAndWait()
-
-    # حفظ الملف في حقل audio_file في الـ instance
-    with open(temp_audio_path, 'rb') as f:
-        instance.audio_file.save(f"audio_{instance.pk}.mp3", ContentFile(f.read()), save=False)
-
-    # حذف الملف المؤقت
-    os.remove(temp_audio_path)
-
-    # حفظ التغييرات في الحقل audio_file فقط
-    instance.save(update_fields=['audio_file'])
+    except Exception as e:
+        print("Audio generation failed:", e)
 
 
 STATUS_CHOICES = [
@@ -129,7 +124,7 @@ class GraduationProject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     view_count = models.PositiveIntegerField(default=0)  # Added field
-    slug = models.SlugField(unique=True, null=True, blank=True)
+    slug = models.SlugField(unique=True, null=True, blank=True, max_length=250)
 
 
     def get_absolute_url(self):
@@ -162,6 +157,7 @@ class ProjectImages(models.Model):
 
     def __str__(self) -> str:
         return str(self.project)  
+    
     
 
 # ___________________________________________________________________________________

@@ -230,58 +230,47 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
     
 
 # ___________________________________________________________________________________
-
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views import generic
-from django.core.mail import send_mail
-from django.conf import settings
 from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import GraduationProject, ProjectImages
+
 class UpdateProject(UserPassesTestMixin, generic.UpdateView):
     model = GraduationProject
     fields = [
         'title', 'title_ar', 'description', 'sub_description', 'graduation_year', 
-        'category', 'doctor', 'students', 'supervisors', 'book_pdf', "images", 'video'
+        'category', 'doctor', 'students', 'supervisors', 'book_pdf', 'images', 'video'
     ]
     template_name = "update_project.html"
-    success_url = reverse_lazy('profile')  # Use reverse_lazy for dynamic URLs
+    success_url = reverse_lazy('profile')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         project = self.get_object()
-
-        # Add existing images to the context
-        context['existing_images'] = ProjectImages.objects.filter(project=project)
-
-        # Add existing book_pdf and video URLs to the context
+        context['project'] = project  # ⬅️ مهم جدًا للـ slug في التمبلت
+        context['existing_images'] = project.project_image.all()
+        
         if project.book_pdf:
             context['existing_book_pdf'] = project.book_pdf.url
         if project.video:
             context['existing_video'] = project.video.url
-
+            
         return context
 
     def form_valid(self, form):
-        # Save the form and get the project instance
         project = form.save()
 
-        # Handle uploaded images
-        images = self.request.FILES.getlist('images')
-
-        for image in images:
+        new_images = self.request.FILES.getlist('project_images')
+        for image in new_images:
             ProjectImages.objects.create(project=project, image=image)
 
-        # Delete existing images and add new ones
-        ProjectImages.objects.filter(project=project).delete()
-        for image in images:
-            ProjectImages.objects.create(project=project, image=image)
-
-        # Update the project status to 'pending' after editing
         project.status = 'pending'
         project.save()
-
-        # Send email notification to the leader
+        
+         # Send email notification to the leader
         send_mail(
             'تم تحديث مشروع التخرج',
             'تم تحديث مشروعك بنجاح وسيتم مراجعته من قبل المشرف.',
@@ -296,9 +285,21 @@ class UpdateProject(UserPassesTestMixin, generic.UpdateView):
         return super().form_valid(form)
 
     def test_func(self):
-        # Only the project author (leader) or staff members can update projects
         project = self.get_object()
         return self.request.user == project.author or self.request.user.is_staff
+
+# 🔥 حذف صورة
+@login_required
+def delete_project_image(request, project_slug, image_id):
+    image = get_object_or_404(
+        ProjectImages,
+        id=image_id,
+        project__slug=project_slug,
+        project__author=request.user
+    )
+    image.delete()
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
 
 # ______________________________________________________________
 

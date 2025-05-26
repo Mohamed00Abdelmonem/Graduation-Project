@@ -19,5 +19,8 @@ urlpatterns = [
     path('reject-project/<int:project_id>/', views.reject_project, name='reject_project'),
     path('pending_projects/', views.pending_projects, name='pending_projects'),
 
+# for delete images in update project
+    path('project/<slug:project_slug>/delete-image/<int:image_id>/', views.delete_project_image, name='delete_project_image'),
+
 
 ]
