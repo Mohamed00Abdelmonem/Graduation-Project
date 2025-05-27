@@ -263,14 +263,15 @@
                                 <a class="dropdown-item custom-menu-item" href="{% url 'upload_excel' %}">إضافة طلاب</a>
                             </li>
                             {% endif %}
-                            {% if user.is_authenticated and user.profile.is_leader %}
-                            <li class="mb-2">
-                                <a class="dropdown-item custom-menu-item" href="{% url 'project:add_project' %}">إرسال مشروع</a>
-                            </li>
-                            {% endif %}
+                            
                             {% if not user.is_staff %}
                             <li class="mb-2">
                                 <a class="dropdown-item custom-menu-item" data-bs-toggle="modal" data-bs-target="#commentQuickView">التعليقات</a>
+                            </li>
+                            {% endif %}
+                            {% if user.is_authenticated and user.profile.is_leader %}
+                            <li class="mb-2">
+                                <a class="dropdown-item custom-menu-item" href="{% url 'project:add_project' %}">إرسال مشروع</a>
                             </li>
                             {% endif %}
                         </ul>
@@ -353,7 +354,7 @@
                     // تحقق من دعم المتصفح لواجهة speechSynthesis
                     if ('speechSynthesis' in window) {
                         const userName = "{{ user.get_full_name|default:user.username }}";
-                        const welcomeText = `Welcome, ${userName}`;
+                        const welcomeText = `Welcome back yaa ${userName}. We're glad to see you again!`;
 
                         // إعداد الصوت
                         const utterance = new SpeechSynthesisUtterance(welcomeText);
@@ -507,34 +508,34 @@
 
 <!-- Comments Modal -->
 <div class="modal fade" id="commentQuickView" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">تعليقاتي</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Sample Comment - Replace with dynamic content -->
+
+                {% for review in user.submitted_reviews.all %}
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h6 class="card-title mb-0">اسم المشروع</h6>
-                            <div class="rating">
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                                <i class="fas fa-star text-warning"></i>
-                            </div>
+                            <h6 class="card-title mb-0">{{ review.project.title }}</h6>
+                            <a href="{% url 'project:project_detail' review.project.slug %}" class="btn btn-sm btn-primary">عرض المشروع</a>
                         </div>
-                        <p class="card-text">هذا المشروع رائع ويستحق أن يكون أفضل مشروع هذا العام لأنه ساعد الطلاب بشكل كبير.</p>
-                        <small class="text-muted">تم النشر في 12/05/2023</small>
+                        <p class="card-text">{{ review.comments }}</p>
+                        <small class="text-muted">تم النشر في {{ review.created_at|date:"d/m/Y" }}</small>
                     </div>
                 </div>
+                {% empty %}
+                <div class="alert alert-info text-center">لا توجد تعليقات حتى الآن</div>
+                {% endfor %}
+
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
