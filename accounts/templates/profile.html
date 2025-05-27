@@ -344,6 +344,36 @@
                 </div>
             </div>
             
+
+
+
+            {% comment %} this function for talk sound welcome name user {% endcomment %}
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // تحقق من دعم المتصفح لواجهة speechSynthesis
+                    if ('speechSynthesis' in window) {
+                        const userName = "{{ user.get_full_name|default:user.username }}";
+                        const welcomeText = `Welcome, ${userName}`;
+
+                        // إعداد الصوت
+                        const utterance = new SpeechSynthesisUtterance(welcomeText);
+                        utterance.lang = 'en-US';  // يمكنك تغييره إلى 'ar-SA' إذا كنت تفضل اللغة العربية
+                        utterance.pitch = 1;
+                        utterance.rate = 1;
+
+                        // تشغيل الصوت
+                        window.speechSynthesis.speak(utterance);
+                    } else {
+                        console.warn("Speech Synthesis not supported in this browser.");
+                    }
+                });
+            </script>
+
+
+
+
+
+
             <!-- Additional Sections -->
             <div class="row mt-4">
                 <div class="col-md-6">
