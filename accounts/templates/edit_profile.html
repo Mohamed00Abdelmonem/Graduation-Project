@@ -2,218 +2,170 @@
 {% load static %}
 
 {% block body %}
-<section class="bj_author_single_area sec_padding pb-0" data-bg-color="#f5f5f5">
-<div class="content_body" style=" margin-bottom: 100px; text-align:center">
-    <form method="post" enctype="multipart/form-data" >
-        {% csrf_token %}
-        <div class="row gy-4">
-            <!-- Profile Picture Section -->
-            <div class="col-12">
-                <div class="profile-picture-form">
-                    <div class="preview">
-                        {% if form.image.value %}
-                        <img class="profile-picture" src="{{ form.instance.image.url }}" alt="Profile Picture">
-                        {% else %}
-                            <img class="profile-picture" src="{% static 'img/default-avatar.png' %}" alt="Default Profile Picture">
-                        {% endif %}
-                    </div>
-                    <div class="upload_btn">
-                        تحميل صورة جديدة
-                        {{ form.image }}
-                    </div>
-                </div>
-            </div>
+<section class="profile-edit-section" style="background-color:#f5f5f5; padding:50px 0;">
+<div class="profile-container" style="max-width:1000px; margin:0 auto; background:#fff; padding:40px; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.1);">
 
-            {% comment %} <!-- Full Name Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    {{ form.full_name }}
-                    <label class="floating-label">الاسم الكامل</label>
-                </div>
-            </div> {% endcomment %}
+    <form method="post" enctype="multipart/form-data" id="profileForm">
+      {% csrf_token %}
 
-            <!-- Phone Number Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    {{ form.phone_number }}
-                    <label class="floating-label">رقم الهاتف</label>
-                </div>
-            </div>
+      <!-- Profile Picture + Upload -->
+      <div style="text-align:center; margin-bottom:30px;">
+        <img id="avatarPreview" 
+          src="{% if form.instance.image %}{{ form.instance.image.url }}{% else %}{% static 'img/default-avatar.png' %}{% endif %}" 
+          alt="Profile Picture" 
+          style="width:150px; height:150px; object-fit:cover; border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: transform 0.3s ease; margin-bottom:15px;">
 
-            {% comment %} <!-- Grade/Year Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    <label class="form-label">Grade/Year</label>
-                    {{ form.grade }}
-                </div>
-            </div> {% endcomment %}
-            
-{% comment %} 
-            <!-- Date of Birth Field -->
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label class="form-label">Date of Birth</label>
-                    {{ form.date_of_birth }}
-                </div>
-            </div> {% endcomment %}
+        <label for="id_image" style="
+          cursor:pointer; 
+          background:#007bff; 
+          color:#fff; 
+          padding:10px 20px; 
+          border-radius: 25px; 
+          font-weight:600; 
+          display:inline-block;
+          box-shadow: 0 4px 8px rgba(0,123,255,0.4);
+          transition: background-color 0.3s ease;
+        ">
+          تغيير الصورة
+        </label>
+        {{ form.image }}
 
-            <!-- Job Title Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    {{ form.job_title }}
-                    <label class="floating-label">مسمى وظيفي</label>
-                </div>
-            </div>
-              
+      </div>
 
-            <!-- WhatsApp Number Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    {{ form.whatsapp_number }}
-                    <label class="floating-label">رقم الواتساب</label>
-                </div>
-            </div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
 
-            <!-- LinkedIn Link Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    {{ form.linkedin_link }}
-                    <label class="floating-label"> رابط لينكدإن </label>
-                </div>
-            </div>
 
-            <!-- Instagram Link Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    {{ form.instgram_link }}
-                    <label class="floating-label">رابط الانستقرام</label>
-                </div>
-            </div>
 
-            <!-- Portfolio Link Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    {{ form.porfolio_link }}
-                    <label class="floating-label">رابط الصفحه الخاصه بيك</label>
-                </div>
-            </div>
-
-            {% comment %} <!-- Department Field -->
-            <div class="col-lg-6">
-                <div class="form-group">
-                    {{ form.department }}
-                    <label class="floating-label">Department</label>
-                </div>
-            </div> {% endcomment %}
-
-            <!-- Address Field -->
-            <div class="col-lg-3">
-                <div class="form-group">
-                    {{ form.address }}
-                    <label class="floating-label">عنوان</label>
-                </div>
-            </div>
-
-            <!-- Short Bio Field -->
-            <div class="col-10 text-center" style="padding-right:20px">
-                <div class="form-group">
-                    {{ form.short_bio }}
-                    <label class="floating-label">سيرة ذاتية قصيرة</label>
-                </div>
-            </div>
+        
+        <!-- Phone Number -->
+        <div style="position:relative;">
+          {{ form.phone_number }}
+          <label class="floating-label">رقم الهاتف</label>
         </div>
 
-        <!-- Save Button -->
-        <button type="submit" class="bj_theme_btn btn btn-primary mt-3 ">حفظ</button>
-        
+        <!-- Job Title -->
+        <div style="position:relative;">
+          {{ form.job_title }}
+          <label class="floating-label">مسمى وظيفي</label>
+        </div>
+
+        <!-- WhatsApp Number -->
+        <div style="position:relative;">
+          {{ form.whatsapp_number }}
+          <label class="floating-label">رقم الواتساب</label>
+        </div>
+
+        <!-- LinkedIn Link -->
+        <div style="position:relative;">
+          {{ form.linkedin_link }}
+          <label class="floating-label">رابط لينكدإن</label>
+        </div>
+
+        <!-- Instagram Link -->
+        <div style="position:relative;">
+          {{ form.instgram_link }}
+          <label class="floating-label">رابط الانستقرام</label>
+        </div>
+
+        <!-- Portfolio Link -->
+        <div style="position:relative;">
+          {{ form.porfolio_link }}
+          <label class="floating-label">رابط الصفحة الخاصة بك</label>
+        </div>
+
+        <!-- Address -->
+        <div style="position:relative;">
+          {{ form.address }}
+          <label class="floating-label">العنوان</label>
+        </div>
+
+        <!-- Short Bio -->
+        <div style="position:relative; grid-column: 1 / -1;">
+          {{ form.short_bio }}
+          <label class="floating-label">سيرة ذاتية قصيرة</label>
+        </div>
+
+      </div>
+
+      <!-- Submit Button -->
+      <div style="text-align:center; margin-top:30px;">
+        <button type="submit" style="
+          background:#007bff;
+          color:#fff;
+          border:none;
+          padding:12px 40px;
+          font-size:18px;
+          font-weight:600;
+          border-radius:30px;
+          cursor:pointer;
+          box-shadow: 0 6px 12px rgba(0,123,255,0.5);
+          transition: background-color 0.3s ease;
+        " 
+        onmouseover="this.style.background='#0056b3'" 
+        onmouseout="this.style.background='#007bff'">
+          حفظ
+        </button>
+      </div>
+
     </form>
-</div>
+  </div>
 </section>
 
 <style>
-    /* General Styling */
-    .content_body {
-        max-width: 80%;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
+  input[type="file"] {
+    display: none;
+  }
 
-    /* Form Group Styling */
-    .form-group {
-        position: relative;
-        margin-bottom: 20px;
-    }
+  /* Inputs & Textareas styling */
+  input, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  input:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 6px rgba(0,123,255,0.5);
+  }
 
-    .form-group textarea{
-        height: 150px
-    }
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
-        transition: border-color 0.3s ease;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-        border-color: #007bff;
-        outline: none;
-        box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
-    }
-
-    /* Floating Label Styling */
-    .floating-label {
-        position: absolute;
-        top: -10px;
-        left: 10px;
-        background-color: #fff;
-        padding: 0 5px;
-        font-size: 14px;
-        color: #555;
-        transition: all 0.3s ease;
-    }
-
-    /* Save Button Styling */
-    .bj_theme_btn {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 18px;
-        color: #fff;
-        background-color: #007bff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .bj_theme_btn:hover {
-        background-color: #0056b3;
-    }
-    /* Profile Picture Styling */
-.profile-picture {
-    width: 150px; /* Set the width */
-    height: 150px; /* Set the height */
-    object-fit: cover; /* Ensure the image covers the container without distortion */
-    border-radius: 50%; /* Make the image circular */
-    display: block; /* Ensure proper alignment */
-    margin: 0 auto; /* Center the image horizontally */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
-    transition: transform 0.3s ease; /* Add a hover effect */
-}
-
-/* Optional Hover Effect */
-.profile-picture:hover {
-    transform: scale(1.1); /* Slightly enlarge the image on hover */
-}
+  /* Floating labels */
+  .floating-label {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    background: white;
+    padding: 0 6px;
+    font-size: 14px;
+    color: #666;
+    font-weight: 600;
+    pointer-events: none;
+    user-select: none;
+  }
 </style>
+
+<script>
+  // Show image preview on file select
+  const imageInput = document.getElementById('id_image');
+  const avatarPreview = document.getElementById('avatarPreview');
+
+  imageInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if(file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        avatarPreview.src = e.target.result;
+      }
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
 {% endblock %}
