@@ -2,43 +2,85 @@
 {% load bootstrap5 %}
 
 {% block body %}
-<section class="bj_shop_area d-flex flex-column text-center sec_padding pb-0" data-bg-color="#f5f5f5">
-    <div class="content_body" style=" text-align:center">
-<div class="container"style=" margin-bottom: 100px; margin-top:50px">
-    <div class="row justify-content-center" style=" margin-bottom: 100px; height:383px;">
-        <div class="col-md-8 text-center">
-            <!-- Success Icon -->
-            <div class="mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="green" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-            </div>
+<section class="d-flex align-items-center justify-content-center text-center" style="min-height: 100vh; background: linear-gradient(to right, #e0f7fa, #f1f8e9);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
 
-            <!-- Success Message -->
-            <h1 class="display-4 mb-4">تم إنشاء المشروع بنجاح!</h1>
-            <p class="lead mb-4">سيتم مراجعة مشروعك من قبل المشرف. يمكنك متابعة حالة المشروع من خلال  الايمل الخاص بحضرتك .</p>
-
-            <!-- Display Django Messages -->
-            {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    {% endfor %}
+                <!-- Success Icon -->
+                <div class="mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#28a745" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg>
                 </div>
-            {% endif %}
 
-            <!-- Navigation Buttons -->
-            <div class="mt-5">
-                <a href="/" class="btn btn-primary btn-lg me-3" style="background:rgb(0, 70, 88);">
-                    العودة إلى الصفحة الرئيسية
-                </a>
+                <!-- Success Message -->
+                <h1 class="display-5 fw-bold text-success mb-3">🎉 تم إنشاء المشروع بنجاح!</h1>
+                <p class="lead mb-4 text-muted">
+                    سيتم مراجعة مشروعك من قبل المشرف. يمكنك متابعة حالة المشروع من خلال البريد الإلكتروني الخاص بك.
+                </p>
+
+                <!-- Django Messages -->
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Navigation Button -->
+                <div class="mt-4">
+                    <a href="/" class="btn btn-lg px-4 py-2 text-white shadow" style="background-color: #004658; border-radius: 8px;">
+                        العودة إلى الصفحة الرئيسية
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
-</div>
 </section>
-{% endblock body %}
+
+<!-- 🎤 Voice congratulation on page load -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if ('speechSynthesis' in window) {
+            let hasSpoken = false;
+
+            const speakCongrats = () => {
+                if (hasSpoken) return;
+
+                const voices = window.speechSynthesis.getVoices();
+                if (!voices.length) {
+                    setTimeout(speakCongrats, 100);
+                    return;
+                }
+
+                const congratsText = "Congratulations! Your project has been successfully submitted. It will be reviewed shortly.";
+                const utterance = new SpeechSynthesisUtterance(congratsText);
+
+                utterance.lang = 'en-US';
+                utterance.pitch = 1;
+                utterance.rate = 1;
+
+                const englishVoice = voices.find(voice => voice.lang.startsWith("en"));
+                if (englishVoice) {
+                    utterance.voice = englishVoice;
+                }
+
+                speechSynthesis.speak(utterance);
+                hasSpoken = true;
+            };
+
+            window.speechSynthesis.onvoiceschanged = speakCongrats;
+            speakCongrats(); // Try immediately
+        } else {
+            console.warn("Speech Synthesis not supported in this browser.");
+        }
+    });
+</script>
+{% endblock body%}
