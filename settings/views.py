@@ -36,8 +36,8 @@ def get_top_liked_projects():
 # ___________________________________________________________________________________
 
 
-# Cache the page for 1 minute to reduce database load
-# @cache_page(60 * 1)  
+# Cache the page for 1 minute to reduce database load 
+# @cache_page(60 * 1)   # for run this open ubunto linux for start redis db and password 1234
 def home(request):
     # Fetch only accepted projects for the main projects section
     projects_main = (
