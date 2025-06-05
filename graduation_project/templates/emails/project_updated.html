@@ -1,0 +1,68 @@
+<!-- templates/emails/project_updated.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تم تعديل المشروع</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color:rgb(130, 201, 188);
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color:rgb(99, 223, 192);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px 30px;
+        }
+
+        h2 {
+            color: #1c5a5b;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        .highlight {
+            color:rgb(37, 103, 110);
+            font-weight: bold;
+        }
+
+        
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            border-top: 1px solid #e4e4e4;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h2>مرحبًا {{ user.first_name }}،</h2>
+        <p>نود إبلاغك أنه تم تعديل مشروع التخرج الخاص بك بعنوان 
+            <br>
+            <span class="highlight">{{ project.title }}</span>.</p>
+        <p>سيتم مراجعته من قبل المشرف الأكاديمي قريبًا.</p>
+
+
+        <div class="footer">
+            <p>فريق الإشراف الأكاديمي</p>
+        </div>
+    </div>
+</body>
+</html>

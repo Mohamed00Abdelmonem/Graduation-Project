@@ -6863,7 +6863,7 @@ input::-webkit-inner-spin-button {
 }
 .pr_ribbon .product-badge {
   border-radius: 13px 0px 0px 13px;
-  background: #20bf1d;
+  background: #206387;
   padding: 2px 9px 4px 6px;
   display: inline-block;
   color: #fff;
@@ -6879,6 +6879,11 @@ input::-webkit-inner-spin-button {
   vertical-align: baseline;
   margin-right: 2px;
 }
+
+/* for llm chatbot  */
+
+
+
 
 /*===== product_single css =========*/
 .bj_book_single {

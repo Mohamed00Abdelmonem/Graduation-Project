@@ -269,15 +269,27 @@ class UpdateProject(UserPassesTestMixin, generic.UpdateView):
 
         project.status = 'pending'
         project.save()
+
+
         
-         # Send email notification to the leader
-        send_mail(
-            'تم تحديث مشروع التخرج',
-            'تم تحديث مشروعك بنجاح وسيتم مراجعته من قبل المشرف.',
-            settings.EMAIL_HOST_USER,
-            [self.request.user.email],
-            fail_silently=False,
+        # Prepare context for email
+        context = {
+            'user': self.request.user,
+            'project': project,
+        }       # إنشاء محتوى البريد من قالب HTML
+        html_content = render_to_string('emails/project_updated.html', context)
+        text_content = strip_tags(html_content)
+
+        # إرسال البريد
+        email = EmailMultiAlternatives(
+            subject='تم تعديل مشروع التخرج الخاص بك',
+            body=text_content,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[self.request.user.email]
         )
+        email.attach_alternative(html_content, "text/html")
+        email.send()
+
 
         # Add a success message to be displayed on the same page
         messages.success(self.request, 'تم تحديث المشروع بنجاح! سيتم مراجعته من قبل المشرف.')

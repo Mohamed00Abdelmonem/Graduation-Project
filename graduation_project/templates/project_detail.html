@@ -145,9 +145,42 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <br>
+                        <a href="/ai" class="ai-btn">
+                            <i class="fa-solid fa-robot"></i>
+                            اسأل الذكاء الاصطناعي
+                        </a>
+
+                    <style>
+                    .ai-btn {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        padding: 12px 20px;
+                        background-color:rgb(40, 88, 114); /* أخضر باهت */
+                        color:rgb(223, 231, 225);
+                        border: none;
+                        border-radius: 50px; /* يجعل الزر دائري الشكل */
+                        font-weight: bold;
+                        text-decoration: none;
+                        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                    }
+
+                    .ai-btn:hover {
+                        background-color:rgb(49, 151, 78);
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                        text-decoration: none;
+                        color:rgb(225, 236, 231);
+                    }
+                    </style>
+
+              
+
+                </div>
 
 
+                
                     
                     
                     <div class="col-xl-9">
@@ -291,7 +324,7 @@
                                         </a>
                                            
                                         {% endif %}
-                                    
+
                                     {% comment %} likes {% endcomment %}
                                     {% include "partials/likes_area.html" %}
                                 </div>
