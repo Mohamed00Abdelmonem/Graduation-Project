@@ -3,278 +3,214 @@
 
 {% block body %}
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
   /* Reset & base */
   * {
     box-sizing: border-box;
-  }
-  body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #d7dee5 0%, #f4f7fa 100%);
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 40px 20px;
-    color: #d9d9d9;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
   }
 
   /* Container */
   .generator-section {
-    background: rgba(0, 70, 88, 0.8); /* اللون الأساسي مع شفافية */
-    max-width: 720px;
+    background: white;
     width: 100%;
-    border-radius: 16px;
-    box-shadow:
-      0 4px 12px rgba(0, 70, 88, 0.6),
-      0 0 20px rgba(81, 182, 76, 0.4);
-    padding: 32px 36px;
+    max-width: 900px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 30px;
+    transition: all 0.3s ease;
   }
 
   /* العنوان */
   h1 {
     font-weight: 700;
-    font-size: 2.8rem;
-    color: #8bc34a; /* لون أخضر فاتح لطيف */
+    font-size: 2.5rem;
+    color: #2c3e50;
     text-align: center;
-    letter-spacing: 1.4px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   /* Result Section */
-  .generated-text {
-    background: rgba(255 255 255 / 0.1);
-    border-radius: 14px;
-    padding: 24px 28px;
-    min-height: 180px;
-    font-family: 'Source Code Pro', monospace, monospace;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #d9d9d9;
-    box-shadow: inset 0 0 10px rgba(0, 70, 88, 0.6);
-    overflow-y: auto;
-    white-space: pre-wrap;
+  .generated-text-container {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
   }
 
   .generated-text h2 {
     font-weight: 600;
-    font-size: 1.9rem;
-    margin-bottom: 16px;
-    color: #a3d77d;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
     text-align: center;
+  }
+
+  #output {
+    min-height: 200px;
+    font-size: 1.05rem;
+    color: #495057;
+    white-space: pre-wrap;
+    line-height: 1.7;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 400px;
   }
 
   /* Input Form */
   .input-form {
     display: flex;
+    flex-direction: column;
     gap: 20px;
   }
 
+  #aiForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
   #input_text {
-    flex-grow: 1;
-    padding: 16px 20px;
+    width: 100%;
+    padding: 18px 20px;
     font-size: 1.05rem;
-    border-radius: 16px;
-    border: none;
-    background: rgba(255 255 255 / 0.12);
-    color: #d9d9d9;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #333;
     resize: vertical;
-    min-height: 100px;
-    box-shadow: inset 0 0 12px rgba(0, 70, 88, 0.8);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    min-height: 150px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   }
 
   #input_text::placeholder {
-    color: #9ccaa3;
+    color: #adb5bd;
   }
 
   #input_text:focus {
     outline: none;
-    background: rgba(255 255 255 / 0.18);
-    box-shadow: 0 0 12px 2px #a3d77d;
-    color: white;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
   }
 
   /* Button */
-  button.btn {
-    background: linear-gradient(135deg, #4caf50, #81c784);
-    border: none;
-    border-radius: 56px;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 1.15rem;
-    padding: 0 28px;
-    cursor: pointer;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    min-width: 110px;
+  .btn-container {
     display: flex;
+    justify-content: flex-end;
+  }
+
+  button.btn {
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 14px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 6px rgba(50, 152, 219, 0.2);
   }
 
   button.btn:hover {
-    background: linear-gradient(135deg, #81c784, #4caf50);
-    box-shadow: 0 0 18px #a3d77d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(50, 152, 219, 0.3);
   }
-body {
-    font-size: 16px;
-    background-color: rgb(215, 222, 229);
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    direction: ltr;  /* اتجاه النص من اليسار لليمين */
-    font-family: 'Lugrasimo', cursive, sans-serif;
-}
 
-.generator-section {
-    width: 100vw;
-    height: 100vh;
-    max-width: none;
-    background-color: #004658c7;
-    padding: 40px 60px;
-    border-radius: 0;
-    box-shadow: none;
-    color: rgb(225, 231, 236);
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    box-sizing: border-box;
-}
+  button.btn:active {
+    transform: translateY(0);
+  }
 
-/* العنوان */
-h1 {
-    text-align: center;
-    color: rgb(131, 139, 134);
-    font-weight: 700;
-    font-size: 2.5rem;
-    letter-spacing: 2px;
-}
+  /* Loading animation */
+  .loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+  }
 
-/* محتوى النتائج */
-.generated-text h2 {
-    margin-bottom: 15px;
-    color: rgb(81, 182, 76);
-    text-align: center;
-    font-weight: 600;
-    font-size: 1.8rem;
-}
-
-.generated-text #output {
-    background-color: rgba(255 255 255 / 0.15);
-    padding: 15px 20px;
-    border-radius: 10px;
-    min-height: 150px;
-    white-space: pre-wrap;
-    font-family: monospace;
-    font-size: 1rem;
-    color: #d9d9d9;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-}
-
-/* الفورم */
-.input-form {
-    display: flex;
-    justify-content: center; /* يوسّط الفورم أفقياً */
-}
-
-#aiForm {
-    display: flex;
-    gap: 15px;
-    align-items: stretch;
-    width: 50vw;  /* نصف عرض الصفحة */
-    min-width: 300px; /* حد أدنى للعرض */
-}
-
-#input_text {
-    flex-grow: 1;
-    padding: 15px 20px;
-    font-size: 1rem;
-    border-radius: 12px;
-    border: none;
-    background-color: rgba(255 255 255 / 0.15);
-    color: #d9d9d9;
-    resize: vertical;
-    box-shadow: inset 0 0 8px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease;
-}
-
-#input_text::placeholder {
-    color: #b0c5c9;
-}
-
-#input_text:focus {
-    outline: none;
-    background-color: rgba(255 255 255 / 0.25);
-    box-shadow: 0 0 8px 2px rgb(81, 182, 76);
-    color: white;
-}
-
-button.btn {
-    background-color: rgb(81, 182, 76);
-    color: white;
-    border: none;
-    padding: 0 25px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 110px;
-}
-
-button.btn:hover {
-    background-color: rgb(66, 152, 61);
-    box-shadow: 0 0 10px rgb(81, 182, 76);
-}
-
-/* Responsive للهواتف */
-@media (max-width: 600px) {
-    #aiForm {
-        flex-direction: column;
-        width: 90vw;  /* عشان يشغل عرض أكبر على الموبايل */
-    }
-    button.btn {
-        width: 100%;
-        min-width: auto;
-        padding: 15px 0;
-    }
-    #input_text {
-        min-height: 100px;
-    }
-}
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
 
   /* Responsive */
-  @media (max-width: 620px) {
-    .input-form {
-      flex-direction: column;
+  @media (max-width: 768px) {
+    .generator-section {
+      padding: 30px 20px;
     }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    #aiForm {
+      gap: 12px;
+    }
+    
     button.btn {
       width: 100%;
-      min-width: auto;
-      padding: 14px 0;
-      font-size: 1.1rem;
-      border-radius: 12px;
+      padding: 12px;
     }
+  }
+
+  @media (max-width: 480px) {
+    .generator-section {
+      padding: 25px 15px;
+      border-radius: 15px;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+    }
+    
+    .generated-text h2 {
+      font-size: 1.3rem;
+    }
+    
     #input_text {
+      padding: 15px;
       min-height: 120px;
     }
   }
 </style>
 
 <div class="generator-section" role="main" aria-label="Language model interface">
-  <h1>MET (LLM)</h1>
+  <h1>MET Language Model</h1>
 
-  <div class="generated-text" aria-live="polite" aria-atomic="true">
-    <h2>Result</h2>
-    <div id="output" tabindex="0"></div>
+  <div class="generated-text-container">
+    <div class="generated-text" aria-live="polite" aria-atomic="true">
+      <h2>Generated Output</h2>
+      <div id="output" tabindex="0">Enter your prompt and click "Generate" to see the magic happen...</div>
+    </div>
   </div>
 
   <div class="input-form">
@@ -283,12 +219,16 @@ button.btn:hover {
       <textarea
         id="input_text"
         name="input_text"
-        rows="4"
-        placeholder="Enter your text here..."
+        rows="5"
+        placeholder="Type your prompt here... (e.g., 'Explain quantum computing in simple terms')"
         aria-required="true"
         aria-describedby="output"
       ></textarea>
-      <button type="submit" class="btn" aria-label="Send text input">Send</button>
+      <div class="btn-container">
+        <button type="submit" class="btn" aria-label="Generate text" id="submitBtn">
+          <span id="btnText">Generate</span>
+        </button>
+      </div>
     </form>
   </div>
 </div>
@@ -299,12 +239,18 @@ button.btn:hover {
 
     const inputText = document.getElementById('input_text').value.trim();
     const outputDiv = document.getElementById('output');
-    outputDiv.innerHTML = ''; // clear previous result
-
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    
     if (!inputText) {
-      outputDiv.innerText = 'Please enter some text.';
+      outputDiv.innerHTML = '<div style="color: #e74c3c;">Please enter some text to generate a response.</div>';
       return;
     }
+
+    // Show loading state
+    submitBtn.disabled = true;
+    btnText.innerHTML = '<div class="loading"></div> Processing...';
+    outputDiv.innerHTML = '<div style="color: #3498db;">Generating response... Please wait.</div>';
 
     const formData = new FormData();
     formData.append('input_text', inputText);
@@ -321,25 +267,46 @@ button.btn:hover {
       if (!response.ok) throw new Error('Network response was not ok');
 
       const data = await response.json();
+      
+      // Clear and type the response
+      outputDiv.innerHTML = '';
       typeText(data.generated_text, outputDiv);
+      
     } catch (error) {
-      outputDiv.innerText = 'Error occurred while generating text.';
-      console.error(error);
+      outputDiv.innerHTML = '<div style="color: #e74c3c;">Error: ' + error.message + '</div>';
+      console.error('Error:', error);
+    } finally {
+      // Reset button state
+      submitBtn.disabled = false;
+      btnText.textContent = 'Generate';
     }
   }
 
-  function typeText(text, element, delay = 25) {
-    // remove any HTML-like tags such as <think>...</think>
+  function typeText(text, element, delay = 10) {
+    // Remove any HTML-like tags for safety
     const cleanText = text.replace(/<[^>]*>/g, '');
-
+    
     let index = 0;
+    element.innerHTML = '';
+    
     function typeChar() {
       if (index < cleanText.length) {
-        element.innerHTML += cleanText.charAt(index);
+        // Add character with proper HTML escaping
+        element.innerHTML += cleanText.charAt(index)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+        
+        // Scroll to bottom
+        element.scrollTop = element.scrollHeight;
+        
         index++;
         setTimeout(typeChar, delay);
       }
     }
+    
     typeChar();
   }
 </script>

@@ -27,7 +27,7 @@ def get_top_liked_projects():
         .annotate(like_count=Count('likes'))  # Count the number of likes for each project
         .filter(status='accepted')  # Optionally filter only accepted projects
         .prefetch_related('likes')  # Optimize by prefetching related likes
-        .order_by('-like_count')[:5]  # Order by like count in descending order and limit to 10
+        .order_by('-like_count')[:8]  # Order by like count in descending order and limit to 10
     )
     return top_liked_projects
 
@@ -44,7 +44,7 @@ def home(request):
         GraduationProject.objects
         .filter(status='accepted')
         .select_related('category')  # Optimize by fetching related category data in one query
-        .order_by('-id')[:5]
+        .order_by('-id')[:8]
     )
 
    
@@ -98,3 +98,5 @@ def generate_ollama_text(request):
 
 
 # ___________________________________________________________________________________
+
+
