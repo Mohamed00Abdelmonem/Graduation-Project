@@ -17,12 +17,11 @@ from graduation_project.models import GraduationProject
 
 
 
-
 # ___________________________________________________________________________________
 
 
 @login_required
-def home(request):
+def logout_page(request):
     return render(request, 'logout.html', {'user': request.user})
 
 # ___________________________________________________________________________________
@@ -111,7 +110,7 @@ def Profile(request):
     projects = (
         user.student_projects.all()
         | user.author_project.all()  # Union of the two querysets
-    ).distinct()  # Use distinct to avoid duplicates
+    ).distinct()  # Use distinct to avoid duplicates عشان نتجنب التكرارات
 
     return render(request, 'profile.html', {"user":user, "projects":projects})
 

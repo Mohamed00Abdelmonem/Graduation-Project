@@ -14,7 +14,7 @@ urlpatterns = [
     path('upload/', views.upload_excel, name='upload_excel'),  # Upload Excel file
     path('login/', views.national_id_login, name='login'),     # Login page
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),  # Logout
-    path('', views.home, name='home'),  # Home page
+    path('', views.logout_page, name='home'),  # Home page or logout page 
 ]
 
 # Serve media files during development

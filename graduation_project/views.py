@@ -12,20 +12,21 @@ from accounts.models import UserProfile
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.cache import cache_page
-from django.db.models import Q
 
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
-
-from django.contrib import messages
-from django.core.mail import send_mail
-from django.conf import settings
-from django.urls import reverse
-from django.views import generic
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.views import generic
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import GraduationProject, ProjectImages
+            
+
+
 
 
 from django.contrib.auth import get_user_model
@@ -230,13 +231,6 @@ class AddProject(UserPassesTestMixin, generic.CreateView):
     
 
 # ___________________________________________________________________________________
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.views import generic
-from django.contrib import messages
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import GraduationProject, ProjectImages
 
 class UpdateProject(UserPassesTestMixin, generic.UpdateView):
     model = GraduationProject
@@ -300,7 +294,7 @@ class UpdateProject(UserPassesTestMixin, generic.UpdateView):
         project = self.get_object()
         return self.request.user == project.author or self.request.user.is_staff
 
-# 🔥 حذف صورة
+# حذف صورة
 @login_required
 def delete_project_image(request, project_slug, image_id):
     image = get_object_or_404(
@@ -323,16 +317,9 @@ def delete_proejct(request, slug):
 
 
 
-# _____________________
+# _________________________________________________________
 
 
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.conf import settings
-from .models import GraduationProject
 
 
 def approve_project(request, project_id):
@@ -486,10 +473,6 @@ def temporary_reject_project(request, project_id):
 
 # _______________________________________________________
 
-
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
-from .models import GraduationProject
 
 def pending_projects(request):
     # Get the status filter from the request (default to 'pending' if not provided)

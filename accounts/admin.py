@@ -12,11 +12,6 @@ class UserProfileAdmin(admin.ModelAdmin):
 admin.site.register(Experience)
 
 
-
-
-
-
-
 # ___________________________________________________________________________________
 
 # this for what's show permessions in admin panel 

@@ -3,11 +3,6 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 
-from datetime import datetime
-User = get_user_model()
-
-
-
 from gtts import gTTS
 import os
 from django.core.files.base import ContentFile
@@ -20,6 +15,12 @@ from django.contrib.auth.models import User
 import pyttsx3
 from googletrans import Translator
 import os
+
+
+from datetime import datetime
+User = get_user_model()
+
+
 # ___________________________________________________________________________________
 
 

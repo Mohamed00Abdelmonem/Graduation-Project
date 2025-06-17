@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container mt-5">
+     
+    
+
+    <h2 class="text-center mb-4">📜 سجل النشاطات</h2>
+<div class="mb-3 text-end">
+        <!-- هذا الزر يوجه المستخدم إلى صفحة السجلات -->
+        <a href="{% url 'logs_chart_view' %}" class="btn btn-primary">
+            🔁 عرض احصائيات 
+        </a>
+    </div>
+    {% if error %}
+        <div class="alert alert-danger text-center">
+            ⚠️ حصل خطأ أثناء عرض البيانات: {{ error }}
+        </div>
+    {% endif %}
+
+    {% if logs %}
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>👤 المستخدم</th>
+                        <th>🔁 الطريقة</th>
+                        <th>🔗 الرابط</th>
+                        <th>🌍 IP</th>
+                        <th style="min-width:200px;">🧠 User Agent</th>
+                        <th>🌐 المتصفح</th>
+                        <th>📌 الحالة</th>
+                        <th>📝 ملاحظات</th>
+                        <th>⏰ الوقت</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ log.user|default:"-" }}</td>
+                        <td>{{ log.method }}</td>
+                        <td class="text-break">{{ log.url }}</td>
+                        <td>{{ log.ip_address }}</td>
+                        <td class="text-break" style="max-width: 300px;">{{ log.user_agent }}</td>
+                        <td>{{ log.browser_name }}</td>
+                        <td>
+                            <span class="badge {% if log.status == 'Visited Page' %}bg-success{% else %}bg-secondary{% endif %}">
+                                {{ log.status }}
+                            </span>
+                        </td>
+                        <td>{{ log.notes|default:"-" }}</td>
+                        <td>{{ log.created_at|date:"Y-m-d H:i:s" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">
+            لا توجد سجلات حالياً.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+    
