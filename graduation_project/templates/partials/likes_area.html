@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Include Font Awesome -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
@@ -128,10 +129,13 @@
         </ul>
     </div>
 </div>
+<audio id="like-sound" src="{% static 'sounds/like.mp3' %}" preload="auto"></audio>
 
 <script>
     // Toggle like state immediately for better UX
     function toggleLike(btn) {
+        const audio = document.getElementById("like-sound");
+        
         if (btn.classList.contains('liked')) {
             btn.classList.remove('liked');
             btn.classList.add('unliked');
@@ -140,6 +144,12 @@
             btn.classList.remove('unliked');
             btn.classList.add('liked');
             btn.innerHTML = '<i class="fas fa-heart"></i><span>معجب</span>';
+            
+            // 🎵 تشغيل صوت الإعجاب
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play();
+            }
         }
     }
 

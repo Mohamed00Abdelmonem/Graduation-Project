@@ -354,7 +354,7 @@
                     // تحقق من دعم المتصفح لواجهة speechSynthesis
                     if ('speechSynthesis' in window) {
                         const userName = "{{ user.get_full_name|default:user.username }}";
-                        const welcomeText = `Welcome back yaa ${userName}. We're glad to see you again!`;
+                        const welcomeText = `Welcome back yaa ${userName}.`;
 
                         // إعداد الصوت
                         const utterance = new SpeechSynthesisUtterance(welcomeText);
