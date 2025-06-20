@@ -24,7 +24,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import GraduationProject, ProjectImages
-            
+from .forms import GraduationProjectForm
 
 
 
@@ -169,10 +169,8 @@ def delete_review(request, slug, review_id):
 
 class AddProject(UserPassesTestMixin, generic.CreateView):
     model = GraduationProject
-    fields = [
-        'title', 'title_ar', 'description', 'sub_description', 'graduation_year', 
-        'category', 'doctor', 'students', 'supervisors', "images", 'book_pdf', 'video'
-    ]
+    form_class = GraduationProjectForm
+
     template_name = "add_project.html"
     success_url = '/'  # Use reverse_lazy for success URL
 

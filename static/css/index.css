@@ -1,0 +1,11 @@
+  /* index models */
+  .special-offers-page-select {
+     white-space: nowrap;
+ }
+ .special-offers-page-select img {
+     display: inline-block; 
+ }
+ .overflow-auto {
+     overflow-x: auto; 
+ }
+                           

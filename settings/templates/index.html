@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% load humanize %}
 
     <!-- Modal -->
@@ -14,18 +15,14 @@
                         <div class="row">
                             <div class="bj_book_img flip col-lg-12" style=" height:275px">
                                 <div class="special-offers-page-select mt-4 d-flex overflow-auto">
-                                    
                                     {% if project.project_image.all %}
                                         {% for project_image in  project.project_image.all %}
                                             <img  style="margin-left:15px; width:40%; height:250px;" src="{{ project_image.image.url }}" alt="">
                                         {% endfor %}
-
                                     {% endif %}
-                                    
-                                        
                                 </div>
                             </div>
-                        </div>
+                        </div>          
                         <div class="bj_book_details">
                             <h2>{{ project.title_ar }}</h2>
                             <h2>{{ project.title }}</h2>
@@ -54,18 +51,9 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
-                        
+                        </div> 
                         <style>
-                            .special-offers-page-select {
-                                white-space: nowrap;
-                            }
-                            .special-offers-page-select img {
-                                display: inline-block; 
-                            }
-                            .overflow-auto {
-                                overflow-x: auto; 
-                            }
+
                         </style>
                     </div>
                     {% if user.is_authenticated %}
@@ -74,6 +62,7 @@
             </div>
         </div>
     {% endfor %}
+     <!-- end Modal -->
 
 
         <!-- banner area  -->
@@ -92,7 +81,7 @@
                                 {% endif %}
                             </div>
                             <h2 class="wow fadeInUp" data-wow-delay="0.2s" style="font-size:30px">
-                                المكتبه الرقميه  معهد مصر العالي للتجاره و الحاسبات بالمنصوره
+                                المكتبه الرقميه  معهد مصر العالي للحاسبات والمعلومات بالمنصوره
                             </h2>
                             <p class="wow fadeInUp mb-0" data-wow-delay="0.4s">
                                          يمكنك رؤية جميع مشاريع التخرج التابعه للاكادمية
@@ -106,7 +95,7 @@
                 </div>
             </div>
         </section>
-        <!-- banner area  -->
+        <!-- end banner area  -->
 
         <!-- product tab showcase area  -->
         <section class="product_tab_showcase_area sec_padding p-1" id="product_tab_showcase_id">
@@ -197,8 +186,8 @@
         <section class="best_selling_pr_area pb-4" data-bg-color="#f5f5f5">
             <div class="container">
                 <div class="section_title mb-0 section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 class="title title_two">أحدث  المشاريع</h2>
-                    <p>قراءة الكتب تساعدك على التطوير</p>
+                    <h2 class="title title_two">أحدث 5 مشاريع</h2>
+                    <p>قراءة الكتب تساعدك على تطوير مهارات التواصل لديك</p>
                 </div>
                 <div class="row">
                     {% for project in projects_main %}
@@ -241,18 +230,17 @@
                 </div>
             </div>
         </section>
+        <!-- best selling product area  -->
 
         <!-- new product area  -->
         <section class="bj_new_product_area pt-4" data-bg-color="#f5f5f5">
             <div class="container">
                 <div class="section_title section_title_two text-center">
-                <h2 class="title title_two">المشاريع الأكثر تقييماً</h2>
-                    <p>قراءة الكتب تساعدك على التطوير</p>
+                    <h2 class="title title_two">معظم مشاريع المشهوره لها إعجابات </h2>
+                    <p>قراءة الكتب تساعدك على تطوير مهارات التواصل لديك</p>
                 </div>
                 <div id="clockdiv" class="clock" data-date="2024-12-02"></div>
                 <div class="row">
-
-                    
                     {% for project in top_liked_projects %}
                         <!-- Unique Modal for Each Project -->
                         <div class="modal fade product-quickview-modal" id="productQuickView{{ project.id }}" tabindex="-1" aria-hidden="true">
@@ -306,50 +294,49 @@
                             </div>
                         </div>
 
-    <!-- Project Card -->
-    <div class="col-xl-3 col-lg-4 col-sm-6 mb-20" style="height:325px">
-        <div class="bj_new_pr_item wow fadeInUp h-100" data-wow-delay="0.2s">
-            {% if user.is_authenticated %}
-            <a href="{% url 'project:project_detail' project.slug %}" class="img" style="height:175px">
-                {% if project.images %}
-                <img src="{{ project.images.url }}" class="h-100" alt="book" />
-                {% else %}
-                <img src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="h-100" alt="Default Image" style="width: 200px;" />
-                {% endif %}
-            </a>
-            {% else %}
-            <a href="#" style="height:175px" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}" class="img">
-                {% if project.images %}
-                <img src="{{ project.images.url }}" class="h-100" alt="book" />
-                {% else %}
-                <img src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="h-100" alt="Default Image" style="width: 200px; height: 200px;" />
-                {% endif %}
-            </a>
-            {% endif %}
-            <div class="bj_new_pr_content">
-                {% if user.is_authenticated %}
-                <a href="{% url 'project:project_detail' project.slug %}">
-                    <h4 class="bj_new_pr_title">{{ project|truncatechars:20 }}</h4>
-                </a>
-                {% else %}
-                <a href="#" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}">
-                    <h4 class="bj_new_pr_title">{{ project|truncatechars:20 }}</h4>
-                </a>
-                {% endif %}
-                <div class="bj_pr_meta">
-                    <div class="writer_name">بواسطة د / <a href="author-single.html"> {{ project.doctor }} </a></div>
-                    <div class="book_price mt-2 justify-content-around">
-                        <div>
-                        👁️ {{ project.view_count|intcomma }}
+                        <!-- Project Card -->
+                        <div class="col-xl-3 col-lg-4 col-sm-6 mb-20" style="height:325px">
+                            <div class="bj_new_pr_item wow fadeInUp h-100" data-wow-delay="0.2s">
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'project:project_detail' project.slug %}" class="img" style="height:175px">
+                                    {% if project.images %}
+                                    <img src="{{ project.images.url }}" class="h-100" alt="book" />
+                                    {% else %}
+                                    <img src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="h-100" alt="Default Image" style="width: 200px;" />
+                                    {% endif %}
+                                </a>
+                                {% else %}
+                                <a href="#" style="height:175px" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}" class="img">
+                                    {% if project.images %}
+                                    <img src="{{ project.images.url }}" class="h-100" alt="book" />
+                                    {% else %}
+                                    <img src="https://images.pexels.com/photos/13637651/pexels-photo-13637651.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="h-100" alt="Default Image" style="width: 200px; height: 200px;" />
+                                    {% endif %}
+                                </a>
+                                {% endif %}
+                                <div class="bj_new_pr_content">
+                                    {% if user.is_authenticated %}
+                                    <a href="{% url 'project:project_detail' project.slug %}">
+                                        <h4 class="bj_new_pr_title">{{ project|truncatechars:20 }}</h4>
+                                    </a>
+                                    {% else %}
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#productQuickView{{ project.id }}">
+                                        <h4 class="bj_new_pr_title">{{ project|truncatechars:20 }}</h4>
+                                    </a>
+                                    {% endif %}
+                                    <div class="bj_pr_meta">
+                                        <div class="writer_name">بواسطة د / <a href="author-single.html"> {{ project.doctor }} </a></div>
+                                        <div class="book_price mt-2 justify-content-around">
+                                            <div>
+                                            👁️ {{ project.view_count|intcomma }}
+                                            </div>
+                                            <div class="ribon"><i class="fa-solid fa-thumbs-up"></i> {{ project.likes.count }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="ribon"><i class="fa-solid fa-thumbs-up"></i> {{ project.likes.count }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endfor %}
-
+                    {% endfor %}
                 </div>
                 <div class="text-center mt-4">
                     <a href="{% url 'project:ProjectList'%}" class="bj_theme_btn strock_btn blue_strock_btn wow fadeInUp" data-wow-delay="0.4s">مشاهدة المزيد </a>

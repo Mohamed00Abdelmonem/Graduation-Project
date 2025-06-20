@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  /* Reset & base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #abb4c1 0%, #abb4c1 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  
+  /* Container */
+  .generator-section {
+    background: #414158;
+    min-width: 750px;
+    max-width: 750px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    transition: all 0.3s ease;
+  }
+
+  /* العنوان */
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Result Section */
+  .generated-text-container {
+    direction: ltr;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+  }
+
+  .generated-text h2 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #000;
+    text-align: center;
+  }
+
+  #output {
+    min-height: 200px;
+    font-size: 1.05rem;
+    color: #97ffcc;
+    white-space: pre-wrap;
+    line-height: 1.7;
+    padding: 10px;
+    overflow-y: auto;
+    max-height: 400px;
+  }
+
+  /* Input Form */
+  .input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input-with-button {
+    position: relative;
+    width: 100%;
+  }
+  
+  .inline-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    width: 50px;
+    padding: 0 8px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    color: white;
+    font-weight: 600;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .inline-btn:hover {
+    background: linear-gradient(135deg, #2ecc71, #3498db);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  #input_text {
+    width: 100%;
+    height: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    padding: 12px 70px 0 12px; /* حشو يميني للزر */
+    font-size: 0.9rem;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: #d9d9d9;
+    resize: none;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    line-height: 20px;
+  }
+
+  
+
+  #aiForm {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+  }
+textarea {
+  width: 100%; /* ليشغل العرض الكامل */
+  min-height: 150px; /* ارتفاع مناسب */
+}
+
+  #input_text::placeholder {
+    color: #adb5bd;
+  }
+
+  #input_text:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  }
+
+  /* Button */
+  .btn-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+      #input_text:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+  
+  button.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(50, 152, 219, 0.3);
+  }
+
+  button.btn:active {
+    transform: translateY(0);
+  }
+
+  /* Loading animation */
+  .loading {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .generator-section {
+      padding: 30px 20px;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    #aiForm {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    #input_text, button.btn {
+      width: 100%;
+    }
+    
+    button.btn {
+        margin-top: 8px;
+        height: 30px;
+        min-height: 30px;
+        max-height: 30px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .generator-section {
+      padding: 25px 15px;
+      border-radius: 15px;
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+    }
+    
+    .generated-text h2 {
+      font-size: 1.3rem;
+    }
+    
+    #input_text {
+      padding: 15px;
+      min-height: 120px;
+    }
+  }
+  footer{
+    position:absolute !important;
+    left: 0;
+    width: 100%;
+  }
