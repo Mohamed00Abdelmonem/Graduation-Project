@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block body %} {% load static %}
 
 <!-- mission area  -->
-<section class="bj_banner_area banner_animation_03" data-bg-color="#0046582b">
+<section class="bj_banner_area banner_animation_03 pt-0" data-bg-color="#0046582b">
   <div class="container">
     <div class="row mth align-items-center" style="margin-top: 125px">
       <div class="col-lg-6">
@@ -127,7 +127,7 @@
           <div class="team_img">
             <img
               style="width: 200px"
-              src="{% static 'img/home/testimonial2.jpg' %}"
+              src="{% static 'img-team/shaheen.png' %}"
               alt=""
             />
             <div class="social_icon">
@@ -145,7 +145,7 @@
           <div class="team_img">
             <img
               style="width: 200px"
-              src="{% static 'img/home/testimonial2.jpg' %}"
+              src="{% static 'img-team/moamen.png' %}"
               alt=""
             />
             <div class="social_icon">
@@ -163,7 +163,7 @@
           <div class="team_img">
             <img
               style="width: 200px"
-              src="{% static 'img/home/testimonial2.jpg' %}"
+              src="{% static 'img-team/kattawi.png' %}"
               alt=""
             />
             <div class="social_icon">
@@ -181,7 +181,7 @@
           <div class="team_img">
             <img
               style="width: 200px"
-              src="{% static 'img/home/testimonial2.jpg' %}"
+              src="{% static 'img-team/abdelbser.png' %}"
               alt=""
             />
             <div class="social_icon">
@@ -217,7 +217,7 @@
           <div class="team_img">
             <img
               style="width: 200px"
-              src="{% static 'img/home/testimonial2.jpg' %}"
+              src="{% static 'img-team/tharwat.png' %}"
               alt=""
             />
             <div class="social_icon">
@@ -235,7 +235,7 @@
           <div class="team_img">
             <img
               style="width: 200px"
-              src="{% static 'img/home/testimonial2.jpg' %}"
+              src="{% static 'img-team/fathi.png' %}"
               alt=""
             />
             <div class="social_icon">
@@ -244,7 +244,7 @@
               <a href="#"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
-          <h5 class="m-0">Mohamed Fa</h5>
+          <h5 class="m-0">Mohamed Fathi</h5>
           <span class="name">frontend developer</span>
         </div>
       </div>
@@ -253,7 +253,7 @@
           <div class="team_img">
             <img
               style="width: 200px"
-              src="{% static 'img/home/testimonial2.jpg' %}"
+              src="{% static 'img-team/joo.png' %}"
               alt=""
             />
             <div class="social_icon">
@@ -262,11 +262,62 @@
               <a href="#"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
-          <h5 class="m-0">kamal mohamed</h5>
-          <span class="name">frontend developer</span>
+          <h5 class="m-0">Youssef Elsayed</h5>
+          <span class="name">Backend developer</span>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .team_img {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background-color: #f0f0f0;
+  }
+
+  .team_img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* أهم حاجة */
+    object-position: center;
+  }
+
+  .bj_team_item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    margin-bottom: 30px;
+  }
+
+  .bj_team_item h5 {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .bj_team_item .name {
+    color: #777;
+    font-size: 0.9rem;
+  }
+
+  .social_icon a {
+    color: #333;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+  }
+
+  .social_icon a:hover {
+    color: #007bff;
+  }
+</style>
+
 {% endblock %}

@@ -3,7 +3,7 @@
 {% load static %}
 {% load humanize %}
         <!-- breadcrumb area  -->
-        <section class="product_details_area sec_padding pb-2" data-bg-color="#f5f5f5">
+        <section class="product_details_area sec_padding pb-2 pt-0" data-bg-color="#f5f5f5">
             <div class="container" style="padding-top:4rem">
                 <div class="row gy-xl-0 gy-3">
                     <div class="col-xl-3">
@@ -22,19 +22,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Modal -->
-                            {% comment %} <div class="modal fade product-quickview-modal" id="productQuickView" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog  modal-dialog-centered">
-                                    <div class="modal-content p-3">
-                                        {% if object.book_pdf %}
-                                        <iframe style="width:100%; height:515px" src="{{object.book_pdf.url}}"></iframe> 
-
-                                        {% else %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div> {% endcomment %}
                             <!-- Modal -->
                             <div class="modal fade product-quickview-modal" id="videoQuickView" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog  modal-dialog-centered">
@@ -66,18 +53,9 @@
                                         <span class="product_details_section_key">تاريخ النشر :</span>
                                         <span class="product_details_section_value">{{object.created_at.date}}</span>
                                     </div>
-                                    {% comment %} <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">اعجاب</span>
-                                        <span class="product_details_section_value">{{object.likes.count}}</span>
-                                    </div> {% endcomment %}
-
-                                    {% comment %} <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">Edition :</span>
-                                        <span class="product_details_section_value">3rd Edition</span>
-                                    </div> {% endcomment %}
                                     <div class="product_details_section_content mb-3">
-                                        {% comment %} <span class="product_details_section_key">اللغه :</span> {% endcomment %}
-                                        {% comment %} <span class="product_details_section_value">عربي</span> {% endcomment %}
+                                        <span class="product_details_section_key">اللغه :</span>
+                                        <span class="product_details_section_value">عربي</span>
                                     </div>
                                     <div class="product_details_section_content mb-3">
                                         <span class="product_details_section_key">ID :</span>
@@ -91,14 +69,6 @@
                                             </span>
                                         </div>
                                     </div>
-                                    {% comment %} <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">اللغات المستخدمه :</span>
-                                        <div class="product_details_section_value">
-                                            <a href="https://www.packtpub.com/en-us/data/language/python" class="fw-600">
-                                                Python (Expert)
-                                            </a>
-                                        </div>
-                                    </div> {% endcomment %}
                                     <div class="product_details_section_content mb-3">
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#videoQuickView" class="video-container">
                                             {% if object.video %}
@@ -114,34 +84,6 @@
                                             {% endif %}
                                         </a>
                                     </div>
-                                    
-                                    {% comment %} <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">Category :</span>
-                                        <div class="product_details_section_value">
-                                            <a href="https://www.packtpub.com/en-us/data" class="fw-600">
-                                                Data
-                                            </a>
-                                        </div>
-                                    </div> {% endcomment %}
-                                    {% comment %} <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">Concepts :</span>
-                                        <div class="product_details_section_value">
-                                            <a href="https://www.packtpub.com/en-us/data/concept/machine-learning" class="fw-600">
-                                                Machine Learning </a>
-                                        </div> 
-                                    </div>{% endcomment %}
-                                    {% comment %} <div class="product_details_section_content mb-3">
-                                        <span class="product_details_section_key">Tools :</span>
-                                        <div class="product_details_section_value">
-                                            <a href="https://www.packtpub.com/en-us/data/tool/tensorflow" class="fw-600">
-                                                TensorFlow (Intermediate)
-                                                ,
-                                            </a>
-                                            <a href="https://www.packtpub.com/en-us/data/tool/keras" class="fw-600">
-                                                Keras (Intermediate)
-                                            </a>
-                                        </div>
-                                    </div> {% endcomment %}
                                 </div>
                             </div>
                         </div>
@@ -152,76 +94,18 @@
                         </a>
 
                     <style>
-                    .ai-btn {
-                        display: inline-flex;
-                        align-items: center;
-                        gap: 8px;
-                        padding: 12px 20px;
-                        background-color:rgb(40, 88, 114); /* أخضر باهت */
-                        color:rgb(223, 231, 225);
-                        border: none;
-                        border-radius: 50px; /* يجعل الزر دائري الشكل */
-                        font-weight: bold;
-                        text-decoration: none;
-                        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-                    }
 
-                    .ai-btn:hover {
-                        background-color:rgb(49, 151, 78);
-                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-                        text-decoration: none;
-                        color:rgb(225, 236, 231);
-                    }
                     </style>
-
-              
-
                 </div>
-
-
-                
-                    
-                    
                     <div class="col-xl-9">
                         <div class="bj_book_single me-xl-3">
                             <div class="bj_book_img flip col-xl-6" style="margin-left:10px">
-                               
-                               
                                 <img class="img-fluid lazy-load" 
-                                data-src="{% if object.images %}{{ object.images.url }}{% else %}default-image.jpg{% endif %}" 
-                                data-fallback="https://images.pexels.com/photos/762687/pexels-photo-762687.jpeg?auto=compress&cs=tinysrgb&w=600"
-                                alt="Product Image"
-                                style="height:290px; width:100%; object-fit:cover;" />
-
-                                
-                                {% comment %} دا عشان لما ميعرفش يوصل للصوره يحط الصوره دي افتراضيا {% endcomment %}
-                                <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    const images = document.querySelectorAll('.lazy-load');
-                                    
-                                    const imageObserver = new IntersectionObserver((entries) => {
-                                        entries.forEach(entry => {
-                                            if (entry.isIntersecting) {
-                                                const img = entry.target;
-                                                img.src = img.dataset.src;
-                                                img.onerror = function() {
-                                                    this.src = this.dataset.fallback;
-                                                    this.onerror = null;
-                                                };
-                                                imageObserver.unobserve(img);
-                                            }
-                                        });
-                                    });
-                                
-                                    images.forEach(img => imageObserver.observe(img));
-                                });
-                            </script>
-
-
-
-
-
+                                    data-src="{% if object.images %}{{ object.images.url }}{% else %}default-image.jpg{% endif %}" 
+                                    data-fallback="https://images.pexels.com/photos/762687/pexels-photo-762687.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                    alt="Product Image"
+                                    style="height:290px; width:100%; object-fit:cover;" 
+                                />
                             <div class="pr_ribbon">
                                 <span class="product-badge">👁️ مشااااهده: {{ object.view_count|intcomma }}</span>
                             </div>
@@ -260,43 +144,10 @@
                             </div>
                             {% endif %} 
                             </div>
-
-                            <!-- تغيير الصورة الرئيسية عند النقر على صورة مصغرة -->
-                            <script>
-                            function changeImage(newSrc) {
-                                var mainImage = document.querySelector('.bj_book_img img');
-                                if (mainImage) {
-                                    mainImage.src = newSrc;
-                                }
-                            }
-                            </script>
-
-    
-
-
-
-                            
                             <div class="bj_book_details text-center col-lg-6">
                                 <a data-bs-toggle="modal" data-bs-target="#productQuickView" class="" style="font-size:24px">Project: {{object.title}}</a>
                                 <ul class="list-unstyled book_meta">
-                                    {% comment %} <li>By:<a href="author-single.html">Phillip Siphron</a></li> {% endcomment %}
-                                   
-                                    {% comment %} <li>Tag:<a href="shop-sidebar.html">Best Sellers</a></li> {% endcomment %}
                                 </ul>
-                                {% comment %} <div class="ratting review">
-                                    <div class="star-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-stroke"></i>
-                                        <span>4.5</span>
-                                    </div>
-                                    <a href="#product_review" class="woocommerce-review-link">
-                                        <span class="count"> {{object.}} </span>Reviews
-                                    </a>
-                                </div> {% endcomment %}
-                                {% comment %} <div class="price">$10</div> {% endcomment %}
                                 <p>{{object.sub_description}}.</p>
                                 {% if object.audio_file %}
                                     <audio controls>
@@ -310,7 +161,6 @@
                                     <span>تاريخ النشر:{{object.created_at}}</span>
                                     <span>فئه:<a href="">{{object.category}}</a></span>
                                 </div>
-                                    {% comment %} <a href="#" class="bj_theme_btn strock_btn flip_btn">Flip to Back</a> {% endcomment %}
                                     <div class="d-flex justify-content-around">
                                         
                                         {% if object.book_pdf %}
@@ -327,13 +177,7 @@
 
                                     {% comment %} likes {% endcomment %}
                                     {% include "partials/likes_area.html" %}
-                                </div>
-                                    <script src="https://unpkg.com/htmx.org@1.6.0"></script>
-                                    <script>
-                                        document.body.addEventListener('htmx:configRequest', (e) => {
-                                        e.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
-                                         })
-                                    </script>    
+                                </div>   
                             </div>
                         </div>
                         <div class="bj_book_single_tab_area me-xl-3">
@@ -357,9 +201,6 @@
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="product_review-tab" data-bs-toggle="tab" data-bs-target="#product_review" type="button" role="tab" aria-controls="product_review" aria-selected="false">التعليقات <sup>({{ object.reviews.count }})</sup></button>
                                 </li>
-                                {% comment %} <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="user_like" data-bs-toggle="tab" data-bs-target="#users_like" type="button" role="tab" aria-controls="users_like" aria-selected="false">{{ post.likes.count }}👁️ اعجاب</button>
-                                </li> {% endcomment %}
                             </ul>
                             <div class="tab-content bj_book_single_tab_content mt-4">
                                 <div class="tab-pane fade show active" id="product_description" role="tabpanel" aria-labelledby="product_description-tab">
@@ -368,18 +209,6 @@
                                             <h5 class="content_header mb-2">وصف المشروع</h5>
                                             <p class="content_text mb-2">{{object.description}}.</p>
                                         </div>
-                                        {% comment %} <div>
-                                            <h5 class="content_header mb-2">ماذا سوف تتعلم</h5>
-                                            <ul class="content_text mb-2">
-                                                <li>
-
-                                                    إتقان الأطر والنماذج والتقنيات التي تمكن الآلات ل التعلم من البيانات
-                                                </li>
-                                                <li>
-                                                    إتقان الأطر والنماذج والتقنيات التي تمكن الآلات ل التعلم من البيانات
-                                                </li>
-                                            </ul>
-                                        </div> {% endcomment %}
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="product_aurhor_desc" role="tabpanel" aria-labelledby="product_aurhor_desc-tab">
@@ -403,7 +232,7 @@
                                                         <span style="font-size:32px;" >المشرفين : </span>
                                                             {% if object.supervisors.all %}
                                                                 {% for supervisor in object.supervisors.all %}
-                                                                     {{ supervisor }}
+                                                                    | {{ supervisor }} 
                                                                 {% endfor %}
                                                             {% else %}
                                                                 <span class="no-data">No supervisors available. </span>
@@ -417,22 +246,9 @@
                                                         <ul>
                                                             {% if object.students.all %}
                                                                 {% for student in object.students.all %}
-                                                                    <li><strong>الاسم:</strong>
-                                                                        <li class="col-lg-3 mb-2">
-                                                                            <a href="{% url 'profile_user' student.username %}">
-                                                                                {{ student.get_full_name|default:student.username }}
+                                                                            <a class="m-2" style="border-right:1px solid black" href="{% url 'profile_user' student.username %}">
+                                                                                {{ student.get_full_name|default:student.username }} 
                                                                             </a>
-                                                                        </li>
-                                                                        </li>
-                                                                    {% comment %} <li><strong>Phone Number:</strong> {{ student.phone_number|default:"Not provided" }}</li>
-                                                                    <li>
-                                                                        <strong>Image:</strong> {% endcomment %}
-                                                                        {% comment %} {% if student.image %}
-                                                                            <img src="{{ student.image.url }}" alt="{{ student.user.username }}'s profile picture" width="100">
-                                                                        {% else %}
-                                                                            <span class="no-data">No image available</span>
-                                                                        {% endif %} {% endcomment %}
-                                                                    </li>
                                                                 {% endfor %}
                                                             {% else %}
                                                                 <li class="no-data">No students available.</li>
@@ -448,8 +264,6 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                {% comment %} <a href="" class="bj_theme_btn text_btn">More
-                                                    Details<i class="arrow_right"></i></a> {% endcomment %}
                                             </div>
                                         </div>
                                     </div>
@@ -523,18 +337,6 @@
                                         {% endfor %}
                                     </div>
                                 </div>
-                                {% comment %} <div class="tab-pane fade show active" id="users_like" role="tabpanel" aria-labelledby="product_description-tab">
-                                    <div class="product_book_content_details">
-                                        <div>
-                                            <h5 class="content_header mb-2"> المستخدمون الذين أبدوا إعجابهم بهذا المنشور:</h5>
-                                            {% for user in object.likes.all %}
-                                                <li>{{ user.username }}</li>
-                                            {% endfor %}
-                                        </div>
-                                        <div>
-                                        </div>
-                                    </div>
-                                </div> {% endcomment %}
                             </div>
                         </div>
                     </div>
@@ -542,26 +344,21 @@
             </div>
         </section>
 
-
-
         <section class="bj_frequently_bought_area sec_padding pt-0 pb-2" data-bg-color="#f5f5f5">
             <div class="container">
                 <div class="section_title text-center">
                     <h2 class="title_two">فئة المشاريع ذات الصلة</h2>
-                    {% comment %} <p>Get Special Promo All Books Are 50% Off Now!</p> {% endcomment %}
                 </div>
                 <div class="row gy-xl-0 gy-4">
                 {% for project in related_projects %}
-                
                     <div class="col-xl-3 col-lg-4 col-sm-6 mb-4">
                         <div class="bj_new_pr_item mb-0 wow fadeInUp" data-wow-delay="0.2s">
-                           
-
                             {% if project.images %}
                             <a href="#" class="img"  style="height:130px" ><img src="{{project.images.url}}" alt="book"></a>
                             {% else %}
-                            <a href="#" class="img"  style="height:130px" ><img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" alt="book"></a>
-
+                            <a href="#" class="img"  style="height:130px" >
+                                <img src="https://www.psdcovers.com/wp-content/uploads/2021/12/SOFTCOVER-BOOK-5-25X8X1-FACEUP-MOCKUP_1640220643042.jpg?x18079" alt="book">
+                            </a>
                             {% endif %}   
                             <div class="bj_new_pr_content">
                                 <a href="{% url 'project:project_detail' project.slug%}">
@@ -573,14 +370,54 @@
                                         <i class="fas fa-like"></i> <span>👍 {{project.likes.count}}</span>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
                 {% endfor %}
-
                 </div>
             </div>
         </section>
+        <!-- تغيير الصورة الرئيسية عند النقر على صورة مصغرة -->
+        <script>
+        function changeImage(newSrc) {
+            var mainImage = document.querySelector('.bj_book_img img');
+            if (mainImage) {
+                mainImage.src = newSrc;
+            }
+        }
+        </script>
+        <script src="https://unpkg.com/htmx.org@1.6.0"></script>
+        <script>
+            document.body.addEventListener('htmx:configRequest', (e) => {
+            e.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+             })
+        </script> 
+        {% comment %} دا عشان لما ميعرفش يوصل للصوره يحط الصوره دي افتراضيا {% endcomment %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const images = document.querySelectorAll('.lazy-load');
+                
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.onerror = function() {
+                                this.src = this.dataset.fallback;
+                                this.onerror = null;
+                            };
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+            
+                images.forEach(img => imageObserver.observe(img));
+            });
+        </script>
+        
+        
+
+         
+
         
 {% endblock body %}

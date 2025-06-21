@@ -1,104 +1,89 @@
 {% extends "base.html" %}
 
 {% block body %}
-<section class="bj_shop_area d-flex flex-column text-center sec_padding pb-0" style data-bg-color="#f5f5f5">
-    <div class="content_body w-75" style=" text-align:center">
-        <h2> اضف الجديد من خبرتك</h2>
-    <form method="post" class="add-experience-form">
-        {% csrf_token %}
-        <div class="row">
-        <div class="form-group col-lg-4">
-            <label for="id_company" class="floating-label">الشركة:</label>
-            {{ form.company }}
-        </div>
-        <div class="form-group col-lg-4">
-            <label for="id_from_date" class="floating-label">من تاريخ:</label>
-            {{ form.from_date }}
-        </div>
-        <div class="form-group col-lg-4">
-            <label for="id_to_date" class="floating-label">إلى تاريخ:</label>
-            {{ form.to_date }}
-        </div>
-        <div class="form-group col-lg-4">
-            <label for="id_position" class="floating-label">المنصب:</label>
-            {{ form.position }}
-        </div>
-        <div class="form-group col-lg-4">
-            <label for="id_projects_worked_name" class="floating-label">اسم المشروع:</label>
-            {{ form.projects_worked_name }}
-        </div>
-        <div class="form-group col-lg-4">
-            <label for="id_projects_worked_url" class="floating-label">رابط المشروع:</label>
-            {{ form.projects_worked_url }}
-        </div>
-        <div class="form-group col-lg-11">
-            <label for="id_description" class="floating-label">الوصف:</label>
-            {{ form.description }}
-        </div>
-        <div class="button_spo">
-        <button type="submit" class="spo">إضافة الخبرة</button>
+<section class="experience-section py-5" style="background-color: #f5f5f5;">
+    <div class="container">
+        <div class="form-wrapper mx-auto bg-white shadow rounded p-5" style="max-width: 900px;">
+            <h2 class="text-center mb-4 text-">اضف الجديد من خبرتك</h2>
+
+            <form method="post" class="row g-4">
+                {% csrf_token %}
+
+                <div class="col-md-4">
+                    <label for="id_company" class="form-label">الشركة</label>
+                    {{ form.company}}
+                </div>
+
+                <div class="col-md-4">
+                    <label for="id_from_date" class="form-label">من تاريخ</label>
+                    {{ form.from_date}}
+                </div>
+
+                <div class="col-md-4">
+                    <label for="id_to_date" class="form-label">إلى تاريخ</label>
+                    {{ form.to_date }}
+                </div>
+
+                <div class="col-md-4">
+                    <label for="id_position" class="form-label">المنصب</label>
+                    {{ form.position }}
+                </div>
+
+                <div class="col-md-4">
+                    <label for="id_projects_worked_name" class="form-label">اسم المشروع</label>
+                    {{ form.projects_worked_name }}
+                </div>
+
+                <div class="col-md-4">
+                    <label for="id_projects_worked_url" class="form-label">رابط المشروع</label>
+                    {{ form.projects_worked_url }}
+                </div>
+
+                <div class="col-12">
+                    <label for="id_description" class="form-label">الوصف</label>
+                    {{ form.description }}
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill shadow-sm">
+                        إضافة الخبرة
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-    </form>
-</div>
 </section>
+
 <style>
-    .button_spo{
-        text-align: -webkit-center;
-    }
-    .content_body {
-        max-width: 80%;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
+     input, select, textarea {
         width: 100%;
         padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
         font-size: 16px;
-        transition: border-color 0.3s ease;
-        margin-bottom:10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
     }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-        border-color: #007bff;
+
+    input:focus, select:focus, textarea:focus {
+        border-color:rgb(52, 85, 97);
         outline: none;
-        box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+        box-shadow: 0 0 4px rgba(31, 120, 114, 0.3);
     }
-    {% comment %} /* Floating Label Styling */
-    .floating-label {
-        position: absolute;
-        top: -10px;
-        left: 10px;
-        background-color: #fff;
-        padding: 0 5px;
-        font-size: 14px;
-        color: #555;
-        transition: all 0.3s ease;
-    } {% endcomment %}
-    .form-group textarea{
-        height: 108px
+    .form-wrapper {
+        background-color: #ffffff;
+        border-radius: 10px;
+        border: 1px solid #e0e0e0;
     }
-    .spo{
-        background:rgb(0, 70, 88);
-        display: block;
-        padding: 10px 20px;
-        font-size: 18px;
-        color: #fff;
+    .form-label {
+        font-weight: 500;
+        color: #333;
+    }
+    .btn-primary {
+        background-color: #004658;
         border: none;
-        border-radius: 15px;
-        width:125px;
-        height:40px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+        background-color: #006f85;
     }
 </style>
 {% endblock %}

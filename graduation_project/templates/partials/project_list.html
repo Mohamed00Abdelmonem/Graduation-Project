@@ -16,7 +16,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="bj_book_details">
+                        <div class="bj_book_details mt-5">
                             <h2>{{ project.title_ar }}</h2>
                             <p>{{ project.sub_description }}.</p>
                             <ul class="product_meta list-unstyled p-0 row">
@@ -42,7 +42,7 @@
                                     <ul class="p-0">
                                         {% if project.students.all %}
                                             {% for student in project.students.all %}
-                                            <li class="col-lg-3 mb-2">
+                                            <li class=" mb-2">
                                                 <a href="{% url 'profile_user' student.username %}">
                                                     {{ student.get_full_name|default:student.username }}
                                                 </a>
@@ -56,17 +56,6 @@
                             </ul>
                         </div>
                     </div>
-                    <style>
-                        .special-offers-page-select {
-                            white-space: nowrap;
-                        }
-                        .special-offers-page-select img {
-                            display: inline-block;
-                        }
-                        .overflow-auto {
-                            overflow-x: auto;
-                        }
-                    </style>
                 </div>
             </div>
         </div>

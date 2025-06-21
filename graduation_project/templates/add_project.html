@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% load bootstrap5 %}
+{% load static %}
 {% block body %}
+<link rel="stylesheet" href="{% static 'css/project/add_project.css' %}">
 
 <section class="project-creation-section py-5" style="background-color: #f8f9fa;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="card border-0 shadow-lg">
-                    <div class="card-header bg-primary text-white py-3">
+                    <div class="card-header ver text-white py-3">
                         <h3 class="card-title text-center mb-0">
                             <i class="fas fa-graduation-cap me-2"></i>إنشاء مشروع التخرج
                         </h3>
@@ -45,7 +47,6 @@
                                 <h5 class="section-title mb-4 pb-2 border-bottom">
                                     <i class="fas fa-info-circle me-2"></i>المعلومات الأساسية
                                 </h5>
-                                
                                 <div class="row g-3">
                                     <!-- Project Title -->
                                     <div class="col-md-6">
@@ -61,7 +62,6 @@
                                             {% endif %}
                                         </div>
                                     </div>
-                                    
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="id_title_ar" name="title_ar" 
@@ -140,7 +140,7 @@
                                             {% endif %}
                                         </div>
                                     </div>
-                                    
+                                    <!-- Sub Descriptions -->
                                     <div class="col-md-6">
                                         <div class="form-floating">
                                             <textarea class="form-control" id="id_sub_description" name="sub_description" 
@@ -161,7 +161,6 @@
                                 <h5 class="section-title mb-4 pb-2 border-bottom">
                                     <i class="fas fa-users me-2"></i>فريق المشروع
                                 </h5>
-                                
                                 <div class="row g-3">
                                     <!-- Doctor -->
                                     <div class="col-md-6">
@@ -280,7 +279,6 @@
                                 <h5 class="section-title mb-4 pb-2 border-bottom">
                                     <i class="fas fa-images me-2"></i>الوسائط المتعددة
                                 </h5>
-                                
                                 <div class="row g-3">
                                     <!-- Main Image -->
                                     <div class="col-md-6">
@@ -306,94 +304,90 @@
                                         </div>
                                     </div>
                                     
-                                     
-                      <!-- صور المشروع -->
-                        <div class="col-md-6">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="card-title mb-3">صور المشروع</h6>
-                                    
-                                    <div class="bg-light d-flex align-items-center justify-content-center mb-3 rounded" 
-                                        style="height: 150px;">
-                                        <i class="fas fa-images fa-3x text-muted"></i>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="id_images" class="form-label">اختر صور المشروع</label>
-                                        <input 
-                                            type="file" 
-                                            class="form-control" 
-                                            id="id_images" 
-                                            name="images" 
-                                            multiple 
-                                            accept="image/*"
-                                            onchange="validateImageCount(this)"
-                                        >
-                                        {% if form.images.errors %}
-                                            <div class="alert alert-danger mt-2">{{ form.images.errors }}</div>
-                                        {% endif %}
-                                        <small class="form-text text-muted">يمكنك تحميل عدة صور في آن واحد</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                                    
-                                    <!-- Video -->
-                                    <div class="col-md-6">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h6 class="card-title">فيديو المشروع</h6>
-                                                <div class="bg-light d-flex align-items-center justify-content-center mb-3" 
-                                                     style="height: 150px;">
-                                                    <i class="fas fa-video fa-3x text-muted"></i>
-                                                </div>
-                                                <div class="d-grid">
-                                                    <input type="file" class="form-control" id="id_video" 
-                                                           name="video" accept="video/*">
-                                                </div>
-                                                {% if form.video.errors %}
-                                                    <div class="invalid-feedback d-block mt-2">
-                                                        {{ form.video.errors }}
-                                                    </div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- PDF File -->
-                                    <div class="col-md-6">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h6 class="card-title">ملف المشروع (PDF)</h6>
-                                                <div class="bg-light d-flex align-items-center justify-content-center mb-3" 
-                                                     style="height: 150px;">
-                                                    <i class="fas fa-file-pdf fa-3x text-muted"></i>
-                                                </div>
-                                                <div class="d-grid">
-                                                    <input type="file" class="form-control" id="id_book_pdf" 
-                                                           name="book_pdf" accept=".pdf">
-                                                </div>
-                                                {% if form.book_pdf.errors %}
-                                                    <div class="invalid-feedback d-block mt-2">
-                                                        {{ form.book_pdf.errors }}
-                                                    </div>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Submit Button -->
-                            <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
-                                    <i class="fas fa-save me-2"></i>حفظ المشروع
-                                </button>
-                                <a href="{% url 'profile' %}" class="btn btn-outline-secondary btn-lg px-5 py-3 ms-2">
-                                    <i class="fas fa-times me-2"></i>إلغاء
-                                </a>
-                            </div>
+                                    <!-- صور المشروع -->
+                                      <div class="col-md-6">
+                                          <div class="card h-100">
+                                              <div class="card-body">
+                                                  <h6 class="card-title mb-3">صور المشروع</h6>
+                                                  
+                                                  <div class="bg-light d-flex align-items-center justify-content-center mb-3 rounded" 
+                                                      style="height: 150px;">
+                                                      <i class="fas fa-images fa-3x text-muted"></i>
+                                                  </div>
+                                                  
+                                                  <div class="form-group">
+                                                      <label for="id_images" class="form-label">اختر صور المشروع</label>
+                                                      <input 
+                                                          type="file" 
+                                                          class="form-control" 
+                                                          id="id_images" 
+                                                          name="images" 
+                                                          multiple 
+                                                          accept="image/*"
+                                                          onchange="validateImageCount(this)"
+                                                      >
+                                                      {% if form.images.errors %}
+                                                          <div class="alert alert-danger mt-2">{{ form.images.errors }}</div>
+                                                      {% endif %}
+                                                      <small class="form-text text-muted">يمكنك تحميل عدة صور في آن واحد</small>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <!-- Video -->
+                                      <div class="col-md-6">
+                                          <div class="card h-100">
+                                              <div class="card-body">
+                                                  <h6 class="card-title">فيديو المشروع</h6>
+                                                  <div class="bg-light d-flex align-items-center justify-content-center mb-3" 
+                                                       style="height: 150px;">
+                                                      <i class="fas fa-video fa-3x text-muted"></i>
+                                                  </div>
+                                                  <div class="d-grid">
+                                                      <input type="file" class="form-control" id="id_video" 
+                                                             name="video" accept="video/*">
+                                                  </div>
+                                                  {% if form.video.errors %}
+                                                      <div class="invalid-feedback d-block mt-2">
+                                                          {{ form.video.errors }}
+                                                      </div>
+                                                  {% endif %}
+                                              </div>
+                                          </div>
+                                      </div>
+               
+                                      <!-- PDF File -->
+                                      <div class="col-md-6">
+                                          <div class="card h-100">
+                                              <div class="card-body">
+                                                  <h6 class="card-title">ملف المشروع (PDF)</h6>
+                                                  <div class="bg-light d-flex align-items-center justify-content-center mb-3" 
+                                                       style="height: 150px;">
+                                                      <i class="fas fa-file-pdf fa-3x text-muted"></i>
+                                                  </div>
+                                                  <div class="d-grid">
+                                                      <input type="file" class="form-control" id="id_book_pdf" 
+                                                             name="book_pdf" accept=".pdf">
+                                                  </div>
+                                                  {% if form.book_pdf.errors %}
+                                                      <div class="invalid-feedback d-block mt-2">
+                                                          {{ form.book_pdf.errors }}
+                                                      </div>
+                                                  {% endif %}
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>                  
+                              <!-- Submit Button -->
+                              <div class="text-center mt-4">
+                                  <button type="submit" class="btn ver btn-lg px-5 py-3">
+                                      <i class="fas fa-save me-2"></i>حفظ المشروع
+                                  </button>
+                                  <a href="{% url 'profile' %}" class="btn btn-outline-secondary btn-lg px-5 py-3 ms-2">
+                                      <i class="fas fa-times me-2"></i>إلغاء
+                                  </a>
+                              </div>
                         </form>
                     </div>
                 </div>
@@ -401,46 +395,8 @@
         </div>
     </div>
 </section>
-
-<style>
-    .project-creation-section {
-        min-height: 100vh;
-    }
-    
-    .section-title {
-        color: #2c3e50;
-        font-weight: 600;
-        position: relative;
-    }
-    
-    .section-title i {
-        color: #3498db;
-    }
-    
-    .form-floating label {
-        padding: 1rem 0.75rem;
-    }
-    
-    .dropdown-menu {
-        max-height: 300px;
-        overflow-y: auto;
-    }
-    
-    .dropdown-item {
-        cursor: pointer;
-        padding: 0.5rem 1rem;
-    }
-    
-    .dropdown-item:hover {
-        background-color: #f8f9fa;
-    }
-    
-    @media (max-width: 768px) {
-        .form-floating label {
-            padding: 0.5rem 0.75rem;
-        }
-    }
-</style>
+                                     
+                            
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

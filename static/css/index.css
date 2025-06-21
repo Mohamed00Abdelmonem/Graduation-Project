@@ -1,11 +1,171 @@
-  /* index models */
-  .special-offers-page-select {
-     white-space: nowrap;
- }
- .special-offers-page-select img {
-     display: inline-block; 
- }
- .overflow-auto {
-     overflow-x: auto; 
- }
-                           
+    /* index models */
+    .special-offers-page-select {
+        white-space: nowrap;
+    }
+    .special-offers-page-select img {
+        display: inline-block; 
+    }
+    .overflow-auto {
+        overflow-x: auto; 
+    }
+    .section_title{
+        padding-left: 20%;
+    }
+    /* تنسيقات عامة */
+    .navbar {
+        min-height: 70px;
+        transition: all 0.3s ease;
+    }
+
+    /* تحسين ظهور القوائم المنسدلة */
+    .dropdown-menu {
+        background-color: rgba(255, 255, 255, 0.95);
+        border: none;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    .dropdown-item {
+        padding: 0.5rem 1.5rem;
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: rgba(0, 70, 88, 0.1);
+        color: #004658;
+    }
+
+    /* تنسيقات سطح المكتب */
+    @media (min-width: 992px) {
+        .navbar-nav .nav-item {
+            position: relative;
+        }
+        
+        .navbar-nav .nav-link {
+            padding: 0.5rem 0;
+            margin: 0 0.5rem;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            border-bottom-color: #ffffff;
+        }
+    }
+
+    /* تنسيقات الجوال */
+    @media (max-width: 991.98px) {
+        .offcanvas {
+            width: 280px;
+        }
+        
+        .nav-link {
+            border-radius: 0.25rem;
+            margin: 0.125rem 0;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .badge {
+            font-size: 0.75rem;
+        }
+    }
+     /* Mobile responsive styles */
+        @media (max-width: 991.98px) {
+            .header_area {
+                position: relative;
+            }
+            
+            .top-header {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .top-header .navbar-brand {
+                margin-left: 5px !important;
+                font-size: 12px;
+            }
+            
+            #google_translate_element {
+                margin-right: 5px !important;
+                height: 30px !important;
+            }
+            
+            .navbar {
+                height: auto !important;
+                padding: 10px 0;
+            }
+            
+            .navbar-brand img {
+                max-height: 40px;
+            }
+            
+            .navbar-collapse {
+                background: #fff;
+                margin-top: 10px;
+                padding: 15px;
+                border-radius: 5px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            
+            .dropdown-menu {
+                border: none;
+                margin: 5px 0;
+            }
+            
+            .nav-item {
+                margin-bottom: 5px;
+            }
+            
+            .menu-search-form {
+                margin: 10px 0;
+            }
+            
+            .badge {
+                font-size: 10px;
+                padding: 3px 5px;
+            }
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 992px) {
+            .navbar-nav.menu {
+                margin-right: auto !important;
+                margin-left: auto !important;
+            }
+            
+            .search_cart {
+                margin-left: 0 !important;
+            }
+            
+            .dropdown-menu {
+                text-align: right;
+            }
+        }
+        
+        /* General improvements */
+        .nav-link {
+            padding: 8px 15px;
+        }
+        
+        .dropdown-item {
+            padding: 8px 20px;
+        }
+        
+        .menu-search-form .form-control {
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .menu-search-form button {
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .badge {
+            font-size: 11px;
+        }
+
+
+                            

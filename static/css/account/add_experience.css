@@ -1,0 +1,46 @@
+    .button_spo{
+        text-align: -webkit-center;
+    }
+    .content_body {
+        max-width: 80%;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+        margin-bottom:10px;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+    }
+    .form-group textarea{
+        height: 108px
+    }
+    .spo{
+        background:rgb(0, 70, 88);
+        display: block;
+        padding: 10px 20px;
+        font-size: 18px;
+        color: #fff;
+        border: none;
+        border-radius: 15px;
+        width:125px;
+        height:40px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }

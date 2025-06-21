@@ -1,0 +1,42 @@
+    .project-creation-section {
+        min-height: 100vh;
+        margin-top: 55px;
+    }
+
+    .ver{
+        background:rgba(0, 70, 88, 0.78);
+    }
+    
+    .section-title {
+        color: #2c3e50;
+        font-weight: 600;
+        position: relative;
+    }
+    
+    .section-title i {
+        color: rgba(0, 70, 88, 0.78);
+    }
+    
+    .form-floating label {
+        padding: 1rem 0.75rem;
+    }
+    
+    .dropdown-menu {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    .dropdown-item {
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+    }
+    
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+    }
+    
+    @media (max-width: 768px) {
+        .form-floating label {
+            padding: 0.5rem 0.75rem;
+        }
+    }

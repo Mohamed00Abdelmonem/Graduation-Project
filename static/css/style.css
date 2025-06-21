@@ -5145,13 +5145,13 @@ ul.ordered-list li::before {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background: #4285F4;
+  background: rgba(0, 70, 88, 0.78);
   border-radius: 5px;
   padding: 11px 15px;
 }
 .page-item.active .page-link:hover {
   color: #fff;
-  background: #4285F4;
+  background: #5c98f0;
 }
 
 /*========= author_sidebar css ========*/
@@ -7497,7 +7497,7 @@ input::-webkit-inner-spin-button {
   margin-bottom: 30px;
 }
 .reviews-item .review-text .r-title {
-  color: #202124;
+  color: #a6bcff;
   margin-bottom: 7px;
   font-weight: 600;
 }
@@ -7775,7 +7775,7 @@ input::-webkit-inner-spin-button {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  padding-top: 10rem;
+  padding-top: 7rem;
 }
 .login-area.registration-area {
   background-image: url(../img/login/reginstration-bg.png);
@@ -7809,7 +7809,7 @@ input::-webkit-inner-spin-button {
 }
 
 .login-wrapper {
-  margin: 20px 0;
+  margin-bottom: 20px ;
   max-width: 1170px;
   width: 100%;
   display: flex;
@@ -7821,10 +7821,11 @@ input::-webkit-inner-spin-button {
   z-index: 2;
 }
 .login-wrapper .login-left {
-  width: 80%;
+  width: 65%;
   text-align: center;
-  padding: 60px 43px;
+  padding: 15px 30px;
   border-right: 1px solid #bbc0c4;
+  border-radius: 25px;
   background-color: rgba(255, 255, 255, 0.6);
   box-shadow: 0 30px 60px rgba(19, 45, 73, 0.5);
 }
@@ -7841,7 +7842,7 @@ input::-webkit-inner-spin-button {
   color: #36383a;
 }
 .login-wrapper .login-left .logo {
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   display: block;
 }
 .login-wrapper .login-left .social-links {
@@ -7971,6 +7972,43 @@ input::-webkit-inner-spin-button {
 .login-wrapper .login-right img {
   max-width: 100%;
 }
+
+/* Logout */
+    .user-profile-card {
+        border: 1px solid #e3e6f0;
+        transition: all 0.3s ease;
+    }
+
+    .padder{
+        padding: 50px;
+        margin: 10px;
+    }
+    
+    .user-profile-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .detail-label {
+        color: #5a5c69;
+        margin-left: 8px;
+    }
+    
+    .detail-value {
+        color: #2e3a59;
+    }
+    
+    .btn-danger {
+        background-color: #e74a3b;
+        border-color: #e74a3b;
+        transition: all 0.3s;
+    }
+    
+    .btn-danger:hover {
+        background-color: #be2617;
+        border-color: #be2617;
+        transform: scale(1.05);
+    }
 
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
@@ -10084,6 +10122,30 @@ input::-webkit-inner-spin-button {
 .footer_social .f_social_round li a:hover {
   background: #fff;
 }
+
+/* ai */
+.ai-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background-color:rgb(40, 88, 114); /* أخضر باهت */
+    color:rgb(223, 231, 225);
+    border: none;
+    border-radius: 50px; /* يجعل الزر دائري الشكل */
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ai-btn:hover {
+    background-color:rgb(49, 151, 78);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    color:rgb(225, 236, 231);
+}
+
 
 /*---------------------------------------------------- */
 

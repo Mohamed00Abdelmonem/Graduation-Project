@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="card border-0 shadow-lg">
-                    <div class="card-header bg-primary text-white py-3">
+                    <div class="card-header ver text-white py-3">
                         <h3 class="card-title text-center mb-0">تحديث مشروع التخرج 🎓</h3>
                     </div>
                     
@@ -461,7 +461,7 @@
                             
                             <!-- Submit Button -->
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                                <button type="submit" class="btn ver btn-lg px-5 py-3">
                                     <i class="fas fa-save me-2"></i>حفظ التغييرات
                                 </button>
                                 {% comment %} <a href="{% url 'project_detail' form.instance.id %}" class="btn btn-outline-secondary btn-lg px-5 py-3 ms-2"> {% endcomment %}
@@ -480,6 +480,9 @@
     .project-update-section {
         min-height: 100vh;
     }
+        .ver{
+        background:rgba(0, 70, 88, 0.78);
+    }
     
     .section-title {
         color: #2c3e50;
@@ -488,7 +491,7 @@
     }
     
     .section-title i {
-        color: #3498db;
+        color: rgba(0, 70, 88, 0.78);
     }
     
     .form-floating label {

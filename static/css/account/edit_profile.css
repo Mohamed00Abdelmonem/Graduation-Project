@@ -1,0 +1,57 @@
+  input[type="file"] {
+    display: none;
+  }
+
+  /* Inputs & Textareas styling */
+  input, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  input:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 6px rgba(0,123,255,0.5);
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  /* Floating labels */
+  .floating-label {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    background: white;
+    padding: 0 6px;
+    font-size: 14px;
+    color: #666;
+    font-weight: 600;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .edit{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap:20px;
+  }
+
+  .but{
+          background:rgba(0, 70, 88, 0.78);
+          color:#fff;
+          border:none;
+          padding:12px 40px;
+          font-size:18px;
+          font-weight:600;
+          border-radius:30px;
+          cursor:pointer;
+          box-shadow: 0 6px 12px rgba(0,123,255,0.5);
+          transition: background-color 0.3s ease;
+  }

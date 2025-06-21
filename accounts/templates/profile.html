@@ -310,7 +310,7 @@
                         {% comment %} <li class="mb-2"><span>الرقم التعريفي:</span> {{ user.profile.national_id|default:"غير محدد" }}</li> {% endcomment %}
                         {% if not user.is_staff %}
                         <li class="mb-2"><span>السنة الدراسية:</span> {{ user.profile.grade|default:"غير محدد" }}</li>
-                        <li class="mb-2"><span>الشعبة:</span> {{ user.profile.department|default:"غير محدد" }}</li>
+                        {% comment %} <li class="mb-2"><span>الشعبة:</span> {{ user.profile.department|default:"غير محدد" }}</li> {% endcomment %}
                         {% endif %}
                         {% comment %} <li class="mb-2"><span>تاريخ الميلاد:</span> {{ user.profile.date_of_birth|date:"Y-m-d"|default:"غير محدد" }}</li> {% endcomment %}
                         <li class="mb-2"><span>رقم الهاتف:</span> {{ user.profile.phone_number|default:"غير محدد" }}</li>

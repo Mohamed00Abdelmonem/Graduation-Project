@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block body %}
+<link rel="stylesheet" href="{% static 'css/project/pending_project.css' %}">
 
 <!-- Modal for Temporary Rejection -->
 {% for project in projects %}
@@ -12,7 +13,9 @@
                     {% csrf_token %}
                     <label for="rejection_reason_{{ project.id }}" class="form-label">سبب الرفض:</label>
                     <textarea name="rejection_reason" id="rejection_reason_{{ project.id }}" class="form-control" rows="3" required></textarea>
-                    <button type="submit" class="btn btn-primary mt-2">ارسال</button>
+                    <div class="text-center">
+                    <button type="submit" class="btn mt-2" style="background:rgba(0, 70, 88, 0.78)">ارسال</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -20,44 +23,11 @@
 </div>
 {% endfor %}
 
-<!-- Button trigger modal -->
-
-
-{% comment %} {% for project in projects %}
-<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#temporaryRejectModal{{ project.id }}">
-    رفض مؤقت
-</button>
-{% endfor %} {% endcomment %}
-
 
 
 <!-- Rest of your template remains unchanged -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-    .card {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-    }
-    .btn-success, .btn-danger {
-        margin-right: 5px;
-    }
-    .messages .alert {
-        margin-bottom: 15px;
-    }
-    .project-info {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-    }
-    .project-actions {
-        display: flex;
-        gap: 10px;
-    }
-</style>
-<section class="bj_author_single_area sec_padding pb-0" style="padding-top:10rem" data-bg-color="#f5f5f5">
+<section class="bj_author_single_area sec_padding pb-0" style="padding-top:6rem; " data-bg-color="#f5f5f5">
     <div class="container text-center">
         <div class="row">
             <div class="col-md-12">
@@ -80,20 +50,19 @@
       <!-- Search and Filter Section - Responsive -->
   <!-- Search Form -->
   <div class="row">
-    <div class="mb-4 col-lg-6">
+    <div class="mb-4 col-lg-8">
         <form method="get" action="{% url 'project:pending_projects' %}">
             <label for="search">بحث </label>
-            <input type="text" class="whi" id="search" name="search" style="border-radius: 5px" value="{{ search_query }}" placeholder="ادخل عنوان المشروع...">
+            <input type="text" class="whi w-75" id="search" name="search" style="border-radius: 5px" value="{{ search_query }}" placeholder="ادخل عنوان المشروع...">
             <button type="submit" class="" style="background:#004658; border-radius: 10px; color:white; width:60px; height:30px">بحث</button>
         </form>
     </div>
 
-
         <!-- Filter Dropdown -->
-          <div class="mb-4 col-lg-6">
+          <div class="mb-4 col-lg-4">
             <form method="get" action="{% url 'project:pending_projects' %}">
                 <label for="status_filter">الحاله  :</label>
-                <select name="status" id="status_filter" onchange="this.form.submit()" style="border-radius: 5px">
+                <select name="status" class="w-75" id="status_filter" onchange="this.form.submit()" style="border-radius: 5px">
 
                     <option value="all" {% if status_filter == 'all' %}selected{% endif %}>All</option>
                     <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>قيد الانتظار</option>
@@ -104,27 +73,8 @@
     </div>
     </div>
 
-    
-    {% comment %} <!-- Filter Dropdown -->
-    <div class="mb-4 col-12 col-lg-6">
-        <form method="get" action="{% url 'project:pending_projects' %}" class="row g-2 align-items-center">
-            <div class="col-8 col-sm-9">
-                <label for="status_filter" class="form-label mb-0 d-block d-sm-inline">تصفية حسب الحالة:</label>
-                <select name="status" id="status_filter" class="form-select mt-1 mt-sm-0" onchange="this.form.submit()">
-                    <option value="all" {% if status_filter == 'all' %}selected{% endif %}>الكل</option>
-                    <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>قيد الانتظار</option>
-                    <option value="temporary_rejection" {% if status_filter == 'temporary_rejection' %}selected{% endif %}>الرفض المؤقت</option>
-                </select>
-            </div>
-            <div class="col-4 col-sm-3 d-none d-sm-block">
-                <!-- Empty column for alignment -->
-            </div>
-        </form>
-    </div>
-</div> {% endcomment %}
-
         <!-- Project List -->
-        <div class="row">
+        <div class="row" style="margin-left: 0">
             {% if projects %}
                 {% for project in projects %}
                     <div class="col-md-6 mb-4">
