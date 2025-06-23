@@ -5,7 +5,7 @@
     }
     
     body {
-        background-color: #f4f6f8;
+        background-color: var(--secondary-color);
     }
     
     /* Sidebar Styling */

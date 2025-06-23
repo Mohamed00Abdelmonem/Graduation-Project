@@ -20,7 +20,7 @@ from graduation_project.models import GraduationProject
 # ___________________________________________________________________________________
 
 
-@login_required
+# @login_required
 def logout_page(request):
     return render(request, 'logout.html', {'user': request.user})
 

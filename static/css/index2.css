@@ -16,37 +16,6 @@
         min-height: 70px;
         transition: all 0.3s ease;
     }
-    /* تحسين ظهور القوائم المنسدلة */
-    .students-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* عمودين ثابتين */
-        gap: 16px;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-      }
-      .students-grid li {
-        background-color: #f9f9f9;
-        padding: 12px 18px;
-        border-radius: 12px;
-        text-align: center;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        font-weight: 500;
-        color: #333;
-        transition: transform 0.2s ease;
-      }
-
-      .students-grid li:hover {
-        transform: scale(1.02);
-      }
-
-      @media (max-width: 600px) {
-        .students-grid {
-          grid-template-columns: 1fr; /* صف واحد في الشاشات الصغيرة */
-        }
-      }
-
-
 
     /* تحسين ظهور القوائم المنسدلة */
     .dropdown-menu {

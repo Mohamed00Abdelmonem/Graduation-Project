@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% block body %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/project/project_detail.css' %}">
 {% load humanize %}
         <!-- breadcrumb area  -->
-        <section class="product_details_area sec_padding pb-2 pt-0" data-bg-color="#f5f5f5">
+        <section class="product_details_area sec_padding pb-2 pt-5 pt-0" data-bg-color="#f5f5f5">
             <div class="container" style="padding-top:4rem">
                 <div class="row gy-xl-0 gy-3">
                     <div class="col-xl-3">
@@ -145,7 +146,7 @@
                             {% endif %} 
                             </div>
                             <div class="bj_book_details text-center col-lg-6">
-                                <a data-bs-toggle="modal" data-bs-target="#productQuickView" class="" style="font-size:24px">Project: {{object.title}}</a>
+                                <a data-bs-toggle="modal" data-bs-target="#productQuickView" class="" style="font-size:24px">مشروع: {{object.title_ar}}</a>
                                 <ul class="list-unstyled book_meta">
                                 </ul>
                                 <p>{{object.sub_description}}.</p>
@@ -242,23 +243,24 @@
                                             
                                                     <!-- Students Information -->
                                                     <div class="info-section">
-                                                        <span style="font-size:32px;">الطلاب</span>
-                                                        <ul>
-                                                            {% if object.students.all %}
-                                                                {% for student in object.students.all %}
-                                                                            <a class="m-2" style="border-right:1px solid black" href="{% url 'profile_user' student.username %}">
-                                                                                {{ student.get_full_name|default:student.username }} 
-                                                                            </a>
-                                                                {% endfor %}
-                                                            {% else %}
-                                                                <li class="no-data">No students available.</li>
-                                                            {% endif %}
+                                                        <span style="font-size:32px;">الطلاب : </span>
+                                                        <ul class="students-grid">
+                                                        {% if object.students.all %}
+                                                            {% for student in object.students.all %}
+                                                            <li>
+                                                                <a href="{% url 'profile_user' student.username %}">
+                                                                {{ student.get_full_name|default:student.username }}
+                                                                </a>
+                                                            </li>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            <li class="no-data">No students available.</li>
+                                                        {% endif %}
                                                         </ul>
                                                     </div>
-                                            
                                                     <!-- Created At Information -->
-                                                    <div class="info-section">
-                                                        <span style="font-size:32px;">تم الإنشاء في</span>
+                                                    <div class="info-section mt-2">
+                                                        <span style="font-size:32px;">تم الإنشاء في :</span>
                                                         <ul>
                                                             <li><strong>تاريخ:</strong> {{ object.created_at }}</li>
                                                         </ul>

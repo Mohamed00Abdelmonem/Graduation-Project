@@ -1,17 +1,19 @@
-<!-- Include Font Awesome -->
- {% load static %}
+<!-- Load static files and Font Awesome -->
+{% load static %}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/project/projects.css' %}">
 
+<!-- Like Container -->
 <div class="like-container" id="likesarea">
     <span class="like-count">{{ object.likes.count }} 👁️</span>
-    
+
     {% if request.user.is_authenticated %}
-        <button hx-post="{% url 'project:like_post' object.id %}" 
-                class="like-btn {% if request.user in post.likes.all %}liked{% else %}unliked{% endif %}"
-                hx-target="#likesarea" 
-                hx-swap="outerHTML"
-                onclick="toggleLike(this)">
+        <button 
+            hx-post="{% url 'project:like_post' object.id %}" 
+            class="like-btn {% if request.user in object.likes.all %}liked{% else %}unliked{% endif %}"
+            hx-target="#likesarea" 
+            hx-swap="outerHTML"
+            onclick="toggleLike(this)">
             {% if request.user in object.likes.all %}
                 <i class="fas fa-heart"></i>
                 <span>معجب</span>
@@ -26,8 +28,9 @@
             <span>سجل دخول للإعجاب</span>
         </a>
     {% endif %}
-    
-    <div class="likers-list">
+
+    <!-- Likers List -->
+    <div class="likers-list" style="display: none;">
         <p>المعجبون</p>
         <ul>
             {% for user in object.likes.all %}
@@ -39,10 +42,24 @@
     </div>
 </div>
 
+<!-- Like Sound -->
+<audio id="like-sound" src="{% static 'sounds/like.mp3' %}" preload="auto"></audio>
+
+<!-- JavaScript -->
 <script>
-    // Toggle like state immediately for better UX
+    // Play like sound
+    function playLikeSound() {
+        const audio = document.getElementById("like-sound");
+        if (audio) {
+            audio.currentTime = 0;
+            audio.play();
+        }
+    }
+
+    // Toggle like immediately on click
     function toggleLike(btn) {
-        if (btn.classList.contains('liked')) {
+        const isLiked = btn.classList.contains('liked');
+        if (isLiked) {
             btn.classList.remove('liked');
             btn.classList.add('unliked');
             btn.innerHTML = '<i class="far fa-thumbs-up"></i><span>أعجبني</span>';
@@ -50,43 +67,55 @@
             btn.classList.remove('unliked');
             btn.classList.add('liked');
             btn.innerHTML = '<i class="fas fa-heart"></i><span>معجب</span>';
+            playLikeSound();  // ✅ play sound only on like
         }
     }
 
-    // Show/hide likers list
-    document.querySelector(".like-count").addEventListener("click", function(e) {
-        e.stopPropagation();
-        const list = document.querySelector(".likers-list");
-        list.style.display = list.style.display === "block" ? "none" : "block";
+    // Show/hide likers list on count click
+    document.addEventListener("DOMContentLoaded", function () {
+        const likeCount = document.querySelector(".like-count");
+        const likersList = document.querySelector(".likers-list");
+
+        likeCount?.addEventListener("click", function (e) {
+            e.stopPropagation();
+            likersList.style.display = likersList.style.display === "block" ? "none" : "block";
+        });
+
+        document.addEventListener("click", function () {
+            if (likersList) likersList.style.display = "none";
+        });
+
+        likersList?.addEventListener("click", function (e) {
+            e.stopPropagation();
+        });
     });
 
-    // Close likers list when clicking outside
-    document.addEventListener("click", function() {
-        document.querySelector(".likers-list").style.display = "none";
-    });
-
-    // Prevent closing when clicking inside the list
-    document.querySelector(".likers-list").addEventListener("click", function(e) {
-        e.stopPropagation();
-    });
-
-    // Handle HTMX after swap to maintain state
-    document.addEventListener("htmx:afterSwap", function(evt) {
+    // Update DOM after HTMX swaps content
+    document.addEventListener("htmx:afterSwap", function (evt) {
         if (evt.detail.target.id === "likesarea") {
-            // Update the like count display
-            const response = JSON.parse(evt.detail.xhr.responseText);
-            document.querySelector(".like-count").textContent = `${response.count} 👁️`;
-            
-            // Update button state based on response
-            const likeBtn = document.querySelector(".like-btn");
-            if (response.status === 'liked') {
-                likeBtn.classList.remove('unliked');
-                likeBtn.classList.add('liked');
-                likeBtn.innerHTML = '<i class="fas fa-heart"></i><span>معجب</span>';
-            } else {
-                likeBtn.classList.remove('liked');
-                likeBtn.classList.add('unliked');
-                likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i><span>أعجبني</span>';
+            try {
+                const response = JSON.parse(evt.detail.xhr.responseText);
+                const likeBtn = document.querySelector(".like-btn");
+                const likeCountSpan = document.querySelector(".like-count");
+
+                if (likeCountSpan) {
+                    likeCountSpan.textContent = `${response.count} 👁️`;
+                }
+
+                if (likeBtn) {
+                    if (response.status === 'liked') {
+                        likeBtn.classList.remove('unliked');
+                        likeBtn.classList.add('liked');
+                        likeBtn.innerHTML = '<i class="fas fa-heart"></i><span>معجب</span>';
+                        playLikeSound();  // ✅ sound on HTMX like
+                    } else {
+                        likeBtn.classList.remove('liked');
+                        likeBtn.classList.add('unliked');
+                        likeBtn.innerHTML = '<i class="far fa-thumbs-up"></i><span>أعجبني</span>';
+                    }
+                }
+            } catch (err) {
+                console.error("HTMX response error:", err);
             }
         }
     });

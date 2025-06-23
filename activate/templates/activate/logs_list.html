@@ -1,37 +1,33 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="container mt-5">
-     
-    
-
-    <h2 class="text-center mb-4">📜 سجل النشاطات</h2>
-<div class="mb-3 text-end">
+<div class="container mt-5 pt-5">
+    <h2 class="text-center mb-2">📜 سجل النشاطات</h2>
+    <div class="mb-3 text-end">
         <!-- هذا الزر يوجه المستخدم إلى صفحة السجلات -->
-        <a href="{% url 'logs_chart_view' %}" class="btn btn-primary">
+        <a href="{% url 'logs_chart_view' %}" class="btn" style="background: #006871;">
             🔁 عرض احصائيات 
         </a>
     </div>
     {% if error %}
-        <div class="alert alert-danger text-center">
-            ⚠️ حصل خطأ أثناء عرض البيانات: {{ error }}
-        </div>
+    <div class="alert alert-danger text-center">
+        ⚠️ حصل خطأ أثناء عرض البيانات: {{ error }}
+    </div>
     {% endif %}
-
     {% if logs %}
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered align-middle text-center">
-                <thead class="table-dark">
+        <div class="table-responsive" style="border-radius: 12px;">
+            <table class="table table-hover table-bordered align-middle text-center table-striped">
+                <thead style="background: #006871;">
                     <tr>
                         <th>#</th>
-                        <th>👤 المستخدم</th>
-                        <th>🔁 الطريقة</th>
-                        <th>🔗 الرابط</th>
-                        <th>🌍 IP</th>
-                        <th style="min-width:200px;">🧠 User Agent</th>
-                        <th>🌐 المتصفح</th>
-                        <th>📌 الحالة</th>
-                        <th>📝 ملاحظات</th>
-                        <th>⏰ الوقت</th>
+                        <th> المستخدم</th>
+                        <th> الطريقة</th>
+                        <th> الرابط</th>
+                        <th> IP</th>
+                        <th style="min-width:200px;"> User Agent</th>
+                        <th> المتصفح</th>
+                        <th> الحالة</th>
+                        <th> ملاحظات</th>
+                        <th> الوقت</th>
                     </tr>
                 </thead>
                 <tbody>

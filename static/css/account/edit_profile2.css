@@ -23,15 +23,6 @@
     resize: vertical;
   }
 
-  .cont{
-    max-width:1000px; 
-    margin:0 auto; 
-    background:#fff; 
-    padding:40px; 
-    border-radius:12px; 
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
-  }
-
   /* Floating labels */
   .floating-label {
     position: absolute;
@@ -62,17 +53,5 @@
           border-radius:30px;
           cursor:pointer;
           box-shadow: 0 6px 12px rgba(0,123,255,0.5);
-          transition: background-color 0.3s ease;
-  }
-
-  .lab-img{
-          cursor:pointer; 
-          background:rgba(0, 70, 88, 0.78); 
-          color:#fff; 
-          padding:10px 20px; 
-          border-radius: 25px; 
-          font-weight:600; 
-          display:inline-block;
-          box-shadow: 0 4px 8px rgba(0,123,255,0.4);
           transition: background-color 0.3s ease;
   }

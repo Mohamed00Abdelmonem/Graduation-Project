@@ -1,39 +1,37 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="container mt-4">
-    
-    <h2 class="mb-4">📊 ملخص النشاطات</h2>
-
+<div class="container mt-5 pt-5 mb-3">
+    <h2 class="mb-4 text-center">📊 ملخص النشاطات</h2>
     {% if error %}
         <div class="alert alert-danger">حدث خطأ: {{ error }}</div>
     {% else %}
+        <!-- جدول مبسط -->
+         <div class="table-responsive"  style="border-radius: 12px;">
+            <table class="table table-striped table-bordered">
+                <thead style="background: #006871;">
+                    <tr>
+                        <th>#</th>
+                        <th>الرابط</th>
+                        <th>عدد الدخول</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for url, count in top_logs %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ url }}</td>
+                        <td>{{ count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    <!-- جدول مبسط -->
-    <table class="table table-striped table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>#</th>
-                <th>الرابط</th>
-                <th>عدد الدخول</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for url, count in top_logs %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ url }}</td>
-                <td>{{ count }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <!-- الرسوم -->
-    <div class="text-center mt-5">
-        <h4 class="mb-3">📈 رسوم بيانية</h4>
-        <img src="data:image/png;base64,{{ chart }}" class="img-fluid rounded shadow" style="max-width: 1000px;" />
-    </div>
-
+        <!-- الرسوم -->
+        <div class="text-center mt-5">
+            <h4 class="mb-3">📈 رسوم بيانية</h4>
+            <img src="data:image/png;base64,{{ chart }}" class="img-fluid rounded shadow" style="max-width: 1000px;" />
+        </div>
     {% endif %}
 </div>
 {% endblock %}

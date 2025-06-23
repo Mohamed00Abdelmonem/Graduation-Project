@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                         </div>          
-                        <div class="bj_book_details">
+                        <div class="bj_book_details mt-5">
                             <h2>{{ project.title_ar }}</h2>
                             <h2>{{ project.title }}</h2>
                             <p>{{ project.sub_description }}.</p>
@@ -39,16 +39,17 @@
                                         <span class="no-data">لا يوجد مشرفين. </span>
                                     {% endif %}
                                 </li>
-                                <li><span> اسماء فريق العمل : </span>
-                                    <ul class="p-0 row">
+                                <li>
+                                    <span> اسماء فريق العمل : </span>
+                                    <ul class="students-grid">
                                         {% if project.students.all %}
-                                            {% for student in project.students.all %}
-                                                <li class="col-lg-3 mb-2"> {{ student }}</li>
-                                            {% endfor %}
+                                          {% for student in project.students.all %}
+                                            <li>{{ student }}</li>
+                                          {% endfor %}
                                         {% else %}
-                                            <li class="no-data">لا يوجد طالبه.</li>
+                                          <li class="no-data">لا يوجد طالبه.</li>
                                         {% endif %}
-                                    </ul>
+                                      </ul>
                                 </li>
                             </ul>
                         </div> 
@@ -81,7 +82,7 @@
                                 {% endif %}
                             </div>
                             <h2 class="wow fadeInUp" data-wow-delay="0.2s" style="font-size:30px">
-                                المكتبه الرقميه  معهد مصر العالي للحاسبات والمعلومات بالمنصوره
+                                المكتبه الرقميه  معهد مصر العالي للتجاره و الحاسبات  
                             </h2>
                             <p class="wow fadeInUp mb-0" data-wow-delay="0.4s">
                                          يمكنك رؤية جميع مشاريع التخرج التابعه للاكادمية
@@ -186,7 +187,7 @@
         <section class="best_selling_pr_area pb-4" data-bg-color="#f5f5f5">
             <div class="container">
                 <div class="section_title mb-0 section_title_two text-center wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 class="title title_two">أحدث 5 مشاريع</h2>
+                    <h2 class="title title_two">احدث المشاريع</h2>
                     <p>قراءة الكتب تساعدك على تطوير مهارات التواصل لديك</p>
                 </div>
                 <div class="row">
@@ -236,7 +237,7 @@
         <section class="bj_new_product_area pt-4" data-bg-color="#f5f5f5">
             <div class="container">
                 <div class="section_title section_title_two text-center">
-                    <h2 class="title title_two">معظم مشاريع المشهوره لها إعجابات </h2>
+                    <h2 class="title title_two">    المشاريع الاكثر اعجابا </h2>
                     <p>قراءة الكتب تساعدك على تطوير مهارات التواصل لديك</p>
                 </div>
                 <div id="clockdiv" class="clock" data-date="2024-12-02"></div>

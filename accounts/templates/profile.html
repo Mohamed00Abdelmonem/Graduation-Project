@@ -2,214 +2,10 @@
 {% block body %}
 {% load static %}
 
-{% comment %} <style>
-    :root {
-        --primary-color: #004658;
-        --secondary-color: #ffffff;
-        --accent-color: #f8f9fa;
-    }
-    
-    body {
-        background-color: var(--secondary-color);
-    }
-    
-    /* Sidebar Styling */
-    .account_dashboard_sidebar {
-        background-color: var(--secondary-color);
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-    
-    .sidebar_widget_menu {
-        list-style: none;
-        padding: 0;
-    }
-    
-    .sidebar_widget_menu li {
-        margin-bottom: 10px;
-    }
-    
-    .sidebar_widget_menu a {
-        display: block;
-        padding: 10px 15px;
-        color: var(--primary-color);
-        text-decoration: none;
-        border-radius: 5px;
-        transition: all 0.3s;
-    }
-    
-    .sidebar_widget_menu a:hover,
-    .sidebar_widget_menu a.active {
-        background-color: rgba(0, 70, 88, 0.1);
-        color: var(--primary-color);
-    }
-    
-    /* Main Content Styling */
-    .bj_author_single_area {
-        background-color: var(--secondary-color);
-    }
-    
-    .bj_author_single {
-        background-color: var(--secondary-color);
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    
-    .profile-image {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 10px;
-        border: 3px solid var(--primary-color);
-    }
-    
-    /* Info Cards */
-    .info-card {
-        background-color: var(--secondary-color);
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-    
-    /* Buttons */
-    .btn-primary {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
-    }
-    
-    .btn-primary:hover {
-        background-color: #003540;
-        border-color: #003540;
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 20px;
-        }
-    }
-</style> {% endcomment %}
-
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-    :root {
-        --primary-color: #004658;
-        --secondary-color: #ffffff;
-        --background-light: #f4f6f8;
-        --accent-color: #e9ecef;
-        --text-dark: #212529;
-        --border-radius: 16px;
-        --transition-speed: 0.3s;
-    }
-
-    body {
-        background-color: var(--background-light);
-        font-family: 'Poppins', sans-serif;
-        color: var(--text-dark);
-    }
-
-    .account_dashboard_sidebar {
-        background-color: var(--secondary-color);
-        border-radius: var(--border-radius);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        padding: 20px;
-    }
-
-    .sidebar_widget_menu a {
-        display: block;
-        padding: 10px 15px;
-        color: var(--primary-color);
-        text-decoration: none;
-        border-radius: 8px;
-        transition: background-color var(--transition-speed), transform var(--transition-speed);
-    }
-
-    .sidebar_widget_menu a:hover,
-    .sidebar_widget_menu a.active {
-        background-color: rgba(0, 70, 88, 0.1);
-        transform: translateX(5px);
-    }
-
-    .bj_author_single {
-        background-color: var(--secondary-color);
-        padding: 30px;
-        border-radius: var(--border-radius);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .profile-image {
-        width: 180px;
-        height: 180px;
-        object-fit: cover;
-        border-radius: var(--border-radius);
-        border: 4px solid var(--primary-color);
-    }
-
-    .info-card {
-        background-color: var(--secondary-color);
-        border: 1px solidrgb(194, 201, 207);
-        border-radius: var(--border-radius);
-        padding: 20px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-    }
-
-    .btn-primary {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
-        transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
-    }
-
-    .btn-primary:hover {
-        background-color: #003540;
-        border-color: #003540;
-        box-shadow: 0 0 0 0.2rem rgba(0, 70, 88, 0.2);
-    }
-
-    .social-links a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 38px;
-        height: 38px;
-        background-color:rgb(223, 228, 233);
-        border-radius: 50%;
-        margin-right: 10px;
-        transition: all var(--transition-speed);
-    }
-
-    .social-links a:hover {
-        background-color: var(--primary-color);
-        color: white;
-    }
-
-    @media (max-width: 768px) {
-        .profile-image {
-            width: 140px;
-            height: 140px;
-        }
-
-        .bj_author_single {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .bj_author_single_content {
-            margin-top: 20px;
-        }
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 
 <!-- Main Content -->
-<div class="container py-5">
+<div class="container py-5 asst">
     <div class="row">
         <!-- Sidebar Column -->
         <div class="col-lg-3">
@@ -307,12 +103,10 @@
                     
                     <ul class="book_info list-unstyled">
                         <li class="mb-2"><span>المسمى الوظيفي:</span> {{ user.profile.job_title|default:"غير محدد" }}</li>
-                        {% comment %} <li class="mb-2"><span>الرقم التعريفي:</span> {{ user.profile.national_id|default:"غير محدد" }}</li> {% endcomment %}
                         {% if not user.is_staff %}
                         <li class="mb-2"><span>السنة الدراسية:</span> {{ user.profile.grade|default:"غير محدد" }}</li>
-                        {% comment %} <li class="mb-2"><span>الشعبة:</span> {{ user.profile.department|default:"غير محدد" }}</li> {% endcomment %}
+                        <li class="mb-2"><span>الشعبة:</span> {{ user.profile.department|default:"غير محدد" }}</li>
                         {% endif %}
-                        {% comment %} <li class="mb-2"><span>تاريخ الميلاد:</span> {{ user.profile.date_of_birth|date:"Y-m-d"|default:"غير محدد" }}</li> {% endcomment %}
                         <li class="mb-2"><span>رقم الهاتف:</span> {{ user.profile.phone_number|default:"غير محدد" }}</li>
                         <li class="mb-2"><span>العنوان:</span> {{ user.profile.address|default:"غير محدد" }}</li>
                     </ul>
@@ -344,36 +138,6 @@
                     </div>
                 </div>
             </div>
-            
-
-
-
-            {% comment %} this function for talk sound welcome name user {% endcomment %}
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    // تحقق من دعم المتصفح لواجهة speechSynthesis
-                    if ('speechSynthesis' in window) {
-                        const userName = "{{ user.get_full_name|default:user.username }}";
-                        const welcomeText = `Welcome back yaa ${userName}.`;
-
-                        // إعداد الصوت
-                        const utterance = new SpeechSynthesisUtterance(welcomeText);
-                        utterance.lang = 'en-US';  // يمكنك تغييره إلى 'ar-SA' إذا كنت تفضل اللغة العربية
-                        utterance.pitch = 1;
-                        utterance.rate = 1;
-
-                        // تشغيل الصوت
-                        window.speechSynthesis.speak(utterance);
-                    } else {
-                        console.warn("Speech Synthesis not supported in this browser.");
-                    }
-                });
-            </script>
-
-
-
-
-
 
             <!-- Additional Sections -->
             <div class="row mt-4">
@@ -383,8 +147,6 @@
                         <p>{{ user.profile.short_bio|default:"لا يوجد سيرة ذاتية متاحة." }}</p>
                     </div>
                 </div>
-                
-                
                 <div class="col-md-6 mt-2">
                     <div class="info-card h-100">
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -401,7 +163,7 @@
                                 {% if experience.to_date %}{{ experience.to_date|date:"Y" }}{% else %}حتى الآن{% endif %}
                             </p>
                             
-                            <div class="d-flex mt-2">
+                            <div class="d-flex justify-content-around mt-2">
                                 <a href="{% url 'update_experience' experience.id %}" class="btn btn-sm btn-outline-primary me-2">تعديل</a>
                                 <form action="{% url 'delete_experience' experience.id %}" method="POST">
                                     {% csrf_token %}
@@ -422,7 +184,6 @@
             {% if not user.is_staff %}
             <div class="info-card mt-4">
                 <h4 class="mb-4" style="color: var(--primary-color);">مشاريع التخرج</h4>
-                
                 <div class="row">
                     {% for project in projects %}
                     <div class="col-md-6 mb-4">
@@ -435,15 +196,13 @@
                             <img src="{% static 'img/default-project.png' %}" class="card-img-top" alt="صورة افتراضية"
                                  style="height: 180px; object-fit: cover;">
                             {% endif %}
-                            
                             <div class="card-body">
                                 <h5 class="card-title">{{ project.title }}</h5>
                                 <p class="card-text text-muted small">{{ project.description|truncatechars:100|default:"لا يوجد وصف" }}</p>
                             </div>
-                            
                             <div class="card-footer bg-white">
                                 <div class="d-flex justify-content-between">
-                                    <a href="{% url 'project:project_detail' project.slug %}" class="btn btn-sm btn-outline-primary">عرض</a>
+                                    <a href="{% url 'project:project_detail' project.slug %}" class="btn btn-sm ver">عرض</a>
                                     <div>
                                         <a href="{% url 'project:update_project' project.slug %}" class="btn btn-sm btn-outline-secondary me-1">تعديل</a>
                                         <a href="{% url 'project:delete_project' project.slug %}" class="btn btn-sm btn-outline-danger"
@@ -560,5 +319,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+{% comment %} this function for talk sound welcome name user {% endcomment %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // تحقق من دعم المتصفح لواجهة speechSynthesis
+        if ('speechSynthesis' in window) {
+            const userName = "{{ user.get_full_name|default:user.username }}";
+            const welcomeText = `Welcome back yaa ${userName}.`;
+
+            // إعداد الصوت
+            const utterance = new SpeechSynthesisUtterance(welcomeText);
+            utterance.lang = 'en-US';  // يمكنك تغييره إلى 'ar-SA' إذا كنت تفضل اللغة العربية
+            utterance.pitch = 1;
+            utterance.rate = 1;
+
+            // تشغيل الصوت
+            window.speechSynthesis.speak(utterance);
+        } else {
+            console.warn("Speech Synthesis not supported in this browser.");
+        }
+    });
+</script>
+
 
 {% endblock body %}
