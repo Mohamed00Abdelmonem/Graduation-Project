@@ -70,7 +70,7 @@ def ProjectList(request):
 
    # Pagination
     page = request.GET.get('page', 1)  # Get the current page number from the request
-    paginator = Paginator(projects, 10)  # Show 10 projects per page
+    paginator = Paginator(projects, 8)  # Show 10 projects per page
     try:
         paginated_projects = paginator.page(page)
     except PageNotAnInteger:

@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color:rgb(130, 201, 188);
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             direction: rtl;
@@ -16,30 +16,39 @@
         .email-container {
             max-width: 600px;
             margin: 40px auto;
-            background-color:rgb(99, 223, 192);
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
             padding: 40px 30px;
+            text-align: right;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            max-width: 150px;
         }
 
         h2 {
             color: #1c5a5b;
             margin-bottom: 20px;
+            font-size: 24px;
         }
 
         p {
             font-size: 16px;
-            color: #444;
+            color: #333;
             line-height: 1.8;
             margin: 10px 0;
         }
 
         .highlight {
-            color:rgb(37, 103, 110);
+            color: #25676e;
             font-weight: bold;
         }
-
-        
 
         .footer {
             margin-top: 40px;
@@ -53,15 +62,20 @@
 </head>
 <body>
     <div class="email-container">
-        <h2>مرحبًا {{ user.first_name }}،</h2>
-        <p>نود إبلاغك أنه تم تعديل مشروع التخرج الخاص بك بعنوان 
-            <br>
-            <span class="highlight">{{ project.title }}</span>.</p>
-        <p>سيتم مراجعته من قبل المشرف الأكاديمي قريبًا.</p>
+        <!-- إضافة لوجو -->
+        <div class="logo">
+            <img src="https://student.metmans.edu.eg/siteAssets/images/logo.png" alt="شعار المعهد">
+        </div>
 
+        <h2>مرحبًا {{ user.first_name }}،</h2>
+
+        <p>نود إبلاغك أنه تم تعديل مشروع التخرج الخاص بك بعنوان:</p>
+        <p><span class="highlight">{{ project.title }}</span></p>
+
+        <p>سيتم مراجعته من قبل المشرف الأكاديمي في أقرب وقت.</p>
 
         <div class="footer">
-            <p>فريق الإشراف الأكاديمي</p>
+            <p>فريق الإشراف الأكاديمي<br>المعهد العالي للهندسة والتكنولوجيا</p>
         </div>
     </div>
 </body>

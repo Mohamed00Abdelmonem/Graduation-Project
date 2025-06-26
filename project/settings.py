@@ -86,7 +86,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # For Vercel deployment
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 WSGI_APPLICATION = 'api.wsgi.app'
 
@@ -97,10 +97,7 @@ WSGI_APPLICATION = 'api.wsgi.app'
 # ALLOWED_HOSTS = []
 # ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://rngna-197-35-92-181.a.free.pinggy.link',
-    # أضف أي domains تانية هنا
-]
+
 
 # Application definition
 
@@ -158,7 +155,7 @@ AUTHENTICATION_BACKENDS = [
 
 # for trust csrf in pinngy for share server for test project 
 CSRF_TRUSTED_ORIGINS = [
-    'https://rnztq-197-35-43-199.a.free.pinggy.link',
+    'https://rnmhl-197-35-106-194.a.free.pinggy.link',
     # Add other domains as needed
 ]
 

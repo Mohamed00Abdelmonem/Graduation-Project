@@ -37,44 +37,47 @@ def get_top_liked_projects():
 
 
 # Cache the page for 1 minute to reduce database load 
-# @cache_page(60 * 1)   # for run this open ubunto linux for start redis db and password 1234
+# @cache_page(60 * 5)   # for run this open ubunto linux for start redis db and password 1234
 def home(request):
-    # Fetch only accepted projects for the main projects section
     projects_main = (
         GraduationProject.objects
         .filter(status='accepted')
-        .select_related('category')  # Optimize by fetching related category data in one query
+        .select_related('category', 'doctor')
+        .prefetch_related('project_image', 'students', 'supervisors')
         .order_by('-id')[:8]
     )
 
-   
-    # Fetch the top 10 doctors with the most accepted projects
     doctors = (
         UserProfile.objects
         .filter(is_doctor=True)
         .annotate(
-            book_count=Count('user__doctor_projects', filter=Q(user__doctor_projects__status='accepted'))
+            book_count=Count(
+                'user__doctor_projects',
+                filter=Q(user__doctor_projects__status='accepted')
+            )
         )
         .prefetch_related(
             Prefetch(
                 'user__doctor_projects',
-                queryset=GraduationProject.objects.filter(status='accepted').select_related('category'),
+                queryset=GraduationProject.objects
+                    .filter(status='accepted')
+                    .select_related('doctor__profile')  # عشان نجيب بيانات الدكتور المرتبط بالمشروع
+                    .only('title', 'images', 'doctor__first_name', 'doctor__last_name', 'created_at')
+                    .order_by('-id')[:3],  # ترتيب أحدث المشاريع، وبعدين نفلتر في التيمبلت 3 بس لو حبيت
                 to_attr='doctor_projects_list'
             )
         )
         .order_by('-book_count')[:10]
     )
 
-    # Fetch the top 10 projects with the most likes
     top_liked_projects = get_top_liked_projects()
-
-  
 
     return render(request, "index.html", {
         "projects_main": projects_main,
-        "top_liked_projects": top_liked_projects,  
+        "top_liked_projects": top_liked_projects,
         "doctors": doctors,
     })
+
 
 
 

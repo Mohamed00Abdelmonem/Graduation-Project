@@ -6,14 +6,12 @@
 <!-- Like Container -->
 <div class="like-container" id="likesarea">
     <span class="like-count">{{ object.likes.count }} 👁️</span>
-
     {% if request.user.is_authenticated %}
-        <button 
-            hx-post="{% url 'project:like_post' object.id %}" 
-            class="like-btn {% if request.user in object.likes.all %}liked{% else %}unliked{% endif %}"
-            hx-target="#likesarea" 
-            hx-swap="outerHTML"
-            onclick="toggleLike(this)">
+        <button hx-post="{% url 'project:like_post' object.id %}" 
+                class="like-btn {% if request.user in post.likes.all %}liked{% else %}unliked{% endif %}"
+                hx-target="#likesarea" 
+                hx-swap="outerHTML"
+                onclick="toggleLike(this)">
             {% if request.user in object.likes.all %}
                 <i class="fas fa-heart"></i>
                 <span>معجب</span>
@@ -28,9 +26,8 @@
             <span>سجل دخول للإعجاب</span>
         </a>
     {% endif %}
-
-    <!-- Likers List -->
-    <div class="likers-list" style="display: none;">
+    
+    <div class="likers-list">
         <p>المعجبون</p>
         <ul>
             {% for user in object.likes.all %}
