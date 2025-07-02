@@ -1,28 +1,30 @@
-{% extends "base.html" %}
-{% block body %}
+{% extends "base.html" %} {% block body %}
 
-<div class="container" style="margin-top: 200px; margin-bottom: 100px;">
-    <div class="row justify-content-center">
-        <div class="col-md-6 text-center">
-            <h2 class="text-success mb-4">تم رفع البيانات بنجاح!</h2>
-            <a href="/" class="btn btn-secondary">العودة إلى الصفحة الرئيسية</a>
-        </div>
+<div
+  class="container"
+  style="margin-top: 200px; margin-bottom: 100px; min-height: 360px"
+>
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <h2 class="text-success mb-4">تم رفع البيانات بنجاح!</h2>
+      <a href="/" class="btn btn-secondary">العودة إلى الصفحة الرئيسية</a>
     </div>
+  </div>
 </div>
 
 <style>
-    .btn-secondary {
-        padding: 10px 20px;
-        font-size: 18px;
-        border-radius: 10px;
-        transition: background-color 0.3s ease;
-    }
-    .btn-secondary:hover {
-        background-color: #5a6268;
-    }
-    h2 {
-        font-weight: bold;
-    }
+  .btn-secondary {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  h2 {
+    font-weight: bold;
+  }
 </style>
 
 {% endblock %}

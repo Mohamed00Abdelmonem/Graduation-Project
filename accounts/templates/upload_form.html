@@ -1,90 +1,105 @@
-{% extends "base.html" %}
-{% block body %}
+{% extends "base.html" %} {% block body %}
 
-<div class="container ">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6 upload-container">
-            <div class="card shadow-lg">
-                <div class="card-header text-white text-center" style="background-color: #004658c7;">
-                    <h2 class="mb-0 py-3">رفع ملف Excel</h2>
-                </div>
-                <div class="card-body p-4">
-                    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
-                        {% csrf_token %}
-                        <div class="mb-4">
-                            <label for="id_excel_file" class="form-label fw-bold">اختر ملف Excel:</label>
-                            <input type="file" class="form-control form-control-lg" id="id_excel_file" name="excel_file" required>
-                            <div class="invalid-feedback">
-                                يرجى اختيار ملف Excel.
-                            </div>
-                        </div>
-                        <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg py-3 fw-bold">رفع الملف</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6 upload-container" style="min-height: 360px">
+      <div class="card shadow-lg">
+        <div
+          class="card-header text-white text-center"
+          style="background-color: #004658c7"
+        >
+          <h2 class="mb-0 py-3">رفع ملف Excel</h2>
         </div>
+        <div class="card-body p-4">
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            class="needs-validation"
+            novalidate
+          >
+            {% csrf_token %}
+            <div class="mb-4">
+              <label for="id_excel_file" class="form-label fw-bold"
+                >اختر ملف Excel:</label
+              >
+              <input
+                type="file"
+                class="form-control form-control-lg"
+                id="id_excel_file"
+                name="excel_file"
+                required
+              />
+              <div class="invalid-feedback">يرجى اختيار ملف Excel.</div>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-lg py-3 fw-bold">
+                رفع الملف
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <style>
+  .upload-container {
+    margin: 150px 0;
+  }
+
+  .card {
+    border-radius: 12px;
+    border: none;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 70, 88, 0.2);
+  }
+
+  .card-header {
+    border-bottom: none;
+  }
+
+  .btn-primary {
+    background-color: #004658;
+    border: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #003344;
+    transform: translateY(-2px);
+  }
+
+  .form-control {
+    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #004658;
+    box-shadow: 0 0 0 0.25rem rgba(0, 70, 88, 0.25);
+  }
+
+  body {
+    background-color: #f8f9fa;
+  }
+
+  @media (max-width: 768px) {
     .upload-container {
-        margin: 150px 0;
+      margin: 100px 0;
     }
-    
-    .card {
-        border-radius: 12px;
-        border: none;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    .card-header h2 {
+      font-size: 1.5rem;
     }
-    
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 70, 88, 0.2);
-    }
-    
-    .card-header {
-        border-bottom: none;
-    }
-    
-    .btn-primary {
-        background-color: #004658;
-        border: none;
-        transition: all 0.3s ease;
-    }
-    
-    .btn-primary:hover {
-        background-color: #003344;
-        transform: translateY(-2px);
-    }
-    
-    .form-control {
-        border-radius: 8px;
-        padding: 12px 15px;
-        border: 1px solid #ddd;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .form-control:focus {
-        border-color: #004658;
-        box-shadow: 0 0 0 0.25rem rgba(0, 70, 88, 0.25);
-    }
-    
-    body {
-        background-color: #f8f9fa;
-    }
-    
-    @media (max-width: 768px) {
-        .upload-container {
-            margin: 100px 0;
-        }
-        
-        .card-header h2 {
-            font-size: 1.5rem;
-        }
-    }
+  }
 </style>
 
 {% endblock %}

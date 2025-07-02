@@ -105,7 +105,7 @@
                         <li class="mb-2"><span>المسمى الوظيفي:</span> {{ user.profile.job_title|default:"غير محدد" }}</li>
                         {% if not user.is_staff %}
                         <li class="mb-2"><span>السنة الدراسية:</span> {{ user.profile.grade|default:"غير محدد" }}</li>
-                        <li class="mb-2"><span>الشعبة:</span> {{ user.profile.department|default:"غير محدد" }}</li>
+                        {% comment %} <li class="mb-2"><span>الشعبة:</span> {{ user.profile.department|default:"غير محدد" }}</li> {% endcomment %}
                         {% endif %}
                         <li class="mb-2"><span>رقم الهاتف:</span> {{ user.profile.phone_number|default:"غير محدد" }}</li>
                         <li class="mb-2"><span>العنوان:</span> {{ user.profile.address|default:"غير محدد" }}</li>
@@ -203,12 +203,15 @@
                             <div class="card-footer bg-white">
                                 <div class="d-flex justify-content-between">
                                     <a href="{% url 'project:project_detail' project.slug %}" class="btn btn-sm ver">عرض</a>
-                                    <div>
-                                        <a href="{% url 'project:update_project' project.slug %}" class="btn btn-sm btn-outline-secondary me-1">تعديل</a>
-                                        <a href="{% url 'project:delete_project' project.slug %}" class="btn btn-sm btn-outline-danger"
-                                           onclick="return confirm('هل أنت متأكد من حذف هذا المشروع؟')">حذف</a>
-                                    </div>
+                                    {% if request.user == project.author or request.user == project.author %}
+                                        <div>
+                                            <a href="{% url 'project:update_project' project.slug %}" class="btn btn-sm btn-outline-secondary me-1">تعديل</a>
+                                            <a href="{% url 'project:delete_project' project.slug %}" class="btn btn-sm btn-outline-danger"
+                                            onclick="return confirm('هل أنت متأكد من حذف هذا المشروع؟')">حذف</a>
+                                        </div>
+                                    {% endif %}
                                 </div>
+
                             </div>
                         </div>
                     </div>

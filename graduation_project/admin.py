@@ -14,6 +14,7 @@ class ProjectImagesTabular(TabularInline):  # استخدم TabularInline من un
 class GraduationProjectAdmin(ModelAdmin):  # استخدم ModelAdmin من unfold
 
     list_display = (
+        
         'title',
         'graduation_year',
         'category',
@@ -31,7 +32,7 @@ class GraduationProjectAdmin(ModelAdmin):  # استخدم ModelAdmin من unfold
     fieldsets = (
         ('Basic Info', {
         'fields': (
-            'title', 'title_ar', 'description', 'sub_description',
+            'author','title', 'title_ar', 'description', 'sub_description',
             'graduation_year', 'status', 'students', 'doctor', 'supervisors',
             'category', 'book_pdf', 'images', 'video', 'audio_file',
             'likes', 'slug', 'view_count'
